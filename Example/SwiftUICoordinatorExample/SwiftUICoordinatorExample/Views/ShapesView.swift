@@ -13,22 +13,24 @@ struct ShapesView: View {
 
     var body: some View {
         List {
-            Button {
-                coordinator.didTap(route: .circle)
-            } label: {
-                Text("Circle")
-            }
+            Section("Shapes") {
+                Button {
+                    coordinator.didTap(route: .circle)
+                } label: {
+                    Text("Circle")
+                }
 
-            Button {
-                coordinator.didTap(route: .rectangle)
-            } label: {
-                Text("Rectangle")
-            }
+                Button {
+                    coordinator.didTap(route: .rectangle)
+                } label: {
+                    Text("Rectangle")
+                }
 
-            Button {
-                coordinator.didTap(route: .square)
-            } label: {
-                Text("Square")
+                Button {
+                    coordinator.didTap(route: .square)
+                } label: {
+                    Text("Square")
+                }
             }
         }
     }

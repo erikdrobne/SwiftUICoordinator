@@ -16,7 +16,6 @@
 		176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */; };
 		176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBA29B8C162009C4987 /* ShapesRoute.swift */; };
 		176F3CBD29B8C29D009C4987 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBC29B8C29D009C4987 /* CircleView.swift */; };
-		176F3CC029B8CF75009C4987 /* SwiftUICoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 176F3CBF29B8CF75009C4987 /* SwiftUICoordinator */; };
 		176F3CC229B8DD64009C4987 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CC129B8DD64009C4987 /* RectangleView.swift */; };
 		17C21EC229BA2895007189FC /* SquaresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C21EC129BA2895007189FC /* SquaresView.swift */; };
 		17C21EC529BA2997007189FC /* SquaresCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C21EC429BA2997007189FC /* SquaresCoordinator.swift */; };
@@ -30,7 +29,6 @@
 		1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICoordinatorExampleApp.swift; sourceTree = "<group>"; };
 		1732C9FF29A6607800C2BC1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1732CA0929A6622800C2BC1F /* SwiftUICoordinator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUICoordinator; path = ../..; sourceTree = "<group>"; };
 		176F3CB429B8BF71009C4987 /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesCoordinator.swift; sourceTree = "<group>"; };
 		176F3CBA29B8C162009C4987 /* ShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesRoute.swift; sourceTree = "<group>"; };
@@ -46,7 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				176F3CC029B8CF75009C4987 /* SwiftUICoordinator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +53,6 @@
 		1732C9EF29A6607500C2BC1F = {
 			isa = PBXGroup;
 			children = (
-				1732CA0929A6622800C2BC1F /* SwiftUICoordinator */,
 				1732C9FA29A6607500C2BC1F /* SwiftUICoordinatorExample */,
 				1732C9F929A6607500C2BC1F /* Products */,
 				176F3CBE29B8CF75009C4987 /* Frameworks */,
@@ -155,7 +151,6 @@
 			);
 			name = SwiftUICoordinatorExample;
 			packageProductDependencies = (
-				176F3CBF29B8CF75009C4987 /* SwiftUICoordinator */,
 			);
 			productName = SwiftUICoordinatorExample;
 			productReference = 1732C9F829A6607500C2BC1F /* SwiftUICoordinatorExample.app */;
@@ -422,13 +417,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		176F3CBF29B8CF75009C4987 /* SwiftUICoordinator */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftUICoordinator;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1732C9F029A6607500C2BC1F /* Project object */;
 }
