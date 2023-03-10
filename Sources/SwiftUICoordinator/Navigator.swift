@@ -1,0 +1,93 @@
+//
+//  Navigator.swift
+//  
+//
+//  Created by Erik Drobne on 12/12/2022.
+//
+
+import SwiftUI
+
+@MainActor
+public protocol Navigator: ObservableObject {
+    associatedtype Route: NavigationRoute
+
+    var navigationController: UINavigationController { get set }
+    var startRoute: Route? { get }
+
+    func start()
+    func show(route: Route)
+    func set(routes: [Route], animated: Bool)
+    func pop(animated: Bool)
+    func popToRoot(animated: Bool)
+    func dismiss(animated: Bool)
+}
+
+public extension Navigator where Self: Coordinator, Self: RouterViewFactory, Self.Route == Self.Route {
+
+    var viewControllers: [UIViewController] {
+        return navigationController.viewControllers
+    }
+
+    var topViewController: UIViewController? {
+        return navigationController.topViewController
+    }
+
+    var visibleViewController: UIViewController? {
+        return navigationController.visibleViewController
+    }
+
+    func start() {
+        guard let route = startRoute else { return }
+        show(route: route)
+    }
+
+    func show(route: Route) {
+        let view = self.view(for: route)
+        let viewWithCoordinator = view.environmentObject(self)
+        let viewController = UIHostingController(rootView: viewWithCoordinator)
+        switch route.transition {
+        case .push(let animated):
+            navigationController.pushViewController(viewController, animated: animated)
+        case .present(let animated, let modalPresentationStyle, let completion):
+            present(viewController: viewController, animated: animated, modalPresentationStyle: modalPresentationStyle, completion: completion)
+        default:
+            assertionFailure("This route should represent a child coordinator. We shouldn't show it.")
+        }
+    }
+
+    func present(
+        viewController: UIViewController,
+        animated: Bool,
+        modalPresentationStyle: UIModalPresentationStyle,
+        completion: (() -> Void)?
+    ) {
+        viewController.modalPresentationStyle = modalPresentationStyle
+        navigationController.present(viewController, animated: animated, completion: completion)
+    }
+
+    func set(routes: [Route], animated: Bool = true) {
+        let views = routes.map({
+            UIHostingController(rootView: self.view(for: $0).environmentObject(self))
+        })
+
+        navigationController.setViewControllers(views, animated: animated)
+    }
+
+    func pop(animated: Bool = true) {
+        navigationController.popViewController(animated: animated)
+    }
+
+    func popToRoot(animated: Bool = true) {
+        if navigationController.presentedViewController != nil {
+            navigationController.dismiss(animated: true)
+        }
+        navigationController.popToRootViewController(animated: animated)
+    }
+
+    func dismiss(animated: Bool = true) {
+        navigationController.dismiss(animated: true) { [weak self] in
+            /// because there is a leak in UIHostingControllers that prevents from deallocation
+            self?.navigationController.viewControllers = []
+        }
+    }
+}
