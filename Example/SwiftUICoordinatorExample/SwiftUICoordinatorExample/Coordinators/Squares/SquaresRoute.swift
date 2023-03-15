@@ -10,7 +10,7 @@ import SwiftUICoordinator
 
 enum SquaresRoute: NavigationRoute {
     case squares
-    case square(color: Color, isConfigurable: Bool = false)
+    case square(color: Color)
     case details(title: String, text: String)
 
     var transition: NavigationTransitionStyle? {

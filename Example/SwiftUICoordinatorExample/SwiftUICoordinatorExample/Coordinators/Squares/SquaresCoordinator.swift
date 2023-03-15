@@ -46,8 +46,8 @@ extension SquaresCoordinator: RouterViewFactory {
         switch route {
         case .squares:
             SquaresView()
-        case let .square(color, isConfigurable):
-            SquareView(color: color, isConfigurable: isConfigurable)
+        case let .square(color):
+            SquareView(color: color)
         case let .details(title, text):
             ShapeDetailsView(title: title, text: text)
         }

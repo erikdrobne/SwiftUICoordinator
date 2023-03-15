@@ -10,11 +10,12 @@ import SwiftUI
 struct SquaresView: View {
 
     @EnvironmentObject var coordinator: SquaresCoordinator
+    @StateObject var viewModel = ViewModel()
 
     var body: some View {
         List {
             Button {
-                coordinator.didTap(route: .square(color: .blue))
+
             } label: {
                 Text("Blue")
             }
@@ -30,6 +31,27 @@ struct SquaresView: View {
             } label: {
                 Text("Red")
             }
+        }
+        .onAppear {
+            viewModel.coordinator = coordinator
+        }
+    }
+}
+
+extension SquaresView {
+    @MainActor class ViewModel: ObservableObject {
+        var coordinator: SquaresCoordinator?
+
+        func didTapBlue() {
+            coordinator?.didTap(route: .square(color: .blue))
+        }
+
+        func didTapGreen() {
+            coordinator?.didTap(route: .square(color: .green))
+        }
+
+        func didTapRed() {
+            coordinator?.didTap(route: .square(color: .red))
         }
     }
 }
