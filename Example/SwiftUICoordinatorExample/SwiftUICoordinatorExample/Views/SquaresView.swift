@@ -15,19 +15,19 @@ struct SquaresView: View {
     var body: some View {
         List {
             Button {
-
+                viewModel.didTapBlue()
             } label: {
                 Text("Blue")
             }
 
             Button {
-                coordinator.didTap(route: .square(color: .green))
+                viewModel.didTapGreen()
             } label: {
                 Text("Green")
             }
 
             Button {
-                coordinator.didTap(route: .square(color: .red))
+                viewModel.didTapRed()
             } label: {
                 Text("Red")
             }
