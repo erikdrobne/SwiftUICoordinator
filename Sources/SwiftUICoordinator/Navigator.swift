@@ -22,7 +22,7 @@ public protocol Navigator: ObservableObject {
     func dismiss(animated: Bool)
 }
 
-public extension Navigator where Self: Coordinator, Self: RouterViewFactory, Self.Route == Self.Route {
+public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     var viewControllers: [UIViewController] {
         return navigationController.viewControllers
@@ -50,12 +50,12 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory, Sel
             navigationController.pushViewController(viewController, animated: animated)
         case .present(let animated, let modalPresentationStyle, let completion):
             present(viewController: viewController, animated: animated, modalPresentationStyle: modalPresentationStyle, completion: completion)
-        default:
+        case .none:
             assertionFailure("This route should represent a child coordinator. We shouldn't show it.")
         }
     }
 
-    func present(
+    private func present(
         viewController: UIViewController,
         animated: Bool,
         modalPresentationStyle: UIModalPresentationStyle,
