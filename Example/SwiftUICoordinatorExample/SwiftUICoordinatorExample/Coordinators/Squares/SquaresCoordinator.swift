@@ -36,10 +36,7 @@ class SquaresCoordinator: Coordinator, Navigator {
 
 extension SquaresCoordinator: SquaresCoordinatorNavigation {
     func didTap(route: SquaresRoute) {
-        switch route {
-        default:
-            show(route: route)
-        }
+        show(route: route)
     }
 }
 
