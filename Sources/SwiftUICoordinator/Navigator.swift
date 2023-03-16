@@ -45,24 +45,15 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         let view = self.view(for: route)
         let viewWithCoordinator = view.environmentObject(self)
         let viewController = UIHostingController(rootView: viewWithCoordinator)
+        
         switch route.transition {
         case .push(let animated):
             navigationController.pushViewController(viewController, animated: animated)
         case .present(let animated, let modalPresentationStyle, let completion):
             present(viewController: viewController, animated: animated, modalPresentationStyle: modalPresentationStyle, completion: completion)
         case .none:
-            assertionFailure("This route should represent a child coordinator. We shouldn't show it.")
+            assertionFailure("This route should represent a child coordinator.")
         }
-    }
-
-    private func present(
-        viewController: UIViewController,
-        animated: Bool,
-        modalPresentationStyle: UIModalPresentationStyle,
-        completion: (() -> Void)?
-    ) {
-        viewController.modalPresentationStyle = modalPresentationStyle
-        navigationController.present(viewController, animated: animated, completion: completion)
     }
 
     func set(routes: [Route], animated: Bool = true) {
@@ -89,5 +80,17 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             /// because there is a leak in UIHostingControllers that prevents from deallocation
             self?.navigationController.viewControllers = []
         }
+    }
+
+    // MARK: - Private methods
+
+    private func present(
+        viewController: UIViewController,
+        animated: Bool,
+        modalPresentationStyle: UIModalPresentationStyle,
+        completion: (() -> Void)?
+    ) {
+        viewController.modalPresentationStyle = modalPresentationStyle
+        navigationController.present(viewController, animated: animated, completion: completion)
     }
 }

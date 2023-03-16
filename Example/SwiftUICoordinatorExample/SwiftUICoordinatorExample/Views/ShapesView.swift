@@ -10,28 +10,50 @@ import SwiftUI
 struct ShapesView: View {
 
     @EnvironmentObject var coordinator: ShapesCoordinator
+    @StateObject var viewModel = ViewModel()
 
     var body: some View {
         List {
             Section("Shapes") {
                 Button {
-                    coordinator.didTap(route: .circle)
+                    viewModel.didTapCircle()
                 } label: {
                     Text("Circle")
                 }
 
                 Button {
-                    coordinator.didTap(route: .rectangle)
+                    viewModel.didTapRectangle()
                 } label: {
                     Text("Rectangle")
                 }
 
                 Button {
-                    coordinator.didTap(route: .square)
+                    viewModel.didTapSquare()
                 } label: {
                     Text("Square")
                 }
             }
+        }
+        .onAppear {
+            viewModel.coordinator = coordinator
+        }
+    }
+}
+
+extension ShapesView {
+    @MainActor class ViewModel: ObservableObject {
+        var coordinator: ShapesCoordinator?
+
+        func didTapCircle() {
+            coordinator?.didTap(route: .circle)
+        }
+
+        func didTapRectangle() {
+            coordinator?.didTap(route: .rectangle)
+        }
+
+        func didTapSquare() {
+            coordinator?.didTap(route: .square)
         }
     }
 }

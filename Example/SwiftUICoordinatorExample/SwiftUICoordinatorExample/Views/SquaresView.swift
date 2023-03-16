@@ -10,26 +10,48 @@ import SwiftUI
 struct SquaresView: View {
 
     @EnvironmentObject var coordinator: SquaresCoordinator
+    @StateObject var viewModel = ViewModel()
 
     var body: some View {
         List {
             Button {
-                coordinator.didTap(route: .square(color: .blue))
+                viewModel.didTapBlue()
             } label: {
                 Text("Blue")
             }
 
             Button {
-                coordinator.didTap(route: .square(color: .green))
+                viewModel.didTapGreen()
             } label: {
                 Text("Green")
             }
 
             Button {
-                coordinator.didTap(route: .square(color: .red))
+                viewModel.didTapRed()
             } label: {
                 Text("Red")
             }
+        }
+        .onAppear {
+            viewModel.coordinator = coordinator
+        }
+    }
+}
+
+extension SquaresView {
+    @MainActor class ViewModel: ObservableObject {
+        var coordinator: SquaresCoordinator?
+
+        func didTapBlue() {
+            coordinator?.didTap(route: .square(color: .blue))
+        }
+
+        func didTapGreen() {
+            coordinator?.didTap(route: .square(color: .green))
+        }
+
+        func didTapRed() {
+            coordinator?.didTap(route: .square(color: .red))
         }
     }
 }
