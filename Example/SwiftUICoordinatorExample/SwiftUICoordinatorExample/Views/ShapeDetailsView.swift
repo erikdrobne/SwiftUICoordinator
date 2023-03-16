@@ -14,15 +14,18 @@ struct ShapeDetailsView: View {
 
     var body: some View {
         VStack {
-            Text(title)
-                .font(.title)
-                .fontWeight(.bold)
-                .frame(alignment: .leading)
             Spacer()
-                .frame(height: 24)
+                .frame(height: 8)
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.leading, .trailing], 12)
+            Spacer()
+                .frame(height: 16)
             Text(text)
-            .font(.italic(.body)())
-            .padding([.leading, .trailing], 12)
+                .font(.italic(.body)())
+                .padding([.leading, .trailing], 12)
             Spacer()
         }
     }

@@ -14,24 +14,22 @@ struct SquaresView: View {
 
     var body: some View {
         List {
-            Section("Squares") {
-                Button {
-                    viewModel.didTapBlue()
-                } label: {
-                    Text("Blue")
-                }
-                
-                Button {
-                    viewModel.didTapGreen()
-                } label: {
-                    Text("Green")
-                }
-                
-                Button {
-                    viewModel.didTapRed()
-                } label: {
-                    Text("Red")
-                }
+            Button {
+                viewModel.didTapBlue()
+            } label: {
+                Text("Blue")
+            }
+
+            Button {
+                viewModel.didTapGreen()
+            } label: {
+                Text("Green")
+            }
+
+            Button {
+                viewModel.didTapRed()
+            } label: {
+                Text("Red")
             }
         }
         .onAppear {

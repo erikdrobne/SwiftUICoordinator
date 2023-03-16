@@ -16,9 +16,6 @@ struct SquareView: View {
 
     var body: some View {
         VStack {
-            Text("Square")
-                .font(.title)
-                .fontWeight(.bold)
             Spacer()
             Rectangle()
                 .aspectRatio(1.0, contentMode: .fit)
