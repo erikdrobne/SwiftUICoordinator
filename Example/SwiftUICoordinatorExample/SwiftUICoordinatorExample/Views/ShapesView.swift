@@ -59,7 +59,10 @@ extension ShapesView {
 }
 
 struct ShapesView_Previews: PreviewProvider {
+    static let coordinator = ShapesCoordinator()
+
     static var previews: some View {
         ShapesView()
+            .environmentObject(coordinator)
     }
 }

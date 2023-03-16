@@ -14,22 +14,24 @@ struct SquaresView: View {
 
     var body: some View {
         List {
-            Button {
-                viewModel.didTapBlue()
-            } label: {
-                Text("Blue")
-            }
-
-            Button {
-                viewModel.didTapGreen()
-            } label: {
-                Text("Green")
-            }
-
-            Button {
-                viewModel.didTapRed()
-            } label: {
-                Text("Red")
+            Section("Squares") {
+                Button {
+                    viewModel.didTapBlue()
+                } label: {
+                    Text("Blue")
+                }
+                
+                Button {
+                    viewModel.didTapGreen()
+                } label: {
+                    Text("Green")
+                }
+                
+                Button {
+                    viewModel.didTapRed()
+                } label: {
+                    Text("Red")
+                }
             }
         }
         .onAppear {
@@ -57,8 +59,11 @@ extension SquaresView {
 }
 
 struct SquaresView_Previews: PreviewProvider {
+    static let coordinator = SquaresCoordinator(parent: nil)
+
     static var previews: some View {
         SquaresView()
+            .environmentObject(coordinator)
     }
 }
 

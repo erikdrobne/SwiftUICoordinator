@@ -67,7 +67,10 @@ extension SquareView {
 
 
 struct SquareView_Previews: PreviewProvider {
+    static let coordinator = SquaresCoordinator(parent: nil)
+
     static var previews: some View {
         SquareView(color: .blue)
+            .environmentObject(coordinator)
     }
 }
