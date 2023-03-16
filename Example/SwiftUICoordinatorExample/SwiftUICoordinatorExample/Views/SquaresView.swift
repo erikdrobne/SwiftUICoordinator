@@ -57,8 +57,11 @@ extension SquaresView {
 }
 
 struct SquaresView_Previews: PreviewProvider {
+    static let coordinator = SquaresCoordinator(parent: nil)
+
     static var previews: some View {
         SquaresView()
+            .environmentObject(coordinator)
     }
 }
 

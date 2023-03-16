@@ -10,9 +10,6 @@ import SwiftUI
 struct CircleView: View {
     var body: some View {
         VStack {
-            Text("Circle")
-                .font(.title)
-                .fontWeight(.bold)
             Spacer()
             Circle()
                 .foregroundColor(.blue)

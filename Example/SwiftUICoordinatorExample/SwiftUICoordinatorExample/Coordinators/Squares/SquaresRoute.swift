@@ -13,6 +13,17 @@ enum SquaresRoute: NavigationRoute {
     case square(color: Color)
     case details(title: String, text: String)
 
+    var title: String? {
+        switch self {
+        case .squares:
+            return "Squares"
+        case .square:
+            return "Square"
+        case .details:
+            return "Details"
+        }
+    }
+
     var transition: NavigationTransitionStyle? {
         return .push()
     }

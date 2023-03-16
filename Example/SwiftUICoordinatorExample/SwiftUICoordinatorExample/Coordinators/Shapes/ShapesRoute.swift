@@ -14,6 +14,17 @@ enum ShapesRoute: NavigationRoute {
     case rectangle
     case square
 
+    var title: String? {
+        switch self {
+        case .shapes:
+            return "Shapes"
+        case .circle:
+            return "Circle"
+        default:
+            return nil
+        }
+    }
+
     var transition: NavigationTransitionStyle? {
         switch self {
         case .rectangle:

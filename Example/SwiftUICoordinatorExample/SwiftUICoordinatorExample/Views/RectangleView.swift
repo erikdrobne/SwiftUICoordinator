@@ -9,14 +9,9 @@ import SwiftUI
 
 struct RectangleView: View {
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Rectangle")
-                .font(.title)
-                .fontWeight(.bold)
-            Rectangle()
-                .foregroundColor(.yellow)
-        }
+        Rectangle()
+            .foregroundColor(.yellow)
+            .ignoresSafeArea()
     }
 }
 

@@ -14,24 +14,22 @@ struct ShapesView: View {
 
     var body: some View {
         List {
-            Section("Shapes") {
-                Button {
-                    viewModel.didTapCircle()
-                } label: {
-                    Text("Circle")
-                }
+            Button {
+                viewModel.didTapCircle()
+            } label: {
+                Text("Circle")
+            }
 
-                Button {
-                    viewModel.didTapRectangle()
-                } label: {
-                    Text("Rectangle")
-                }
+            Button {
+                viewModel.didTapRectangle()
+            } label: {
+                Text("Rectangle")
+            }
 
-                Button {
-                    viewModel.didTapSquare()
-                } label: {
-                    Text("Square")
-                }
+            Button {
+                viewModel.didTapSquare()
+            } label: {
+                Text("Square")
             }
         }
         .onAppear {
@@ -59,7 +57,10 @@ extension ShapesView {
 }
 
 struct ShapesView_Previews: PreviewProvider {
+    static let coordinator = ShapesCoordinator()
+
     static var previews: some View {
         ShapesView()
+            .environmentObject(coordinator)
     }
 }
