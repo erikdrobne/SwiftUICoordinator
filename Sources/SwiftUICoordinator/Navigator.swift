@@ -91,8 +91,11 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     // MARK: - Private methods
 
     private func views(for routes: [Route]) -> [UIHostingController<some View>] {
-        return routes.map({
-            UIHostingController(rootView: self.view(for: $0).environmentObject(self))
+        return routes.map({ route in
+            let view = self.view(for: route).ifLet(route.title) { view, value in
+                view.navigationTitle(value)
+            }
+            return UIHostingController(rootView: view.environmentObject(self))
         })
     }
 

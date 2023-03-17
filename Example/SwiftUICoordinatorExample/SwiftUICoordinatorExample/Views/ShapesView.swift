@@ -14,28 +14,32 @@ struct ShapesView: View {
 
     var body: some View {
         List {
-            Button {
-                viewModel.didTapCircle()
-            } label: {
-                Text("Circle")
+            Section(header: Text("Simple")) {
+                Button {
+                    viewModel.didTapCircle()
+                } label: {
+                    Text("Circle")
+                }
+
+                Button {
+                    viewModel.didTapRectangle()
+                } label: {
+                    Text("Rectangle")
+                }
+
+                Button {
+                    viewModel.didTapSquare()
+                } label: {
+                    Text("Square")
+                }
             }
 
-            Button {
-                viewModel.didTapRectangle()
-            } label: {
-                Text("Rectangle")
-            }
-
-            Button {
-                viewModel.didTapSquare()
-            } label: {
-                Text("Square")
-            }
-
-            Button {
-                viewModel.didTapSquare(color: .blue)
-            } label: {
-                Text("Blue Square")
+            Section(header: Text("Featured")) {
+                Button {
+                    viewModel.didTapSquare(color: .blue)
+                } label: {
+                    Text("Blue Square")
+                }
             }
         }
         .onAppear {
@@ -59,7 +63,7 @@ extension ShapesView {
         func didTapSquare(color: Color? = nil) {
             if let color {
                 coordinator?.didTap(route: .square(.square(color: color)))
-                
+
             } else {
                 coordinator?.didTap(route: .square(nil))
             }
