@@ -17,6 +17,7 @@ public protocol Navigator: ObservableObject {
     func start()
     func show(route: Route)
     func set(routes: [Route], animated: Bool)
+    func append(routes: [Route], animated: Bool)
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
     func dismiss(animated: Bool)
