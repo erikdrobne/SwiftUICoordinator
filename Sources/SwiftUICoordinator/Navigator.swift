@@ -61,11 +61,13 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     }
 
     func set(routes: [Route], animated: Bool = true) {
-        let views = routes.map({
-            UIHostingController(rootView: self.view(for: $0).environmentObject(self))
-        })
-
+        let views = views(for: routes)
         navigationController.setViewControllers(views, animated: animated)
+    }
+
+    func append(routes: [Route], animated: Bool = true) {
+        let views = views(for: routes)
+        navigationController.setViewControllers(self.viewControllers + views, animated: animated)
     }
 
     func pop(animated: Bool = true) {
@@ -87,6 +89,12 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     }
 
     // MARK: - Private methods
+
+    private func views(for routes: [Route]) -> [UIHostingController<some View>] {
+        return routes.map({
+            UIHostingController(rootView: self.view(for: $0).environmentObject(self))
+        })
+    }
 
     private func present(
         viewController: UIViewController,

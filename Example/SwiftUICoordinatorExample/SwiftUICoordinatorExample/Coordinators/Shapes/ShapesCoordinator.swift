@@ -40,8 +40,15 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
 extension ShapesCoordinator: ShapesCoordinatorNavigation {
     func didTap(route: ShapesRoute) {
         switch route {
-        case .square:
-            startSquaresCoordinator()
+        case .square(let squaresRoute):
+            guard let squaresRoute else {
+                startSquaresCoordinator()
+                return
+            }
+
+            let coordinator = SquaresCoordinator(parent: self, navigationController: navigationController)
+            add(child: coordinator)
+            coordinator.append(routes: [.squares, squaresRoute])
         default:
             show(route: route)
         }

@@ -31,6 +31,12 @@ struct ShapesView: View {
             } label: {
                 Text("Square")
             }
+
+            Button {
+                viewModel.didTapSquare(color: .blue)
+            } label: {
+                Text("Blue Square")
+            }
         }
         .onAppear {
             viewModel.coordinator = coordinator
@@ -50,8 +56,13 @@ extension ShapesView {
             coordinator?.didTap(route: .rectangle)
         }
 
-        func didTapSquare() {
-            coordinator?.didTap(route: .square)
+        func didTapSquare(color: Color? = nil) {
+            if let color {
+                coordinator?.didTap(route: .square(.square(color: color)))
+                
+            } else {
+                coordinator?.didTap(route: .square(nil))
+            }
         }
     }
 }
