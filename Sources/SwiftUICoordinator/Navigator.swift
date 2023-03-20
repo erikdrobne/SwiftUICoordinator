@@ -17,6 +17,7 @@ public protocol Navigator: ObservableObject {
     func start()
     func show(route: Route)
     func set(routes: [Route], animated: Bool)
+    func append(routes: [Route], animated: Bool)
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
     func dismiss(animated: Bool)
@@ -61,11 +62,13 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     }
 
     func set(routes: [Route], animated: Bool = true) {
-        let views = routes.map({
-            UIHostingController(rootView: self.view(for: $0).environmentObject(self))
-        })
-
+        let views = views(for: routes)
         navigationController.setViewControllers(views, animated: animated)
+    }
+
+    func append(routes: [Route], animated: Bool = true) {
+        let views = views(for: routes)
+        navigationController.setViewControllers(self.viewControllers + views, animated: animated)
     }
 
     func pop(animated: Bool = true) {
@@ -87,6 +90,15 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     }
 
     // MARK: - Private methods
+
+    private func views(for routes: [Route]) -> [UIHostingController<some View>] {
+        return routes.map({ route in
+            let view = self.view(for: route).ifLet(route.title) { view, value in
+                view.navigationTitle(value)
+            }
+            return UIHostingController(rootView: view.environmentObject(self))
+        })
+    }
 
     private func present(
         viewController: UIViewController,
