@@ -24,14 +24,14 @@ class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Initialization
 
     init(parent: Coordinator?, navigationController: UINavigationController = .init(), startRoute: SimpleShapesRoute? = .simpleShapes) {
+        self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
         super.init()
     }
 
     func presentRoot() {
-        popToRoot()
-        childCoordinators.removeAll()
+        parent?.presentRoot()
     }
 }
 
@@ -72,9 +72,20 @@ extension SimpleShapesCoordinator: RouterViewFactory {
                 .fill(.gray)
                 .frame(width: 200, height: 100)
         case .circle:
-            Circle()
-                .fill(.blue)
-                .frame(width: 200, height: 200)
+            VStack {
+                Spacer()
+                Circle()
+                    .fill(.blue)
+                    .frame(width: 200, height: 200)
+                Spacer()
+                Button {
+                    self.presentRoot()
+                } label: {
+                    Text("Done")
+                }
+                .buttonStyle(.borderedProminent)
+            }
+
         }
     }
 }

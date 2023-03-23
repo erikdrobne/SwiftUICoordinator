@@ -26,6 +26,7 @@ class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Initialization
 
     init(parent: Coordinator?, navigationController: UINavigationController = .init(), startRoute: CustomShapesRoute? = .customShapes) {
+        self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
         super.init()
