@@ -18,6 +18,11 @@
 		17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183629CC63C0004755DB /* CustomShapesView.swift */; };
 		17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */; };
 		17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183C29CC668F004755DB /* SimpleShapesRoute.swift */; };
+		17F1183F29CC8A57004755DB /* CustomShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183E29CC8A57004755DB /* CustomShapesCoordinator.swift */; };
+		17F1184129CC8A84004755DB /* CustomShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1184029CC8A84004755DB /* CustomShapesRoute.swift */; };
+		17F1184329CC8BA6004755DB /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1184229CC8BA6004755DB /* Triangle.swift */; };
+		17F1184529CC8CF6004755DB /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1184429CC8CF6004755DB /* Star.swift */; };
+		17F1184729CC8F1A004755DB /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1184629CC8F1A004755DB /* Tower.swift */; };
 		182274C729C09C94001F9B50 /* SwiftUICoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 182274C629C09C94001F9B50 /* SwiftUICoordinator */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +39,11 @@
 		17F1183629CC63C0004755DB /* CustomShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesView.swift; sourceTree = "<group>"; };
 		17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesCoordinator.swift; sourceTree = "<group>"; };
 		17F1183C29CC668F004755DB /* SimpleShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesRoute.swift; sourceTree = "<group>"; };
+		17F1183E29CC8A57004755DB /* CustomShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesCoordinator.swift; sourceTree = "<group>"; };
+		17F1184029CC8A84004755DB /* CustomShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesRoute.swift; sourceTree = "<group>"; };
+		17F1184229CC8BA6004755DB /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		17F1184429CC8CF6004755DB /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		17F1184629CC8F1A004755DB /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		182274C529C09C79001F9B50 /* SwiftUICoordinator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUICoordinator; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +104,9 @@
 				170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */,
 				17F1183429CC63B1004755DB /* SimpleShapesView.swift */,
 				17F1183629CC63C0004755DB /* CustomShapesView.swift */,
+				17F1184229CC8BA6004755DB /* Triangle.swift */,
+				17F1184429CC8CF6004755DB /* Star.swift */,
+				17F1184629CC8F1A004755DB /* Tower.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,6 +149,8 @@
 		17F1183929CC6648004755DB /* CustomShapes */ = {
 			isa = PBXGroup;
 			children = (
+				17F1183E29CC8A57004755DB /* CustomShapesCoordinator.swift */,
+				17F1184029CC8A84004755DB /* CustomShapesRoute.swift */,
 			);
 			path = CustomShapes;
 			sourceTree = "<group>";
@@ -224,12 +239,17 @@
 				170A6C4129BB4FA200C615B2 /* ShapeDetailsView.swift in Sources */,
 				17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */,
 				17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */,
+				17F1184729CC8F1A004755DB /* Tower.swift in Sources */,
+				17F1184329CC8BA6004755DB /* Triangle.swift in Sources */,
 				1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */,
+				17F1184529CC8CF6004755DB /* Star.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
 				176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */,
 				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
 				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
 				176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */,
+				17F1183F29CC8A57004755DB /* CustomShapesCoordinator.swift in Sources */,
+				17F1184129CC8A84004755DB /* CustomShapesRoute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

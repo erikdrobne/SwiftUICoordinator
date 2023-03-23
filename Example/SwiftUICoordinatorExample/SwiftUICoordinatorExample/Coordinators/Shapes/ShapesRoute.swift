@@ -5,7 +5,7 @@
 //  Created by Erik Drobne on 08/03/2023.
 //
 
-import SwiftUI
+import Foundation
 import SwiftUICoordinator
 
 enum ShapesRoute: NavigationRoute {
@@ -13,17 +13,11 @@ enum ShapesRoute: NavigationRoute {
     case simpleShapes
     case customShapes
     case featuredShape
-    
-//    case circle
-//    case rectangle
-//    case square(SquaresRoute?)
 
     var title: String? {
         switch self {
         case .shapes:
             return "SwiftUI Shapes"
-//        case .circle:
-//            return "Circle"
         default:
             return nil
         }
@@ -31,10 +25,6 @@ enum ShapesRoute: NavigationRoute {
 
     var transition: NavigationTransitionStyle? {
         switch self {
-//        case .rectangle:
-//            return .present()
-//        case .square:
-//            return nil
         case .simpleShapes:
             return nil
         default:

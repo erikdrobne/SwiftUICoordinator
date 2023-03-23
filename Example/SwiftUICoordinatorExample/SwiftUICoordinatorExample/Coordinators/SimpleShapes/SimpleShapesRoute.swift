@@ -5,7 +5,7 @@
 //  Created by Erik Drobne on 23/03/2023.
 //
 
-import SwiftUI
+import Foundation
 import SwiftUICoordinator
 
 enum SimpleShapesRoute: NavigationRoute {
