@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		170A6C4129BB4FA200C615B2 /* ShapeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */; };
 		1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */; };
 		1732CA0029A6607800C2BC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732C9FF29A6607800C2BC1F /* Assets.xcassets */; };
 		1732CA0329A6607800C2BC1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */; };
@@ -27,7 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeDetailsView.swift; sourceTree = "<group>"; };
 		1732C9F829A6607500C2BC1F /* SwiftUICoordinatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUICoordinatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICoordinatorExampleApp.swift; sourceTree = "<group>"; };
 		1732C9FF29A6607800C2BC1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				176F3CB429B8BF71009C4987 /* ShapesView.swift */,
-				170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */,
 				17F1183429CC63B1004755DB /* SimpleShapesView.swift */,
 				17F1183629CC63C0004755DB /* CustomShapesView.swift */,
 				17F1184229CC8BA6004755DB /* Triangle.swift */,
@@ -236,7 +233,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				170A6C4129BB4FA200C615B2 /* ShapeDetailsView.swift in Sources */,
 				17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */,
 				17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */,
 				17F1184729CC8F1A004755DB /* Tower.swift in Sources */,
