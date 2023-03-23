@@ -17,7 +17,7 @@ enum CustomShapesRoute: NavigationRoute {
     var title: String? {
         switch self {
         case .customShapes:
-            return "Custom Shapes"
+            return "Custom"
         case .triangle:
             return "Triangle"
         case .star:

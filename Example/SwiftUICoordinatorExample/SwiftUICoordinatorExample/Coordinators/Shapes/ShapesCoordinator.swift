@@ -41,18 +41,18 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
     func didTap(route: ShapesRoute) {
         switch route {
         case .simpleShapes:
-            startSimpleShapesCoordinator()
+            let coordinator = makeSimpleShapesCoordinator()
+            coordinator.start()
         case .customShapes:
-            startCustomShapesCoordinator()
+            let coordinator = makeCustomShapesCoordinator()
+            coordinator.start()
         case .featuredShape(let route):
             switch route {
             case let shapeRoute as SimpleShapesRoute:
-                let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
-                add(child: coordinator)
+                let coordinator = makeSimpleShapesCoordinator()
                 coordinator.append(routes: [.simpleShapes, shapeRoute])
             case let shapeRoute as CustomShapesRoute:
-                let coordinator = CustomShapesCoordinator(parent: self, navigationController: navigationController)
-                add(child: coordinator)
+                let coordinator = makeCustomShapesCoordinator()
                 coordinator.append(routes: [.customShapes, shapeRoute])
             default:
                 break
@@ -64,16 +64,16 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
 
     // MARK: - Private methods
 
-    private func startSimpleShapesCoordinator() {
+    private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
         let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
         add(child: coordinator)
-        coordinator.start()
+        return coordinator
     }
 
-    private func startCustomShapesCoordinator() {
+    private func makeCustomShapesCoordinator() -> CustomShapesCoordinator {
         let coordinator = CustomShapesCoordinator(parent: self, navigationController: navigationController)
         add(child: coordinator)
-        coordinator.start()
+        return coordinator
     }
 }
 
