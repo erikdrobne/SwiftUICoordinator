@@ -44,6 +44,19 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
             startSimpleShapesCoordinator()
         case .customShapes:
             startCustomShapesCoordinator()
+        case .featuredShape(let route):
+            switch route {
+            case let shapeRoute as SimpleShapesRoute:
+                let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
+                add(child: coordinator)
+                coordinator.append(routes: [.simpleShapes, shapeRoute])
+            case let shapeRoute as CustomShapesRoute:
+                let coordinator = CustomShapesCoordinator(parent: self, navigationController: navigationController)
+                add(child: coordinator)
+                coordinator.append(routes: [.customShapes, shapeRoute])
+            default:
+                break
+            }
         default:
             show(route: route)
         }

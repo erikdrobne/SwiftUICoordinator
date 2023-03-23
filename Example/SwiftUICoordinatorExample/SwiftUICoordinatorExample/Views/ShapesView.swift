@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUICoordinator
 
 struct ShapesView: View {
 
@@ -49,7 +50,17 @@ extension ShapesView {
         }
 
         func didTapFeatured() {
-            coordinator?.didTap(route: .featuredShape)
+            let routes: [NavigationRoute] = [
+                SimpleShapesRoute.circle,
+                CustomShapesRoute.tower,
+                SimpleShapesRoute.capsule
+            ]
+
+            guard let route = routes.randomElement() else {
+                return
+            }
+
+            coordinator?.didTap(route: .featuredShape(route))
         }
     }
 }
