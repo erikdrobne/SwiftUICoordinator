@@ -40,15 +40,8 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
 extension ShapesCoordinator: ShapesCoordinatorNavigation {
     func didTap(route: ShapesRoute) {
         switch route {
-        case .square(let squaresRoute):
-            guard let squaresRoute else {
-                startSquaresCoordinator()
-                return
-            }
-
-            let coordinator = SquaresCoordinator(parent: self, navigationController: navigationController)
-            add(child: coordinator)
-            coordinator.append(routes: [.squares, squaresRoute])
+        case .simpleShapes:
+            startSimpleShapesCoordinator()
         default:
             show(route: route)
         }
@@ -56,8 +49,8 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
 
     // MARK: - Private methods
 
-    private func startSquaresCoordinator() {
-        let coordinator = SquaresCoordinator(parent: self, navigationController: navigationController, startRoute: .squares)
+    private func startSimpleShapesCoordinator() {
+        let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
         add(child: coordinator)
         coordinator.start()
     }
@@ -71,11 +64,11 @@ extension ShapesCoordinator: RouterViewFactory {
         switch route {
         case .shapes:
             ShapesView()
-        case .circle:
-            CircleView()
-        case .rectangle:
-            RectangleView()
-        case .square:
+        case .simpleShapes:
+            EmptyView()
+        case .customShapes:
+            CustomShapesView()
+        case .featuredShape:
             EmptyView()
         }
     }

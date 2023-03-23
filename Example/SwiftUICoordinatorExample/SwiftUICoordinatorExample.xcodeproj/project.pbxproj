@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		170A6C3F29BB298400C615B2 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3E29BB298400C615B2 /* SquareView.swift */; };
 		170A6C4129BB4FA200C615B2 /* ShapeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */; };
 		1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */; };
 		1732CA0029A6607800C2BC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732C9FF29A6607800C2BC1F /* Assets.xcassets */; };
@@ -16,15 +15,14 @@
 		176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */; };
 		176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBA29B8C162009C4987 /* ShapesRoute.swift */; };
 		176F3CBD29B8C29D009C4987 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBC29B8C29D009C4987 /* CircleView.swift */; };
-		176F3CC229B8DD64009C4987 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CC129B8DD64009C4987 /* RectangleView.swift */; };
-		17C21EC229BA2895007189FC /* SquaresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C21EC129BA2895007189FC /* SquaresView.swift */; };
-		17C21EC529BA2997007189FC /* SquaresCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C21EC429BA2997007189FC /* SquaresCoordinator.swift */; };
-		17C21EC729BA29A6007189FC /* SquaresRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C21EC629BA29A6007189FC /* SquaresRoute.swift */; };
+		17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183429CC63B1004755DB /* SimpleShapesView.swift */; };
+		17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183629CC63C0004755DB /* CustomShapesView.swift */; };
+		17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */; };
+		17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183C29CC668F004755DB /* SimpleShapesRoute.swift */; };
 		182274C729C09C94001F9B50 /* SwiftUICoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 182274C629C09C94001F9B50 /* SwiftUICoordinator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		170A6C3E29BB298400C615B2 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeDetailsView.swift; sourceTree = "<group>"; };
 		1732C9F829A6607500C2BC1F /* SwiftUICoordinatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUICoordinatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICoordinatorExampleApp.swift; sourceTree = "<group>"; };
@@ -34,10 +32,10 @@
 		176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesCoordinator.swift; sourceTree = "<group>"; };
 		176F3CBA29B8C162009C4987 /* ShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesRoute.swift; sourceTree = "<group>"; };
 		176F3CBC29B8C29D009C4987 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
-		176F3CC129B8DD64009C4987 /* RectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
-		17C21EC129BA2895007189FC /* SquaresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquaresView.swift; sourceTree = "<group>"; };
-		17C21EC429BA2997007189FC /* SquaresCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquaresCoordinator.swift; sourceTree = "<group>"; };
-		17C21EC629BA29A6007189FC /* SquaresRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquaresRoute.swift; sourceTree = "<group>"; };
+		17F1183429CC63B1004755DB /* SimpleShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesView.swift; sourceTree = "<group>"; };
+		17F1183629CC63C0004755DB /* CustomShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesView.swift; sourceTree = "<group>"; };
+		17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesCoordinator.swift; sourceTree = "<group>"; };
+		17F1183C29CC668F004755DB /* SimpleShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesRoute.swift; sourceTree = "<group>"; };
 		182274C529C09C79001F9B50 /* SwiftUICoordinator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUICoordinator; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,10 +94,9 @@
 			children = (
 				176F3CB429B8BF71009C4987 /* ShapesView.swift */,
 				176F3CBC29B8C29D009C4987 /* CircleView.swift */,
-				176F3CC129B8DD64009C4987 /* RectangleView.swift */,
-				17C21EC129BA2895007189FC /* SquaresView.swift */,
-				170A6C3E29BB298400C615B2 /* SquareView.swift */,
 				170A6C4029BB4FA200C615B2 /* ShapeDetailsView.swift */,
+				17F1183429CC63B1004755DB /* SimpleShapesView.swift */,
+				17F1183629CC63C0004755DB /* CustomShapesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -107,8 +104,9 @@
 		176F3CB629B8C01E009C4987 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				17C21EC329BA2977007189FC /* Squares */,
 				176F3CB929B8C143009C4987 /* Shapes */,
+				17F1183929CC6648004755DB /* CustomShapes */,
+				17F1183829CC662B004755DB /* SimpleShapes */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -129,13 +127,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		17C21EC329BA2977007189FC /* Squares */ = {
+		17F1183829CC662B004755DB /* SimpleShapes */ = {
 			isa = PBXGroup;
 			children = (
-				17C21EC429BA2997007189FC /* SquaresCoordinator.swift */,
-				17C21EC629BA29A6007189FC /* SquaresRoute.swift */,
+				17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */,
+				17F1183C29CC668F004755DB /* SimpleShapesRoute.swift */,
 			);
-			path = Squares;
+			path = SimpleShapes;
+			sourceTree = "<group>";
+		};
+		17F1183929CC6648004755DB /* CustomShapes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomShapes;
 			sourceTree = "<group>";
 		};
 		182274C429C09C79001F9B50 /* Packages */ = {
@@ -220,15 +225,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				170A6C4129BB4FA200C615B2 /* ShapeDetailsView.swift in Sources */,
+				17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */,
 				176F3CBD29B8C29D009C4987 /* CircleView.swift in Sources */,
-				170A6C3F29BB298400C615B2 /* SquareView.swift in Sources */,
-				17C21EC229BA2895007189FC /* SquaresView.swift in Sources */,
+				17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */,
 				1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */,
-				17C21EC529BA2997007189FC /* SquaresCoordinator.swift in Sources */,
-				176F3CC229B8DD64009C4987 /* RectangleView.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
 				176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */,
-				17C21EC729BA29A6007189FC /* SquaresRoute.swift in Sources */,
+				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
+				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
 				176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

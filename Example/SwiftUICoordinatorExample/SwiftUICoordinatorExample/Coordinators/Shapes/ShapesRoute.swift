@@ -10,16 +10,20 @@ import SwiftUICoordinator
 
 enum ShapesRoute: NavigationRoute {
     case shapes
-    case circle
-    case rectangle
-    case square(SquaresRoute?)
+    case simpleShapes
+    case customShapes
+    case featuredShape
+    
+//    case circle
+//    case rectangle
+//    case square(SquaresRoute?)
 
     var title: String? {
         switch self {
         case .shapes:
-            return "Shapes"
-        case .circle:
-            return "Circle"
+            return "SwiftUI Shapes"
+//        case .circle:
+//            return "Circle"
         default:
             return nil
         }
@@ -27,9 +31,11 @@ enum ShapesRoute: NavigationRoute {
 
     var transition: NavigationTransitionStyle? {
         switch self {
-        case .rectangle:
-            return .present()
-        case .square:
+//        case .rectangle:
+//            return .present()
+//        case .square:
+//            return nil
+        case .simpleShapes:
             return nil
         default:
             return .push()
