@@ -6,4 +6,4 @@ This package represents a solution for integrating Coordinator pattern into the 
 
 ## Problem statement
 
-In SwiftUI we miss navigating to root, one step back, dismissing in the middle of the stack or replacing a view.
+In SwiftUI with NavigationStack we miss dismissing in the middle of the stack or replacing the view.
