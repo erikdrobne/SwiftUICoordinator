@@ -8,3 +8,9 @@ This package represents a solution for integrating Coordinator pattern into the 
 
 In SwiftUI with NavigationStack we miss dismissing in the middle of the stack or replacing the view.
 UINavigationController works from earlier versions of iOS while NavigationStack was introduced with iOS 16.0.
+
+## Implementation
+
+## Usage
+
+## Examples
