@@ -9,5 +9,5 @@ import Foundation
 
 public protocol NavigationRoute {
     var title: String? { get }
-    var transition: NavigationTransitionStyle? { get }
+    var transition: NavigationTransition? { get }
 }

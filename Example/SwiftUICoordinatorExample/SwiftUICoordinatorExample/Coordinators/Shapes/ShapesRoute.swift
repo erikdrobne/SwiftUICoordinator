@@ -23,7 +23,7 @@ enum ShapesRoute: NavigationRoute {
         }
     }
 
-    var transition: NavigationTransitionStyle? {
+    var transition: NavigationTransition? {
         switch self {
         case .simpleShapes:
             return nil

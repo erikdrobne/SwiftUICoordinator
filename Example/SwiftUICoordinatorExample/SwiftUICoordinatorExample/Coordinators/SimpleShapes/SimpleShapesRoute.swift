@@ -33,7 +33,7 @@ enum SimpleShapesRoute: NavigationRoute {
         }
     }
 
-    var transition: NavigationTransitionStyle? {
+    var transition: NavigationTransition? {
         return .push()
     }
 }
