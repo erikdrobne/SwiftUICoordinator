@@ -40,15 +40,23 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
 extension ShapesCoordinator: ShapesCoordinatorNavigation {
     func didTap(route: ShapesRoute) {
         switch route {
-        case .square(let squaresRoute):
-            guard let squaresRoute else {
-                startSquaresCoordinator()
-                return
+        case .simpleShapes:
+            let coordinator = makeSimpleShapesCoordinator()
+            coordinator.start()
+        case .customShapes:
+            let coordinator = makeCustomShapesCoordinator()
+            coordinator.start()
+        case .featuredShape(let route):
+            switch route {
+            case let shapeRoute as SimpleShapesRoute:
+                let coordinator = makeSimpleShapesCoordinator()
+                coordinator.append(routes: [.simpleShapes, shapeRoute])
+            case let shapeRoute as CustomShapesRoute:
+                let coordinator = makeCustomShapesCoordinator()
+                coordinator.append(routes: [.customShapes, shapeRoute])
+            default:
+                break
             }
-
-            let coordinator = SquaresCoordinator(parent: self, navigationController: navigationController)
-            add(child: coordinator)
-            coordinator.append(routes: [.squares, squaresRoute])
         default:
             show(route: route)
         }
@@ -56,10 +64,16 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
 
     // MARK: - Private methods
 
-    private func startSquaresCoordinator() {
-        let coordinator = SquaresCoordinator(parent: self, navigationController: navigationController, startRoute: .squares)
+    private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
+        let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
         add(child: coordinator)
-        coordinator.start()
+        return coordinator
+    }
+
+    private func makeCustomShapesCoordinator() -> CustomShapesCoordinator {
+        let coordinator = CustomShapesCoordinator(parent: self, navigationController: navigationController)
+        add(child: coordinator)
+        return coordinator
     }
 }
 
@@ -71,11 +85,11 @@ extension ShapesCoordinator: RouterViewFactory {
         switch route {
         case .shapes:
             ShapesView()
-        case .circle:
-            CircleView()
-        case .rectangle:
-            RectangleView()
-        case .square:
+        case .simpleShapes:
+            EmptyView()
+        case .customShapes:
+            CustomShapesView()
+        case .featuredShape:
             EmptyView()
         }
     }

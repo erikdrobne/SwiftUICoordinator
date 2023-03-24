@@ -5,21 +5,19 @@
 //  Created by Erik Drobne on 08/03/2023.
 //
 
-import SwiftUI
+import Foundation
 import SwiftUICoordinator
 
 enum ShapesRoute: NavigationRoute {
     case shapes
-    case circle
-    case rectangle
-    case square(SquaresRoute?)
+    case simpleShapes
+    case customShapes
+    case featuredShape(NavigationRoute)
 
     var title: String? {
         switch self {
         case .shapes:
-            return "Shapes"
-        case .circle:
-            return "Circle"
+            return "SwiftUI Shapes"
         default:
             return nil
         }
@@ -27,9 +25,7 @@ enum ShapesRoute: NavigationRoute {
 
     var transition: NavigationTransitionStyle? {
         switch self {
-        case .rectangle:
-            return .present()
-        case .square:
+        case .simpleShapes:
             return nil
         default:
             return .push()

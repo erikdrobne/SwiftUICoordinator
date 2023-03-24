@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUICoordinator
 
 struct ShapesView: View {
 
@@ -14,32 +15,20 @@ struct ShapesView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Simple")) {
-                Button {
-                    viewModel.didTapCircle()
-                } label: {
-                    Text("Circle")
-                }
-
-                Button {
-                    viewModel.didTapRectangle()
-                } label: {
-                    Text("Rectangle")
-                }
-
-                Button {
-                    viewModel.didTapSquare()
-                } label: {
-                    Text("Square")
-                }
+            Button {
+                viewModel.didTapBuiltIn()
+            } label: {
+                Text("Built-in")
             }
-
-            Section(header: Text("Featured")) {
-                Button {
-                    viewModel.didTapSquare(color: .blue)
-                } label: {
-                    Text("Blue Square")
-                }
+            Button {
+                viewModel.didTapCustom()
+            } label: {
+                Text("Custom")
+            }
+            Button {
+                viewModel.didTapFeatured()
+            } label: {
+                Text("Featured")
             }
         }
         .onAppear {
@@ -52,21 +41,26 @@ extension ShapesView {
     @MainActor class ViewModel: ObservableObject {
         var coordinator: ShapesCoordinator?
 
-        func didTapCircle() {
-            coordinator?.didTap(route: .circle)
+        func didTapBuiltIn() {
+            coordinator?.didTap(route: .simpleShapes)
         }
 
-        func didTapRectangle() {
-            coordinator?.didTap(route: .rectangle)
+        func didTapCustom() {
+            coordinator?.didTap(route: .customShapes)
         }
 
-        func didTapSquare(color: Color? = nil) {
-            if let color {
-                coordinator?.didTap(route: .square(.square(color: color)))
+        func didTapFeatured() {
+            let routes: [NavigationRoute] = [
+                SimpleShapesRoute.circle,
+                CustomShapesRoute.tower,
+                SimpleShapesRoute.capsule
+            ]
 
-            } else {
-                coordinator?.didTap(route: .square(nil))
+            guard let route = routes.randomElement() else {
+                return
             }
+
+            coordinator?.didTap(route: .featuredShape(route))
         }
     }
 }
