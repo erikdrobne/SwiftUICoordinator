@@ -91,3 +91,5 @@ func dismiss(animated: Bool)
 ## Usage
 
 ## Examples
+
+Example project is attached to the repo. It can be found in the SwiftUICoordinatorExample folder.
