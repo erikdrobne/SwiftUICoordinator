@@ -1,14 +1,12 @@
 # SwiftUICoordinator
 
-Coordinator pattern is a design pattern commonly used in Swift/iOS apps that helps you manage navigation and flow between views in your application.
-The idea is to keep views lightweight, decoupled and the app easier to maintain and extend over time.
-This package represents a solution for integrating Coordinator pattern into the SwiftUI framework.
+## Introduction
+
+The Coordinator pattern is a popular design pattern in Swift/iOS apps that assists in managing navigation and flow between views within an application. The concept involves keeping views lightweight and decoupled, resulting in an app that is easier to maintain and extend over time. This package offers a solution for seamlessly integrating the Coordinator pattern into the SwiftUI framework.
 
 ## Problem
 
-In SwiftUI with NavigationStack we miss dismissing in the middle of the stack or replacing the view.
-UINavigationController works from earlier versions of iOS while NavigationStack was introduced with iOS 16.0.
-Our views shouldn’t know about configuration and presentation of other views.
+Despite the benefits of using SwiftUI, navigating between views and managing their flow can become a complex and cumbersome task. With NavigationStack, there are limitations where dismissing or replacing views in the middle of the stack becomes challenging. Additionally, views within an app should be decoupled from each other and should not know about the configuration or presentation of other views. Our goal is to reduce the time spent on navigation by seamlessly integrating the Coordinator pattern into SwiftUI, providing a lightweight and decoupled approach to view management that enables efficient dismissal and replacement of views.
 
 ## Implementation
 
