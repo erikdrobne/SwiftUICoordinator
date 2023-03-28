@@ -27,6 +27,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
         let coordinator = ShapesCoordinator(startRoute: .shapes)
         window = UIWindow(windowScene: windowScene)
+        /// Assign root coordinator's navigation controller
         window?.rootViewController = coordinator.navigationController
         window?.makeKeyAndVisible()
 

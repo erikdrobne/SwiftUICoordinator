@@ -84,7 +84,6 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     func dismiss(animated: Bool = true) {
         navigationController.dismiss(animated: true) { [weak self] in
-            /// because there is a leak in UIHostingControllers that prevents from deallocation
             self?.navigationController.viewControllers = []
         }
     }

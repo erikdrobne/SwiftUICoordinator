@@ -44,10 +44,6 @@ extension CustomShapesCoordinator: CustomShapesCoordinatorNavigation {
     func didTap(route: CustomShapesRoute) {
         show(route: route)
     }
-
-    // MARK: - Private methods
-
-
 }
 
 // MARK: - RouterViewFactory

@@ -16,6 +16,7 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
 
     // MARK: - Internal properties
 
+    /// Root coordinator doesn't have a parent.
     weak var parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -86,6 +87,7 @@ extension ShapesCoordinator: RouterViewFactory {
         case .shapes:
             ShapesView()
         case .simpleShapes:
+            /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         case .customShapes:
             CustomShapesView()
