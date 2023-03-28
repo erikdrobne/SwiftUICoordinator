@@ -70,11 +70,7 @@ var startRoute: Route? { get }
 ```Swift
 /// Start the flow.
 func start()
-```
-
-Flow navigation.
-
-```Swift
+/// Flow navigation.
 func show(route: Route)
 func set(routes: [Route], animated: Bool)
 func append(routes: [Route], animated: Bool)
