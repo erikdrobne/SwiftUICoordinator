@@ -16,53 +16,37 @@ Coordinator protocol is the main component that all our coordinators will confor
 
 **Properties**
 
-An optional property to store parent's reference.
-
 ```Swift
+/// An optional property to store parent's reference.
 var parent: Coordinator? { get }
-```
- 
-An array to store any child coordinators.
-
-```Swift
+/// An array to store any child coordinators.
 var childCoordinators: [Coordinator] { get set }
 ```
 
 **Methods**
 
-A method to tell the coordinator that it should finish the flow.
-
 ```Swift
+/// Tell the coordinator that the flow is finished.
 func finish()
-```
-
-A method to add a child coordinator.
-
-```Swift
+/// Add a child coordinator.
 func add(child: Coordinator)
 ```
 
 ### NavigationRoute
 
-Available routes (where coordinator can transition to) are represented by NavigationRoute protocol.
+Available routes for navigation.
 
 **Properties**
 
-Route title.
-
 ```Swift
 var title: String? { get }
-```
-
-Transition type.
-
-```Swift
+/// Transition type.
 var transition: NavigationTransition? { get }
 ```
 
 ### NavigationTransition
 
-An enum that hold the available transition styles.
+An enum that holds the available transition styles.
 
 ```Swift
 case push(...
@@ -71,27 +55,24 @@ case present(animated: Bool = true, modalPresentationStyle: UIModalPresentationS
 
 ### Navigator
 
-Navigator protocol encapsulates all logic for navigating hierarchical content. It manages `UINavigationController`
-it’s child views.
+The Navigator protocol encapsulates all the necessary logic for navigating hierarchical content, including the management of the UINavigationController and its child views.
 
 **Properties**
 
-A reference to the `UINavigationController`.
-
 ```Swift
+/// A reference to the UINavigationController.
 var navigationController: UINavigationController { get set }
 var startRoute: Route? { get }
 ```
 
 **Methods**
 
-A method to start the flow.
-
 ```Swift
+/// Start the flow.
 func start()
 ```
 
-Methods for flow navigation.
+Flow navigation.
 
 ```Swift
 func show(route: Route)
@@ -103,6 +84,10 @@ func dismiss(animated: Bool)
 ```
 
 ## Installation
+
+### Requirements
+
+**iOS 15.0** or higher
 
 ### Swift Package Manager
 
@@ -286,5 +271,7 @@ struct ShapesView: View {
     }
 }
 ```
+
+## Example project
 
 Example project is attached to the repo. It can be found in the SwiftUICoordinatorExample folder.
