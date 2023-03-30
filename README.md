@@ -16,71 +16,77 @@ The second challenge is related to popping to the root view. This can occur when
 
 ### Coordinator
 
-Coordinator protocol is the main component that all our coordinators will conform to.
+Coordinator protocol is the core component of the pattern. You should create a new coordinator for each distinct flow of views in your app.
 
-**Properties**
-
-```Swift
-/// An optional property to store parent's reference.
-var parent: Coordinator? { get }
-/// An array to store any child coordinators.
-var childCoordinators: [Coordinator] { get set }
-```
-
-**Methods**
+**Protocol declaration**
 
 ```Swift
-/// Tell the coordinator that the flow is finished.
-func finish()
-/// Add a child coordinator.
-func add(child: Coordinator)
+@MainActor
+public protocol Coordinator: AnyObject, CoordinatorNavigation {
+    /// A property that stores a reference to the parent coordinator, if any.
+    var parent: Coordinator? { get }
+    /// An array that stores references to any child coordinators.
+    var childCoordinators: [Coordinator] { get set }
+    
+    /// This method is used to remove the coordinator from its parent's child coordinators list.
+    func finish()
+    /// A method that adds a child coordinator to the coordinator's child coordinators list, if it's not already in the list.
+    func add(child: Coordinator)
+}
+
+public protocol CoordinatorNavigation {
+    /// A method that presents the root view of the coordinator.
+    func presentRoot()
+}
 ```
 
 ### NavigationRoute
 
-Available routes for navigation.
+Available routes for navigation within a coordinator flow. The protocol should be used with enum types.
 
-**Properties**
-
-```Swift
-var title: String? { get }
-/// Transition type.
-var transition: NavigationTransition? { get }
-```
-
-### NavigationTransition
-
-An enum that holds the available transition styles.
+**Protocol declaration**
 
 ```Swift
-case push(...
-case present(animated: Bool = true, modalPresentationStyle: UIModalPresentationStyle = .automatic, ...
+public protocol NavigationRoute {
+    /// This title can be used to set the navigation bar title when the route is shown.
+    var title: String? { get }
+    /// The type of transition to be used when the route is shown. This can be a push transition, a modal presentation, or `nil` (for child coordinators).
+    var transition: NavigationTransition? { get }
+}
 ```
 
 ### Navigator
 
-The Navigator protocol encapsulates all the necessary logic for navigating hierarchical content, including the management of the UINavigationController and its child views.
+The Navigator protocol encapsulates all the necessary logic for navigating hierarchical content, including the management of the `UINavigationController` and its child views.
 
-**Properties**
-
-```Swift
-/// A reference to the UINavigationController.
-var navigationController: UINavigationController { get set }
-var startRoute: Route? { get }
-```
-
-**Methods**
+**Protocol declaration**
 
 ```Swift
-/// Start the flow.
-func start()
-/// Flow navigation.
-func show(route: Route)
-func set(routes: [Route], animated: Bool)
-func append(routes: [Route], animated: Bool)
-func pop(animated: Bool)
-func popToRoot(animated: Bool)
-func dismiss(animated: Bool)
+@MainActor
+public protocol Navigator: ObservableObject {
+    associatedtype Route: NavigationRoute
+    
+    var navigationController: UINavigationController { get set }
+    /// The starting route of the navigator. The Route type is optional because there may not always be a starting route specified.
+    var startRoute: Route? { get }
+    
+    /// This method is called when the navigator should start navigating.
+    func start()
+    /// Navigate to a specific route. 
+    /// It creates a view for the route and adds it to the navigation stack using the specified transition.
+    func show(route: Route)
+    /// Sets the navigation stack to a new array of routes.
+    /// It can be useful if you need to reset the entire navigation stack to a new set of views.
+    func set(routes: [Route], animated: Bool)
+    /// Append a new set of routes to the existing navigation stack.
+    func append(routes: [Route], animated: Bool)
+    /// Pop the current view from the navigation stack.
+    func pop(animated: Bool)
+    /// Pops all the views from the stack except the root view.
+    func popToRoot(animated: Bool)
+    /// Dismiss the view that was presented modally.
+    func dismiss(animated: Bool)
+}
 ```
 
 ## Installation
