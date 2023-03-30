@@ -2,11 +2,15 @@
 
 ## Introduction
 
-The Coordinator pattern is a popular design pattern in Swift/iOS apps that assists in managing navigation and flow between views within an application. The concept involves keeping views lightweight and decoupled, resulting in an app that is easier to maintain and extend over time. This package offers a solution for seamlessly integrating the Coordinator pattern into the SwiftUI framework.
+The Coordinator pattern is a widely used design pattern in Swift/iOS applications that facilitates the management of navigation and view flow within an app. The main idea behind this pattern is to decouple the navigation logic from the views, thereby making it easier to maintain and extend the application over time. By offering a central point of contact for navigation purposes, the Coordinator pattern encapsulates the navigation logic and enables views to remain lightweight and focused on their own responsibilities.
+
+This package provides a seamless integration of the Coordinator pattern into the SwiftUI framework, making it easy to implement and manage navigation in your SwiftUI applications. With the Coordinator pattern, you can easily manage the flow of views within your app, while maintaining a clear separation of concerns between views and navigation logic. This results in a more maintainable and extensible app, with clean and easy-to-understand code.
 
 ## Problem
 
-Despite the benefits of using SwiftUI, navigating between views and managing their flow can become a complex and cumbersome task. With NavigationStack, there are limitations where dismissing or replacing views in the middle of the stack becomes challenging. Additionally, views within an app should be decoupled from each other and should not know about the configuration or presentation of other views. Our goal is to reduce the time spent on navigation by seamlessly integrating the Coordinator pattern into SwiftUI, providing a lightweight and decoupled approach to view management that enables efficient dismissal and replacement of views.
+Despite the benefits of using SwiftUI, navigating between views and managing their flow can become a complex and cumbersome task. With `NavigationStack`, there are limitations where dismissing or replacing views in the middle of the stack becomes challenging. This can occur when you have multiple views that are presented in sequence, and you need to dismiss or replace one of the intermediate views.
+
+The second challenge is related to popping to the root view. This can occur when you have multiple views that are presented in a hierarchical manner, and you need to return to the root view.
 
 ## Implementation
 
