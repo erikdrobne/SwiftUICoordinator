@@ -16,7 +16,7 @@ The second challenge is related to popping to the root view. This can occur when
 
 ### Coordinator
 
-Coordinator protocol is the core component of the pattern. You should create a new coordinator for each distinct flow of views in your app.
+Coordinator protocol is the core component of the pattern representing each distinct flow of views in your app.
 
 **Protocol declaration**
 
@@ -28,21 +28,21 @@ public protocol Coordinator: AnyObject, CoordinatorNavigation {
     /// An array that stores references to any child coordinators.
     var childCoordinators: [Coordinator] { get set }
     
-    /// This method is used to remove the coordinator from its parent's child coordinators list.
+    /// Remove the coordinator from its parent's child coordinators list.
     func finish()
-    /// A method that adds a child coordinator to the coordinator's child coordinators list, if it's not already in the list.
+    /// Adds a child coordinator to the coordinator's child coordinators list, if needed.
     func add(child: Coordinator)
 }
 
 public protocol CoordinatorNavigation {
-    /// A method that presents the root view of the coordinator.
+    /// Present the root view of the coordinator.
     func presentRoot()
 }
 ```
 
 ### NavigationRoute
 
-Available routes for navigation within a coordinator flow. The protocol should be used with enum types.
+This protocol defines the available routes for navigation within a coordinator flow, which should be implemented using enum types.
 
 **Protocol declaration**
 
@@ -67,7 +67,7 @@ public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
     
     var navigationController: UINavigationController { get set }
-    /// The starting route of the navigator. The Route type is optional because there may not always be a starting route specified.
+    /// The starting route of the navigator.
     var startRoute: Route? { get }
     
     /// This method is called when the navigator should start navigating.
@@ -111,11 +111,19 @@ import SwiftUICoordinator
 
 ### Create Route
 
+First, create an enum with all the available routes for a particular flow.
+In the following example, we have the `ShapesRoute` enum representing the main flows of our application. It offers routes to present shapes list, simple shapes list, custom shapes list and
+a featured shape.
+
+We can also create a deep link by creating an enum case with the associated value of type `NavigationRoute` and handle
+flow execution within the coordinator.
+
 ```Swift
 enum ShapesRoute: NavigationRoute {
     case shapes
     case simpleShapes
     case customShapes
+    /// Deep link
     case featuredShape(NavigationRoute)
 
     var title: String? {
@@ -147,28 +155,9 @@ protocol ShapesCoordinatorNavigation {
 }
 ```
 
-### Conform to RouterViewFactory
-
-```Swift
-extension ShapesCoordinator: RouterViewFactory {
-    @ViewBuilder
-    public func view(for route: ShapesRoute) -> some View {
-        switch route {
-        case .shapes:
-            ShapesView()
-        case .simpleShapes:
-            /// We are returning an empty view for the route presenting a child coordinator.
-            EmptyView()
-        case .customShapes:
-            CustomShapesView()
-        case .featuredShape:
-            EmptyView()
-        }
-    }
-}
-```
-
 ### Create Coordinator
+
+Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `didTap(route: ShapesRoute)` to execute flow-specific logic on method execution. Every root coordinator has to initialize the `UINavigationController`.
 
 ```Swift
 class ShapesCoordinator: NSObject, Coordinator, Navigator {
@@ -205,17 +194,44 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
             let coordinator = makeCustomShapesCoordinator()
             coordinator.start()
         case .featuredShape(let route):
-            ...
+            switch route {
+            /// handle deep link flow
+            default:
+                break
+            }
         default:
             show(route: route)
         }
     }
 ```
 
-## Initialize ShapesCoordinator
+### Conform to RouterViewFactory
 
-We are going to create an instance of ShapesCoordinator (our root coordinator) and pass it's `UINavigationController` to the
-`UIWindow`.
+By conforming to the `RouterViewFactory` protocol, we are defining which view should be displayed for each route. If we need to present a child coordinator, we will return an `EmptyView`.  
+
+```Swift
+extension ShapesCoordinator: RouterViewFactory {
+    @ViewBuilder
+    public func view(for route: ShapesRoute) -> some View {
+        switch route {
+        case .shapes:
+            ShapesView()
+        case .simpleShapes:
+            /// We are returning an empty view for the route presenting a child coordinator.
+            EmptyView()
+        case .customShapes:
+            CustomShapesView()
+        case .featuredShape:
+            EmptyView()
+        }
+    }
+}
+```
+
+### Initialize ShapesCoordinator
+
+We are going to create an instance of `ShapesCoordinator` (our root coordinator) and pass it's `UINavigationController` to the
+`UIWindow`. Our start route for the coordinator is `ShapesRoute.shape`.
 
 ```Swift
 import SwiftUI
@@ -257,7 +273,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 ```
 
-## Usage in the Views
+### Usage in the Views
+
+The coordinator is accessible within a SwiftUI view through an `@EnvironmentObject`.
 
 ```Swift
 import SwiftUICoordinator
@@ -280,4 +298,4 @@ struct ShapesView: View {
 
 ## Example project
 
-Example project is attached to the repo. It can be found in the SwiftUICoordinatorExample folder.
+For better understanding, I recommend that you take a look at the example project located in the `SwiftUICoordinatorExample` folder.
