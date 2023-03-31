@@ -6,13 +6,13 @@ The Coordinator pattern is a widely used design pattern in Swift/iOS application
 
 This package provides a seamless integration of the Coordinator pattern into the SwiftUI framework, making it easy to implement and manage navigation in your SwiftUI applications. With the Coordinator pattern, you can easily manage the flow of views within your app, while maintaining a clear separation of concerns between views and navigation logic. This results in a more maintainable and extensible app, with clean and easy-to-understand code.
 
-## Problem
+## 💡 Problem
 
 Despite the benefits of using SwiftUI, navigating between views and managing their flow can become a complex and cumbersome task. With `NavigationStack`, there are limitations where dismissing or replacing views in the middle of the stack becomes challenging. This can occur when you have multiple views that are presented in sequence, and you need to dismiss or replace one of the intermediate views.
 
 The second challenge is related to popping to the root view. This can occur when you have multiple views that are presented in a hierarchical manner, and you need to return to the root view.
 
-## Implementation
+## 🏃 Implementation
 
 ### Coordinator
 
@@ -89,7 +89,7 @@ public protocol Navigator: ObservableObject {
 }
 ```
 
-## Installation
+## 💿 Installation
 
 ### Requirements
 
@@ -103,7 +103,7 @@ dependencies: [
 ]
 ```
 
-## Usage
+## 🔧 Usage
 
 ```Swift
 import SwiftUICoordinator
@@ -296,6 +296,6 @@ struct ShapesView: View {
 }
 ```
 
-## Example project
+## 📒 Example project
 
 For better understanding, I recommend that you take a look at the example project located in the `SwiftUICoordinatorExample` folder.
