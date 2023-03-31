@@ -14,6 +14,8 @@ The second challenge is related to popping to the root view. This can occur when
 
 ## 🏃 Implementation
 
+<img width="500" alt="coordinator-diagram" src="https://user-images.githubusercontent.com/15943419/229084345-bb7ff093-b267-4b8e-ac12-a206bdd427c9.png">
+
 ### Coordinator
 
 Coordinator protocol is the core component of the pattern representing each distinct flow of views in your app.
