@@ -95,7 +95,7 @@ public protocol Navigator: ObservableObject {
 
 ### Requirements
 
-**iOS 15.0** or higher
+`iOS 15.0` or higher
 
 ### Swift Package Manager
 
