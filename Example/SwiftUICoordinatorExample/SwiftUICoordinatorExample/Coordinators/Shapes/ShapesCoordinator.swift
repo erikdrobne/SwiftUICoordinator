@@ -85,7 +85,7 @@ extension ShapesCoordinator: RouterViewFactory {
     public func view(for route: ShapesRoute) -> some View {
         switch route {
         case .shapes:
-            ShapesView()
+            ShapesView<ShapesCoordinator>()
         case .simpleShapes:
             /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()

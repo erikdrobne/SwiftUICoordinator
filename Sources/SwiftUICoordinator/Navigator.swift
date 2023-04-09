@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+public typealias CoordinatorNavigator = Coordinator & Navigator
+
 @MainActor
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
