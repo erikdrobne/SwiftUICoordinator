@@ -10,10 +10,6 @@ import SwiftUI
 import SwiftUI
 import SwiftUICoordinator
 
-protocol CustomShapesCoordinatorNavigation {
-    func didTap(route: CustomShapesRoute)
-}
-
 class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
 
     // MARK: - Internal properties
@@ -36,12 +32,12 @@ class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
         popToRoot()
         childCoordinators.removeAll()
     }
-}
-
-// MARK: - ShapesCoordinatorNavigation
-
-extension CustomShapesCoordinator: CustomShapesCoordinatorNavigation {
-    func didTap(route: CustomShapesRoute) {
+    
+    func navigate(to route: NavigationRoute) {
+        guard let route = route as? CustomShapesRoute else {
+            return
+        }
+        
         show(route: route)
     }
 }
@@ -53,7 +49,7 @@ extension CustomShapesCoordinator: RouterViewFactory {
     public func view(for route: CustomShapesRoute) -> some View {
         switch route {
         case .customShapes:
-            CustomShapesView()
+            CustomShapesView<CustomShapesCoordinator>()
         case .triangle:
             Triangle()
                 .fill(.yellow)

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 public protocol NavigationRoute {
     var title: String? { get }
     var transition: NavigationTransition? { get }

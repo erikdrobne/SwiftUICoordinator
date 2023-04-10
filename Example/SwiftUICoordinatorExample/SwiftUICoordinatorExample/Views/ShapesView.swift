@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
-struct ShapesView<Coordinator: CoordinatorNavigator>: View {
+struct ShapesView<Coordinator: Routing>: View {
 
     @EnvironmentObject var coordinator: Coordinator
     @StateObject var viewModel = ViewModel<Coordinator>()
@@ -38,15 +38,15 @@ struct ShapesView<Coordinator: CoordinatorNavigator>: View {
 }
 
 extension ShapesView {
-    @MainActor class ViewModel<Coordinator: CoordinatorNavigator>: ObservableObject {
+    @MainActor class ViewModel<Coordinator: Routing>: ObservableObject {
         var coordinator: Coordinator?
 
         func didTapBuiltIn() {
-            //coordinator?.didTap(route: .simpleShapes)
+            coordinator?.navigate(to: ShapesRoute.simpleShapes)
         }
 
         func didTapCustom() {
-            //coordinator?.didTap(route: .customShapes)
+            coordinator?.navigate(to: ShapesRoute.customShapes)
         }
 
         func didTapFeatured() {
@@ -60,7 +60,7 @@ extension ShapesView {
                 return
             }
 
-            //coordinator?.didTap(route: .featuredShape(route))
+            coordinator?.navigate(to: ShapesRoute.featuredShape(route))
         }
     }
 }

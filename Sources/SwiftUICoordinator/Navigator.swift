@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public typealias CoordinatorNavigator = Coordinator & Navigator
+public typealias Routing = Coordinator & Navigator
 
 @MainActor
 public protocol Navigator: ObservableObject {
@@ -23,6 +23,7 @@ public protocol Navigator: ObservableObject {
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
     func dismiss(animated: Bool)
+    func presentRoot()
 }
 
 public extension Navigator where Self: Coordinator, Self: RouterViewFactory {

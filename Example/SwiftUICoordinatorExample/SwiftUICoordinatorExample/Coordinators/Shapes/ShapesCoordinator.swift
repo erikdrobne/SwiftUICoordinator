@@ -8,10 +8,6 @@
 import SwiftUI
 import SwiftUICoordinator
 
-protocol ShapesCoordinatorNavigation {
-    func didTap(route: ShapesRoute)
-}
-
 class ShapesCoordinator: NSObject, Coordinator, Navigator {
 
     // MARK: - Internal properties
@@ -34,20 +30,16 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         popToRoot()
         childCoordinators.removeAll()
     }
-}
-
-// MARK: - ShapesCoordinatorNavigation
-
-extension ShapesCoordinator: ShapesCoordinatorNavigation {
-    func didTap(route: ShapesRoute) {
+    
+    func navigate(to route: NavigationRoute) {
         switch route {
-        case .simpleShapes:
+        case ShapesRoute.simpleShapes:
             let coordinator = makeSimpleShapesCoordinator()
             coordinator.start()
-        case .customShapes:
+        case ShapesRoute.customShapes:
             let coordinator = makeCustomShapesCoordinator()
             coordinator.start()
-        case .featuredShape(let route):
+        case ShapesRoute.featuredShape(let route):
             switch route {
             case let shapeRoute as SimpleShapesRoute:
                 let coordinator = makeSimpleShapesCoordinator()
@@ -56,13 +48,13 @@ extension ShapesCoordinator: ShapesCoordinatorNavigation {
                 let coordinator = makeCustomShapesCoordinator()
                 coordinator.append(routes: [.customShapes, shapeRoute])
             default:
-                break
+                return
             }
         default:
-            show(route: route)
+            return
         }
     }
-
+    
     // MARK: - Private methods
 
     private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
@@ -90,7 +82,7 @@ extension ShapesCoordinator: RouterViewFactory {
             /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         case .customShapes:
-            CustomShapesView()
+            CustomShapesView<CustomShapesCoordinator>()
         case .featuredShape:
             EmptyView()
         }
