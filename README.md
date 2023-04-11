@@ -1,6 +1,6 @@
 # SwiftUICoordinator
 
-![build](https://github.com/erikdrobne/SwiftUICoordinator/actions/workflows/workflow.yml/badge.svg)
+![Build Status](https://github.com/erikdrobne/SwiftUICoordinator/actions/workflows/workflow.yml/badge.svg)
 
 ## Introduction
 
