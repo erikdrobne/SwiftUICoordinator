@@ -16,4 +16,5 @@ jobs:
     steps:
     - name: Checkout code
     - uses: actions/checkout@v3
-    - name: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+    - name: Select Xcode
+    - uses: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
