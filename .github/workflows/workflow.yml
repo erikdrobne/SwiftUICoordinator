@@ -15,13 +15,3 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Install Dependencies
-      run: |
-        sudo xcode-select --switch /Applications/Xcode_14.3.app/Contents/Developer
-        brew update
-        swift package update
-        swift package resolve
-
-    - name: Build
-      run: swift build -v
