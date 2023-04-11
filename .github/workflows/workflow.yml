@@ -12,14 +12,18 @@ jobs:
   build:
 
     runs-on: macos-latest
-
+    env:
+      PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+      SCHEME: SwiftUICoordinatorExample
+      DESTINATION: platform=iOS Simulator,name=iPhone 11
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Select Xcode
-      run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+      run: sudo xcode-select --switch $DEVELOPER_DIR
     - name: Build
       run: |
         brew update
         swift package update
-        xcodebuild -workspace Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcworkspace -scheme SwiftUICoordinatorExample -destination 'platform=iOS Simulator,name=iPhone 11' clean build
+        xcodebuild clean build -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
