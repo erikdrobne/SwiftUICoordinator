@@ -22,4 +22,4 @@ jobs:
       run: |
         brew update
         swift package update
-        swift build -v
+        xcodebuild -workspace Example/SwiftUICoordinatorExample.xcworkspace -scheme SwiftUICoordinatorExample -destination 'platform=iOS Simulator,name=iPhone 11' clean build
