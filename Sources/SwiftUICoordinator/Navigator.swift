@@ -90,6 +90,11 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             self?.navigationController.viewControllers = []
         }
     }
+    
+    func presentRoot() {
+        popToRoot()
+        childCoordinators.removeAll()
+    }
 
     // MARK: - Private methods
 

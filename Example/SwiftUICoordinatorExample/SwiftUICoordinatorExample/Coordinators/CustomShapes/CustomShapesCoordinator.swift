@@ -27,11 +27,6 @@ class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
         self.startRoute = startRoute
         super.init()
     }
-
-    func presentRoot() {
-        popToRoot()
-        childCoordinators.removeAll()
-    }
     
     func navigate(to route: NavigationRoute) {
         guard let route = route as? CustomShapesRoute else {

@@ -25,11 +25,6 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         self.startRoute = startRoute
         super.init()
     }
-
-    func presentRoot() {
-        popToRoot()
-        childCoordinators.removeAll()
-    }
     
     func navigate(to route: NavigationRoute) {
         switch route {
