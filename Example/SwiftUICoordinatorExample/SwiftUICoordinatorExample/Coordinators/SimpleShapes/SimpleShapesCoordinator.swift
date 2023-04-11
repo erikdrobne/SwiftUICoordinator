@@ -27,7 +27,7 @@ class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
     }
 
     func presentRoot() {
-        parent?.presentRoot()
+        (parent as? any Navigator)?.presentRoot()
     }
     
     func navigate(to route: NavigationRoute) {
