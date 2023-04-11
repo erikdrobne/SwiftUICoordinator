@@ -2,9 +2,11 @@ name: SwiftUICoordinator
 
 on:
   push:
-    branches: [ ${{ env.default-branch }} ]
+    branches:
+      - main
   pull_request:
-    branches: [ ${{ env.default-branch }} ]
+    branches:
+      - main
 
 jobs:
   build:
