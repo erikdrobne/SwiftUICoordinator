@@ -1,0 +1,17 @@
+name: SwiftUICoordinator
+
+on:
+  push:
+    branches: [ ${{ env.default-branch }} ]
+  pull_request:
+    branches: [ ${{ env.default-branch }} ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
