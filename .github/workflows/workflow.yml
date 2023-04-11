@@ -20,12 +20,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Select Xcode
+      run: sudo xcode-select --switch $DEVELOPER_DIR
     - name: Bundle install
       run: bundle install
     - name: Brew update
       run: brew update
-    - name: Select Xcode
-      run: sudo xcode-select --switch $DEVELOPER_DIR
     - name: Build
       run: |
         swift package update
