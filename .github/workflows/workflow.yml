@@ -16,14 +16,17 @@ jobs:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
       SCHEME: SwiftUICoordinatorExample
-      DESTINATION: platform=iOS Simulator,name=iPhone 11
+      DESTINATION: platform=iOS Simulator,name=iPhone 14
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Bundle install
+      run: bundle install
+    - name: Brew update
+      run: brew update
     - name: Select Xcode
       run: sudo xcode-select --switch $DEVELOPER_DIR
     - name: Build
       run: |
-        brew update
         swift package update
         xcodebuild clean build -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
