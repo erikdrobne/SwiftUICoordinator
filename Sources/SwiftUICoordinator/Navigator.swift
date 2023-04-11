@@ -15,7 +15,7 @@ public protocol Navigator: ObservableObject {
 
     var navigationController: UINavigationController { get set }
     var startRoute: Route? { get }
-
+    
     func start()
     func show(route: Route)
     func set(routes: [Route], animated: Bool)

@@ -11,7 +11,7 @@ import SwiftUI
 public protocol Coordinator: AnyObject {
     var parent: Coordinator? { get }
     var childCoordinators: [Coordinator] { get set }
-        
+    
     func add(child: Coordinator)
     func navigate(to route: NavigationRoute)
     func finish()
