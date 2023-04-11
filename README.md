@@ -1,5 +1,7 @@
 # SwiftUICoordinator
 
+https://github.com/erikdrobne/SwiftUICoordinator/actions/workflows/workflow.yml/badge.svg
+
 ## Introduction
 
 The Coordinator pattern is a widely used design pattern in Swift/iOS applications that facilitates the management of navigation and view flow within an app. The main idea behind this pattern is to decouple the navigation logic from the views, thereby making it easier to maintain and extend the application over time. By offering a central point of contact for navigation purposes, the Coordinator pattern encapsulates the navigation logic and enables views to remain lightweight and focused on their own responsibilities.
