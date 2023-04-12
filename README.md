@@ -91,8 +91,6 @@ public protocol Navigator: ObservableObject {
     func popToRoot(animated: Bool)
     /// Dismiss the view that was presented modally.
     func dismiss(animated: Bool)
-    /// Presents the root view.
-    func presentRoot()
 }
 ```
 

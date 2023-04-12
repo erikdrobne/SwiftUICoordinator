@@ -23,7 +23,6 @@ public protocol Navigator: ObservableObject {
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
     func dismiss(animated: Bool)
-    func presentRoot()
 }
 
 public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
@@ -85,15 +84,10 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         navigationController.popToRootViewController(animated: animated)
     }
 
-    func dismiss(animated: Bool = true) {
+    func dismiss(animated: Bool) {
         navigationController.dismiss(animated: true) { [weak self] in
             self?.navigationController.viewControllers = []
         }
-    }
-    
-    func presentRoot() {
-        popToRoot()
-        childCoordinators.removeAll()
     }
 
     // MARK: - Private methods
