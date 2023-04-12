@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUICoordinator
 
-struct SimpleShapesView: View {
+struct SimpleShapesView<Coordinator: Routing>: View {
 
-    @EnvironmentObject var coordinator: SimpleShapesCoordinator
-    @StateObject var viewModel = ViewModel()
+    @EnvironmentObject var coordinator: Coordinator
+    @StateObject var viewModel = ViewModel<Coordinator>()
 
     var body: some View {
         List {
@@ -47,33 +48,36 @@ struct SimpleShapesView: View {
 }
 
 extension SimpleShapesView {
-    @MainActor class ViewModel: ObservableObject {
-        var coordinator: SimpleShapesCoordinator?
+    @MainActor class ViewModel<Coordinator: Routing>: ObservableObject {
+        var coordinator: Coordinator?
 
         func didTapRectangle() {
-            coordinator?.didTap(route: .rect)
+            coordinator?.navigate(to: SimpleShapesRoute.rect)
         }
 
         func didTapRoundedRectangle() {
-            coordinator?.didTap(route: .roundedRect)
+            coordinator?.navigate(to: SimpleShapesRoute.roundedRect)
         }
 
         func didTapCapsule() {
-            coordinator?.didTap(route: .capsule)
+            coordinator?.navigate(to: SimpleShapesRoute.capsule)
         }
 
         func didTapEllipse() {
-            coordinator?.didTap(route: .ellipse)
+            coordinator?.navigate(to: SimpleShapesRoute.ellipse)
         }
 
         func didTapCircle() {
-            coordinator?.didTap(route: .circle)
+            coordinator?.navigate(to: SimpleShapesRoute.circle)
         }
     }
 }
 
 struct SimpleShapesView_Previews: PreviewProvider {
+    static let coordinator = SimpleShapesCoordinator(parent: nil)
+    
     static var previews: some View {
-        SimpleShapesView()
+        SimpleShapesView<SimpleShapesCoordinator>()
+            .environmentObject(coordinator)
     }
 }

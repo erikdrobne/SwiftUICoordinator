@@ -8,12 +8,13 @@
 import SwiftUI
 
 @MainActor
-public protocol Coordinator: AnyObject, CoordinatorNavigation {
+public protocol Coordinator: AnyObject {
     var parent: Coordinator? { get }
     var childCoordinators: [Coordinator] { get set }
-
-    func finish()
+    
     func add(child: Coordinator)
+    func navigate(to route: NavigationRoute)
+    func finish()
 }
 
 public extension Coordinator {
@@ -26,8 +27,4 @@ public extension Coordinator {
             childCoordinators.append(child)
         }
     }
-}
-
-public protocol CoordinatorNavigation {
-    func presentRoot()
 }

@@ -1,5 +1,7 @@
 # SwiftUICoordinator
 
+![Build Status](https://github.com/erikdrobne/SwiftUICoordinator/actions/workflows/workflow.yml/badge.svg)
+
 ## Introduction
 
 The Coordinator pattern is a widely used design pattern in Swift/iOS applications that facilitates the management of navigation and view flow within an app. The main idea behind this pattern is to decouple the navigation logic from the views, thereby making it easier to maintain and extend the application over time. By offering a central point of contact for navigation purposes, the Coordinator pattern encapsulates the navigation logic and enables views to remain lightweight and focused on their own responsibilities.
@@ -24,21 +26,18 @@ Coordinator protocol is the core component of the pattern representing each dist
 
 ```Swift
 @MainActor
-public protocol Coordinator: AnyObject, CoordinatorNavigation {
+public protocol Coordinator: AnyObject {
     /// A property that stores a reference to the parent coordinator, if any.
     var parent: Coordinator? { get }
     /// An array that stores references to any child coordinators.
     var childCoordinators: [Coordinator] { get set }
     
-    /// Remove the coordinator from its parent's child coordinators list.
-    func finish()
     /// Adds a child coordinator to the coordinator's child coordinators list, if needed.
     func add(child: Coordinator)
-}
-
-public protocol CoordinatorNavigation {
-    /// Present the root view of the coordinator.
-    func presentRoot()
+    /// Navigate to a specific route.
+    func navigate(to route: NavigationRoute)
+    /// Remove the coordinator from its parent's child coordinators list.
+    func finish()
 }
 ```
 
@@ -52,7 +51,8 @@ This protocol defines the available routes for navigation within a coordinator f
 public protocol NavigationRoute {
     /// This title can be used to set the navigation bar title when the route is shown.
     var title: String? { get }
-    /// The type of transition to be used when the route is shown. This can be a push transition, a modal presentation, or `nil` (for child coordinators).
+    /// The type of transition to be used when the route is shown. 
+    /// This can be a push transition, a modal presentation, or `nil` (for child coordinators).
     var transition: NavigationTransition? { get }
 }
 ```
@@ -64,6 +64,9 @@ The Navigator protocol encapsulates all the necessary logic for navigating hiera
 **Protocol declaration**
 
 ```Swift
+
+public typealias Routing = Coordinator & Navigator
+
 @MainActor
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
@@ -149,17 +152,9 @@ enum ShapesRoute: NavigationRoute {
 }
 ```
 
-### Create ShapesCoordinatorNavigation protocol
-
-```Swift
-protocol ShapesCoordinatorNavigation {
-    func didTap(route: ShapesRoute)
-}
-```
-
 ### Create Coordinator
 
-Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `didTap(route: ShapesRoute)` to execute flow-specific logic on method execution. Every root coordinator has to initialize the `UINavigationController`.
+Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `UINavigationController`.
 
 ```Swift
 class ShapesCoordinator: NSObject, Coordinator, Navigator {
@@ -179,32 +174,31 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         self.startRoute = startRoute
         super.init()
     }
-
-    func presentRoot() {
-        popToRoot()
-        childCoordinators.removeAll()
-    }
-}
-
-extension ShapesCoordinator: ShapesCoordinatorNavigation {
-    func didTap(route: ShapesRoute) {
+    
+    func navigate(to route: NavigationRoute) {
         switch route {
-        case .simpleShapes:
+        case ShapesRoute.simpleShapes:
             let coordinator = makeSimpleShapesCoordinator()
             coordinator.start()
-        case .customShapes:
+        case ShapesRoute.customShapes:
             let coordinator = makeCustomShapesCoordinator()
             coordinator.start()
-        case .featuredShape(let route):
+        case ShapesRoute.featuredShape(let route):
             switch route {
-            /// handle deep link flow
+            case let shapeRoute as SimpleShapesRoute:
+                let coordinator = makeSimpleShapesCoordinator()
+                coordinator.append(routes: [.simpleShapes, shapeRoute])
+            case let shapeRoute as CustomShapesRoute:
+                let coordinator = makeCustomShapesCoordinator()
+                coordinator.append(routes: [.customShapes, shapeRoute])
             default:
-                break
+                return
             }
         default:
-            show(route: route)
+            return
         }
     }
+}
 ```
 
 ### Conform to RouterViewFactory
@@ -217,12 +211,12 @@ extension ShapesCoordinator: RouterViewFactory {
     public func view(for route: ShapesRoute) -> some View {
         switch route {
         case .shapes:
-            ShapesView()
+            ShapesView<ShapesCoordinator>()
         case .simpleShapes:
             /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         case .customShapes:
-            CustomShapesView()
+            CustomShapesView<CustomShapesCoordinator>()
         case .featuredShape:
             EmptyView()
         }
@@ -282,9 +276,9 @@ The coordinator is accessible within a SwiftUI view through an `@EnvironmentObje
 ```Swift
 import SwiftUICoordinator
 
-struct ShapesView: View {
+struct ShapesView<Coordinator: Routing>: View {
 
-    @EnvironmentObject var coordinator: ShapesCoordinator
+    @EnvironmentObject var coordinator: Coordinator
 
     var body: some View {
         List {

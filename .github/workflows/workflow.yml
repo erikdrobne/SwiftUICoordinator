@@ -1,0 +1,28 @@
+name: SwiftUICoordinator
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+    env:
+      PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+      SCHEME: SwiftUICoordinatorExample
+      DESTINATION: platform=iOS Simulator,name=iPhone 14
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Select Xcode
+      run: sudo xcode-select --switch $DEVELOPER_DIR
+    - name: Build
+      run: |
+        swift package update
+        xcodebuild clean build -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"

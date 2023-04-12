@@ -8,10 +8,6 @@
 import SwiftUI
 import SwiftUICoordinator
 
-protocol SimpleShapesCoordinatorNavigation {
-    func didTap(route: SimpleShapesRoute)
-}
-
 class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
 
     // MARK: - Internal properties
@@ -31,20 +27,21 @@ class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
     }
 
     func presentRoot() {
-        parent?.presentRoot()
+        guard let routing = parent as? any Routing else {
+            return
+        }
+        
+        routing.popToRoot(animated: true)
+        routing.childCoordinators.removeAll()
     }
-}
-
-// MARK: - ShapesCoordinatorNavigation
-
-extension SimpleShapesCoordinator: SimpleShapesCoordinatorNavigation {
-    func didTap(route: SimpleShapesRoute) {
+    
+    func navigate(to route: NavigationRoute) {
+        guard let route = route as? SimpleShapesRoute else {
+            return
+        }
+        
         show(route: route)
     }
-
-    // MARK: - Private methods
-
-    
 }
 
 // MARK: - RouterViewFactory
@@ -54,7 +51,7 @@ extension SimpleShapesCoordinator: RouterViewFactory {
     public func view(for route: SimpleShapesRoute) -> some View {
         switch route {
         case .simpleShapes:
-            SimpleShapesView()
+            SimpleShapesView<SimpleShapesCoordinator>()
         case .rect:
             Rectangle()
                 .fill(.yellow)

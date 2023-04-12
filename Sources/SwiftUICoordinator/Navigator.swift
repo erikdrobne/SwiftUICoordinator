@@ -7,13 +7,15 @@
 
 import SwiftUI
 
+public typealias Routing = Coordinator & Navigator
+
 @MainActor
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
 
     var navigationController: UINavigationController { get set }
     var startRoute: Route? { get }
-
+    
     func start()
     func show(route: Route)
     func set(routes: [Route], animated: Bool)
@@ -82,7 +84,7 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         navigationController.popToRootViewController(animated: animated)
     }
 
-    func dismiss(animated: Bool = true) {
+    func dismiss(animated: Bool) {
         navigationController.dismiss(animated: true) { [weak self] in
             self?.navigationController.viewControllers = []
         }

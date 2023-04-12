@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUICoordinator
 
-struct CustomShapesView: View {
+struct CustomShapesView<Coordinator: Routing>: View {
 
-    @EnvironmentObject var coordinator: CustomShapesCoordinator
-    @StateObject var viewModel = ViewModel()
+    @EnvironmentObject var coordinator: Coordinator
+    @StateObject var viewModel = ViewModel<Coordinator>()
 
     var body: some View {
         List {
@@ -37,25 +38,28 @@ struct CustomShapesView: View {
 }
 
 extension CustomShapesView {
-    @MainActor class ViewModel: ObservableObject {
-        var coordinator: CustomShapesCoordinator?
+    @MainActor class ViewModel<Coordinator: Routing>: ObservableObject {
+        var coordinator: Coordinator?
 
         func didTapTriangle() {
-            coordinator?.didTap(route: .triangle)
+            coordinator?.navigate(to: CustomShapesRoute.triangle)
         }
 
         func didTapStar() {
-            coordinator?.didTap(route: .star)
+            coordinator?.navigate(to: CustomShapesRoute.star)
         }
 
         func didTapTower() {
-            coordinator?.didTap(route: .tower)
+            coordinator?.navigate(to: CustomShapesRoute.tower)
         }
     }
 }
 
 struct CustomShapesView_Previews: PreviewProvider {
+    static let coordinator = CustomShapesCoordinator(parent: nil)
+    
     static var previews: some View {
-        CustomShapesView()
+        CustomShapesView<CustomShapesCoordinator>()
+            .environmentObject(coordinator)
     }
 }
