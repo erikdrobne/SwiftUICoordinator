@@ -79,15 +79,13 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     func popToRoot(animated: Bool = true) {
         if navigationController.presentedViewController != nil {
-            navigationController.dismiss(animated: true)
+            navigationController.dismiss(animated: animated)
         }
         navigationController.popToRootViewController(animated: animated)
     }
 
-    func dismiss(animated: Bool) {
-        navigationController.dismiss(animated: true) { [weak self] in
-            self?.navigationController.viewControllers = []
-        }
+    func dismiss(animated: Bool = true) {
+        navigationController.dismiss(animated: animated)
     }
 
     // MARK: - Private methods
