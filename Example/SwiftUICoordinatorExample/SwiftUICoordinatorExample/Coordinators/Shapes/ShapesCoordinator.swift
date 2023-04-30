@@ -30,10 +30,10 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         switch route {
         case ShapesRoute.simpleShapes:
             let coordinator = makeSimpleShapesCoordinator()
-            coordinator.start()
+            try? coordinator.start()
         case ShapesRoute.customShapes:
             let coordinator = makeCustomShapesCoordinator()
-            coordinator.start()
+            try? coordinator.start()
         case ShapesRoute.featuredShape(let route):
             switch route {
             case let shapeRoute as SimpleShapesRoute:

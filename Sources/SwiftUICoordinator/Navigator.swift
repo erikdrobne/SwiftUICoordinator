@@ -40,7 +40,10 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     }
 
     func start() throws {
-        guard let route = startRoute else { return }
+        guard let route = startRoute else {
+            return
+        }
+        
         try show(route: route)
     }
 
