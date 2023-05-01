@@ -76,10 +76,10 @@ public protocol Navigator: ObservableObject {
     var startRoute: Route? { get }
     
     /// This method is called when the navigator should start navigating.
-    func start()
+    func start() throws
     /// Navigate to a specific route. 
     /// It creates a view for the route and adds it to the navigation stack using the specified transition.
-    func show(route: Route)
+    func show(route: Route) throws
     /// Sets the navigation stack to a new array of routes.
     /// It can be useful if you need to reset the entire navigation stack to a new set of views.
     func set(routes: [Route], animated: Bool)
