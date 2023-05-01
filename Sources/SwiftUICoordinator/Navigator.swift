@@ -16,8 +16,8 @@ public protocol Navigator: ObservableObject {
     var navigationController: UINavigationController { get set }
     var startRoute: Route? { get }
     
-    func start()
-    func show(route: Route)
+    func start() throws
+    func show(route: Route) throws
     func set(routes: [Route], animated: Bool)
     func append(routes: [Route], animated: Bool)
     func pop(animated: Bool)
@@ -39,12 +39,15 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         return navigationController.visibleViewController
     }
 
-    func start() {
-        guard let route = startRoute else { return }
-        show(route: route)
+    func start() throws {
+        guard let route = startRoute else {
+            return
+        }
+        
+        try show(route: route)
     }
 
-    func show(route: Route) {
+    func show(route: Route) throws {
         let view = self.view(for: route)
             .ifLet(route.title) { view, value in
                 view.navigationTitle(value)
@@ -59,7 +62,7 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         case .present(let animated, let modalPresentationStyle, let completion):
             present(viewController: viewController, animated: animated, modalPresentationStyle: modalPresentationStyle, completion: completion)
         case .none:
-            assertionFailure("This route should represent a child coordinator.")
+            throw NavigatorError.cannotShow(route)
         }
     }
 

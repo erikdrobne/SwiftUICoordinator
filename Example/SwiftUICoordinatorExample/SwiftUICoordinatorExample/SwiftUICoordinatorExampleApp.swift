@@ -31,7 +31,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         window?.rootViewController = coordinator.navigationController
         window?.makeKeyAndVisible()
 
-        coordinator.start()
+        try? coordinator.start()
     }
 }
 

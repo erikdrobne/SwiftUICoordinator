@@ -40,7 +40,7 @@ class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
             return
         }
         
-        show(route: route)
+        try? show(route: route)
     }
 }
 
