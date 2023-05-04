@@ -20,16 +20,15 @@ struct SwiftUICoordinatorExampleApp: App {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
-    var window: UIWindow?
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let window = (scene as? UIWindowScene)?.windows.first else {
+            return
+        }
 
         let coordinator = ShapesCoordinator(startRoute: .shapes)
-        window = UIWindow(windowScene: windowScene)
         /// Assign root coordinator's navigation controller
-        window?.rootViewController = coordinator.navigationController
-        window?.makeKeyAndVisible()
+        window.rootViewController = coordinator.navigationController
+        window.makeKeyAndVisible()
 
         try? coordinator.start()
     }
