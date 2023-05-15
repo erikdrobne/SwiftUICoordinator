@@ -5,6 +5,7 @@
 //  Created by Erik Drobne on 12/12/2022.
 //
 
+import Foundation
 import SwiftUI
 
 @MainActor
@@ -17,7 +18,12 @@ public protocol Coordinator: AnyObject {
     func finish()
 }
 
+// MARK: - Extensions
+
 public extension Coordinator {
+    
+    // MARK: - Public methods
+    
     func finish() {
         parent?.childCoordinators.removeAll(where: { $0 === self })
     }

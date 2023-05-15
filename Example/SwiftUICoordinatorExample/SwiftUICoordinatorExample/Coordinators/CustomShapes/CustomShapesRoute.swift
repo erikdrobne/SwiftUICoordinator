@@ -27,7 +27,7 @@ enum CustomShapesRoute: NavigationRoute {
         }
     }
 
-    var transition: NavigationTransition? {
+    var action: TransitionAction? {
         switch self {
         case .tower:
             return .present(animated: true, modalPresentationStyle: .fullScreen)

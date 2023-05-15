@@ -5,6 +5,7 @@
 //  Created by Erik Drobne on 12/12/2022.
 //
 
+import Foundation
 import SwiftUI
 
 public typealias Routing = Coordinator & Navigator
@@ -25,7 +26,11 @@ public protocol Navigator: ObservableObject {
     func dismiss(animated: Bool)
 }
 
+// MARK: - Extensions
+
 public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
+    
+    // MARK: - Public properties
 
     var viewControllers: [UIViewController] {
         return navigationController.viewControllers
@@ -38,6 +43,8 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     var visibleViewController: UIViewController? {
         return navigationController.visibleViewController
     }
+    
+    // MARK: - Public methods
 
     func start() throws {
         guard let route = startRoute else {

@@ -23,7 +23,7 @@ enum ShapesRoute: NavigationRoute {
         }
     }
 
-    var transition: NavigationTransition? {
+    var action: TransitionAction? {
         switch self {
         case .simpleShapes:
             /// We have to pass nil for the route presenting a child coordinator.

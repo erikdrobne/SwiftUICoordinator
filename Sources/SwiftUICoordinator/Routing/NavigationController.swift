@@ -8,9 +8,13 @@
 import Foundation
 import SwiftUI
 
-public class NavigationController: UINavigationController, UINavigationControllerDelegate {
+public class NavigationController: UINavigationController {
+    
+    // MARK: - Properties
     
     public private(set) var transitions = [Transition]()
+    
+    // MARK: - Initialization
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -26,6 +30,22 @@ public class NavigationController: UINavigationController, UINavigationControlle
         self.init(nibName: nil, bundle: nil)
     }
     
+    // MARK: - Public methods
+    
+    public func register(_ transition: Transition) {
+        guard transitions.first(where: { element in
+            return type(of: element) == type(of: transition)
+        }) == nil else {
+            return
+        }
+        
+        transitions.append(transition)
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension NavigationController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController,
                                      animationControllerFor operation: UINavigationController.Operation,
                                      from fromVC: UIViewController,
@@ -40,23 +60,5 @@ public class NavigationController: UINavigationController, UINavigationControlle
         }
         
         return nil
-    }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
-    }
-    
-    public func register(_ transition: Transition) {
-        guard transitions.first(where: { element in
-            return type(of: element) == type(of: transition)
-        }) == nil else {
-            return
-        }
-        
-        transitions.append(transition)
     }
 }
