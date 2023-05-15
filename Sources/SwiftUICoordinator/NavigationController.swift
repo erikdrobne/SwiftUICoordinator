@@ -27,14 +27,13 @@ public class NavigationController: UINavigationController, UINavigationControlle
     }
     
     public func navigationController(_ navigationController: UINavigationController,
-                              animationControllerFor operation: UINavigationController.Operation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+                                     animationControllerFor operation: UINavigationController.Operation,
+                                     from fromVC: UIViewController,
+                                     to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         for transition in transitions {
-            if let fromRoute = (fromVC as? NavigationRouteHostingController)?.route,
-               let toRoute = (toVC as? NavigationRouteHostingController)?.route {
-                if transition.isEligible(from: fromRoute,to: toRoute) {
+            if let from = (fromVC as? RouteProvider)?.route, let to = (toVC as? RouteProvider)?.route {
+                if transition.isEligible(from: from,to: to) {
                     return transition
                 }
             }

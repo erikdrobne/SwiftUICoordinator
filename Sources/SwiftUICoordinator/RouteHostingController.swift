@@ -1,5 +1,5 @@
 //
-//  CoordinatorHostingController.swift
+//  RouteHostingController.swift
 //  
 //
 //  Created by Erik Drobne on 15/05/2023.
@@ -7,11 +7,7 @@
 
 import SwiftUI
 
-public protocol NavigationRouteHostingController {
-    var route: NavigationRoute { get }
-}
-
-public class CoordinatorHostingController<Content: View>: UIHostingController<Content>, NavigationRouteHostingController {
+public class RouteHostingController<Content: View>: UIHostingController<Content>, RouteProvider {
     public let route: NavigationRoute
     
     init(rootView: Content, route: NavigationRoute) {
