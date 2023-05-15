@@ -51,6 +51,12 @@ public class NavigationController: UINavigationController, UINavigationControlle
     }
     
     public func register(_ transition: Transition) {
+        guard transitions.first(where: { element in
+            return type(of: element) == type(of: transition)
+        }) == nil else {
+            return
+        }
+        
         transitions.append(transition)
     }
 }

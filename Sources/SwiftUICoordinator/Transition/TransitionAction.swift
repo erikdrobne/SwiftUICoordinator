@@ -1,5 +1,5 @@
 //
-//  NavigationTransition.swift
+//  TransitionAction.swift
 //  
 //
 //  Created by Erik Drobne on 12/12/2022.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public enum NavigationTransition {
+public enum TransitionAction {
     case push(animated: Bool)
     case present(
         animated: Bool,

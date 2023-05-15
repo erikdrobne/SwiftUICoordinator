@@ -11,7 +11,7 @@ import Foundation
 public protocol NavigationRoute {
     /// This title can be used to set the navigation bar title when the route is shown.
     var title: String? { get }
-    /// The type of transition to be used when the route is shown.
-    /// This can be a push transition, a modal presentation, or `nil` (for child coordinators).
-    var transition: NavigationTransition? { get }
+    /// Transition action to be used when the route is shown.
+    /// This can be a push action, a modal presentation, or `nil` (for child coordinators).
+    var action: TransitionAction? { get }
 }

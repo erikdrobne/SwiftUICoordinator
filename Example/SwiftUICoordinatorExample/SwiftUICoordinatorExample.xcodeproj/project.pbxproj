@@ -10,6 +10,7 @@
 		1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */; };
 		1732CA0029A6607800C2BC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732C9FF29A6607800C2BC1F /* Assets.xcassets */; };
 		1732CA0329A6607800C2BC1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */; };
+		17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17360A402A1275D600DB2296 /* FadeTransition.swift */; };
 		176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB429B8BF71009C4987 /* ShapesView.swift */; };
 		176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */; };
 		176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBA29B8C162009C4987 /* ShapesRoute.swift */; };
@@ -30,6 +31,7 @@
 		1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICoordinatorExampleApp.swift; sourceTree = "<group>"; };
 		1732C9FF29A6607800C2BC1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		17360A402A1275D600DB2296 /* FadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
 		176F3CB429B8BF71009C4987 /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesCoordinator.swift; sourceTree = "<group>"; };
 		176F3CBA29B8C162009C4987 /* ShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesRoute.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */,
 				176F3CB629B8C01E009C4987 /* Coordinators */,
 				176F3CB329B8BD92009C4987 /* Views */,
+				17360A3F2A1275C000DB2296 /* Transitions */,
 				1732C9FF29A6607800C2BC1F /* Assets.xcassets */,
 				1732CA0129A6607800C2BC1F /* Preview Content */,
 			);
@@ -93,6 +96,14 @@
 				1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		17360A3F2A1275C000DB2296 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				17360A402A1275D600DB2296 /* FadeTransition.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		176F3CB329B8BD92009C4987 /* Views */ = {
@@ -241,6 +252,7 @@
 				17F1184529CC8CF6004755DB /* Star.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
 				176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */,
+				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
 				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
 				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
 				176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */,

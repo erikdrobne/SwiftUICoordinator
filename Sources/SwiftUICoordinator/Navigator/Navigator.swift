@@ -59,7 +59,7 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             route: route
         )
         
-        switch route.transition {
+        switch route.action {
         case .push(let animated):
             navigationController.pushViewController(viewController, animated: animated)
         case .present(let animated, let modalPresentationStyle, let completion):
