@@ -10,8 +10,7 @@ import SwiftUICoordinator
 
 class FadeTransition: NSObject, Transition {
     func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute) -> Bool {
-        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star) ||
-        (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .tower)
+        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
