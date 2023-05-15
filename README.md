@@ -162,7 +162,7 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Internal properties
 
     /// Root coordinator doesn't have a parent.
-    weak var parent: Coordinator? = nil
+    let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let startRoute: ShapesRoute?
