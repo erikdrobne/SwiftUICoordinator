@@ -54,7 +54,10 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             }
 
         let viewWithCoordinator = view.environmentObject(self)
-        let viewController = UIHostingController(rootView: viewWithCoordinator)
+        let viewController = CoordinatorHostingController(
+            rootView: viewWithCoordinator,
+            route: route
+        )
         
         switch route.transition {
         case .push(let animated):
