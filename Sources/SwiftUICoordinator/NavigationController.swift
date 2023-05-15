@@ -46,7 +46,3 @@ public class NavigationController: UINavigationController, UINavigationControlle
         transitions.append(transition)
     }
 }
-
-public protocol Transition: UIViewControllerAnimatedTransitioning {
-    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute) -> Bool
-}
