@@ -29,7 +29,7 @@ enum ShapesRoute: NavigationRoute {
             /// We have to pass nil for the route presenting a child coordinator.
             return nil
         default:
-            return .push()
+            return .push(animated: true)
         }
     }
 }

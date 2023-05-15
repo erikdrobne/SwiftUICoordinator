@@ -28,6 +28,11 @@ enum CustomShapesRoute: NavigationRoute {
     }
 
     var transition: NavigationTransition? {
-        return .push()
+        switch self {
+        case .tower:
+            return .present(animated: true, modalPresentationStyle: .fullScreen)
+        default:
+            return .push(animated: true)
+        }
     }
 }

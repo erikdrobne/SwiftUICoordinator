@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 public enum NavigationTransition {
-    case push(animated: Bool = true)
+    case push(animated: Bool)
     case present(
-        animated: Bool = true,
+        animated: Bool,
         modalPresentationStyle: UIModalPresentationStyle = .automatic,
         completion: (() -> Void)? = nil
     )

@@ -13,9 +13,9 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Internal properties
 
     /// Root coordinator doesn't have a parent.
-    weak var parent: Coordinator? = nil
+    let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
     let startRoute: ShapesRoute?
 
     // MARK: - Initialization
@@ -55,7 +55,7 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Private methods
     
     private func setup() {
-        (navigationController as? NavigationController)?.register(FadeAnimator())
+        navigationController.register(FadeAnimator())
     }
 
     private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
@@ -92,7 +92,8 @@ extension ShapesCoordinator: RouterViewFactory {
 
 class FadeAnimator: NSObject, Transition {
     func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute) -> Bool {
-        return toRoute is CustomShapesRoute
+        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star) ||
+        (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .tower)
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

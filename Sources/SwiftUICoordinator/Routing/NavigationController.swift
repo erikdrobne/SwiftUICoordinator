@@ -42,6 +42,14 @@ public class NavigationController: UINavigationController, UINavigationControlle
         return nil
     }
     
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
+    
     public func register(_ transition: Transition) {
         transitions.append(transition)
     }

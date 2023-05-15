@@ -34,6 +34,6 @@ enum SimpleShapesRoute: NavigationRoute {
     }
 
     var transition: NavigationTransition? {
-        return .push()
+        return .push(animated: false)
     }
 }

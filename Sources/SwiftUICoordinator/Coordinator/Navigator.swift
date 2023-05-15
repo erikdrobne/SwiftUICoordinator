@@ -13,7 +13,7 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
 
-    var navigationController: UINavigationController { get set }
+    var navigationController: NavigationController { get set }
     var startRoute: Route? { get }
     
     func start() throws
@@ -101,7 +101,7 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             let view = self.view(for: route).ifLet(route.title) { view, value in
                 view.navigationTitle(value)
             }
-            return UIHostingController(rootView: view.environmentObject(self))
+            return RouteHostingController(rootView: view.environmentObject(self), route: route)
         })
     }
 
