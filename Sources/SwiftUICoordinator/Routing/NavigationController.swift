@@ -5,14 +5,13 @@
 //  Created by Erik Drobne on 12/05/2023.
 //
 
-import Foundation
 import SwiftUI
 
 public class NavigationController: UINavigationController {
     
     // MARK: - Properties
     
-    public private(set) var transitions = [Transition]()
+    public private(set) var transitions = [ObjectIdentifier: Transition]()
     
     // MARK: - Initialization
     
@@ -33,13 +32,10 @@ public class NavigationController: UINavigationController {
     // MARK: - Public methods
     
     public func register(_ transition: Transition) {
-        guard transitions.first(where: { element in
-            return type(of: element) == type(of: transition)
-        }) == nil else {
-            return
+        let transitionType = ObjectIdentifier(type(of: transition))
+        if transitions[transitionType] == nil {
+            transitions[transitionType] = transition
         }
-        
-        transitions.append(transition)
     }
 }
 
@@ -51,7 +47,7 @@ extension NavigationController: UINavigationControllerDelegate {
                                      from fromVC: UIViewController,
                                      to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        for transition in transitions {
+        for transition in transitions.values {
             if let from = (fromVC as? RouteProvider)?.route, let to = (toVC as? RouteProvider)?.route {
                 if transition.isEligible(from: from,to: to) {
                     return transition

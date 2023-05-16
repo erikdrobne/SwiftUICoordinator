@@ -280,14 +280,18 @@ import SwiftUICoordinator
 struct ShapesView<Coordinator: Routing>: View {
 
     @EnvironmentObject var coordinator: Coordinator
+    @StateObject var viewModel = ViewModel<Coordinator>()
 
     var body: some View {
         List {
             Button {
-                coordinator?.didTap(route: .simpleShapes)
+                viewModel.didTapBuiltIn()
             } label: {
                 Text("Built-in")
             }
+        }
+        .onAppear {
+            viewModel.coordinator = coordinator
         }
     }
 }

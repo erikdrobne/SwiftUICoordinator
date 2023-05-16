@@ -5,7 +5,6 @@
 //  Created by Erik Drobne on 15/05/2023.
 //
 
-import Foundation
 import SwiftUI
 
 public class RouteHostingController<Content: View>: UIHostingController<Content>, RouteProvider {
