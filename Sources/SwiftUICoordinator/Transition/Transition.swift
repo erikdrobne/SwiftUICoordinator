@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+public typealias NavigationOperation = UINavigationController.Operation
+
 public protocol Transition: UIViewControllerAnimatedTransitioning {
-    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute) -> Bool
+    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool
 }

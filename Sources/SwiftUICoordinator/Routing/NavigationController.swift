@@ -49,7 +49,7 @@ extension NavigationController: UINavigationControllerDelegate {
         
         for transition in transitions.values {
             if let from = (fromVC as? RouteProvider)?.route, let to = (toVC as? RouteProvider)?.route {
-                if transition.isEligible(from: from,to: to) {
+                if transition.isEligible(from: from,to: to, operation: operation) {
                     return transition
                 }
             }

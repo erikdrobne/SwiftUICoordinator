@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICoordinator
 
 class FadeTransition: NSObject, Transition {
-    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute) -> Bool {
+    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
         return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
     }
     
