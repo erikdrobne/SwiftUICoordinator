@@ -9,13 +9,17 @@ import SwiftUI
 
 public class NavigationController: UINavigationController {
     
-    // MARK: - Properties
+    // MARK: - Internal Properties
     
-    public private(set) var transitions = [ObjectIdentifier: Transition]()
+    private(set) var transitions = [ObjectIdentifier: Transition]()
     
     // MARK: - Initialization
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public convenience init() {
+        self.init(nibName: nil, bundle: nil)
+    }
+    
+    private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         self.delegate = self
@@ -23,10 +27,6 @@ public class NavigationController: UINavigationController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    public convenience init() {
-        self.init(nibName: nil, bundle: nil)
     }
     
     // MARK: - Public methods
@@ -48,11 +48,15 @@ extension NavigationController: UINavigationControllerDelegate {
                                      to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         for transition in transitions.values {
-            if let from = (fromVC as? RouteProvider)?.route, let to = (toVC as? RouteProvider)?.route {
-                if transition.isEligible(from: from,to: to, operation: operation) {
-                    return transition
-                }
+            guard
+                let from = (fromVC as? RouteProvider)?.route,
+                let to = (toVC as? RouteProvider)?.route,
+                transition.isEligible(from: from,to: to, operation: operation)
+            else {
+                return nil
             }
+                            
+            return transition
         }
         
         return nil
