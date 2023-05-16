@@ -47,7 +47,7 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     func start() throws {
         guard let route = startRoute else {
-            return
+            throw NavigatorError.startRouteMissing
         }
         
         try show(route: route)
