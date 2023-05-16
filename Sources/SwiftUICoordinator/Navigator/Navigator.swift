@@ -55,10 +55,8 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     func show(route: Route) throws {
         let view = self.view(for: route)
-            .ifLet(route.title) { view, value in
-                view.navigationTitle(value)
-            }
-
+            .navigationTitle(route.title ?? "")
+        
         let viewWithCoordinator = view.environmentObject(self)
         let viewController = RouteHostingController(
             rootView: viewWithCoordinator,
@@ -104,9 +102,8 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     private func views(for routes: [Route]) -> [UIHostingController<some View>] {
         return routes.map({ route in
-            let view = self.view(for: route).ifLet(route.title) { view, value in
-                view.navigationTitle(value)
-            }
+            let view = self.view(for: route)
+                .navigationTitle(route.title ?? "")
             return RouteHostingController(rootView: view.environmentObject(self), route: route)
         })
     }
