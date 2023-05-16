@@ -49,7 +49,7 @@ This protocol defines the available routes for navigation within a coordinator f
 
 ```Swift
 public protocol NavigationRoute {
-    /// This title can be used to set the navigation bar title when the route is shown.
+    /// Navigation bar title.
     var title: String? { get }
     /// Transition action to be used when the route is shown.
     /// This can be a push action, a modal presentation, or `nil` (for child coordinators).
@@ -71,7 +71,7 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
     
-    var navigationController: UINavigationController { get set }
+    var navigationController: NavigationController { get set }
     /// The starting route of the navigator.
     var startRoute: Route? { get }
     
@@ -154,7 +154,7 @@ enum ShapesRoute: NavigationRoute {
 
 ### Create Coordinator
 
-Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `UINavigationController`.
+Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `NavigationController`.
 
 ```Swift
 class ShapesCoordinator: NSObject, Coordinator, Navigator {
@@ -164,15 +164,17 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     /// Root coordinator doesn't have a parent.
     let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
     let startRoute: ShapesRoute?
 
     // MARK: - Initialization
 
-    init(navigationController: UINavigationController = .init(), startRoute: ShapesRoute? = nil) {
-        self.navigationController = navigationController
+    init(startRoute: ShapesRoute? = nil) {
+        self.navigationController = NavigationController()
         self.startRoute = startRoute
         super.init()
+        
+        setup()
     }
     
     func navigate(to route: NavigationRoute) {
@@ -197,6 +199,12 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         default:
             return
         }
+    }
+    
+    // MARK: - Private methods
+    
+    private func setup() {
+        navigationController.register(FadeTransition())
     }
 }
 ```
@@ -299,7 +307,7 @@ struct ShapesView<Coordinator: Routing>: View {
 
 ### Custom transitions
 
-Create custom transition.
+Create custom Fade transition.
 
 ```Swift
 class FadeTransition: NSObject, Transition {
