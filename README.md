@@ -49,11 +49,11 @@ This protocol defines the available routes for navigation within a coordinator f
 
 ```Swift
 public protocol NavigationRoute {
-    /// This title can be used to set the navigation bar title when the route is shown.
+    /// Navigation bar title.
     var title: String? { get }
-    /// The type of transition to be used when the route is shown. 
-    /// This can be a push transition, a modal presentation, or `nil` (for child coordinators).
-    var transition: NavigationTransition? { get }
+    /// Transition action to be used when the route is shown.
+    /// This can be a push action, a modal presentation, or `nil` (for child coordinators).
+    var action: TransitionAction? { get }
 }
 ```
 
@@ -71,14 +71,14 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
     
-    var navigationController: UINavigationController { get set }
+    var navigationController: NavigationController { get set }
     /// The starting route of the navigator.
     var startRoute: Route? { get }
     
     /// This method is called when the navigator should start navigating.
     func start() throws
     /// Navigate to a specific route. 
-    /// It creates a view for the route and adds it to the navigation stack using the specified transition.
+    /// It creates a view for the route and adds it to the navigation stack using the specified action (TransitionAction).
     func show(route: Route) throws
     /// Sets the navigation stack to a new array of routes.
     /// It can be useful if you need to reset the entire navigation stack to a new set of views.
@@ -140,7 +140,7 @@ enum ShapesRoute: NavigationRoute {
         }
     }
 
-    var transition: NavigationTransition? {
+    var action: TransitionAction? {
         switch self {
         case .simpleShapes:
             // We have to pass nil for the route presenting a child coordinator.
@@ -154,7 +154,7 @@ enum ShapesRoute: NavigationRoute {
 
 ### Create Coordinator
 
-Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `UINavigationController`.
+Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `NavigationController`.
 
 ```Swift
 class ShapesCoordinator: NSObject, Coordinator, Navigator {
@@ -162,17 +162,19 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Internal properties
 
     /// Root coordinator doesn't have a parent.
-    weak var parent: Coordinator? = nil
+    let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
     let startRoute: ShapesRoute?
 
     // MARK: - Initialization
 
-    init(navigationController: UINavigationController = .init(), startRoute: ShapesRoute? = nil) {
-        self.navigationController = navigationController
+    init(startRoute: ShapesRoute? = nil) {
+        self.navigationController = NavigationController()
         self.startRoute = startRoute
         super.init()
+        
+        setup()
     }
     
     func navigate(to route: NavigationRoute) {
@@ -197,6 +199,12 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         default:
             return
         }
+    }
+    
+    // MARK: - Private methods
+    
+    private func setup() {
+        navigationController.register(FadeTransition())
     }
 }
 ```
@@ -280,17 +288,67 @@ import SwiftUICoordinator
 struct ShapesView<Coordinator: Routing>: View {
 
     @EnvironmentObject var coordinator: Coordinator
+    @StateObject var viewModel = ViewModel<Coordinator>()
 
     var body: some View {
         List {
             Button {
-                coordinator?.didTap(route: .simpleShapes)
+                viewModel.didTapBuiltIn()
             } label: {
                 Text("Built-in")
             }
         }
+        .onAppear {
+            viewModel.coordinator = coordinator
+        }
     }
 }
+```
+
+### Custom transitions
+
+Create custom Fade transition.
+
+```Swift
+class FadeTransition: NSObject, Transition {
+    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
+        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
+    }
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.3 // Set the duration of the fade animation
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let toView = transitionContext.view(forKey: .to) else {
+            transitionContext.completeTransition(false)
+            return
+        }
+        
+        let containerView = transitionContext.containerView
+        toView.alpha = 0.0
+        
+        containerView.addSubview(toView)
+        
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+            toView.alpha = 1.0
+        }) { _ in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
+    }
+}
+```
+
+Register transition in the coordinator initializer.
+
+```Swift
+    init(startRoute: ShapesRoute? = nil) {
+        self.navigationController = NavigationController()
+        self.startRoute = startRoute
+        super.init()
+        
+        navigationController.register(FadeTransition())
+    }
 ```
 
 ## 📒 Example project

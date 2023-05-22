@@ -13,7 +13,7 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
 
-    var navigationController: UINavigationController { get set }
+    var navigationController: NavigationController { get set }
     var startRoute: Route? { get }
     
     func start() throws
@@ -25,7 +25,11 @@ public protocol Navigator: ObservableObject {
     func dismiss(animated: Bool)
 }
 
+// MARK: - Extensions
+
 public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
+    
+    // MARK: - Public properties
 
     var viewControllers: [UIViewController] {
         return navigationController.viewControllers
@@ -38,10 +42,12 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     var visibleViewController: UIViewController? {
         return navigationController.visibleViewController
     }
+    
+    // MARK: - Public methods
 
     func start() throws {
         guard let route = startRoute else {
-            return
+            throw NavigatorError.startRouteMissing
         }
         
         try show(route: route)
@@ -52,11 +58,14 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             .ifLet(route.title) { view, value in
                 view.navigationTitle(value)
             }
-
-        let viewWithCoordinator = view.environmentObject(self)
-        let viewController = UIHostingController(rootView: viewWithCoordinator)
         
-        switch route.transition {
+        let viewWithCoordinator = view.environmentObject(self)
+        let viewController = RouteHostingController(
+            rootView: viewWithCoordinator,
+            route: route
+        )
+        
+        switch route.action {
         case .push(let animated):
             navigationController.pushViewController(viewController, animated: animated)
         case .present(let animated, let modalPresentationStyle, let completion):
@@ -95,10 +104,9 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     private func views(for routes: [Route]) -> [UIHostingController<some View>] {
         return routes.map({ route in
-            let view = self.view(for: route).ifLet(route.title) { view, value in
-                view.navigationTitle(value)
-            }
-            return UIHostingController(rootView: view.environmentObject(self))
+            let view = self.view(for: route)
+                .navigationTitle(route.title ?? "")
+            return RouteHostingController(rootView: view.environmentObject(self), route: route)
         })
     }
 

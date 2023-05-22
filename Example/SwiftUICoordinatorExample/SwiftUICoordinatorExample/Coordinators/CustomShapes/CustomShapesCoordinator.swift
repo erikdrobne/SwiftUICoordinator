@@ -16,12 +16,12 @@ class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
 
     weak var parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
     let startRoute: CustomShapesRoute?
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: UINavigationController = .init(), startRoute: CustomShapesRoute? = .customShapes) {
+    init(parent: Coordinator?, navigationController: NavigationController, startRoute: CustomShapesRoute? = .customShapes) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute

@@ -13,17 +13,19 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     // MARK: - Internal properties
 
     /// Root coordinator doesn't have a parent.
-    weak var parent: Coordinator? = nil
+    let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController: NavigationController
     let startRoute: ShapesRoute?
 
     // MARK: - Initialization
 
-    init(navigationController: UINavigationController = .init(), startRoute: ShapesRoute? = nil) {
-        self.navigationController = navigationController
+    init(startRoute: ShapesRoute? = nil) {
+        self.navigationController = NavigationController()
         self.startRoute = startRoute
         super.init()
+        
+        setup()
     }
     
     func navigate(to route: NavigationRoute) {
@@ -51,6 +53,10 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     }
     
     // MARK: - Private methods
+    
+    private func setup() {
+        navigationController.register(FadeTransition())
+    }
 
     private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
         let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)

@@ -1,8 +1,8 @@
 //
-//  Utilities.swift
+//  View+Utilities.swift
 //  
 //
-//  Created by Erik Drobne on 16/03/2023.
+//  Created by Erik Drobne on 22/05/2023.
 //
 
 import SwiftUI

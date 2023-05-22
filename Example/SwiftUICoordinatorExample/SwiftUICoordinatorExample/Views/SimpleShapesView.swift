@@ -74,7 +74,7 @@ extension SimpleShapesView {
 }
 
 struct SimpleShapesView_Previews: PreviewProvider {
-    static let coordinator = SimpleShapesCoordinator(parent: nil)
+    static let coordinator = SimpleShapesCoordinator(parent: nil, navigationController: .init())
     
     static var previews: some View {
         SimpleShapesView<SimpleShapesCoordinator>()
