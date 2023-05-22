@@ -55,7 +55,9 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
 
     func show(route: Route) throws {
         let view = self.view(for: route)
-            .navigationTitle(route.title ?? "")
+            .ifLet(route.title) { view, value in
+                view.navigationTitle(value)
+            }
         
         let viewWithCoordinator = view.environmentObject(self)
         let viewController = RouteHostingController(

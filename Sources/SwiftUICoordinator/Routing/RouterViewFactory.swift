@@ -11,7 +11,14 @@ import SwiftUI
 public protocol RouterViewFactory {
     associatedtype V: View
     associatedtype Route: NavigationRoute
-
+    
     @ViewBuilder
     func view(for route: Route) -> V
 }
+
+
+
+
+
+
+
