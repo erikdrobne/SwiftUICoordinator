@@ -6,6 +6,5 @@
 //
 
 public enum NavigatorError: Error {
-    case startRouteMissing
     case cannotShow(NavigationRoute)
 }

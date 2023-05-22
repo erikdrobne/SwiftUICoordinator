@@ -14,7 +14,7 @@ public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
 
     var navigationController: NavigationController { get }
-    var startRoute: Route? { get }
+    var startRoute: Route { get }
     
     func start() throws
     func show(route: Route) throws
@@ -46,11 +46,7 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
     // MARK: - Public methods
 
     func start() throws {
-        guard let route = startRoute else {
-            throw NavigatorError.startRouteMissing
-        }
-        
-        try show(route: route)
+        try show(route: startRoute)
     }
 
     func show(route: Route) throws {
