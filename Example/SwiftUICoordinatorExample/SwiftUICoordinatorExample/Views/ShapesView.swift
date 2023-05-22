@@ -66,7 +66,7 @@ extension ShapesView {
 }
 
 struct ShapesView_Previews: PreviewProvider {
-    static let coordinator = ShapesCoordinator()
+    static let coordinator = ShapesCoordinator(startRoute: ShapesRoute.shapes)
 
     static var previews: some View {
         ShapesView<ShapesCoordinator>()

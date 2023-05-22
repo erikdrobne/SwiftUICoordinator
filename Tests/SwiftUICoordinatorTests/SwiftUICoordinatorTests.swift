@@ -5,8 +5,8 @@ import SwiftUI
 final class SwiftUICoordinatorTests: XCTestCase {
     
     @MainActor func testAddChildToCoordinator() {
-        let rootCoordinator = MockCoordinator(parent: nil)
-        let childCoordinator = MockCoordinator(parent: rootCoordinator)
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        let childCoordinator = MockCoordinator(parent: rootCoordinator, startRoute: .rectangle)
         
         rootCoordinator.add(child: childCoordinator)
         rootCoordinator.add(child: childCoordinator)
@@ -15,39 +15,30 @@ final class SwiftUICoordinatorTests: XCTestCase {
     }
     
     @MainActor func testFinishChildCoordinator() {
-        let rootCoordinator = MockCoordinator(parent: nil)
-        let childCoordinator = MockCoordinator(parent: rootCoordinator)
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        let childCoordinator = MockCoordinator(parent: rootCoordinator, startRoute: .rectangle)
         
         rootCoordinator.add(child: childCoordinator)
         childCoordinator.finish()
         
         XCTAssertEqual(rootCoordinator.childCoordinators.count, 0)
     }
-    
-    @MainActor func testStartThrowsMissingRouteError() {
-        let rootCoordinator = MockCoordinator(parent: nil)
-        
-        XCTAssertThrowsError(try rootCoordinator.start()) { error in
-            //XCTAssertTrue(error is NavigatorError.startRouteMissing)
-        }
-    }
 }
 
 class MockCoordinator: NSObject, Coordinator, Navigator {
-    
     var parent: Coordinator?
     var childCoordinators = [Coordinator]()
     var navigationController: NavigationController
-    let startRoute: MockRoute?
+    let startRoute: MockRoute
     
-    init(parent: Coordinator?, startRoute: MockRoute? = nil) {
+    init(parent: Coordinator?, startRoute: MockRoute) {
         self.parent = parent
         self.navigationController = NavigationController()
         self.startRoute = startRoute
         super.init()
     }
     
-    func navigate(to route: SwiftUICoordinator.NavigationRoute) {
+    func navigate(to route: NavigationRoute) {
         
     }
 }
