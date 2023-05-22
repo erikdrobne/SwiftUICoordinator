@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B7CC2B8C-17C7-4F8B-BC9D-DE54FDF15F94",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SwiftUICoordinatorTests",
+        "name" : "SwiftUICoordinatorTests"
+      }
+    }
+  ],
+  "version" : 1
+}

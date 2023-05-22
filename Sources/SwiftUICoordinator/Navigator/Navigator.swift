@@ -13,7 +13,7 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
 
-    var navigationController: NavigationController { get set }
+    var navigationController: NavigationController { get }
     var startRoute: Route? { get }
     
     func start() throws
