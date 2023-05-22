@@ -11,7 +11,7 @@ public class NavigationController: UINavigationController {
     
     // MARK: - Internal Properties
     
-    private(set) var transitions = [ObjectIdentifier: Transition]()
+    private(set) var transitions = [Transition]()
     
     // MARK: - Initialization
     
@@ -32,10 +32,7 @@ public class NavigationController: UINavigationController {
     // MARK: - Public methods
     
     public func register(_ transition: Transition) {
-        let transitionType = ObjectIdentifier(type(of: transition))
-        if transitions[transitionType] == nil {
-            transitions[transitionType] = transition
-        }
+        transitions.append(transition)
     }
 }
 
@@ -47,7 +44,7 @@ extension NavigationController: UINavigationControllerDelegate {
                                      from fromVC: UIViewController,
                                      to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        for transition in transitions.values {
+        for transition in transitions {
             guard
                 let from = (fromVC as? RouteProvider)?.route,
                 let to = (toVC as? RouteProvider)?.route,
