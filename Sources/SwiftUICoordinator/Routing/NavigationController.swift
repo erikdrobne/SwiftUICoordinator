@@ -34,6 +34,10 @@ public class NavigationController: UINavigationController {
     public func register(_ transition: Transition) {
         transitions.append(transition)
     }
+    
+    public func register(_ transitions: [Transition]) {
+        self.transitions += transitions
+    }
 }
 
 // MARK: - UINavigationControllerDelegate
