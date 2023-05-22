@@ -23,6 +23,34 @@ final class SwiftUICoordinatorTests: XCTestCase {
         
         XCTAssertEqual(rootCoordinator.childCoordinators.count, 0)
     }
+    
+    @MainActor func testShowRouteThrowsError() {
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        XCTAssertNoThrow(try rootCoordinator.start())
+        
+        XCTAssertThrowsError(try rootCoordinator.show(route: .square)) { error in
+            guard let error = error as? NavigatorError else {
+                XCTFail("Unexpected error type: \(error)")
+                return
+            }
+            
+            switch error {
+            case .cannotShow(let route as MockRoute):
+                XCTAssertEqual(route, .square)
+            default:
+                XCTFail("Unexpected error type: \(error)")
+            }
+        }
+    }
+    
+    @MainActor func testShowRouteSuccess() {
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        XCTAssertNoThrow(try rootCoordinator.start())
+        XCTAssertNotNil(rootCoordinator.topViewController)
+        XCTAssertNotNil(rootCoordinator.visibleViewController)
+        XCTAssertEqual(rootCoordinator.topViewController, rootCoordinator.visibleViewController)
+        XCTAssertEqual(rootCoordinator.viewControllers.count, 1)
+    }
 }
 
 class MockCoordinator: NSObject, Coordinator, Navigator {
@@ -46,7 +74,12 @@ class MockCoordinator: NSObject, Coordinator, Navigator {
 extension MockCoordinator: RouterViewFactory {
     @ViewBuilder
     public func view(for route: MockRoute) -> some View {
-        EmptyView()
+        switch route {
+        case .rectangle, .circle:
+            MockView()
+        default:
+            EmptyView()
+        }
     }
 }
 
@@ -67,6 +100,17 @@ enum MockRoute: NavigationRoute {
     }
 
     var action: TransitionAction? {
-        return .push(animated: true)
+        switch self {
+        case .square:
+            return nil
+        default:
+            return .push(animated: true)
+        }
+    }
+}
+
+struct MockView: View {
+    var body: some View {
+        Text("Mock View")
     }
 }
