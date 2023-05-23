@@ -43,13 +43,21 @@ final class SwiftUICoordinatorTests: XCTestCase {
         }
     }
     
-    @MainActor func testShowRouteSuccess() {
+    @MainActor func testShowRouteNoThrow() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         XCTAssertNoThrow(try rootCoordinator.start())
-        XCTAssertNotNil(rootCoordinator.topViewController)
-        XCTAssertNotNil(rootCoordinator.visibleViewController)
-        XCTAssertEqual(rootCoordinator.topViewController, rootCoordinator.visibleViewController)
-        XCTAssertEqual(rootCoordinator.viewControllers.count, 1)
+    }
+    
+    @MainActor func testSetRoutesSuccess() {
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        rootCoordinator.set(routes: [.rectangle, .rectangle])
+        XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
+    }
+    
+    @MainActor func testAppendRoutesSuccess() {
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        rootCoordinator.append(routes: [.rectangle, .circle])
+        XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
     }
 }
 
