@@ -54,7 +54,7 @@ extension NavigationController: UINavigationControllerDelegate {
                 let to = (toVC as? RouteProvider)?.route,
                 transition.isEligible(from: from,to: to, operation: operation)
             else {
-                return nil
+                continue
             }
                             
             return transition
