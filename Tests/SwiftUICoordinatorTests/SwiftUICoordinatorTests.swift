@@ -30,7 +30,7 @@ final class SwiftUICoordinatorTests: XCTestCase {
         
         XCTAssertThrowsError(try rootCoordinator.show(route: .square)) { error in
             guard let error = error as? NavigatorError else {
-                XCTFail("Unexpected error type: \(error)")
+                XCTFail("Cannot cast to NavigatorError: \(error)")
                 return
             }
             
