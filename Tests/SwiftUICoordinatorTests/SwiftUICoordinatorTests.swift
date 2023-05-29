@@ -59,4 +59,28 @@ final class SwiftUICoordinatorTests: XCTestCase {
         rootCoordinator.append(routes: [.rectangle, .circle])
         XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
     }
+    
+    @MainActor func testPopToRootSuccess() {
+        let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        rootCoordinator.append(routes: [.rectangle, .circle])
+        XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
+        rootCoordinator.popToRoot(animated: false)
+        XCTAssertEqual(rootCoordinator.viewControllers.count, 1)
+    }
+    
+    @MainActor func testRegisterTransitionSuccess() {
+        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        let transitions = [MockTransition()]
+        
+        coordinator.navigationController.register(transitions)
+        
+        for (index, item) in coordinator.navigationController.transitions.enumerated() {
+            guard let mockTransition = item as? MockTransition else {
+                XCTFail("Cannot cast to MockTransition.")
+                return
+            }
+            
+            XCTAssertEqual(mockTransition, transitions[index])
+        }
+    }
 }
