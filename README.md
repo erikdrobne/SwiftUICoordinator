@@ -71,7 +71,7 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
     
-    var navigationController: NavigationController { get set }
+    var navigationController: NavigationController { get }
     /// The starting route of the navigator.
     var startRoute: Route? { get }
     
@@ -165,11 +165,11 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
     var navigationController: NavigationController
-    let startRoute: ShapesRoute?
+    let startRoute: ShapesRoute
 
     // MARK: - Initialization
 
-    init(startRoute: ShapesRoute? = nil) {
+    init(startRoute: ShapesRoute) {
         self.navigationController = NavigationController()
         self.startRoute = startRoute
         super.init()
@@ -181,10 +181,10 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
         switch route {
         case ShapesRoute.simpleShapes:
             let coordinator = makeSimpleShapesCoordinator()
-            coordinator.start()
+            try? coordinator.start()
         case ShapesRoute.customShapes:
             let coordinator = makeCustomShapesCoordinator()
-            coordinator.start()
+            try? coordinator.start()
         case ShapesRoute.featuredShape(let route):
             switch route {
             case let shapeRoute as SimpleShapesRoute:
@@ -253,8 +253,6 @@ struct SwiftUICoordinatorExampleApp: App {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
-    var window: UIWindow?
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let window = (scene as? UIWindowScene)?.windows.first else {
             return
@@ -316,7 +314,7 @@ class FadeTransition: NSObject, Transition {
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3 // Set the duration of the fade animation
+        return 0.3
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
