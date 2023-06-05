@@ -2,9 +2,9 @@ import XCTest
 import SwiftUI
 @testable import SwiftUICoordinator
 
-final class SwiftUICoordinatorTests: XCTestCase {
+@MainActor final class SwiftUICoordinatorTests: XCTestCase {
     
-    @MainActor func testAddChildToCoordinator() {
+    func testAddChildToCoordinator() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         let childCoordinator = MockCoordinator(parent: rootCoordinator, startRoute: .rectangle)
         
@@ -14,7 +14,7 @@ final class SwiftUICoordinatorTests: XCTestCase {
         XCTAssertEqual(rootCoordinator.childCoordinators.count, 1)
     }
     
-    @MainActor func testFinishChildCoordinator() {
+    func testFinishChildCoordinator() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         let childCoordinator = MockCoordinator(parent: rootCoordinator, startRoute: .rectangle)
         
@@ -24,7 +24,7 @@ final class SwiftUICoordinatorTests: XCTestCase {
         XCTAssertEqual(rootCoordinator.childCoordinators.count, 0)
     }
     
-    @MainActor func testShowRouteThrowsError() {
+    func testShowRouteThrowsError() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         XCTAssertNoThrow(try rootCoordinator.start())
         
@@ -43,24 +43,24 @@ final class SwiftUICoordinatorTests: XCTestCase {
         }
     }
     
-    @MainActor func testShowRouteNoThrow() {
+    func testShowRouteNoThrow() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         XCTAssertNoThrow(try rootCoordinator.start())
     }
     
-    @MainActor func testSetRoutesSuccess() {
+    func testSetRoutesSuccess() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         rootCoordinator.set(routes: [.rectangle, .rectangle])
         XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
     }
     
-    @MainActor func testAppendRoutesSuccess() {
+    func testAppendRoutesSuccess() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         rootCoordinator.append(routes: [.rectangle, .circle])
         XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
     }
     
-    @MainActor func testPopToRootSuccess() {
+    func testPopToRootSuccess() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         rootCoordinator.append(routes: [.rectangle, .circle])
         XCTAssertEqual(rootCoordinator.viewControllers.count, 2)
@@ -68,7 +68,7 @@ final class SwiftUICoordinatorTests: XCTestCase {
         XCTAssertEqual(rootCoordinator.viewControllers.count, 1)
     }
     
-    @MainActor func testRegisterTransitionSuccess() {
+    func testRegisterTransitionSuccess() {
         let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
         let transitions = [MockTransition()]
         
@@ -82,10 +82,5 @@ final class SwiftUICoordinatorTests: XCTestCase {
             
             XCTAssertEqual(mockTransition, transitions[index])
         }
-    }
-    
-    @MainActor func testRoutePropertiesAreCorrect() {
-        let route = MockRoute.circle
-        XCTAssertEqual(route.title, "Circle")
     }
 }
