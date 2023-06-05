@@ -30,8 +30,10 @@ extension MockCoordinator: RouterViewFactory {
     @ViewBuilder
     public func view(for route: MockRoute) -> some View {
         switch route {
-        case .rectangle, .circle:
-            MockView()
+        case .rectangle:
+            RectangleView()
+        case .circle:
+            CircleView()
         default:
             EmptyView()
         }

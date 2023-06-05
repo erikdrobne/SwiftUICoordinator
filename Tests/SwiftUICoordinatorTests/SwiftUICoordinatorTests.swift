@@ -83,4 +83,9 @@ final class SwiftUICoordinatorTests: XCTestCase {
             XCTAssertEqual(mockTransition, transitions[index])
         }
     }
+    
+    @MainActor func testRoutePropertiesAreCorrect() {
+        let route = MockRoute.circle
+        XCTAssertEqual(route.title, "Circle")
+    }
 }

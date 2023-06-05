@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 public class NavigationController: UINavigationController {
     
     // MARK: - Internal Properties
