@@ -16,11 +16,11 @@ class ShapesCoordinator: NSObject, Coordinator, Navigator {
     let parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
     var navigationController: NavigationController
-    let startRoute: ShapesRoute?
+    let startRoute: ShapesRoute
 
     // MARK: - Initialization
 
-    init(startRoute: ShapesRoute? = nil) {
+    init(startRoute: ShapesRoute) {
         self.navigationController = NavigationController()
         self.startRoute = startRoute
         super.init()

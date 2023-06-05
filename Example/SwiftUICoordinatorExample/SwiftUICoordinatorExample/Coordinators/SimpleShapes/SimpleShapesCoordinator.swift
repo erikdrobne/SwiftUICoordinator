@@ -15,11 +15,11 @@ class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
     weak var parent: Coordinator? = nil
     var childCoordinators = [Coordinator]()
     var navigationController: NavigationController
-    let startRoute: SimpleShapesRoute?
+    let startRoute: SimpleShapesRoute
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: NavigationController, startRoute: SimpleShapesRoute? = .simpleShapes) {
+    init(parent: Coordinator?, navigationController: NavigationController, startRoute: SimpleShapesRoute = .simpleShapes) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute

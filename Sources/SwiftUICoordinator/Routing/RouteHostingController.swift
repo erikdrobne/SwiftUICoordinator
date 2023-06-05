@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 public class RouteHostingController<Content: View>: UIHostingController<Content>, RouteProvider {
     
     // MARK: - Public properties
