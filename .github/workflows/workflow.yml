@@ -15,14 +15,14 @@ jobs:
     env:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
-      SCHEME: SwiftUICoordinatorExample
+      SCHEME: SwiftUICoordinator
       DESTINATION: platform=iOS Simulator,name=iPhone 14
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Select Xcode
       run: sudo xcode-select --switch $DEVELOPER_DIR
-    - name: Build
+    - name: Build and test
       run: |
         swift package update
-        xcodebuild clean build -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
+        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION"
