@@ -8,7 +8,7 @@
 import SwiftUI
 @testable import SwiftUICoordinator
 
-class MockCoordinator: NSObject, Routing {
+class MockCoordinator: Routing {
     var parent: Coordinator?
     var childCoordinators = [Coordinator]()
     var navigationController: NavigationController
@@ -18,7 +18,6 @@ class MockCoordinator: NSObject, Routing {
         self.parent = parent
         self.navigationController = NavigationController()
         self.startRoute = startRoute
-        super.init()
     }
     
     func navigate(to route: NavigationRoute) {

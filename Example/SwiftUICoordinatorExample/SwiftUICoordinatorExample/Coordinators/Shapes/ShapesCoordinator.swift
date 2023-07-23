@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
-class ShapesCoordinator: NSObject, Routing {
+class ShapesCoordinator: Routing {
 
     // MARK: - Internal properties
 
@@ -23,7 +23,6 @@ class ShapesCoordinator: NSObject, Routing {
     init(startRoute: ShapesRoute) {
         self.navigationController = NavigationController()
         self.startRoute = startRoute
-        super.init()
         
         setup()
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
-class SimpleShapesCoordinator: NSObject, Routing {
+class SimpleShapesCoordinator: Routing {
 
     // MARK: - Internal properties
 
@@ -23,7 +23,6 @@ class SimpleShapesCoordinator: NSObject, Routing {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
-        super.init()
     }
 
     func presentRoot() {

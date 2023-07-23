@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUI
 import SwiftUICoordinator
 
-class CustomShapesCoordinator: NSObject, Routing {
+class CustomShapesCoordinator: Routing {
 
     // MARK: - Internal properties
 
@@ -25,7 +25,6 @@ class CustomShapesCoordinator: NSObject, Routing {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
-        super.init()
     }
     
     func navigate(to route: NavigationRoute) {
