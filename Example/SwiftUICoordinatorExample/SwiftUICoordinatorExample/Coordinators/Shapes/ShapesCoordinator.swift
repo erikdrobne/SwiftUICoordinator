@@ -27,27 +27,27 @@ class ShapesCoordinator: Routing {
         setup()
     }
     
-    func navigate(to route: NavigationRoute) {
-        switch route {
-        case ShapesRoute.simpleShapes:
+    func handle(_ action: CoordinatorAction) {
+        switch action {
+        case ShapesAction.simpleShapes:
             let coordinator = makeSimpleShapesCoordinator()
             try? coordinator.start()
-        case ShapesRoute.customShapes:
+        case ShapesAction.customShapes:
             let coordinator = makeCustomShapesCoordinator()
             try? coordinator.start()
-        case ShapesRoute.featuredShape(let route):
+        case let ShapesAction.featuredShape(route):
             switch route {
-            case let shapeRoute as SimpleShapesRoute:
+            case let shapeRoute as SimpleShapesRoute where shapeRoute != .simpleShapes:
                 let coordinator = makeSimpleShapesCoordinator()
                 coordinator.append(routes: [.simpleShapes, shapeRoute])
-            case let shapeRoute as CustomShapesRoute:
+            case let shapeRoute as CustomShapesRoute where shapeRoute != .customShapes:
                 let coordinator = makeCustomShapesCoordinator()
                 coordinator.append(routes: [.customShapes, shapeRoute])
             default:
                 return
             }
         default:
-            return
+            break
         }
     }
     

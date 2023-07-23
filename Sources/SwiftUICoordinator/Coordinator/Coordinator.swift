@@ -5,16 +5,16 @@
 //  Created by Erik Drobne on 12/12/2022.
 //
 
-import SwiftUI
+import Foundation
 
 @MainActor
 public protocol Coordinator: AnyObject {
     var parent: Coordinator? { get }
     var childCoordinators: [Coordinator] { get set }
     
+    func handle(_ action: CoordinatorAction)
     func add(child: Coordinator)
-    func navigate(to route: NavigationRoute)
-    func finish()
+    func removeFromParent()
 }
 
 // MARK: - Extensions
@@ -22,14 +22,14 @@ public protocol Coordinator: AnyObject {
 public extension Coordinator {
     
     // MARK: - Public methods
-    
-    func finish() {
-        parent?.childCoordinators.removeAll(where: { $0 === self })
-    }
 
-    func add(child: Coordinator) {
+    func add(child: any Coordinator) {
         if !childCoordinators.contains(where: { $0 === child }) {
             childCoordinators.append(child)
         }
+    }
+    
+    func removeFromParent() {
+        parent?.childCoordinators.removeAll(where: { $0 === self })
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 import SwiftUICoordinator
 
 class CustomShapesCoordinator: Routing {
-
+    
     // MARK: - Internal properties
 
     weak var parent: Coordinator? = nil
@@ -27,12 +27,17 @@ class CustomShapesCoordinator: Routing {
         self.startRoute = startRoute
     }
     
-    func navigate(to route: NavigationRoute) {
-        guard let route = route as? CustomShapesRoute else {
-            return
+    func handle(_ action: CoordinatorAction) {
+        switch action {
+        case CustomShapesAction.triangle:
+            try? show(route: .triangle)
+        case CustomShapesAction.star:
+            try? show(route: .star)
+        case CustomShapesAction.tower:
+            try? show(route: .tower)
+        default:
+            parent?.handle(action)
         }
-        
-        try? show(route: route)
     }
 }
 

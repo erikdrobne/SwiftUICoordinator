@@ -34,12 +34,21 @@ class SimpleShapesCoordinator: Routing {
         routing.childCoordinators.removeAll()
     }
     
-    func navigate(to route: NavigationRoute) {
-        guard let route = route as? SimpleShapesRoute else {
-            return
+    func handle(_ action: CoordinatorAction) {
+        switch action {
+        case SimpleShapesAction.rect:
+            try? show(route: .rect)
+        case SimpleShapesAction.roundedRect:
+            try? show(route: .roundedRect)
+        case SimpleShapesAction.capsule:
+            try? show(route: .capsule)
+        case SimpleShapesAction.ellipse:
+            try? show(route: .ellipse)
+        case SimpleShapesAction.circle:
+            try? show(route: .circle)
+        default:
+            parent?.handle(action)
         }
-        
-        try? show(route: route)
     }
 }
 
