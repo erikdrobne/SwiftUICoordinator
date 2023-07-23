@@ -8,7 +8,7 @@
 import SwiftUI
 @testable import SwiftUICoordinator
 
-class MockCoordinator: NSObject, Coordinator, Navigator {
+class MockCoordinator: NSObject, Routing {
     var parent: Coordinator?
     var childCoordinators = [Coordinator]()
     var navigationController: NavigationController

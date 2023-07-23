@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUI
 import SwiftUICoordinator
 
-class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
+class CustomShapesCoordinator: NSObject, Routing {
 
     // MARK: - Internal properties
 

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
-class SimpleShapesCoordinator: NSObject, Coordinator, Navigator {
+class SimpleShapesCoordinator: NSObject, Routing {
 
     // MARK: - Internal properties
 

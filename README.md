@@ -157,7 +157,7 @@ enum ShapesRoute: NavigationRoute {
 Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `NavigationController`.
 
 ```Swift
-class ShapesCoordinator: NSObject, Coordinator, Navigator {
+class ShapesCoordinator: NSObject, Routing {
 
     // MARK: - Internal properties
 
