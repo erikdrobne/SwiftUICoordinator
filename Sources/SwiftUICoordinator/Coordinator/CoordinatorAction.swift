@@ -9,7 +9,7 @@ import Foundation
 
 public protocol CoordinatorAction {}
 
-enum Action: CoordinatorAction {
+public enum Action: CoordinatorAction {
     case done(Any)
     case cancel(Any)
 }
