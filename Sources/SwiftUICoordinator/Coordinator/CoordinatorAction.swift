@@ -9,6 +9,7 @@ import Foundation
 
 public protocol CoordinatorAction {}
 
+/// Essential actions.
 public enum Action: CoordinatorAction {
     case done(Any)
     case cancel(Any)
