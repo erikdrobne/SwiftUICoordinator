@@ -16,7 +16,7 @@ The second challenge is related to popping to the root view. This can occur when
 
 ## 🏃 Implementation
 
-<img width="500" alt="coordinator-diagram" src="https://user-images.githubusercontent.com/15943419/229084345-bb7ff093-b267-4b8e-ac12-a206bdd427c9.png">
+<img width="912" alt="workflow" src="https://github.com/erikdrobne/SwiftUICoordinator/assets/15943419/9c9d279c-e87d-43c2-85df-7f197bed01d3">
 
 ### Coordinator
 
@@ -32,12 +32,28 @@ public protocol Coordinator: AnyObject {
     /// An array that stores references to any child coordinators.
     var childCoordinators: [Coordinator] { get set }
     
-    /// Adds a child coordinator to the coordinator's child coordinators list, if needed.
+    /// Takes action parameter and handles the `CoordinatorAction`.
+    func handle(_ action: CoordinatorAction)
+    /// Adds child coordinator to the list.
     func add(child: Coordinator)
-    /// Navigate to a specific route.
-    func navigate(to route: NavigationRoute)
-    /// Remove the coordinator from its parent's child coordinators list.
-    func finish()
+    /// Removes the coordinator from the list of children.
+    func remove(coordinator: Coordinator)
+}
+```
+
+### CoordinatorAction
+
+This protocol defines the available actions for the coordinator. Views should only communicate with the coordinator using actions (Unidirectional flow). 
+
+**Protocol declaration**
+
+```Swift
+public protocol CoordinatorAction {}
+
+/// Essential actions.
+public enum Action: CoordinatorAction {
+    case done(Any)
+    case cancel(Any)
 }
 ```
 
@@ -70,26 +86,24 @@ public typealias Routing = Coordinator & Navigator
 @MainActor
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
-    
+
     var navigationController: NavigationController { get }
     /// The starting route of the navigator.
-    var startRoute: Route? { get }
+    var startRoute: Route { get }
     
-    /// This method is called when the navigator should start navigating.
+    /// This method should be called to show the view for the `startRoute`.
     func start() throws
-    /// Navigate to a specific route. 
-    /// It creates a view for the route and adds it to the navigation stack using the specified action (TransitionAction).
+    /// It creates a view for the route and adds it to the navigation stack.
     func show(route: Route) throws
-    /// Sets the navigation stack to a new array of routes.
-    /// It can be useful if you need to reset the entire navigation stack to a new set of views.
+    /// Creates views for routes, and replaces the navigation stack with the specified views.
     func set(routes: [Route], animated: Bool)
-    /// Append a new set of routes to the existing navigation stack.
+    /// Creates views for routes, and appends them on the navigation stack.
     func append(routes: [Route], animated: Bool)
-    /// Pop the current view from the navigation stack.
+    /// Pops the top view from the navigation stack.
     func pop(animated: Bool)
-    /// Pops all the views from the stack except the root view.
+    /// Pops all the views on the stack except the root view.
     func popToRoot(animated: Bool)
-    /// Dismiss the view that was presented modally.
+    /// Dismisses the view.
     func dismiss(animated: Bool)
 }
 ```
@@ -117,19 +131,14 @@ import SwiftUICoordinator
 ### Create Route
 
 First, create an enum with all the available routes for a particular flow.
-In the following example, we have the `ShapesRoute` enum representing the main flows of our application. It offers routes to present shapes list, simple shapes list, custom shapes list and
-a featured shape.
-
-We can also create a deep link by creating an enum case with the associated value of type `NavigationRoute` and handle
-flow execution within the coordinator.
+In the following example, we have the `ShapesRoute` enum representing the main flows of our application. It offers routes to present shapes list, simple shapes list, custom shapes list and a featured shape.
 
 ```Swift
 enum ShapesRoute: NavigationRoute {
     case shapes
     case simpleShapes
     case customShapes
-    /// Deep link
-    case featuredShape(NavigationRoute)
+    case featuredShape
 
     var title: String? {
         switch self {
@@ -152,9 +161,24 @@ enum ShapesRoute: NavigationRoute {
 }
 ```
 
+### Create Action
+
+`ShapesAction` represents all the available actions that can be triggered by the view.
+
+```Swift
+enum ShapesAction: CoordinatorAction {
+    case simpleShapes
+    case customShapes
+    /// Deep link
+    case featuredShape(NavigationRoute)
+}
+```
+
+We can also make a deep link by adding an associated value of type `NavigationRoute` to the enum.
+
 ### Create Coordinator
 
-Our `ShapesCoordinator` has to conform to the `Navigator` protocol and implement the `navigate(to route: NavigationRoute)` to execute flow-specific logic on method execution. Root coordinator has to initialize `NavigationController`.
+Our `ShapesCoordinator` has to conform to the `Routing` protocol and implement the `handle(_ action: CoordinatorAction)` method which executes flow-specific logic when the action is received. `ShapesCoordinator` is the root coordinator and therefore needs to initialize `NavigationController`.
 
 ```Swift
 class ShapesCoordinator: Routing {
@@ -172,32 +196,31 @@ class ShapesCoordinator: Routing {
     init(startRoute: ShapesRoute) {
         self.navigationController = NavigationController()
         self.startRoute = startRoute
-        super.init()
         
         setup()
     }
     
-    func navigate(to route: NavigationRoute) {
-        switch route {
-        case ShapesRoute.simpleShapes:
+    func handle(_ action: CoordinatorAction) {
+        switch action {
+        case ShapesAction.simpleShapes:
             let coordinator = makeSimpleShapesCoordinator()
             try? coordinator.start()
-        case ShapesRoute.customShapes:
+        case ShapesAction.customShapes:
             let coordinator = makeCustomShapesCoordinator()
             try? coordinator.start()
-        case ShapesRoute.featuredShape(let route):
+        case let ShapesAction.featuredShape(route):
             switch route {
-            case let shapeRoute as SimpleShapesRoute:
+            case let shapeRoute as SimpleShapesRoute where shapeRoute != .simpleShapes:
                 let coordinator = makeSimpleShapesCoordinator()
                 coordinator.append(routes: [.simpleShapes, shapeRoute])
-            case let shapeRoute as CustomShapesRoute:
+            case let shapeRoute as CustomShapesRoute where shapeRoute != .customShapes:
                 let coordinator = makeCustomShapesCoordinator()
                 coordinator.append(routes: [.customShapes, shapeRoute])
             default:
                 return
             }
         default:
-            return
+            break
         }
     }
     
@@ -234,7 +257,7 @@ extension ShapesCoordinator: RouterViewFactory {
 
 ### Initialize ShapesCoordinator
 
-We are going to create an instance of `ShapesCoordinator` (our root coordinator) and pass it's `UINavigationController` to the
+We are going to create an instance of `ShapesCoordinator` (our root coordinator) and pass its `UINavigationController` to the
 `UIWindow`. Our start route for the coordinator is `ShapesRoute.shape`.
 
 ```Swift
