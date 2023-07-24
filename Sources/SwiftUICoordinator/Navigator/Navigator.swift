@@ -17,7 +17,7 @@ public protocol Navigator: ObservableObject {
     /// The starting route of the navigator.
     var startRoute: Route { get }
     
-    /// This method should be called to show the view for the `startRoute`.
+    /// This method should be called to start the flow  and to show the view for the `startRoute`.
     func start() throws
     /// It creates a view for the route and adds it to the navigation stack.
     func show(route: Route) throws
