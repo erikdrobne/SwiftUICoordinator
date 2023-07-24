@@ -43,7 +43,7 @@ public protocol Coordinator: AnyObject {
 
 ### CoordinatorAction
 
-This protocol defines the available actions for the coordinator. Views should only communicate with the coordinator using actions (Unidirectional flow). 
+This protocol defines the available actions for the coordinator. Views should only communicate with the coordinator using actions (unidirectional flow). 
 
 **Protocol declaration**
 
@@ -59,7 +59,7 @@ public enum Action: CoordinatorAction {
 
 ### NavigationRoute
 
-This protocol defines the available routes for navigation within a coordinator flow, which should be implemented using enum types.
+This protocol defines the available routes for navigation within a coordinator flow.
 
 **Protocol declaration**
 
@@ -91,7 +91,7 @@ public protocol Navigator: ObservableObject {
     /// The starting route of the navigator.
     var startRoute: Route { get }
     
-    /// This method should be called to show the view for the `startRoute`.
+    /// This method should be called to start the flow  and to show the view for the `startRoute`.
     func start() throws
     /// It creates a view for the route and adds it to the navigation stack.
     func show(route: Route) throws
