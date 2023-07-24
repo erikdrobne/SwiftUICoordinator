@@ -10,8 +10,8 @@ import SwiftUI
 import SwiftUI
 import SwiftUICoordinator
 
-class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
-
+class CustomShapesCoordinator: Routing {
+    
     // MARK: - Internal properties
 
     weak var parent: Coordinator? = nil
@@ -25,15 +25,19 @@ class CustomShapesCoordinator: NSObject, Coordinator, Navigator {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
-        super.init()
     }
     
-    func navigate(to route: NavigationRoute) {
-        guard let route = route as? CustomShapesRoute else {
-            return
+    func handle(_ action: CoordinatorAction) {
+        switch action {
+        case CustomShapesAction.triangle:
+            try? show(route: .triangle)
+        case CustomShapesAction.star:
+            try? show(route: .star)
+        case CustomShapesAction.tower:
+            try? show(route: .tower)
+        default:
+            parent?.handle(action)
         }
-        
-        try? show(route: route)
     }
 }
 

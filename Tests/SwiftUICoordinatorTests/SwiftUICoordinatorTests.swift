@@ -14,12 +14,12 @@ import SwiftUI
         XCTAssertEqual(rootCoordinator.childCoordinators.count, 1)
     }
     
-    func testFinishChildCoordinator() {
+    func testRemoveChildCoordinator() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)
         let childCoordinator = MockCoordinator(parent: rootCoordinator, startRoute: .rectangle)
         
         rootCoordinator.add(child: childCoordinator)
-        childCoordinator.finish()
+        rootCoordinator.remove(coordinator: childCoordinator)
         
         XCTAssertEqual(rootCoordinator.childCoordinators.count, 0)
     }

@@ -52,23 +52,23 @@ extension SimpleShapesView {
         var coordinator: Coordinator?
 
         func didTapRectangle() {
-            coordinator?.navigate(to: SimpleShapesRoute.rect)
+            coordinator?.handle(SimpleShapesAction.rect)
         }
 
         func didTapRoundedRectangle() {
-            coordinator?.navigate(to: SimpleShapesRoute.roundedRect)
+            coordinator?.handle(SimpleShapesAction.roundedRect)
         }
 
         func didTapCapsule() {
-            coordinator?.navigate(to: SimpleShapesRoute.capsule)
+            coordinator?.handle(SimpleShapesAction.capsule)
         }
 
         func didTapEllipse() {
-            coordinator?.navigate(to: SimpleShapesRoute.ellipse)
+            coordinator?.handle(SimpleShapesAction.ellipse)
         }
 
         func didTapCircle() {
-            coordinator?.navigate(to: SimpleShapesRoute.circle)
+            coordinator?.handle(SimpleShapesAction.circle)
         }
     }
 }

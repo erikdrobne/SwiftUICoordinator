@@ -42,11 +42,11 @@ extension ShapesView {
         var coordinator: Coordinator?
 
         func didTapBuiltIn() {
-            coordinator?.navigate(to: ShapesRoute.simpleShapes)
+            coordinator?.handle(ShapesAction.simpleShapes)
         }
 
         func didTapCustom() {
-            coordinator?.navigate(to: ShapesRoute.customShapes)
+            coordinator?.handle(ShapesAction.customShapes)
         }
 
         func didTapFeatured() {
@@ -60,7 +60,7 @@ extension ShapesView {
                 return
             }
 
-            coordinator?.navigate(to: ShapesRoute.featuredShape(route))
+            coordinator?.handle(ShapesAction.featuredShape(route))
         }
     }
 }

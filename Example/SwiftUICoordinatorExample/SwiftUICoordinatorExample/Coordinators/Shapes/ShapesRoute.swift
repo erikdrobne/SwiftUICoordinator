@@ -12,7 +12,7 @@ enum ShapesRoute: NavigationRoute {
     case shapes
     case simpleShapes
     case customShapes
-    case featuredShape(NavigationRoute)
+    case featuredShape
 
     var title: String? {
         switch self {

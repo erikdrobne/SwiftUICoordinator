@@ -42,15 +42,15 @@ extension CustomShapesView {
         var coordinator: Coordinator?
 
         func didTapTriangle() {
-            coordinator?.navigate(to: CustomShapesRoute.triangle)
+            coordinator?.handle(CustomShapesAction.triangle)
         }
 
         func didTapStar() {
-            coordinator?.navigate(to: CustomShapesRoute.star)
+            coordinator?.handle(CustomShapesAction.star)
         }
 
         func didTapTower() {
-            coordinator?.navigate(to: CustomShapesRoute.tower)
+            coordinator?.handle(CustomShapesAction.tower)
         }
     }
 }
