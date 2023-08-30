@@ -376,12 +376,6 @@ Register transition in the coordinator initializer.
 
 For better understanding, I recommend that you take a look at the example project located in the `SwiftUICoordinatorExample` folder.
 
-## 🔧 How to Use:
-
-1. Clone the repository: `git clone https://github.com/erikdrobne/SwiftUICoordinator.git`
-2. Explore the sample app's source code and the implementation of the Coordinator pattern in SwiftUI.
-3. Integrate the Coordinator pattern into your own SwiftUI projects for enhanced navigation and architecture.
-
 ## 🤝 Contributions:
 
 Contributions are welcome! 
