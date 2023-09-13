@@ -10,6 +10,7 @@ import Foundation
 public struct DeepLink {
     let action: String
     let route: NavigationRoute
+    let params: Set<String>
 }
 
 extension DeepLink: Hashable {
@@ -19,29 +20,5 @@ extension DeepLink: Hashable {
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(action)
-    }
-}
-
-public protocol DeepLinkHandler {
-    var scheme: String { get }
-    var links: Set<DeepLink> { get }
-    func link(from url: URL) throws -> DeepLink?
-}
-
-extension DeepLinkHandler {
-    func link(from url: URL) throws -> DeepLink? {
-        guard url.scheme == scheme else {
-            throw DeepLinkError.invalidScheme
-        }
-        
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            throw DeepLinkError.invalidURL
-        }
-        
-        guard let action = components.host else {
-            throw DeepLinkError.unknownURL
-        }
-        
-        return links.first(where: { $0.action == action })
     }
 }

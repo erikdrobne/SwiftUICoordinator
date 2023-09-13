@@ -11,4 +11,5 @@ public enum DeepLinkError: Error {
     case invalidScheme
     case invalidURL
     case unknownURL
+    case invalidQueryString
 }
