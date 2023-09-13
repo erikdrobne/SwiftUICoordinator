@@ -48,7 +48,7 @@ struct SimpleShapesView<Coordinator: Routing>: View {
 }
 
 extension SimpleShapesView {
-    @MainActor class ViewModel<Coordinator: Routing>: ObservableObject {
+    @MainActor class ViewModel<R: Routing>: ObservableObject {
         var coordinator: Coordinator?
 
         func didTapRectangle() {

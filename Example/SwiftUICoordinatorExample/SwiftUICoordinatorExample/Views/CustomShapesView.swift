@@ -38,7 +38,7 @@ struct CustomShapesView<Coordinator: Routing>: View {
 }
 
 extension CustomShapesView {
-    @MainActor class ViewModel<Coordinator: Routing>: ObservableObject {
+    @MainActor class ViewModel<R: Routing>: ObservableObject {
         var coordinator: Coordinator?
 
         func didTapTriangle() {

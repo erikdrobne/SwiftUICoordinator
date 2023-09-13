@@ -5,7 +5,7 @@
 //  Created by Erik Drobne on 15/05/2023.
 //
 
-import SwiftUI
+import UIKit
 import SwiftUICoordinator
 
 class FadeTransition: NSObject, Transition {
