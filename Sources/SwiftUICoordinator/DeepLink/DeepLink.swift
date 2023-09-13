@@ -25,21 +25,21 @@ extension DeepLink: Hashable {
 public protocol DeepLinkHandler {
     var scheme: String { get }
     var links: Set<DeepLink> { get }
-    func link(from url: URL) -> DeepLink?
+    func link(from url: URL) throws -> DeepLink?
 }
 
 extension DeepLinkHandler {
-    func link(from url: URL) -> DeepLink? {
+    func link(from url: URL) throws -> DeepLink? {
         guard url.scheme == scheme else {
-            return nil
+            throw DeepLinkError.invalidScheme
         }
         
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            return nil
+            throw DeepLinkError.invalidURL
         }
         
         guard let action = components.host else {
-            return nil
+            throw DeepLinkError.unknownURL
         }
         
         return links.first(where: { $0.action == action })
