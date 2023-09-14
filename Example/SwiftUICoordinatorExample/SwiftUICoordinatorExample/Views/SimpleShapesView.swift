@@ -49,7 +49,7 @@ struct SimpleShapesView<Coordinator: Routing>: View {
 
 extension SimpleShapesView {
     @MainActor class ViewModel<R: Routing>: ObservableObject {
-        var coordinator: Coordinator?
+        var coordinator: R?
 
         func didTapRectangle() {
             coordinator?.handle(SimpleShapesAction.rect)

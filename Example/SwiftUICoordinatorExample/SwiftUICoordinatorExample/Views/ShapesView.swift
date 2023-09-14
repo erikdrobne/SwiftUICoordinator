@@ -39,7 +39,7 @@ struct ShapesView<Coordinator: Routing>: View {
 
 extension ShapesView {
     @MainActor class ViewModel<R: Routing>: ObservableObject {
-        var coordinator: Coordinator?
+        var coordinator: R?
 
         func didTapBuiltIn() {
             coordinator?.handle(ShapesAction.simpleShapes)
