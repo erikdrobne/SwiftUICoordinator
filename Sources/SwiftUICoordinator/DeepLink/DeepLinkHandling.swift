@@ -20,11 +20,7 @@ extension DeepLinkHandling {
             throw DeepLinkError.invalidScheme
         }
         
-        guard let components = components(for: url) else {
-            throw DeepLinkError.invalidURL
-        }
-        
-        guard let action = components.host else {
+        guard let action = url.host else {
             throw DeepLinkError.unknownURL
         }
         
@@ -32,7 +28,7 @@ extension DeepLinkHandling {
     }
     
     func params(for url: URL, and keys: [String]) throws -> [String: String] {
-        guard let queryItems = components(for: url)?.queryItems else {
+        guard let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems else {
             throw DeepLinkError.invalidQueryString
         }
         
@@ -43,9 +39,5 @@ extension DeepLinkHandling {
             }
         
         return params
-    }
-    
-    private func components(for url: URL) -> URLComponents? {
-        return URLComponents(url: url, resolvingAgainstBaseURL: true)
     }
 }
