@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 @MainActor
 public protocol Coordinator: AnyObject {
@@ -20,6 +21,8 @@ public protocol Coordinator: AnyObject {
     func add(child: Coordinator)
     /// Removes the coordinator from the list of children.
     func remove(coordinator: Coordinator)
+    /// Takes deep link and its parameters and handles it.
+    func handle(_ deepLink: DeepLink, with params: [String: String])
 }
 
 // MARK: - Extensions
@@ -36,5 +39,9 @@ public extension Coordinator {
     
     func remove(coordinator: Coordinator) {
         childCoordinators.removeAll(where: { $0 === coordinator })
+    }
+    
+    func handle(_ deepLink: DeepLink, with params: [String: String]) {
+        Logger.deepLink.warning("Deep link handler is not implemented.")
     }
 }
