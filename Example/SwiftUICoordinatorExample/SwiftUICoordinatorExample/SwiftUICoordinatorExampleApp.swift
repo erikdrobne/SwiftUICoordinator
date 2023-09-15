@@ -32,6 +32,12 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
         try? coordinator.start()
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            dump(url)
+        }
+    }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {

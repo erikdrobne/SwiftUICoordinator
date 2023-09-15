@@ -7,8 +7,12 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.SwiftUICoordinatorExample</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>coordinatorexample</string>
+			</array>
 		</dict>
 	</array>
 </dict>
