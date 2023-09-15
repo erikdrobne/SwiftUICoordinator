@@ -11,6 +11,7 @@
 		1732CA0029A6607800C2BC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732C9FF29A6607800C2BC1F /* Assets.xcassets */; };
 		1732CA0329A6607800C2BC1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */; };
 		17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17360A402A1275D600DB2296 /* FadeTransition.swift */; };
+		1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */; };
 		176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB429B8BF71009C4987 /* ShapesView.swift */; };
 		176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */; };
 		176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBA29B8C162009C4987 /* ShapesRoute.swift */; };
@@ -35,6 +36,7 @@
 		1732C9FF29A6607800C2BC1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17360A402A1275D600DB2296 /* FadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
+		1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		176F3CB429B8BF71009C4987 /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesCoordinator.swift; sourceTree = "<group>"; };
 		176F3CBA29B8C162009C4987 /* ShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesRoute.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */,
 				176F3CB629B8C01E009C4987 /* Coordinators */,
+				1769698C2AB49FB700CD6696 /* DeepLink */,
 				176F3CB329B8BD92009C4987 /* Views */,
 				17360A3F2A1275C000DB2296 /* Transitions */,
 				1732C9FF29A6607800C2BC1F /* Assets.xcassets */,
@@ -112,6 +115,14 @@
 				17360A402A1275D600DB2296 /* FadeTransition.swift */,
 			);
 			path = Transitions;
+			sourceTree = "<group>";
+		};
+		1769698C2AB49FB700CD6696 /* DeepLink */ = {
+			isa = PBXGroup;
+			children = (
+				1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */,
+			);
+			path = DeepLink;
 			sourceTree = "<group>";
 		};
 		176F3CB329B8BD92009C4987 /* Views */ = {
@@ -255,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */,
 				17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */,
 				17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */,
 				17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */,
