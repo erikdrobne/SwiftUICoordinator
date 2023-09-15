@@ -9,19 +9,12 @@ import Foundation
 import SwiftUICoordinator
 
 class DeepLinkHandler: DeepLinkHandling {
-    
     static let shared = DeepLinkHandler()
     
     let scheme = "coordinatorexample"
-    let links = Set<DeepLink>.init()
+    let links: Set<DeepLink> = [
+        DeepLink(action: "custom", route: ShapesRoute.customShapes)
+    ]
     
     private init() {}
-    
-    func link(for url: URL) throws -> DeepLink? {
-        return nil
-    }
-    
-    func params(for url: URL, and keys: [String]) throws -> [String : String] {
-        return [:]
-    }
 }

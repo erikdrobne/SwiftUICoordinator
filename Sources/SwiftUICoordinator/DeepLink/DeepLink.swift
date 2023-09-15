@@ -8,9 +8,15 @@
 import Foundation
 
 public struct DeepLink {
-    let action: String
-    let route: NavigationRoute
-    let params: Set<String>
+    public let action: String
+    public let route: NavigationRoute
+    public let params: Set<String>
+    
+    public init(action: String, route: NavigationRoute, params: Set<String> = []) {
+        self.action = action
+        self.route = route
+        self.params = params
+    }
 }
 
 extension DeepLink: Hashable {

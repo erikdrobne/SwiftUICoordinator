@@ -12,6 +12,7 @@
 		1732CA0329A6607800C2BC1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */; };
 		17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17360A402A1275D600DB2296 /* FadeTransition.swift */; };
 		1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */; };
+		176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176969902AB4AFD200CD6696 /* DependencyContainer.swift */; };
 		176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB429B8BF71009C4987 /* ShapesView.swift */; };
 		176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */; };
 		176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBA29B8C162009C4987 /* ShapesRoute.swift */; };
@@ -38,6 +39,7 @@
 		17360A402A1275D600DB2296 /* FadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
 		1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		1769698F2AB4A25600CD6696 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		176969902AB4AFD200CD6696 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		176F3CB429B8BF71009C4987 /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesCoordinator.swift; sourceTree = "<group>"; };
 		176F3CBA29B8C162009C4987 /* ShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesRoute.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				1769698F2AB4A25600CD6696 /* Info.plist */,
 				1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */,
+				176969902AB4AFD200CD6696 /* DependencyContainer.swift */,
 				176F3CB629B8C01E009C4987 /* Coordinators */,
 				1769698C2AB49FB700CD6696 /* DeepLink */,
 				176F3CB329B8BD92009C4987 /* Views */,
@@ -270,6 +273,7 @@
 			files = (
 				1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */,
 				17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */,
+				176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */,
 				17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */,
 				17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */,
 				17F1184729CC8F1A004755DB /* Tower.swift in Sources */,

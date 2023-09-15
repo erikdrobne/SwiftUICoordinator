@@ -20,12 +20,14 @@ struct SwiftUICoordinatorExampleApp: App {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
+    private let dependencyContainer = DependencyContainer.shared
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let window = (scene as? UIWindowScene)?.windows.first else {
             return
         }
-
-        let coordinator = ShapesCoordinator(startRoute: .shapes)
+        
+        let coordinator = dependencyContainer.rootCoordinator
         /// Assign root coordinator's navigation controller
         window.rootViewController = coordinator.navigationController
         window.makeKeyAndVisible()
@@ -35,7 +37,14 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            dump(url)
+            guard 
+                let deepLink = try? dependencyContainer.deepLinkHandler.link(for: url),
+                let params = try? dependencyContainer.deepLinkHandler.params(for: url, and: deepLink.params)
+            else {
+                return
+            }
+            
+            dependencyContainer.rootCoordinator.handle(deepLink, with: params)
         }
     }
 }

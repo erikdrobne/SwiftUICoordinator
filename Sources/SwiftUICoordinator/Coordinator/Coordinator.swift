@@ -41,7 +41,7 @@ public extension Coordinator {
         childCoordinators.removeAll(where: { $0 === coordinator })
     }
     
-    func handle(_ deepLink: DeepLink, with params: [String: String]) {
+    func handle(_ deepLink: DeepLink, with params: [String: String] = [:]) {
         Logger.deepLink.warning("Deep link handler is not implemented.")
     }
 }
