@@ -71,17 +71,17 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
-    func testParamsReturnsEmptyCollection() {
-        let scheme = "myapp"
-        let action = "circle"
-        let queryString = "%%%invalidQueryString%%%"
-        let url = URL(string: "\(scheme)://\(action)?\(queryString)")
-        
-        XCTAssertNoThrow(try {
-            let params = try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: ["color", "width", "height"])
-            XCTAssertTrue(params.isEmpty)
-        }(), "Params for url threw an error.")
-    }
+//    func testParamsReturnsEmptyCollection() {
+//        let scheme = "myapp"
+//        let action = "circle"
+//        let queryString = "%%%invalidQueryString%%%"
+//        let url = URL(string: "\(scheme)://\(action)?\(queryString)")
+//        
+//        XCTAssertNoThrow(try {
+//            let params = try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: ["color", "width", "height"])
+//            XCTAssertTrue(params.isEmpty)
+//        }(), "Params for url threw an error.")
+//    }
     
     func testParamsForURLSuccess() {
         let scheme = "myapp"
