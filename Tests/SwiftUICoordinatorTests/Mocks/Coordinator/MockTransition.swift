@@ -6,7 +6,7 @@
 //
 
 import UIKit
-@testable import SwiftUICoordinator
+import SwiftUICoordinator
 
 class MockTransition: NSObject, Transition {
     func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
