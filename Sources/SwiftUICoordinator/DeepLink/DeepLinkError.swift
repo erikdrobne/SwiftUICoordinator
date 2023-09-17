@@ -10,5 +10,5 @@ import Foundation
 public enum DeepLinkError: Error {
     case invalidScheme
     case unknownURL
-    case invalidQueryString
+    case missingQueryString
 }

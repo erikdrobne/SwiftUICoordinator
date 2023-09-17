@@ -54,7 +54,7 @@ public extension DeepLinkHandling {
         }
         
         guard let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems else {
-            throw DeepLinkError.invalidQueryString
+            throw DeepLinkError.missingQueryString
         }
         
         return queryItems
