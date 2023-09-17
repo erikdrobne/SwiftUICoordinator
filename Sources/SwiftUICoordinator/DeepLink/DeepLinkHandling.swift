@@ -23,7 +23,7 @@ public extension DeepLinkHandling {
     ///
     /// - Throws ``DeepLinkError``:
     ///     - `DeepLinkError.invalidScheme`: Thrown if the URL's scheme doesn't match the
-    ///     expected scheme ///defined in the scheme property.
+    ///     expected scheme defined in the scheme property.
     ///     - `DeepLinkError.unknownURL`: Thrown if the URL doesn't have a recognized 
     ///     action (host) that corresponds to any registered deep link.
     ///
