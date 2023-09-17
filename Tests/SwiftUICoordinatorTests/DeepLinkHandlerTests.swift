@@ -6,30 +6,94 @@
 //
 
 import XCTest
+@testable import SwiftUICoordinator
 
 final class DeepLinkHandlerTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testLinkForURLThrowsInvalidSchemeError() {
+        let host = "circle"
+        let url = URL(string: "://\(host)")
+        
+        XCTAssertThrowsError(try MockDeepLinkHandler.shared.link(for: XCTUnwrap(url))) { error in
+            if let customError = error as? DeepLinkError {
+                XCTAssertEqual(customError, DeepLinkError.invalidScheme)
+            } else {
+                XCTFail("Expected an error of type DeepLinkError.")
+            }
         }
     }
-
+    
+    func testLinkForURLThrowsUnknownURLError() {
+        let scheme = "myapp"
+        let url = URL(string: "\(scheme)://")
+        
+        XCTAssertThrowsError(try MockDeepLinkHandler.shared.link(for: XCTUnwrap(url))) { error in
+            if let customError = error as? DeepLinkError {
+                XCTAssertEqual(customError, DeepLinkError.unknownURL)
+            } else {
+                XCTFail("Expected an error of type DeepLinkError.")
+            }
+        }
+    }
+    
+    func testLinkForURLReturnsNil() {
+        let scheme = "myapp"
+        let action = "square"
+        let url = URL(string: "\(scheme)://\(action)")
+        
+        XCTAssertNil(try MockDeepLinkHandler.shared.link(for: XCTUnwrap(url)))
+    }
+    
+    func testLinkForURLSuccess() {
+        let scheme = "myapp"
+        let action = "circle"
+        let url = URL(string: "\(scheme)://\(action)")
+        
+        XCTAssertNoThrow(try {
+            let link = try XCTUnwrap(MockDeepLinkHandler.shared.link(for: XCTUnwrap(url)))
+            XCTAssertEqual(link.action, "circle")
+            XCTAssertEqual(try XCTUnwrap(link.route as? MockRoute), MockRoute.circle)
+            XCTAssertTrue(link.params.isEmpty)
+        }(), "Link for URL threw an error.")
+    }
+    
+    func testParamsThrowsMissingQueryStringError() {
+        let scheme = "myapp"
+        let action = "circle"
+        let url = URL(string: "\(scheme)://\(action)")
+        
+        XCTAssertThrowsError(try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: ["color", "width", "height"])) { error in
+            if let customError = error as? DeepLinkError {
+                XCTAssertEqual(customError, DeepLinkError.missingQueryString)
+            } else {
+                XCTFail("Expected an error of type DeepLinkError.")
+            }
+        }
+    }
+    
+    func testParamsReturnsEmptyCollection() {
+        let scheme = "myapp"
+        let action = "circle"
+        let queryString = "%%%invalidQueryString%%%"
+        let url = URL(string: "\(scheme)://\(action)?\(queryString)")
+        
+        XCTAssertNoThrow(try {
+            let params = try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: ["color", "width", "height"])
+            XCTAssertTrue(params.isEmpty)
+        }(), "Params for url threw an error.")
+    }
+    
+    func testParamsForURLSuccess() {
+        let scheme = "myapp"
+        let action = "rectangle"
+        let queryString = "color=blue&width=100&height=200"
+        let url = URL(string: "\(scheme)://\(action)?\(queryString)")
+        
+        XCTAssertNoThrow(try {
+            let params = try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: ["color", "width", "height"])
+            XCTAssertEqual(params["color"], "blue")
+            XCTAssertEqual(params["width"], "100")
+            XCTAssertEqual(params["height"], "200")
+        }(), "Params for url threw an error.")
+    }
 }

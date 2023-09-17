@@ -11,7 +11,7 @@ import SwiftUICoordinator
 class MockDeepLinkHandler: DeepLinkHandling {
     static let shared = MockDeepLinkHandler()
     
-    let scheme = "coordinatorexample"
+    let scheme = "myapp"
     let links: Set<DeepLink> = [
         DeepLink(action: "circle", route: MockRoute.circle),
         DeepLink(
