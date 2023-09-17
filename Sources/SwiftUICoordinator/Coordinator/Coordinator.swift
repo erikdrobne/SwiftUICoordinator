@@ -43,5 +43,6 @@ public extension Coordinator {
     
     func handle(_ deepLink: DeepLink, with params: [String: String] = [:]) {
         Logger.deepLink.warning("Deep link handler is not implemented.")
+        assertionFailure("Deep link handler is not implemented.")
     }
 }
