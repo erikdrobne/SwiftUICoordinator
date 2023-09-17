@@ -14,7 +14,11 @@ class MockDeepLinkHandler: DeepLinkHandling {
     let scheme = "coordinatorexample"
     let links: Set<DeepLink> = [
         DeepLink(action: "circle", route: MockRoute.circle),
-        DeepLink(action: "rectangle", route: MockRoute.square)
+        DeepLink(
+            action: "rectangle",
+            route: MockRoute.square,
+            params: ["color", "width", "height"]
+        )
     ]
     
     private init() {}
