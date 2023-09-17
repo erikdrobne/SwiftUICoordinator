@@ -7,9 +7,13 @@
 
 import Foundation
 
+/// A struct representing a deep link within an app's navigation system.
 public struct DeepLink {
+    /// The action associated with the deep link.
     public let action: String
+    /// The route or destination associated with the deep link.
     public let route: NavigationRoute
+    /// A set of parameters associated with the deep link.
     public let params: Set<String>
     
     public init(action: String, route: NavigationRoute, params: Set<String> = []) {
