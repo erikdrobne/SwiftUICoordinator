@@ -1,8 +1,9 @@
 import XCTest
-import SwiftUI
+import Foundation
 @testable import SwiftUICoordinator
 
-@MainActor final class SwiftUICoordinatorTests: XCTestCase {
+@MainActor 
+final class CoordinatorTests: XCTestCase {
     
     func testAddChildToCoordinator() {
         let rootCoordinator = MockCoordinator(parent: nil, startRoute: .circle)

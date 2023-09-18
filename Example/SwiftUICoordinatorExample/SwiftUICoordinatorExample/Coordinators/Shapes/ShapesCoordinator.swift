@@ -51,6 +51,16 @@ class ShapesCoordinator: Routing {
         }
     }
     
+    func handle(_ deepLink: DeepLink, with params: [String : String]) {
+        switch deepLink.route {
+        case ShapesRoute.customShapes:
+            let coordinator = makeCustomShapesCoordinator()
+            try? coordinator.start()
+        default:
+            break
+        }
+    }
+    
     // MARK: - Private methods
     
     private func setup() {

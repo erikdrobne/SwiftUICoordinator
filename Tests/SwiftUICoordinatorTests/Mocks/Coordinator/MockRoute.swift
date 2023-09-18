@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import SwiftUICoordinator
+import SwiftUICoordinator
 
 enum MockRoute: NavigationRoute {
     case circle
