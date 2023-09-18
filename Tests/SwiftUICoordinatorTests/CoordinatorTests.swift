@@ -84,4 +84,16 @@ final class CoordinatorTests: XCTestCase {
             XCTAssertEqual(mockTransition, transitions[index])
         }
     }
+    
+    func testNavigationBarIsHidden() {
+        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        coordinator.append(routes: [MockRoute.rectangle, MockRoute.circle])
+        XCTAssertTrue(coordinator.navigationController.isNavigationBarHidden)
+    }
+    
+    func testNavigationBarIsNotHidden() {
+        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        coordinator.append(routes: [MockRoute.circle, MockRoute.rectangle])
+        XCTAssertFalse(coordinator.navigationController.isNavigationBarHidden)
+    }
 }

@@ -16,7 +16,7 @@ enum MockRoute: NavigationRoute {
     var title: String? {
         switch self {
         case .circle:
-            return "Circle"
+            return nil
         case .rectangle:
             return "Rectangle"
         case .square:
