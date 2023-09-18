@@ -71,6 +71,8 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
             route: route
         )
         
+        navigationController.isNavigationBarHidden = route.title == nil
+        
         switch route.action {
         case .push(let animated):
             navigationController.pushViewController(viewController, animated: animated)

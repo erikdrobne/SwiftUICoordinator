@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-@testable import SwiftUICoordinator
+import SwiftUICoordinator
 
 class MockCoordinator: Routing {
     

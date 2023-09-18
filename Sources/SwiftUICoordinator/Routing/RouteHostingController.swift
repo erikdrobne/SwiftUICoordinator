@@ -24,4 +24,12 @@ public class RouteHostingController<Content: View>: UIHostingController<Content>
     @objc required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Lifecycle
+    
+    public override func viewDidLoad() {
+        if let appearance = route.appearance {
+            self.view.backgroundColor = appearance.background
+        }
+    }
 }
