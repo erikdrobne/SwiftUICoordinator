@@ -9,4 +9,8 @@ import SwiftUI
 
 public struct RouteAppearance {
     let background: UIColor
+    
+    public init(background: UIColor) {
+        self.background = background
+    }
 }
