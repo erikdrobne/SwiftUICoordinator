@@ -19,6 +19,10 @@ public protocol NavigationRoute {
 }
 
 public extension NavigationRoute {
+    var title: String? {
+        return nil
+    }
+    
     var appearance: RouteAppearance? {
         return nil
     }
