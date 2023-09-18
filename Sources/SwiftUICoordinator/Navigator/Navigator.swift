@@ -19,8 +19,8 @@ public protocol Navigator: ObservableObject {
     
     /// This method should be called to start the flow  and to show the view for the `startRoute`.
     func start() throws
-    /// It creates a view for the route and adds it to the navigation stack.
-    func show(route: Route) throws
+    /// Shows a view for the specified route and optionally attaches the coordinator to it before adding it to the navigation stack.
+    func show(route: Route, attachCoordinator: Bool) throws
     /// Creates views for routes, and replaces the navigation stack with the specified views.
     func set(routes: [Route], animated: Bool)
     /// Creates views for routes, and appends them on the navigation stack.
@@ -57,15 +57,17 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         try show(route: startRoute)
     }
 
-    func show(route: Route) throws {
-        let view = self.view(for: route)
+    func show(route: Route, attachCoordinator: Bool = true) throws {
+        let view: some View = self.view(for: route)
             .ifLet(route.title) { view, value in
                 view.navigationTitle(value)
             }
+            .if(attachCoordinator) { view in
+                view.environmentObject(self)
+            }
         
-        let viewWithCoordinator = view.environmentObject(self)
         let viewController = RouteHostingController(
-            rootView: viewWithCoordinator,
+            rootView: view,
             route: route
         )
         
