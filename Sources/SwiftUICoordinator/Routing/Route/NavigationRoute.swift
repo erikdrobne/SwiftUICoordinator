@@ -16,6 +16,8 @@ public protocol NavigationRoute {
     /// Transition action to be used when the route is shown.
     /// This can be a push action, a modal presentation, or `nil` (for child coordinators).
     var action: TransitionAction? { get }
+    /// A property that indicates whether the Coordinator should be attached to the View as an EnvironmentObject.
+    var attachCoordinator: Bool { get }
 }
 
 public extension NavigationRoute {
@@ -25,5 +27,9 @@ public extension NavigationRoute {
     
     var appearance: RouteAppearance? {
         return nil
+    }
+    
+    var attachCoordinator: Bool {
+        return true
     }
 }
