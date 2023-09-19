@@ -12,6 +12,7 @@ public class RouteHostingController<Content: View>: UIHostingController<Content>
     
     // MARK: - Public properties
     
+    /// The navigation route associated with this hosting controller.
     public let route: NavigationRoute
     
     // MARK: - Initialization
