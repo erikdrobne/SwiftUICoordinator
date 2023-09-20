@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 public protocol NavigationRoute {
-    /// This title can be used to set the navigation bar title when the route is shown.
+    /// Use this title to set the navigation bar title when the route is displayed.
     var title: String? { get }
     /// A property that provides the info about the appearance and styling of a route in the navigation system.
     var appearance: RouteAppearance? { get }
