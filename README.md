@@ -39,19 +39,21 @@ public protocol Coordinator: AnyObject {
     func add(child: Coordinator)
     /// Removes the coordinator from the list of children.
     func remove(coordinator: Coordinator)
+    /// Takes deep link and its parameters and handles it.
+    func handle(_ deepLink: DeepLink, with params: [String: String])
 }
 ```
 
 ### CoordinatorAction
 
-This protocol defines the available actions for the coordinator. Views should only communicate with the coordinator using actions (unidirectional flow). 
+This protocol defines the available actions for the coordinator. Views should exclusively interact with the coordinator through actions, ensuring a unidirectional flow of communication.
 
 **Protocol declaration**
 
 ```Swift
 public protocol CoordinatorAction {}
 
-/// Essential actions.
+/// Essential actions that can be performed by coordinators.
 public enum Action: CoordinatorAction {
     case done(Any)
     case cancel(Any)
@@ -66,24 +68,25 @@ This protocol defines the available routes for navigation within a coordinator f
 
 ```Swift
 public protocol NavigationRoute {
-    /// Navigation bar title.
+    /// Use this title to set the navigation bar title when the route is displayed.
     var title: String? { get }
+    /// A property that provides the info about the appearance and styling of a route in the navigation system.
+    var appearance: RouteAppearance? { get }
     /// Transition action to be used when the route is shown.
     /// This can be a push action, a modal presentation, or `nil` (for child coordinators).
     var action: TransitionAction? { get }
+    /// A property that indicates whether the Coordinator should be attached to the View as an EnvironmentObject.
+    var attachCoordinator: Bool { get }
 }
 ```
 
 ### Navigator
 
-The Navigator protocol encapsulates all the necessary logic for navigating hierarchical content, including the management of the `UINavigationController` and its child views.
+The Navigator protocol encapsulates all the necessary logic for navigating hierarchical content, including the management of the `NavigationController` and its child views.
 
 **Protocol declaration**
 
 ```Swift
-
-public typealias Routing = Coordinator & Navigator
-
 @MainActor
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
@@ -131,8 +134,7 @@ import SwiftUICoordinator
 
 ### Create Route
 
-First, create an enum with all the available routes for a particular flow.
-In the following example, we have the `ShapesRoute` enum representing the main flows of our application. It offers routes to present shapes list, simple shapes list, custom shapes list and a featured shape.
+Start by creating an enum with all the available routes for a particular coordinator flow.
 
 ```Swift
 enum ShapesRoute: NavigationRoute {
@@ -164,22 +166,19 @@ enum ShapesRoute: NavigationRoute {
 
 ### Create Action
 
-`ShapesAction` represents all the available actions that can be triggered by the view.
+Specify custom actions that can be sent from coordinated objects to their parent coordinators.
 
 ```Swift
 enum ShapesAction: CoordinatorAction {
     case simpleShapes
     case customShapes
-    /// Deep link
     case featuredShape(NavigationRoute)
 }
 ```
 
-We can also make a deep link by adding an associated value of type `NavigationRoute` to the enum.
-
 ### Create Coordinator
 
-Our `ShapesCoordinator` has to conform to the `Routing` protocol and implement the `handle(_ action: CoordinatorAction)` method which executes flow-specific logic when the action is received. `ShapesCoordinator` is the root coordinator and therefore needs to initialize `NavigationController`.
+Our Coordinator has to conform to the `Routing` protocol and implement the `handle(_ action: CoordinatorAction)` method which executes flow-specific logic when the action is received. `ShapesCoordinator` is the root coordinator in the example and therefore needs to initialize `NavigationController`.
 
 ```Swift
 class ShapesCoordinator: Routing {
@@ -235,7 +234,7 @@ class ShapesCoordinator: Routing {
 
 ### Conform to RouterViewFactory
 
-By conforming to the `RouterViewFactory` protocol, we are defining which view should be displayed for each route. If we need to present a child coordinator, we will return an `EmptyView`.  
+By conforming to the `RouterViewFactory` protocol, we are defining which view should be displayed for each route. If we need to present a child coordinator, we should return an `EmptyView`.  
 
 ```Swift
 extension ShapesCoordinator: RouterViewFactory {
@@ -245,7 +244,6 @@ extension ShapesCoordinator: RouterViewFactory {
         case .shapes:
             ShapesView<ShapesCoordinator>()
         case .simpleShapes:
-            /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         case .customShapes:
             CustomShapesView<CustomShapesCoordinator>()
