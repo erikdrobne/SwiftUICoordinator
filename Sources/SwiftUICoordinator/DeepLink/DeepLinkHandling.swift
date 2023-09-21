@@ -8,8 +8,11 @@
 import Foundation
 
 public protocol DeepLinkHandling {
+    /// URL scheme to use for opening links in your app
     var scheme: String { get }
+    /// The set of supported deep links.
     var links: Set<DeepLink> { get }
+    
     func link(for url: URL) throws -> DeepLink?
     func params(for url: URL, and keys: Set<String>) throws -> [String: String]
 }
