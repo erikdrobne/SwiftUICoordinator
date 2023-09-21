@@ -12,6 +12,7 @@ public class NavigationController: UINavigationController {
     
     // MARK: - Internal Properties
     
+    /// The collection of registered transition objects.
     private(set) var transitions = [Transition]()
     
     // MARK: - Initialization
@@ -32,10 +33,16 @@ public class NavigationController: UINavigationController {
     
     // MARK: - Public methods
     
+    /// Registers a single `Transition` for use in navigation animations.
+    ///
+    /// - Parameter transition: The `Transition` to be registered.
     public func register(_ transition: Transition) {
         transitions.append(transition)
     }
     
+    /// Registers multiple `Transition` objects for use in navigation animations.
+    ///
+    /// - Parameter transitions: An array of `Transition` objects to be registered.
     public func register(_ transitions: [Transition]) {
         self.transitions += transitions
     }
@@ -44,10 +51,12 @@ public class NavigationController: UINavigationController {
 // MARK: - UINavigationControllerDelegate
 
 extension NavigationController: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController,
-                                     animationControllerFor operation: UINavigationController.Operation,
-                                     from fromVC: UIViewController,
-                                     to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
         
         for transition in transitions {
             guard

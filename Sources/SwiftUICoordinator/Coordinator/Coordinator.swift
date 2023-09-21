@@ -32,9 +32,12 @@ public extension Coordinator {
     // MARK: - Public methods
 
     func add(child: Coordinator) {
-        if !childCoordinators.contains(where: { $0 === child }) {
-            childCoordinators.append(child)
+        guard !childCoordinators.contains(where: { $0 === child }) else {
+            Logger.coordinator.warning("Attempted to add a coordinator that is already a child.")
+            return
         }
+        
+        childCoordinators.append(child)
     }
     
     func remove(coordinator: Coordinator) {

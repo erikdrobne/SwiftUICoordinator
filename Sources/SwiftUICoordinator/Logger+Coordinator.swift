@@ -13,4 +13,6 @@ extension Logger {
     
     /// Logs related to deep links.
     static let deepLink = Logger(subsystem: subsystem, category: "deep_link")
+    /// Logs related to coordinator management and operations.
+    static let coordinator = Logger(subsystem: subsystem, category: "coordinator")
 }

@@ -7,9 +7,9 @@
 
 import Foundation
 
+/// A protocol that defines coordinator actions.
 public protocol CoordinatorAction {}
 
-/// Essential actions that can be performed by coordinators.
 public enum Action: CoordinatorAction {
     case done(Any)
     case cancel(Any)
