@@ -386,3 +386,5 @@ For better understanding, I recommend that you take a look at the example projec
 
 Contributions are welcome! 
 If you find any issues, have suggestions for improvements, or want to add features, please open an issue or submit a pull request.
+
+**If you appreciate this project, kindly give it a ⭐️ to help others discover the repository.**
