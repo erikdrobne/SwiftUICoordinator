@@ -17,8 +17,10 @@ public class NavigationController: UINavigationController {
     
     // MARK: - Initialization
     
-    public convenience init() {
+    public convenience init(isNavigationBarHidden: Bool = true) {
         self.init(nibName: nil, bundle: nil)
+        
+        self.isNavigationBarHidden = isNavigationBarHidden
     }
     
     private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

@@ -94,8 +94,8 @@ public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
         navigationController.popToRootViewController(animated: animated)
     }
 
-    func dismiss(animated: Bool = true) {
-        navigationController.dismiss(animated: animated)
+    func dismiss(animated: Bool = true, completion: (() -> Void)?) {
+        navigationController.dismiss(animated: animated, completion: completion)
     }
 
     // MARK: - Private methods
