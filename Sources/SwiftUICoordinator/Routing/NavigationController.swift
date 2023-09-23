@@ -17,6 +17,13 @@ public class NavigationController: UINavigationController {
     
     // MARK: - Initialization
     
+    /// Initializes an instance of the class with optional customization for the navigation bar's visibility.
+    ///
+    /// - Parameter isNavigationBarHidden: A Boolean value indicating whether the navigation bar should be hidden on the created instance.
+    /// If set to `true`, the navigation bar will be hidden. If set to `false`, the navigation bar will be displayed.
+    ///
+    /// - Note: By default `isNavigationBarHidden` is set to `true`.
+    ///
     public convenience init(isNavigationBarHidden: Bool = true) {
         self.init(nibName: nil, bundle: nil)
         
