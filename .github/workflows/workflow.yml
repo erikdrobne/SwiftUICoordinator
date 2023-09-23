@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
     env:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
@@ -25,7 +24,17 @@ jobs:
     - name: Clear Derived Data
       run: |
         rm -rf ~/Library/Developer/Xcode/DerivedData/*
-    - name: Build and test
+    - name: Build
       run: |
         swift package update
-        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION"
+        xcodebuild clean build -scheme $SCHEME -destination "$DESTINATION"
+  
+  test:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Tests
+        run: |
+          xcodebuild test -scheme $SCHEME -destination "$DESTINATION"
