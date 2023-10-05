@@ -27,12 +27,9 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
             return
         }
         
-        let coordinator = dependencyContainer.rootCoordinator
-        /// Assign root coordinator's navigation controller
-        window.rootViewController = coordinator.navigationController
-        window.makeKeyAndVisible()
-
-        try? coordinator.start()
+        let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
+        dependencyContainer.set(appCoordinator)
+        //try? coordinator.start()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -44,7 +41,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
                 return
             }
             
-            dependencyContainer.rootCoordinator.handle(deepLink, with: params)
+            dependencyContainer.appCoordinator?.handle(deepLink, with: params)
         }
     }
 }

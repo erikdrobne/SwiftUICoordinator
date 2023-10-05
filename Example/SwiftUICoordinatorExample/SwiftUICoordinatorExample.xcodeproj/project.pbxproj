@@ -19,6 +19,8 @@
 		17AABAED2A6D5CF400AFE8A7 /* SimpleShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAEC2A6D5CF400AFE8A7 /* SimpleShapesAction.swift */; };
 		17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAEE2A6D5E1500AFE8A7 /* CustomShapesAction.swift */; };
 		17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */; };
+		17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379702ACEDD7800CA4105 /* AppCoordinator.swift */; };
+		17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */; };
 		17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183429CC63B1004755DB /* SimpleShapesView.swift */; };
 		17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183629CC63C0004755DB /* CustomShapesView.swift */; };
 		17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */; };
@@ -46,6 +48,8 @@
 		17AABAEC2A6D5CF400AFE8A7 /* SimpleShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesAction.swift; sourceTree = "<group>"; };
 		17AABAEE2A6D5E1500AFE8A7 /* CustomShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesAction.swift; sourceTree = "<group>"; };
 		17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesAction.swift; sourceTree = "<group>"; };
+		17C379702ACEDD7800CA4105 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		17E1C1FF2A1BD86D00542AB9 /* SwiftUICoordinator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftUICoordinator.xctestplan; sourceTree = "<group>"; };
 		17F1183429CC63B1004755DB /* SimpleShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesView.swift; sourceTree = "<group>"; };
 		17F1183629CC63C0004755DB /* CustomShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesView.swift; sourceTree = "<group>"; };
@@ -95,8 +99,8 @@
 			children = (
 				1769698F2AB4A25600CD6696 /* Info.plist */,
 				1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */,
-				176969902AB4AFD200CD6696 /* DependencyContainer.swift */,
 				176F3CB629B8C01E009C4987 /* Coordinators */,
+				17C379722ACEDFBD00CA4105 /* Dependencies */,
 				1769698C2AB49FB700CD6696 /* DeepLink */,
 				176F3CB329B8BD92009C4987 /* Views */,
 				17360A3F2A1275C000DB2296 /* Transitions */,
@@ -146,6 +150,7 @@
 		176F3CB629B8C01E009C4987 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				17C379702ACEDD7800CA4105 /* AppCoordinator.swift */,
 				176F3CB929B8C143009C4987 /* Shapes */,
 				17F1183929CC6648004755DB /* CustomShapes */,
 				17F1183829CC662B004755DB /* SimpleShapes */,
@@ -168,6 +173,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		17C379722ACEDFBD00CA4105 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				176969902AB4AFD200CD6696 /* DependencyContainer.swift */,
+				17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		17F1183829CC662B004755DB /* SimpleShapes */ = {
@@ -280,9 +294,11 @@
 				17F1184329CC8BA6004755DB /* Triangle.swift in Sources */,
 				1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */,
 				17F1184529CC8CF6004755DB /* Star.swift in Sources */,
+				17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */,
 				17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
 				176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */,
+				17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */,
 				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
 				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
 				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
