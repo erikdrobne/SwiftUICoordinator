@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
+import SwiftUICoordinator
 
 protocol CoordinatorFactory {
-    func makeAppCoordinator(window: UIWindow) -> AppCoordinator
+    func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator
 }

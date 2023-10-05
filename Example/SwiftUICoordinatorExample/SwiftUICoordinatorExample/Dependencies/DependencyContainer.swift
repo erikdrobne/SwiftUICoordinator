@@ -11,12 +11,9 @@ import SwiftUICoordinator
 @MainActor
 final class DependencyContainer {
     
-    static let shared = DependencyContainer()
-    
-    private(set) var appCoordinator: AppCoordinator?
+    let navigationController = NavigationController()
     let deepLinkHandler = DeepLinkHandler.shared
-    
-    private init() {}
+    private(set) var appCoordinator: AppCoordinator?
     
     func set(_ coordinator: AppCoordinator) {
         guard appCoordinator == nil else {
@@ -29,6 +26,14 @@ final class DependencyContainer {
 
 extension DependencyContainer: CoordinatorFactory {
     func makeAppCoordinator(window: UIWindow) -> AppCoordinator {
-        return AppCoordinator(window: window, navigationController: NavigationController())
+        return AppCoordinator(window: window, navigationController: self.navigationController)
+    }
+    
+    func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator {
+        return ShapesCoordinator(
+            parent: parent,
+            navigationController: self.navigationController,
+            startRoute: .shapes
+        )
     }
 }

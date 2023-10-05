@@ -12,16 +12,16 @@ class ShapesCoordinator: Routing {
 
     // MARK: - Internal properties
 
-    /// Root coordinator doesn't have a parent.
-    let parent: Coordinator? = nil
+    weak var parent: Coordinator?
     var childCoordinators = [Coordinator]()
-    var navigationController: NavigationController
+    let navigationController: NavigationController
     let startRoute: ShapesRoute
 
     // MARK: - Initialization
 
-    init(startRoute: ShapesRoute) {
-        self.navigationController = NavigationController()
+    init(parent: Coordinator?, navigationController: NavigationController, startRoute: ShapesRoute) {
+        self.parent = parent
+        self.navigationController = navigationController
         self.startRoute = startRoute
         
         setup()
