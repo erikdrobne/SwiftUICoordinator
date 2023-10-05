@@ -14,7 +14,6 @@ public protocol Coordinator: AnyObject {
     var parent: Coordinator? { get }
     /// An array that stores references to any child coordinators.
     var childCoordinators: [Coordinator] { get set }
-    
     /// Takes action parameter and handles the `CoordinatorAction`.
     func handle(_ action: CoordinatorAction)
     /// Adds child coordinator to the list.
