@@ -33,16 +33,15 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url {
-            guard 
-                let deepLink = try? dependencyContainer.deepLinkHandler.link(for: url),
-                let params = try? dependencyContainer.deepLinkHandler.params(for: url, and: deepLink.params)
-            else {
-                return
-            }
-            
-            dependencyContainer.appCoordinator?.handle(deepLink, with: params)
+        guard
+            let url = URLContexts.first?.url,
+            let deepLink = try? dependencyContainer.deepLinkHandler.link(for: url),
+            let params = try? dependencyContainer.deepLinkHandler.params(for: url, and: deepLink.params)
+        else {
+            return
         }
+        
+        dependencyContainer.appCoordinator?.handle(deepLink, with: params)
     }
 }
 
