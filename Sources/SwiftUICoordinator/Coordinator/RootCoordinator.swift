@@ -12,7 +12,7 @@ open class RootCoordinator: Coordinator {
     
     /// RootCoordinator doesn't have a parent
     public let parent: Coordinator? = nil
-    public var childCoordinators: [Coordinator] = []
+    public var childCoordinators: [WeakCoordinator] = []
     
     let window: UIWindow
     let navigationController: NavigationController

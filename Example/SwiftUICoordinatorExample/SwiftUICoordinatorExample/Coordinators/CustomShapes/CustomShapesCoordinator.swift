@@ -15,7 +15,7 @@ class CustomShapesCoordinator: Routing {
     // MARK: - Internal properties
 
     weak var parent: Coordinator? = nil
-    var childCoordinators = [Coordinator]()
+    var childCoordinators = [WeakCoordinator]()
     var navigationController: NavigationController
     let startRoute: CustomShapesRoute
 
