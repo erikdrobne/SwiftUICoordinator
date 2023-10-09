@@ -35,7 +35,7 @@ public protocol Navigator: ObservableObject {
 
 // MARK: - Extensions
 
-public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
+public extension Navigator where Self: RouterViewFactory {
     
     // MARK: - Public properties
 
