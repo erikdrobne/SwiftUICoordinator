@@ -13,6 +13,7 @@ final class DependencyContainer {
     
     let navigationController = NavigationController()
     let deepLinkHandler = DeepLinkHandler.shared
+    
     private(set) var appCoordinator: AppCoordinator?
     
     func set(_ coordinator: AppCoordinator) {

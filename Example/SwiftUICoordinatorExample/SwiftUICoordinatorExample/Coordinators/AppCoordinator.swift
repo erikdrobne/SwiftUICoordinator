@@ -12,12 +12,7 @@ final class AppCoordinator: RootCoordinator {
     
     func start(with coordinator: any Routing) {
         self.add(child: coordinator)
-        
-        do {
-            try coordinator.start()
-        } catch {
-            print("Start error: \(error.localizedDescription)")
-        }
+        try? coordinator.start()
     }
     
     override func handle(_ action: CoordinatorAction) {
