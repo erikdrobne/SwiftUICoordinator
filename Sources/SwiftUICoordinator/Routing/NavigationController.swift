@@ -55,6 +55,13 @@ public class NavigationController: UINavigationController {
     public func register(_ transitions: [Transition]) {
         self.transitions += transitions.map { WeakTransition($0) }
     }
+    
+    /// Unregisters all `Transition` instances of the specified type.
+    ///
+    /// - Parameter type: The type of `Transition` to be unregistered.
+    public func unregister<T: Transition>(_ type: T.Type) {
+        transitions.removeAll { $0.transition is T }
+    }
 }
 
 // MARK: - UINavigationControllerDelegate

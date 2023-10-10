@@ -91,6 +91,16 @@ final class CoordinatorTests: XCTestCase {
         XCTAssertEqual(mockTransition, transitions[0])
     }
     
+    func test_unregisterTransition() {
+        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
+        let transitions = [MockTransition(), MockTransition()]
+        coordinator.navigationController.register(transitions)
+        XCTAssertEqual(coordinator.navigationController.transitions.count, 2)
+        
+        coordinator.navigationController.unregister(MockTransition.self)
+        XCTAssertEqual(coordinator.navigationController.transitions.count, 0)
+    }
+    
     func test_NavigationBarIsHidden() {
         let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
         coordinator.append(routes: [MockRoute.rectangle, MockRoute.circle])
