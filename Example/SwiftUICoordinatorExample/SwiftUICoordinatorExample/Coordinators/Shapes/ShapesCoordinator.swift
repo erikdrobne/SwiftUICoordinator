@@ -51,6 +51,9 @@ class ShapesCoordinator: Routing {
             default:
                 return
             }
+        case Action.done(_):
+            popToRoot()
+            childCoordinators.removeAll()
         default:
             parent?.handle(action)
         }
@@ -70,6 +73,7 @@ class ShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension ShapesCoordinator: RouterViewFactory {
+    
     @ViewBuilder
     public func view(for route: ShapesRoute) -> some View {
         switch route {
@@ -81,6 +85,7 @@ extension ShapesCoordinator: RouterViewFactory {
         case .customShapes:
             CustomShapesView<CustomShapesCoordinator>()
         case .featuredShape:
+            /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         }
     }

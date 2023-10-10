@@ -18,7 +18,7 @@ struct ShapeListView<Coordinator: Routing>: View {
             Button {
                 viewModel.didTapBuiltIn()
             } label: {
-                Text("Built-in")
+                Text("Simple")
             }
             Button {
                 viewModel.didTapCustom()

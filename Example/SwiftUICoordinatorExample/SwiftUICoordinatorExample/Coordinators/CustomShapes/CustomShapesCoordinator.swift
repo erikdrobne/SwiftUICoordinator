@@ -48,6 +48,7 @@ class CustomShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension CustomShapesCoordinator: RouterViewFactory {
+    
     @ViewBuilder
     public func view(for route: CustomShapesRoute) -> some View {
         switch route {

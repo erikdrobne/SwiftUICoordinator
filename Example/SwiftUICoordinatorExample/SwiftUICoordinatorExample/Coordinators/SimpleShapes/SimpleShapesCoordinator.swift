@@ -28,15 +28,6 @@ class SimpleShapesCoordinator: Routing {
         self.navigationController = navigationController
         self.startRoute = startRoute
     }
-
-    func presentRoot() {
-        guard let routing = parent as? any Routing else {
-            return
-        }
-        
-        routing.popToRoot(animated: true)
-        routing.childCoordinators.removeAll()
-    }
     
     func handle(_ action: CoordinatorAction) {
         switch action {
@@ -59,6 +50,7 @@ class SimpleShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension SimpleShapesCoordinator: RouterViewFactory {
+    
     @ViewBuilder
     public func view(for route: SimpleShapesRoute) -> some View {
         switch route {
@@ -88,7 +80,7 @@ extension SimpleShapesCoordinator: RouterViewFactory {
                     .frame(width: 200, height: 200)
                 Spacer()
                 Button {
-                    self.presentRoot()
+                    self.handle(Action.done(self))
                 } label: {
                     Text("Done")
                 }
