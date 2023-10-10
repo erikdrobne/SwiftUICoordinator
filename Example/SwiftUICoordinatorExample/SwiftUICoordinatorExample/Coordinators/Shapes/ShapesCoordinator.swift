@@ -30,8 +30,6 @@ class ShapesCoordinator: Routing {
         self.navigationController = navigationController
         self.startRoute = startRoute
         self.factory = factory
-        
-        setup()
     }
     
     func handle(_ action: CoordinatorAction) {
@@ -66,12 +64,6 @@ class ShapesCoordinator: Routing {
         default:
             break
         }
-    }
-    
-    // MARK: - Private methods
-    
-    private func setup() {
-        navigationController.register(FadeTransition())
     }
 }
 

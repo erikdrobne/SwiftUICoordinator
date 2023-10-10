@@ -27,7 +27,11 @@ final class DependencyContainer {
 
 extension DependencyContainer: CoordinatorFactory {
     func makeAppCoordinator(window: UIWindow) -> AppCoordinator {
-        return AppCoordinator(window: window, navigationController: self.navigationController)
+        return AppCoordinator(
+            window: window,
+            navigationController: self.navigationController,
+            transitions: [FadeTransition()]
+        )
     }
     
     func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator {
