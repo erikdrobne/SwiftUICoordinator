@@ -6,31 +6,31 @@ import Foundation
 final class CoordinatorTests: XCTestCase {
     
     func test_addChildToCoordinator() {
-        let appCoordinator = MockAppCoordinator(window: UIWindow(), navigationController: NavigationController())
-        let coordinator = MockCoordinator(parent: appCoordinator, startRoute: .rectangle)
+        let sut = MockAppCoordinator(window: UIWindow(), navigationController: NavigationController())
+        let coordinator = MockCoordinator(parent: sut, startRoute: .rectangle)
         
-        appCoordinator.start(with: coordinator)
-        XCTAssertEqual(appCoordinator.childCoordinators.count, 1)
+        sut.start(with: coordinator)
+        XCTAssertEqual(sut.childCoordinators.count, 1)
     }
     
     func test_addMultipleChildrenToCoordinator() {
-        let appCoordinator = MockAppCoordinator(window: UIWindow(), navigationController: NavigationController())
-        let coordinator = MockCoordinator(parent: appCoordinator, startRoute: .rectangle)
+        let sut = MockAppCoordinator(window: UIWindow(), navigationController: NavigationController())
+        let coordinator = MockCoordinator(parent: sut, startRoute: .rectangle)
         
-        appCoordinator.start(with: coordinator)
-        appCoordinator.add(child: MockCoordinator(parent: coordinator, startRoute: .circle))
+        sut.start(with: coordinator)
+        sut.add(child: MockCoordinator(parent: coordinator, startRoute: .circle))
         
-        XCTAssertEqual(appCoordinator.childCoordinators.count, 2)
+        XCTAssertEqual(sut.childCoordinators.count, 2)
     }
     
     func test_removeChildCoordinator() {
-        let appCoordinator = MockAppCoordinator(window: UIWindow(), navigationController: NavigationController())
-        let coordinator = MockCoordinator(parent: appCoordinator, startRoute: .rectangle)
+        let sut = MockAppCoordinator(window: UIWindow(), navigationController: NavigationController())
+        let coordinator = MockCoordinator(parent: sut, startRoute: .rectangle)
         
-        appCoordinator.start(with: coordinator)
-        appCoordinator.remove(coordinator: coordinator)
+        sut.start(with: coordinator)
+        sut.remove(coordinator: coordinator)
         
-        XCTAssertEqual(appCoordinator.childCoordinators.count, 0)
+        XCTAssertEqual(sut.childCoordinators.count, 0)
     }
     
     func test_showRouteThrowsError() {

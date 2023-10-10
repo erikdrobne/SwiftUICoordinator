@@ -14,8 +14,8 @@ open class RootCoordinator: Coordinator {
     public let parent: Coordinator? = nil
     public var childCoordinators: [WeakCoordinator] = []
     
-    let window: UIWindow
-    let navigationController: NavigationController
+    public private(set) var window: UIWindow
+    public private(set) var navigationController: NavigationController
     
     public init(window: UIWindow, navigationController: NavigationController) {
         self.window = window
