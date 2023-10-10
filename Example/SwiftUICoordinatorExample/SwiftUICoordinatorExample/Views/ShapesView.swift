@@ -65,11 +65,15 @@ extension ShapesView {
     }
 }
 
-//struct ShapesView_Previews: PreviewProvider {
-//    static let coordinator = ShapesCoordinator(parent: nil, startRoute: ShapesRoute.shapes)
-//
-//    static var previews: some View {
-//        ShapesView<ShapesCoordinator>()
-//            .environmentObject(coordinator)
-//    }
-//}
+struct ShapesView_Previews: PreviewProvider {
+    static let coordinator = ShapesCoordinator(
+        parent: nil,
+        navigationController: NavigationController(),
+        startRoute: ShapesRoute.shapes
+    )
+
+    static var previews: some View {
+        ShapesView<ShapesCoordinator>()
+            .environmentObject(coordinator)
+    }
+}
