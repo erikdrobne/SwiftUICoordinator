@@ -11,7 +11,7 @@ import XCTest
 
 final class DeepLinkTests: XCTestCase {
     
-    func testDeepLinksWithoutParametersAreEqual() {
+    func test_deepLinksWithoutParametersAreEqual() {
         let linkA = DeepLink(action: "square", route: MockRoute.square)
         let linkB = DeepLink(action: "square", route: MockRoute.square)
         let linkC = DeepLink(action: "rectangle", route: MockRoute.rectangle)
@@ -21,7 +21,7 @@ final class DeepLinkTests: XCTestCase {
         XCTAssertNotEqual(linkB, linkC)
     }
     
-    func testDeepLinksWithParametersAreEqual() {
+    func test_deepLinksWithParametersAreEqual() {
         let linkA = DeepLink(action: "square", route: MockRoute.square, params: [])
         let linkB = DeepLink(action: "square", route: MockRoute.square, params: ["color"])
         let linkC = DeepLink(action: "square", route: MockRoute.rectangle, params: ["width"])

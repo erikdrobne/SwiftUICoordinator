@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
+@MainActor
 class MockCoordinator: Routing {
     
     weak var parent: Coordinator?
@@ -15,9 +16,9 @@ class MockCoordinator: Routing {
     var navigationController: NavigationController
     let startRoute: MockRoute
     
-    init(parent: Coordinator?, startRoute: MockRoute) {
+    init(parent: Coordinator?, startRoute: MockRoute, navigationController: NavigationController) {
         self.parent = parent
-        self.navigationController = NavigationController()
+        self.navigationController = navigationController
         self.startRoute = startRoute
     }
     
