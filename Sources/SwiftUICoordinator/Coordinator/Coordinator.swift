@@ -40,7 +40,7 @@ public extension Coordinator {
     }
     
     func remove(coordinator: Coordinator) {
-        childCoordinators.removeAll(where: { $0 === coordinator })
+        childCoordinators.removeAll(where: { $0.coordinator === coordinator })
     }
     
     func handle(_ deepLink: DeepLink, with params: [String: String] = [:]) {

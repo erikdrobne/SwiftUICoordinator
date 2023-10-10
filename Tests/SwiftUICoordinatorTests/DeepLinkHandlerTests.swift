@@ -10,7 +10,7 @@ import XCTest
 
 final class DeepLinkHandlerTests: XCTestCase {
 
-    func testLinkForURLThrowsInvalidSchemeError() {
+    func test_LinkForURLThrowsInvalidSchemeError() {
         let host = "circle"
         let url = URL(string: "://\(host)")
         
@@ -23,7 +23,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
-    func testLinkForURLThrowsUnknownURLError() {
+    func test_LinkForURLThrowsUnknownURLError() {
         let scheme = "myapp"
         let url = URL(string: "\(scheme)://")
         
@@ -36,7 +36,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
-    func testLinkForURLReturnsNil() {
+    func test_LinkForURLReturnsNil() {
         let scheme = "myapp"
         let action = "square"
         let url = URL(string: "\(scheme)://\(action)")
@@ -44,7 +44,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         XCTAssertNil(try MockDeepLinkHandler.shared.link(for: XCTUnwrap(url)))
     }
     
-    func testLinkForURLSuccess() {
+    func test_LinkForURLSuccess() {
         let scheme = "myapp"
         let action = "circle"
         let url = URL(string: "\(scheme)://\(action)")
@@ -57,7 +57,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }(), "Link for URL threw an error.")
     }
     
-    func testParamsThrowsMissingQueryStringError() {
+    func test_ParamsThrowsMissingQueryStringError() {
         let scheme = "myapp"
         let action = "circle"
         let url = URL(string: "\(scheme)://\(action)")
@@ -71,7 +71,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
-    func testParamsReturnsEmptyCollection() {
+    func test_ParamsReturnsEmptyCollection() {
         let scheme = "myapp"
         let action = "circle"
         let queryString = "abc=1"
@@ -83,7 +83,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }(), "Params for url threw an error.")
     }
     
-    func testParamsForURLSuccess() {
+    func test_ParamsForURLSuccess() {
         let scheme = "myapp"
         let action = "rectangle"
         let queryString = "color=blue&width=100&height=200"
