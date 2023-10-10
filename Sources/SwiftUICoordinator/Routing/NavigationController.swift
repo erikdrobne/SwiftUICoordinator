@@ -62,6 +62,11 @@ public class NavigationController: UINavigationController {
     public func unregister<T: Transition>(_ type: T.Type) {
         transitions.removeAll { $0.transition is T }
     }
+    
+    /// Removes all registered `Transition` objects from the navigation controller.
+    public func unregisterAllTransitions() {
+        transitions.removeAll()
+    }
 }
 
 // MARK: - UINavigationControllerDelegate
