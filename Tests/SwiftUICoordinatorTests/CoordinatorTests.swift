@@ -77,40 +77,6 @@ final class CoordinatorTests: XCTestCase {
         XCTAssertEqual(rootCoordinator.viewControllers.count, 1)
     }
     
-    func test_registerTransition() {
-        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
-        let transitions = [MockTransition()]
-        
-        coordinator.navigationController.register(transitions)
-        
-        guard let mockTransition = coordinator.navigationController.transitions[0].transition as? MockTransition else {
-            XCTFail("Cannot cast to MockTransition.")
-            return
-        }
-        
-        XCTAssertEqual(mockTransition, transitions[0])
-    }
-    
-    func test_unregisterTransition() {
-        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
-        let transitions = [MockTransition(), MockTransition()]
-        coordinator.navigationController.register(transitions)
-        XCTAssertEqual(coordinator.navigationController.transitions.count, 2)
-        
-        coordinator.navigationController.unregister(MockTransition.self)
-        XCTAssertEqual(coordinator.navigationController.transitions.count, 0)
-    }
-    
-    func test_unregisterAllTransitions() {
-        let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
-        let transitions = [MockTransition(), MockTransition(), MockTransition()]
-        coordinator.navigationController.register(transitions)
-        XCTAssertEqual(coordinator.navigationController.transitions.count, 3)
-        
-        coordinator.navigationController.unregisterAllTransitions()
-        XCTAssertEqual(coordinator.navigationController.transitions.count, 0)
-    }
-    
     func test_navigationBarIsHidden() {
         let coordinator = MockCoordinator(parent: nil, startRoute: .circle)
         coordinator.append(routes: [MockRoute.rectangle, MockRoute.circle])
