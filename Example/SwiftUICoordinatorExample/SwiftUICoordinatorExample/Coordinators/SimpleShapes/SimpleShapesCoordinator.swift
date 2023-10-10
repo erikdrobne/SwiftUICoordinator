@@ -19,7 +19,11 @@ class SimpleShapesCoordinator: Routing {
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: NavigationController, startRoute: SimpleShapesRoute = .simpleShapes) {
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: SimpleShapesRoute = .simpleShapes
+    ) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute

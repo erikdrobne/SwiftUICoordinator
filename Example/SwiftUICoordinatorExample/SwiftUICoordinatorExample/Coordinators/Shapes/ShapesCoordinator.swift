@@ -11,18 +11,25 @@ import SwiftUICoordinator
 class ShapesCoordinator: Routing {
 
     // MARK: - Internal properties
-
+    
     weak var parent: Coordinator?
     var childCoordinators = [WeakCoordinator]()
     let navigationController: NavigationController
     let startRoute: ShapesRoute
+    let factory: CoordinatorFactory
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: NavigationController, startRoute: ShapesRoute) {
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: ShapesRoute = .shapes,
+        factory: CoordinatorFactory
+    ) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
+        self.factory = factory
         
         setup()
     }
@@ -30,31 +37,31 @@ class ShapesCoordinator: Routing {
     func handle(_ action: CoordinatorAction) {
         switch action {
         case ShapesAction.simpleShapes:
-            let coordinator = makeSimpleShapesCoordinator()
+            let coordinator = factory.makeSimpleShapesCoordinator(parent: self)
             try? coordinator.start()
         case ShapesAction.customShapes:
-            let coordinator = makeCustomShapesCoordinator()
+            let coordinator = factory.makeCustomShapesCoordinator(parent: self)
             try? coordinator.start()
         case let ShapesAction.featuredShape(route):
             switch route {
             case let shapeRoute as SimpleShapesRoute where shapeRoute != .simpleShapes:
-                let coordinator = makeSimpleShapesCoordinator()
+                let coordinator = factory.makeSimpleShapesCoordinator(parent: self)
                 coordinator.append(routes: [.simpleShapes, shapeRoute])
             case let shapeRoute as CustomShapesRoute where shapeRoute != .customShapes:
-                let coordinator = makeCustomShapesCoordinator()
+                let coordinator = factory.makeCustomShapesCoordinator(parent: self)
                 coordinator.append(routes: [.customShapes, shapeRoute])
             default:
                 return
             }
         default:
-            break
+            parent?.handle(action)
         }
     }
     
-    func handle(_ deepLink: DeepLink, with params: [String : String]) {
+    func handle(_ deepLink: DeepLink, with params: [String: String]) {
         switch deepLink.route {
         case ShapesRoute.customShapes:
-            let coordinator = makeCustomShapesCoordinator()
+            let coordinator = factory.makeCustomShapesCoordinator(parent: self)
             try? coordinator.start()
         default:
             break
@@ -66,18 +73,6 @@ class ShapesCoordinator: Routing {
     private func setup() {
         navigationController.register(FadeTransition())
     }
-
-    private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
-        let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
-        add(child: coordinator)
-        return coordinator
-    }
-
-    private func makeCustomShapesCoordinator() -> CustomShapesCoordinator {
-        let coordinator = CustomShapesCoordinator(parent: self, navigationController: navigationController)
-        add(child: coordinator)
-        return coordinator
-    }
 }
 
 // MARK: - RouterViewFactory
@@ -87,7 +82,7 @@ extension ShapesCoordinator: RouterViewFactory {
     public func view(for route: ShapesRoute) -> some View {
         switch route {
         case .shapes:
-            ShapesView<ShapesCoordinator>()
+            ShapeListView<ShapesCoordinator>()
         case .simpleShapes:
             /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()

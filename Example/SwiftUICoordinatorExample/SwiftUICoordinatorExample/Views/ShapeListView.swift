@@ -1,5 +1,5 @@
 //
-//  ShapesView.swift
+//  ShapeListView.swift
 //  SwiftUICoordinatorExample
 //
 //  Created by Erik Drobne on 08/03/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
-struct ShapesView<Coordinator: Routing>: View {
+struct ShapeListView<Coordinator: Routing>: View {
 
     @EnvironmentObject var coordinator: Coordinator
     @StateObject var viewModel = ViewModel<Coordinator>()
@@ -37,7 +37,7 @@ struct ShapesView<Coordinator: Routing>: View {
     }
 }
 
-extension ShapesView {
+extension ShapeListView {
     @MainActor class ViewModel<R: Routing>: ObservableObject {
         var coordinator: R?
 
@@ -69,11 +69,12 @@ struct ShapesView_Previews: PreviewProvider {
     static let coordinator = ShapesCoordinator(
         parent: nil,
         navigationController: NavigationController(),
-        startRoute: ShapesRoute.shapes
+        startRoute: ShapesRoute.shapes,
+        factory: DependencyContainer.mock
     )
 
     static var previews: some View {
-        ShapesView<ShapesCoordinator>()
+        ShapeListView<ShapesCoordinator>()
             .environmentObject(coordinator)
     }
 }

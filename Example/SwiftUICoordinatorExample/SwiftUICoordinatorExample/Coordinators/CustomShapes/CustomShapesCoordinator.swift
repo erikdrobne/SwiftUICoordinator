@@ -21,7 +21,11 @@ class CustomShapesCoordinator: Routing {
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: NavigationController, startRoute: CustomShapesRoute = .customShapes) {
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: CustomShapesRoute = .customShapes
+    ) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
