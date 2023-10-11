@@ -11,10 +11,10 @@ import OSLog
 @MainActor
 public protocol Coordinator: AnyObject {
     /// A property that stores a reference to the parent coordinator, if any.
+    /// Should be used as a weak reference.
     var parent: Coordinator? { get }
     /// An array that stores references to any child coordinators.
-    var childCoordinators: [Coordinator] { get set }
-    
+    var childCoordinators: [WeakCoordinator] { get set }
     /// Takes action parameter and handles the `CoordinatorAction`.
     func handle(_ action: CoordinatorAction)
     /// Adds child coordinator to the list.
@@ -37,11 +37,11 @@ public extension Coordinator {
             return
         }
         
-        childCoordinators.append(child)
+        childCoordinators.append(WeakCoordinator(child))
     }
     
     func remove(coordinator: Coordinator) {
-        childCoordinators.removeAll(where: { $0 === coordinator })
+        childCoordinators.removeAll(where: { $0.coordinator === coordinator })
     }
     
     func handle(_ deepLink: DeepLink, with params: [String: String] = [:]) {

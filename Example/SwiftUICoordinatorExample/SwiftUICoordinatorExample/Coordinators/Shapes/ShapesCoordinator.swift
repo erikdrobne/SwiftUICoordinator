@@ -11,89 +11,81 @@ import SwiftUICoordinator
 class ShapesCoordinator: Routing {
 
     // MARK: - Internal properties
-
-    /// Root coordinator doesn't have a parent.
-    let parent: Coordinator? = nil
-    var childCoordinators = [Coordinator]()
-    var navigationController: NavigationController
+    
+    weak var parent: Coordinator?
+    var childCoordinators = [WeakCoordinator]()
+    let navigationController: NavigationController
     let startRoute: ShapesRoute
+    let factory: CoordinatorFactory
 
     // MARK: - Initialization
 
-    init(startRoute: ShapesRoute) {
-        self.navigationController = NavigationController()
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: ShapesRoute = .shapes,
+        factory: CoordinatorFactory
+    ) {
+        self.parent = parent
+        self.navigationController = navigationController
         self.startRoute = startRoute
-        
-        setup()
+        self.factory = factory
     }
     
     func handle(_ action: CoordinatorAction) {
         switch action {
         case ShapesAction.simpleShapes:
-            let coordinator = makeSimpleShapesCoordinator()
+            let coordinator = factory.makeSimpleShapesCoordinator(parent: self)
             try? coordinator.start()
         case ShapesAction.customShapes:
-            let coordinator = makeCustomShapesCoordinator()
+            let coordinator = factory.makeCustomShapesCoordinator(parent: self)
             try? coordinator.start()
         case let ShapesAction.featuredShape(route):
             switch route {
             case let shapeRoute as SimpleShapesRoute where shapeRoute != .simpleShapes:
-                let coordinator = makeSimpleShapesCoordinator()
+                let coordinator = factory.makeSimpleShapesCoordinator(parent: self)
                 coordinator.append(routes: [.simpleShapes, shapeRoute])
             case let shapeRoute as CustomShapesRoute where shapeRoute != .customShapes:
-                let coordinator = makeCustomShapesCoordinator()
+                let coordinator = factory.makeCustomShapesCoordinator(parent: self)
                 coordinator.append(routes: [.customShapes, shapeRoute])
             default:
                 return
             }
+        case Action.done(_):
+            popToRoot()
+            childCoordinators.removeAll()
         default:
-            break
+            parent?.handle(action)
         }
     }
     
-    func handle(_ deepLink: DeepLink, with params: [String : String]) {
+    func handle(_ deepLink: DeepLink, with params: [String: String]) {
         switch deepLink.route {
         case ShapesRoute.customShapes:
-            let coordinator = makeCustomShapesCoordinator()
+            let coordinator = factory.makeCustomShapesCoordinator(parent: self)
             try? coordinator.start()
         default:
             break
         }
-    }
-    
-    // MARK: - Private methods
-    
-    private func setup() {
-        navigationController.register(FadeTransition())
-    }
-
-    private func makeSimpleShapesCoordinator() -> SimpleShapesCoordinator {
-        let coordinator = SimpleShapesCoordinator(parent: self, navigationController: navigationController)
-        add(child: coordinator)
-        return coordinator
-    }
-
-    private func makeCustomShapesCoordinator() -> CustomShapesCoordinator {
-        let coordinator = CustomShapesCoordinator(parent: self, navigationController: navigationController)
-        add(child: coordinator)
-        return coordinator
     }
 }
 
 // MARK: - RouterViewFactory
 
 extension ShapesCoordinator: RouterViewFactory {
+    
     @ViewBuilder
     public func view(for route: ShapesRoute) -> some View {
         switch route {
         case .shapes:
-            ShapesView<ShapesCoordinator>()
+            ShapeListView<ShapesCoordinator>()
         case .simpleShapes:
             /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         case .customShapes:
             CustomShapesView<CustomShapesCoordinator>()
         case .featuredShape:
+            /// We are returning an empty view for the route presenting a child coordinator.
             EmptyView()
         }
     }

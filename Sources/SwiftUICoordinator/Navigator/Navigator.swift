@@ -9,6 +9,7 @@ import SwiftUI
 
 public typealias Routing = Coordinator & Navigator
 
+/// A protocol for navigating and managing view controllers within a navigation stack.
 @MainActor
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
@@ -35,7 +36,7 @@ public protocol Navigator: ObservableObject {
 
 // MARK: - Extensions
 
-public extension Navigator where Self: Coordinator, Self: RouterViewFactory {
+public extension Navigator where Self: RouterViewFactory {
     
     // MARK: - Public properties
 

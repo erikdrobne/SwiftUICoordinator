@@ -12,26 +12,21 @@ class SimpleShapesCoordinator: Routing {
 
     // MARK: - Internal properties
 
-    weak var parent: Coordinator? = nil
-    var childCoordinators = [Coordinator]()
+    weak var parent: Coordinator?
+    var childCoordinators = [WeakCoordinator]()
     var navigationController: NavigationController
     let startRoute: SimpleShapesRoute
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: NavigationController, startRoute: SimpleShapesRoute = .simpleShapes) {
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: SimpleShapesRoute = .simpleShapes
+    ) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
-    }
-
-    func presentRoot() {
-        guard let routing = parent as? any Routing else {
-            return
-        }
-        
-        routing.popToRoot(animated: true)
-        routing.childCoordinators.removeAll()
     }
     
     func handle(_ action: CoordinatorAction) {
@@ -55,6 +50,7 @@ class SimpleShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension SimpleShapesCoordinator: RouterViewFactory {
+    
     @ViewBuilder
     public func view(for route: SimpleShapesRoute) -> some View {
         switch route {
@@ -84,7 +80,7 @@ extension SimpleShapesCoordinator: RouterViewFactory {
                     .frame(width: 200, height: 200)
                 Spacer()
                 Button {
-                    self.presentRoot()
+                    self.handle(Action.done(self))
                 } label: {
                     Text("Done")
                 }

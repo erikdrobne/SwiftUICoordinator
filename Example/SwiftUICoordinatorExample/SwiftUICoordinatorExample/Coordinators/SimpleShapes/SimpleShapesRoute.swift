@@ -19,7 +19,7 @@ enum SimpleShapesRoute: NavigationRoute {
     var title: String? {
         switch self {
         case .simpleShapes:
-            return "Built-in"
+            return "Simple"
         case .rect:
             return "Rectangle"
         case .roundedRect:

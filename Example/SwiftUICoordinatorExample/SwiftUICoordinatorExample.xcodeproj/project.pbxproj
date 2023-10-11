@@ -13,12 +13,14 @@
 		17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17360A402A1275D600DB2296 /* FadeTransition.swift */; };
 		1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */; };
 		176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176969902AB4AFD200CD6696 /* DependencyContainer.swift */; };
-		176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB429B8BF71009C4987 /* ShapesView.swift */; };
+		176F3CB529B8BF71009C4987 /* ShapeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB429B8BF71009C4987 /* ShapeListView.swift */; };
 		176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */; };
 		176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CBA29B8C162009C4987 /* ShapesRoute.swift */; };
 		17AABAED2A6D5CF400AFE8A7 /* SimpleShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAEC2A6D5CF400AFE8A7 /* SimpleShapesAction.swift */; };
 		17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAEE2A6D5E1500AFE8A7 /* CustomShapesAction.swift */; };
 		17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */; };
+		17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379702ACEDD7800CA4105 /* AppCoordinator.swift */; };
+		17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */; };
 		17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183429CC63B1004755DB /* SimpleShapesView.swift */; };
 		17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183629CC63C0004755DB /* CustomShapesView.swift */; };
 		17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */; };
@@ -40,12 +42,14 @@
 		1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		1769698F2AB4A25600CD6696 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		176969902AB4AFD200CD6696 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
-		176F3CB429B8BF71009C4987 /* ShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
+		176F3CB429B8BF71009C4987 /* ShapeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeListView.swift; sourceTree = "<group>"; };
 		176F3CB729B8C05B009C4987 /* ShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesCoordinator.swift; sourceTree = "<group>"; };
 		176F3CBA29B8C162009C4987 /* ShapesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesRoute.swift; sourceTree = "<group>"; };
 		17AABAEC2A6D5CF400AFE8A7 /* SimpleShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesAction.swift; sourceTree = "<group>"; };
 		17AABAEE2A6D5E1500AFE8A7 /* CustomShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesAction.swift; sourceTree = "<group>"; };
 		17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesAction.swift; sourceTree = "<group>"; };
+		17C379702ACEDD7800CA4105 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		17E1C1FF2A1BD86D00542AB9 /* SwiftUICoordinator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftUICoordinator.xctestplan; sourceTree = "<group>"; };
 		17F1183429CC63B1004755DB /* SimpleShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesView.swift; sourceTree = "<group>"; };
 		17F1183629CC63C0004755DB /* CustomShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesView.swift; sourceTree = "<group>"; };
@@ -95,7 +99,7 @@
 			children = (
 				1769698F2AB4A25600CD6696 /* Info.plist */,
 				1732C9FB29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift */,
-				176969902AB4AFD200CD6696 /* DependencyContainer.swift */,
+				17C379722ACEDFBD00CA4105 /* Dependencies */,
 				176F3CB629B8C01E009C4987 /* Coordinators */,
 				1769698C2AB49FB700CD6696 /* DeepLink */,
 				176F3CB329B8BD92009C4987 /* Views */,
@@ -133,7 +137,7 @@
 		176F3CB329B8BD92009C4987 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				176F3CB429B8BF71009C4987 /* ShapesView.swift */,
+				176F3CB429B8BF71009C4987 /* ShapeListView.swift */,
 				17F1183429CC63B1004755DB /* SimpleShapesView.swift */,
 				17F1183629CC63C0004755DB /* CustomShapesView.swift */,
 				17F1184229CC8BA6004755DB /* Triangle.swift */,
@@ -146,6 +150,7 @@
 		176F3CB629B8C01E009C4987 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				17C379702ACEDD7800CA4105 /* AppCoordinator.swift */,
 				176F3CB929B8C143009C4987 /* Shapes */,
 				17F1183929CC6648004755DB /* CustomShapes */,
 				17F1183829CC662B004755DB /* SimpleShapes */,
@@ -168,6 +173,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		17C379722ACEDFBD00CA4105 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				176969902AB4AFD200CD6696 /* DependencyContainer.swift */,
+				17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		17F1183829CC662B004755DB /* SimpleShapes */ = {
@@ -280,9 +294,11 @@
 				17F1184329CC8BA6004755DB /* Triangle.swift in Sources */,
 				1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */,
 				17F1184529CC8CF6004755DB /* Star.swift in Sources */,
+				17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */,
 				17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
-				176F3CB529B8BF71009C4987 /* ShapesView.swift in Sources */,
+				176F3CB529B8BF71009C4987 /* ShapeListView.swift in Sources */,
+				17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */,
 				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
 				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
 				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
@@ -347,7 +363,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -402,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -429,6 +445,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -437,6 +454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftUICoordinatorExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -459,6 +477,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,6 +486,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftUICoordinatorExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

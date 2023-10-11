@@ -13,7 +13,7 @@ public class NavigationController: UINavigationController {
     // MARK: - Internal Properties
     
     /// The collection of registered transition objects.
-    private(set) var transitions = [Transition]()
+    private(set) var transitions = [WeakTransition]()
     
     // MARK: - Initialization
     
@@ -46,14 +46,26 @@ public class NavigationController: UINavigationController {
     ///
     /// - Parameter transition: The `Transition` to be registered.
     public func register(_ transition: Transition) {
-        transitions.append(transition)
+        transitions.append(WeakTransition(transition))
     }
     
     /// Registers multiple `Transition` objects for use in navigation animations.
     ///
     /// - Parameter transitions: An array of `Transition` objects to be registered.
     public func register(_ transitions: [Transition]) {
-        self.transitions += transitions
+        self.transitions += transitions.map { WeakTransition($0) }
+    }
+    
+    /// Unregisters all `Transition` instances of the specified type.
+    ///
+    /// - Parameter type: The type of `Transition` to be unregistered.
+    public func unregister<T: Transition>(_ type: T.Type) {
+        transitions.removeAll { $0.transition is T }
+    }
+    
+    /// Removes all registered `Transition` objects from the navigation controller.
+    public func unregisterAllTransitions() {
+        transitions.removeAll()
     }
 }
 
@@ -66,6 +78,7 @@ extension NavigationController: UINavigationControllerDelegate {
         from fromVC: UIViewController,
         to toVC: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
+        let transitions = self.transitions.compactMap({ $0.transition })
         
         for transition in transitions {
             guard

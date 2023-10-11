@@ -10,7 +10,7 @@ import SwiftUICoordinator
 
 class MockTransition: NSObject, Transition {
     func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
-        return true
+        return (fromRoute as? MockRoute == .circle && toRoute as? MockRoute == .rectangle)
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

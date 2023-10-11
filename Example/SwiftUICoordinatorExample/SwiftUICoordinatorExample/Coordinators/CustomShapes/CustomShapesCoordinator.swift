@@ -14,14 +14,18 @@ class CustomShapesCoordinator: Routing {
     
     // MARK: - Internal properties
 
-    weak var parent: Coordinator? = nil
-    var childCoordinators = [Coordinator]()
+    weak var parent: Coordinator?
+    var childCoordinators = [WeakCoordinator]()
     var navigationController: NavigationController
     let startRoute: CustomShapesRoute
 
     // MARK: - Initialization
 
-    init(parent: Coordinator?, navigationController: NavigationController, startRoute: CustomShapesRoute = .customShapes) {
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: CustomShapesRoute = .customShapes
+    ) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
@@ -44,6 +48,7 @@ class CustomShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension CustomShapesCoordinator: RouterViewFactory {
+    
     @ViewBuilder
     public func view(for route: CustomShapesRoute) -> some View {
         switch route {

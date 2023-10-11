@@ -14,13 +14,13 @@ import XCTest
 @MainActor
 final class NavigationControllerTests: XCTestCase {
     
-    func testNavigationBarIsHiddenByDefault() {
-        let navigationController = NavigationController()
-        XCTAssertTrue(navigationController.isNavigationBarHidden)
+    func test_NavigationBarIsHiddenByDefault() {
+        let sut = NavigationController()
+        XCTAssertTrue(sut.isNavigationBarHidden)
     }
     
-    func testNavigationBarIsNotHidden() {
-        let navigationController = NavigationController(isNavigationBarHidden: false)
-        XCTAssertFalse(navigationController.isNavigationBarHidden)
+    func test_navigationBarIsNotHidden() {
+        let sut = NavigationController(isNavigationBarHidden: false)
+        XCTAssertFalse(sut.isNavigationBarHidden)
     }
 }
