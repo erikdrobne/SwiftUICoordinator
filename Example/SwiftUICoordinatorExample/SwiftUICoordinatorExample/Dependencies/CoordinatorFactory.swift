@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUICoordinator
 
+@MainActor
 protocol CoordinatorFactory {
     func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator
     func makeSimpleShapesCoordinator(parent: Coordinator) -> SimpleShapesCoordinator
