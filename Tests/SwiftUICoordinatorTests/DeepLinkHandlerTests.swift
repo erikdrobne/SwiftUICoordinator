@@ -8,6 +8,7 @@
 import XCTest
 @testable import SwiftUICoordinator
 
+@MainActor
 final class DeepLinkHandlerTests: XCTestCase {
 
     func test_linkForURLThrowsInvalidSchemeError() {
