@@ -11,6 +11,7 @@ import OSLog
 @MainActor
 public protocol Coordinator: AnyObject {
     /// A property that stores a reference to the parent coordinator, if any.
+    /// Should be used as a weak reference.
     var parent: Coordinator? { get }
     /// An array that stores references to any child coordinators.
     var childCoordinators: [WeakCoordinator] { get set }

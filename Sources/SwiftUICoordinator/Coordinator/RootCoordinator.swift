@@ -9,8 +9,8 @@ import SwiftUI
 
 ///  A coordinator responsible for managing the root navigation flow of the application.
 ///
-/// The `RootCoordinator` class serves as the top-level coordinator in your application's coordinator hierarchy. It initializes the main window and navigation controller, manages child coordinators, and registers navigation transitions.
-///
+/// The `RootCoordinator` class serves as the top-level coordinator in your application's coordinator hierarchy. 
+/// It initializes the main window and navigation controller, manages child coordinators, and registers navigation transitions.
 @MainActor
 open class RootCoordinator: Coordinator {
     

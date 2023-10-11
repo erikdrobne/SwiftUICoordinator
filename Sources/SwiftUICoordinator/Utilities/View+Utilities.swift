@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension View {
-    
     @ViewBuilder
     func ifLet<T, Content: View>(_ value: T?, modifier: (Self, T) -> Content) -> some View {
         if let value = value {
