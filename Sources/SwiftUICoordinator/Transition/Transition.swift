@@ -17,6 +17,7 @@ public typealias NavigationOperation = UINavigationController.Operation
 ///   - operation: The `NavigationOperation` describing the navigation action (push or pop).
 ///
 /// - Returns: `true` if the transition is eligible; otherwise, `false`.
+@MainActor
 public protocol Transition: UIViewControllerAnimatedTransitioning {
     func isEligible(
         from fromRoute: NavigationRoute,

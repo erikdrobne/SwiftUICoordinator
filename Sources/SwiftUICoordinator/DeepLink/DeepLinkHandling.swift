@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 public protocol DeepLinkHandling {
     /// URL scheme to use for opening links in your app
     var scheme: String { get }
