@@ -2,6 +2,7 @@
 
 ![Build Status](https://github.com/erikdrobne/SwiftUICoordinator/actions/workflows/workflow.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/erikdrobne/SwiftUICoordinator/blob/main/LICENSE.md)
+![Static Badge](https://img.shields.io/badge/iOS%20Compatibility-15.0-blue)
 
 ## Introduction
 
@@ -29,10 +30,10 @@ Coordinator protocol is the core component of the pattern representing each dist
 @MainActor
 public protocol Coordinator: AnyObject {
     /// A property that stores a reference to the parent coordinator, if any.
+    /// Should be used as a weak reference.
     var parent: Coordinator? { get }
     /// An array that stores references to any child coordinators.
-    var childCoordinators: [Coordinator] { get set }
-    
+    var childCoordinators: [WeakCoordinator] { get set }
     /// Takes action parameter and handles the `CoordinatorAction`.
     func handle(_ action: CoordinatorAction)
     /// Adds child coordinator to the list.
@@ -53,7 +54,6 @@ This protocol defines the available actions for the coordinator. Views should ex
 ```Swift
 public protocol CoordinatorAction {}
 
-/// Essential actions that can be performed by coordinators.
 public enum Action: CoordinatorAction {
     case done(Any)
     case cancel(Any)
@@ -67,6 +67,7 @@ This protocol defines the available routes for navigation within a coordinator f
 **Protocol declaration**
 
 ```Swift
+@MainActor
 public protocol NavigationRoute {
     /// Use this title to set the navigation bar title when the route is displayed.
     var title: String? { get }
@@ -178,35 +179,39 @@ enum ShapesAction: CoordinatorAction {
 
 ### Create Coordinator
 
-The coordinator has to conform to the `Routing` protocol and implement the `handle(_ action: CoordinatorAction)` method which executes flow-specific logic when the action is received. `ShapesCoordinator` is the root coordinator in the example and therefore needs to initialize `NavigationController`.
-
+The coordinator has to conform to the `Routing` protocol and implement the `handle(_ action: CoordinatorAction)` method which executes flow-specific logic when the action is received.
 ```Swift
 class ShapesCoordinator: Routing {
 
     // MARK: - Internal properties
 
-    /// Root coordinator doesn't have a parent.
-    let parent: Coordinator? = nil
-    var childCoordinators = [Coordinator]()
-    var navigationController: NavigationController
+    weak var parent: Coordinator?
+    var childCoordinators = [WeakCoordinator]()
+    let navigationController: NavigationController
     let startRoute: ShapesRoute
+    let factory: CoordinatorFactory
 
     // MARK: - Initialization
 
-    init(startRoute: ShapesRoute) {
-        self.navigationController = NavigationController()
+    init(
+        parent: Coordinator?,
+        navigationController: NavigationController,
+        startRoute: ShapesRoute = .shapes,
+        factory: CoordinatorFactory
+    ) {
+        self.parent = parent
+        self.navigationController = navigationController
         self.startRoute = startRoute
-        
-        setup()
+        self.factory = factory
     }
     
     func handle(_ action: CoordinatorAction) {
         switch action {
         case ShapesAction.simpleShapes:
-            let coordinator = makeSimpleShapesCoordinator()
+            let coordinator = factory.makeSimpleShapesCoordinator(parent: self)
             try? coordinator.start()
         case ShapesAction.customShapes:
-            let coordinator = makeCustomShapesCoordinator()
+            let coordinator = factory.makeCustomShapesCoordinator(parent: self)
             try? coordinator.start()
         case let ShapesAction.featuredShape(route):
             switch route {
@@ -214,15 +219,12 @@ class ShapesCoordinator: Routing {
             default:
                 return
             }
+        case Action.done(_):
+            popToRoot()
+            childCoordinators.removeAll()
         default:
-            break
+            parent?.handle(action)
         }
-    }
-    
-    // MARK: - Private methods
-    
-    private func setup() {
-        navigationController.register(FadeTransition())
     }
 }
 ```
@@ -238,7 +240,7 @@ extension ShapesCoordinator: RouterViewFactory {
     public func view(for route: ShapesRoute) -> some View {
         switch route {
         case .shapes:
-            ShapesView<ShapesCoordinator>()
+            ShapeListView<ShapesCoordinator>()
         case .simpleShapes:
             EmptyView()
         case .customShapes:
@@ -250,25 +252,27 @@ extension ShapesCoordinator: RouterViewFactory {
 }
 ```
 
-### Adding root coordinator to the app
+### Adding RootCoordinator to the app
 
-We are going instantiate `ShapesCoordinator` (our root coordinator) and pass its `UINavigationController` to the
-`UIWindow`. Our start route for the coordinator is `ShapesRoute.shape`.
+We will instantiate `AppCoordinator` (a subclass of `RootCoordinator`), pass `ShapesCoordinator` as its child, and then initiate the flow. 
+Our starting route will be `ShapesRoute.shapes`.
 
 ```Swift
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
+
+    var dependencyContainer = DependencyContainer()
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let window = (scene as? UIWindowScene)?.windows.first else {
             return
         }
 
-        let coordinator = ShapesCoordinator(startRoute: .shapes)
-        /// Assign root coordinator's navigation controller
-        window.rootViewController = coordinator.navigationController
-        window.makeKeyAndVisible()
-
-        try? coordinator.start()
+        let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
+        dependencyContainer.set(appCoordinator)
+        
+        let coordinator = dependencyContainer.makeShapesCoordinator(parent: appCoordinator)
+        appCoordinator.start(with: coordinator)
     }
 }
 ```
@@ -281,7 +285,7 @@ To disable this feature, you need to set the `attachCoordinator` property of the
 ```Swift
 import SwiftUICoordinator
 
-struct ShapesView<Coordinator: Routing>: View {
+struct ShapeListView<Coordinator: Routing>: View {
 
     @EnvironmentObject var coordinator: Coordinator
     @StateObject var viewModel = ViewModel<Coordinator>()
@@ -289,9 +293,19 @@ struct ShapesView<Coordinator: Routing>: View {
     var body: some View {
         List {
             Button {
-                viewModel.handleButtonTap()
+                viewModel.didTapBuiltIn()
             } label: {
-                Text("Button")
+                Text("Simple")
+            }
+            Button {
+                viewModel.didTapCustom()
+            } label: {
+                Text("Custom")
+            }
+            Button {
+                viewModel.didTapFeatured()
+            } label: {
+                Text("Featured")
             }
         }
         .onAppear {
@@ -335,10 +349,29 @@ class FadeTransition: NSObject, Transition {
 }
 ```
 
-Register transition.
+Transitions will be registered within the `RootCoordinator` initializer by passing them as parameters.
 
 ```Swift
-navigationController.register(FadeTransition())
+@MainActor
+open class RootCoordinator: Coordinator {
+    
+    /// RootCoordinator doesn't have a parent
+    public let parent: Coordinator? = nil
+    public var childCoordinators = [WeakCoordinator]()
+    private let transitions: [Transition]
+    
+    public private(set) var window: UIWindow
+    public private(set) var navigationController: NavigationController
+    
+    public init(window: UIWindow, navigationController: NavigationController, transitions: [Transition] = []) {
+        self.window = window
+        self.navigationController = navigationController
+        self.transitions = transitions
+        
+        navigationController.register(transitions)
+        window.rootViewController = self.navigationController
+        window.makeKeyAndVisible()
+    }
 ```
 
 ### Handling deep links
