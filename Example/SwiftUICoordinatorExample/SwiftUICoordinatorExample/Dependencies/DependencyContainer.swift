@@ -32,8 +32,7 @@ extension DependencyContainer: CoordinatorFactory {
     func makeAppCoordinator(window: UIWindow) -> AppCoordinator {
         return AppCoordinator(
             window: window,
-            navigationController: self.navigationController,
-            transitions: [FadeTransition()]
+            navigationController: self.navigationController
         )
     }
     

@@ -21,7 +21,7 @@ open class RootCoordinator: Coordinator {
     public private(set) var window: UIWindow
     public private(set) var navigationController: NavigationController
     
-    public init(window: UIWindow, navigationController: NavigationController, transitions: [Transition] = []) {
+    public init(window: UIWindow, navigationController: NavigationController) {
         self.window = window
         self.navigationController = navigationController
         

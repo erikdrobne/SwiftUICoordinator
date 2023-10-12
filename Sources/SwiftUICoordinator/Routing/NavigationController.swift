@@ -10,9 +10,7 @@ import SwiftUI
 @MainActor
 public class NavigationController: UINavigationController {
     
-    // MARK: - Internal Properties
-    
-    private var transitionProvider: TransitionProvidable?
+    public private(set) var transitionProvider: TransitionProvidable?
     
     // MARK: - Initialization
     

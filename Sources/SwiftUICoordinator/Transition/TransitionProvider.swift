@@ -9,16 +9,12 @@ import Foundation
 
 @MainActor
 public struct TransitionProvider: TransitionProvidable {
-    public let transitions: [WeakTransition]
+    public private(set) var transitions: [WeakTransition]
     /// A private array of transitions ensuring to retain them in memory as long as needed.
-    private var _transitions: [Transition]
+    private var _transitions: [Transitionable]
     
-    public init(transitions: [Transition]) {
+    public init(transitions: [Transitionable]) {
         self._transitions = transitions
         self.transitions = transitions.map { WeakTransition($0) }
-    }
-    
-    public mutating func unregisterAll() {
-        self._transitions.removeAll()
     }
 }
