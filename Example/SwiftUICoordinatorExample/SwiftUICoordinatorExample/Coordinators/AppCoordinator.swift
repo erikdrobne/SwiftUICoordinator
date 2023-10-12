@@ -19,3 +19,7 @@ final class AppCoordinator: RootCoordinator {
         fatalError("Unhadled coordinator action.")
     }
 }
+
+extension AppCoordinator: CoordinatorDeepLinkHandling {
+    func handle(_ deepLink: SwiftUICoordinator.DeepLink, with params: [String : String]) {}
+}
