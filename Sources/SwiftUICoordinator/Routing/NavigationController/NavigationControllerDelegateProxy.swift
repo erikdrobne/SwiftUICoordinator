@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-open class NavigationControllerDelegateProxy: NSObject, UINavigationControllerDelegate {
+public class NavigationControllerDelegateProxy: NSObject, UINavigationControllerDelegate {
     
     public let transitionHandler: NavigationControllerTransitionHandler
     

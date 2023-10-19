@@ -19,7 +19,7 @@ public class NavigationController: UINavigationController {
     ///
     /// - Note: By default `isNavigationBarHidden` is set to `true`.
     ///
-    public convenience init(isNavigationBarHidden: Bool = true, delegate: NavigationControllerDelegateProxy? = nil) {
+    convenience init(isNavigationBarHidden: Bool, delegate: NavigationControllerDelegateProxy?) {
         self.init(nibName: nil, bundle: nil)
         
         self.isNavigationBarHidden = isNavigationBarHidden
