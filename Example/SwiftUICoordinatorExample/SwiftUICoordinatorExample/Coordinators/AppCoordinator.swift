@@ -9,7 +9,7 @@ import Foundation
 import SwiftUICoordinator
 
 final class AppCoordinator: RootCoordinator {
-    
+
     func start(with coordinator: any Routing) {
         self.add(child: coordinator)
         try? coordinator.start()

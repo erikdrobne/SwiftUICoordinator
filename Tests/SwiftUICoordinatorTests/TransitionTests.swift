@@ -13,7 +13,11 @@ import Foundation
 final class TransitionTests: XCTestCase {
     
     func test_registerTransition() {
-        let coordinator = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
+        let coordinator = MockCoordinator(
+            parent: nil,
+            startRoute: .circle,
+            navigationController: NavigationController()
+        )
         let transitions = [MockTransition()]
         
         coordinator.navigationController.register(transitions)

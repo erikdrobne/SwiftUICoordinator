@@ -62,8 +62,9 @@ final class DeepLinkHandlerTests: XCTestCase {
         let scheme = "myapp"
         let action = "circle"
         let url = URL(string: "\(scheme)://\(action)")
+        let keys: Set<String> = ["color", "width", "height"]
         
-        XCTAssertThrowsError(try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: ["color", "width", "height"])) { error in
+        XCTAssertThrowsError(try MockDeepLinkHandler.shared.params(for: XCTUnwrap(url), and: keys)) { error in
             if let customError = error as? DeepLinkError {
                 XCTAssertEqual(customError, DeepLinkError.missingQueryString)
             } else {

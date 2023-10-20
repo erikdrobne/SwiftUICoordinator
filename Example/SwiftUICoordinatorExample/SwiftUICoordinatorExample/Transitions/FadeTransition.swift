@@ -9,7 +9,11 @@ import UIKit
 import SwiftUICoordinator
 
 class FadeTransition: NSObject, Transition {
-    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
+    func isEligible(
+        from fromRoute: NavigationRoute,
+        to toRoute: NavigationRoute,
+        operation: NavigationOperation
+    ) -> Bool {
         return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
     }
     
@@ -30,8 +34,8 @@ class FadeTransition: NSObject, Transition {
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             toView.alpha = 1.0
-        }) { _ in
+        }, completion: { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        }
+        })
     }
 }

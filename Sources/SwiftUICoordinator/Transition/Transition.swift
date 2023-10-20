@@ -9,7 +9,8 @@ import SwiftUI
 
 public typealias NavigationOperation = UINavigationController.Operation
 
-/// Determines if the transition is eligible for a given pair of source and destination routes and the navigation operation.
+/// Determines if the transition is eligible for a given pair of source and destination routes and 
+/// the navigation operation.
 ///
 /// - Parameters:
 ///   - fromRoute: The source `NavigationRoute` for the transition.

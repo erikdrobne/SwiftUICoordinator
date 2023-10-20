@@ -21,7 +21,4 @@ final class RootCoordinatorTests: XCTestCase {
         XCTAssertFalse(sut.window.isHidden)
         XCTAssertEqual(sut.window.rootViewController, navigationController)
     }
-    
-    
-
 }

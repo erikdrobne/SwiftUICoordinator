@@ -21,10 +21,3 @@ public protocol RouterViewFactory {
     @ViewBuilder
     func view(for route: Route) -> V
 }
-
-
-
-
-
-
-
