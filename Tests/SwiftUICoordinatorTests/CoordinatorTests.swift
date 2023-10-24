@@ -45,6 +45,18 @@ final class CoordinatorTests: XCTestCase {
         XCTAssertTrue(sut.childCoordinators.isEmpty)
     }
     
+    func test_coordinatorDoesNotRetainChildCoordinators() {
+        let navigationController = NavigationController()
+        let parentCoordinator = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
+        var childCoordinator: Coordinator? = MockCoordinator(parent: parentCoordinator, startRoute: .rectangle, navigationController: navigationController)
+        parentCoordinator.add(child: childCoordinator!)
+        
+        XCTAssertNotNil(parentCoordinator.childCoordinators.first?.coordinator)
+        childCoordinator = nil
+        XCTAssertNil(parentCoordinator.childCoordinators.first?.coordinator)
+    }
+
+    
     func test_showRouteThrowsError() {
         let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
         XCTAssertNoThrow(try sut.start())
