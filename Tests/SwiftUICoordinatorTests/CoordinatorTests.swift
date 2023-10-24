@@ -42,7 +42,7 @@ final class CoordinatorTests: XCTestCase {
         sut.start(with: coordinator)
         sut.remove(coordinator: coordinator)
         
-        XCTAssertEqual(sut.childCoordinators.count, 0)
+        XCTAssertTrue(sut.childCoordinators.isEmpty)
     }
     
     func test_showRouteThrowsError() {
