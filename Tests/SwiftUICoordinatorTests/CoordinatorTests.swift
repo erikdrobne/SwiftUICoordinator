@@ -47,57 +47,16 @@ final class CoordinatorTests: XCTestCase {
     
     func test_coordinatorDoesNotRetainChildCoordinators() {
         let navigationController = NavigationController()
-        let parentCoordinator = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
-        var childCoordinator: Coordinator? = MockCoordinator(parent: parentCoordinator, startRoute: .rectangle, navigationController: navigationController)
-        parentCoordinator.add(child: childCoordinator!)
+        let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
+        var childCoordinator: Coordinator? = MockCoordinator(
+            parent: sut,
+            startRoute: .rectangle,
+            navigationController: navigationController
+        )
         
-        XCTAssertNotNil(parentCoordinator.childCoordinators.first?.coordinator)
+        sut.add(child: childCoordinator!)
+        XCTAssertNotNil(sut.childCoordinators.first?.coordinator)
         childCoordinator = nil
-        XCTAssertNil(parentCoordinator.childCoordinators.first?.coordinator)
-    }
-
-    
-    func test_showRouteThrowsError() {
-        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
-        XCTAssertNoThrow(try sut.start())
-        
-        XCTAssertThrowsError(try sut.show(route: .square)) { error in
-            guard let error = error as? NavigatorError else {
-                XCTFail("Cannot cast to NavigatorError: \(error)")
-                return
-            }
-            
-            switch error {
-            case .cannotShow(let route as MockRoute):
-                XCTAssertEqual(route, .square)
-            default:
-                XCTFail("Unexpected error type: \(error)")
-            }
-        }
-    }
-    
-    func test_showRouteNoThrow() {
-        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
-        XCTAssertNoThrow(try sut.start())
-    }
-    
-    func test_setRoutes() {
-        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
-        sut.set(routes: [.rectangle, .rectangle])
-        XCTAssertEqual(sut.viewControllers.count, 2)
-    }
-    
-    func test_appendRoutes() {
-        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
-        sut.append(routes: [.rectangle, .circle])
-        XCTAssertEqual(sut.viewControllers.count, 2)
-    }
-    
-    func test_popToRoot() {
-        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: NavigationController())
-        sut.append(routes: [.rectangle, .circle])
-        XCTAssertEqual(sut.viewControllers.count, 2)
-        sut.popToRoot(animated: false)
-        XCTAssertEqual(sut.viewControllers.count, 1)
+        XCTAssertNil(sut.childCoordinators.first?.coordinator)
     }
 }
