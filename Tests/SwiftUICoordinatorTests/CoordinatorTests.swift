@@ -5,6 +5,13 @@ import Foundation
 @MainActor 
 final class CoordinatorTests: XCTestCase {
     
+    func test_coordinatorInitialState() {
+        let navigationController = NavigationController()
+        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: navigationController)
+        XCTAssertNil(sut.parent)
+        XCTAssertTrue(sut.childCoordinators.isEmpty)
+    }
+    
     func test_addChildToCoordinator() {
         let navigationController = NavigationController()
         let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
