@@ -12,12 +12,12 @@ import Foundation
 /// `WeakTransition` is used internally to store weak references to transitions.
 public final class WeakTransition {
     /// The weak reference to the transition.
-    public private(set) weak var transition: Transition?
+    public private(set) weak var transition: Transitionable?
     
     /// Initializes a `WeakTransition` with the provided transition.
     ///
     /// - Parameter transition: The transition to wrap with a weak reference.
-    init(_ transition: Transition) {
+    init(_ transition: Transitionable) {
         self.transition = transition
     }
 }

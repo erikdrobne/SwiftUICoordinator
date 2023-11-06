@@ -11,7 +11,7 @@ import XCTest
 @MainActor
 final class RootCoordinatorTests: XCTestCase {
 
-    func test_rootViewController() {
+    func test_rootViewControllerInitialization() {
         let navigationController = NavigationController()
         let window = UIWindow()
         let sut = MockAppCoordinator(window: window, navigationController: navigationController)
@@ -20,5 +20,6 @@ final class RootCoordinatorTests: XCTestCase {
         XCTAssertTrue(sut.window.isKeyWindow)
         XCTAssertFalse(sut.window.isHidden)
         XCTAssertEqual(sut.window.rootViewController, navigationController)
+        XCTAssertTrue(sut.childCoordinators.isEmpty)
     }
 }

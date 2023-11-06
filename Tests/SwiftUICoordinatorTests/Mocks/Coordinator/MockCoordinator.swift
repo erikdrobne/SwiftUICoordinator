@@ -22,9 +22,7 @@ class MockCoordinator: Routing {
         self.startRoute = startRoute
     }
     
-    func handle(_ action: CoordinatorAction) {
-        
-    }
+    func handle(_ action: CoordinatorAction) {}
 }
 
 extension MockCoordinator: RouterViewFactory {

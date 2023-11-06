@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUICoordinator
 
-class MockTransition: NSObject, Transition {
+class MockTransition: NSObject, Transitionable {
     func isEligible(
         from fromRoute: NavigationRoute,
         to toRoute: NavigationRoute,

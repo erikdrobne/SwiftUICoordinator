@@ -68,7 +68,7 @@ extension ShapeListView {
 struct ShapesView_Previews: PreviewProvider {
     static let coordinator = ShapesCoordinator(
         parent: nil,
-        navigationController: NavigationController(),
+        navigationController: NavigationControllerFactory().makeNavigationController(),
         startRoute: ShapesRoute.shapes,
         factory: DependencyContainer.mock
     )

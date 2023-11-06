@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUICoordinator
 
-class FadeTransition: NSObject, Transition {
+class FadeTransition: NSObject, Transitionable {
     func isEligible(
         from fromRoute: NavigationRoute,
         to toRoute: NavigationRoute,
