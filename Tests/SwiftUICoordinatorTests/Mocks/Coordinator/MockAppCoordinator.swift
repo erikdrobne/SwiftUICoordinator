@@ -19,5 +19,3 @@ final class MockAppCoordinator: RootCoordinator {
         fatalError("Unhadled coordinator action.")
     }
 }
-
-

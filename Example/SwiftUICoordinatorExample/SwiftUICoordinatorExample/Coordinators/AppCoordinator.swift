@@ -21,5 +21,5 @@ final class AppCoordinator: RootCoordinator {
 }
 
 extension AppCoordinator: CoordinatorDeepLinkHandling {
-    func handle(_ deepLink: SwiftUICoordinator.DeepLink, with params: [String : String]) {}
+    func handle(_ deepLink: SwiftUICoordinator.DeepLink, with params: [String: String]) {}
 }
