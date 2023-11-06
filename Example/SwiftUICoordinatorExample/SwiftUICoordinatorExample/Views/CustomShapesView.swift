@@ -56,7 +56,10 @@ extension CustomShapesView {
 }
 
 struct CustomShapesView_Previews: PreviewProvider {
-    static let coordinator = CustomShapesCoordinator(parent: nil, navigationController: .init())
+    static let coordinator = CustomShapesCoordinator(
+        parent: nil,
+        navigationController: NavigationControllerFactory().makeNavigationController()
+    )
     
     static var previews: some View {
         CustomShapesView<CustomShapesCoordinator>()

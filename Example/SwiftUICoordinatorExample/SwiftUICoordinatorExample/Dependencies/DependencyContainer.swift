@@ -11,10 +11,10 @@ import SwiftUICoordinator
 @MainActor
 final class DependencyContainer {
     
-    lazy var transitionProvider = TransitionProvider(
-        transitions: [FadeTransition()]
-    )
-    lazy var navigationController = NavigationController(transitionProvider: transitionProvider)
+    let factory = NavigationControllerFactory()
+    lazy var delegate = factory.makeNavigationDelegate([FadeTransition()])
+    lazy var navigationController = factory.makeNavigationController(delegate: delegate)
+    
     let deepLinkHandler = DeepLinkHandler.shared
     
     private(set) var appCoordinator: AppCoordinator?
