@@ -10,10 +10,7 @@ import SwiftUI
 @MainActor
 public class NavigationController: UINavigationController {
     
-    // MARK: - Internal Properties
-    
-    /// The collection of registered transition objects.
-    private(set) var transitions = [WeakTransition]()
+    public private(set) var transitionProvider: TransitionProvidable?
     
     // MARK: - Initialization
     
@@ -24,10 +21,11 @@ public class NavigationController: UINavigationController {
     ///
     /// - Note: By default `isNavigationBarHidden` is set to `true`.
     ///
-    public convenience init(isNavigationBarHidden: Bool = true) {
+    public convenience init(isNavigationBarHidden: Bool = true, transitionProvider: TransitionProvidable? = nil) {
         self.init(nibName: nil, bundle: nil)
         
         self.isNavigationBarHidden = isNavigationBarHidden
+        self.transitionProvider = transitionProvider
     }
     
     private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -38,34 +36,6 @@ public class NavigationController: UINavigationController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Public methods
-    
-    /// Registers a single `Transition` for use in navigation animations.
-    ///
-    /// - Parameter transition: The `Transition` to be registered.
-    public func register(_ transition: Transition) {
-        transitions.append(WeakTransition(transition))
-    }
-    
-    /// Registers multiple `Transition` objects for use in navigation animations.
-    ///
-    /// - Parameter transitions: An array of `Transition` objects to be registered.
-    public func register(_ transitions: [Transition]) {
-        self.transitions += transitions.map { WeakTransition($0) }
-    }
-    
-    /// Unregisters all `Transition` instances of the specified type.
-    ///
-    /// - Parameter type: The type of `Transition` to be unregistered.
-    public func unregister<T: Transition>(_ type: T.Type) {
-        transitions.removeAll { $0.transition is T }
-    }
-    
-    /// Removes all registered `Transition` objects from the navigation controller.
-    public func unregisterAllTransitions() {
-        transitions.removeAll()
     }
 }
 
@@ -78,17 +48,17 @@ extension NavigationController: UINavigationControllerDelegate {
         from fromVC: UIViewController,
         to toVC: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
-        let transitions = self.transitions.compactMap({ $0.transition })
+        guard
+            let provider = self.transitionProvider,
+            let from = (fromVC as? RouteProvider)?.route,
+            let to = (toVC as? RouteProvider)?.route
+        else {
+            return nil
+        }
         
-        for transition in transitions {
-            guard
-                let from = (fromVC as? RouteProvider)?.route,
-                let to = (toVC as? RouteProvider)?.route,
-                transition.isEligible(from: from,to: to, operation: operation)
-            else {
-                continue
-            }
-                            
+        if let transition = provider.transitions
+            .compactMap({ $0.transition })
+            .first(where: { $0.isEligible(from: from, to: to, operation: operation) }) {
             return transition
         }
         
