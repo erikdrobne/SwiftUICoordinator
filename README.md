@@ -40,8 +40,6 @@ public protocol Coordinator: AnyObject {
     func add(child: Coordinator)
     /// Removes the coordinator from the list of children.
     func remove(coordinator: Coordinator)
-    /// Takes deep link and its parameters and handles it.
-    func handle(_ deepLink: DeepLink, with params: [String: String])
 }
 ```
 
@@ -263,11 +261,15 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
     var dependencyContainer = DependencyContainer()
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         guard let window = (scene as? UIWindowScene)?.windows.first else {
             return
         }
-
+        
         let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
         dependencyContainer.set(appCoordinator)
         
@@ -320,8 +322,12 @@ struct ShapeListView<Coordinator: Routing>: View {
 SwiftUICoordinator also supports creating custom transitions.
 
 ```Swift
-class FadeTransition: NSObject, Transition {
-    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
+class FadeTransition: NSObject, Transitionable {
+    func isEligible(
+        from fromRoute: NavigationRoute,
+        to toRoute: NavigationRoute,
+        operation: NavigationOperation
+    ) -> Bool {
         return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
     }
     
@@ -342,36 +348,19 @@ class FadeTransition: NSObject, Transition {
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             toView.alpha = 1.0
-        }) { _ in
+        }, completion: { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        }
+        })
     }
 }
 ```
 
-Transitions will be registered within the `RootCoordinator` initializer by passing them as parameters.
+Transitions will be registered by creating the `NavigationControllerDelegateProxy` and passing them as parameters.
 
 ```Swift
-@MainActor
-open class RootCoordinator: Coordinator {
-    
-    /// RootCoordinator doesn't have a parent
-    public let parent: Coordinator? = nil
-    public var childCoordinators = [WeakCoordinator]()
-    private let transitions: [Transition]
-    
-    public private(set) var window: UIWindow
-    public private(set) var navigationController: NavigationController
-    
-    public init(window: UIWindow, navigationController: NavigationController, transitions: [Transition] = []) {
-        self.window = window
-        self.navigationController = navigationController
-        self.transitions = transitions
-        
-        navigationController.register(transitions)
-        window.rootViewController = self.navigationController
-        window.makeKeyAndVisible()
-    }
+let factory = NavigationControllerFactory()
+lazy var delegate = factory.makeNavigationDelegate([FadeTransition()])
+lazy var navigationController = factory.makeNavigationController(delegate: delegate)
 ```
 
 ### Handling deep links
@@ -395,18 +384,15 @@ To handle incoming deep links in your app, you can implement the `scene(_:openUR
 
 ```Swift
 func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    if let url = URLContexts.first?.url {
-        // Attempt to retrieve the deep link and its associated parameters.
-        guard 
-            let deepLink = try? dependencyContainer.deepLinkHandler.link(for: url),
-            let params = try? dependencyContainer.deepLinkHandler.params(for: url, and: deepLink.params)
-        else {
-            return
-        }
-        
-        // Handle the deep link and its parameters using your coordinator.
-        coordinator.handle(deepLink, with: params)
+    guard
+        let url = URLContexts.first?.url,
+        let deepLink = try? dependencyContainer.deepLinkHandler.link(for: url),
+        let params = try? dependencyContainer.deepLinkHandler.params(for: url, and: deepLink.params)
+    else {
+        return
     }
+    
+    dependencyContainer.appCoordinator?.handle(deepLink, with: params)
 }
 ```
 
