@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import SwiftUICoordinator
 
 class CustomShapesCoordinator: Routing {

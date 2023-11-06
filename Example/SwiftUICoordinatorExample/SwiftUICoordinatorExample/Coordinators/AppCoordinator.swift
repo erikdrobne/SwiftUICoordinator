@@ -9,7 +9,7 @@ import Foundation
 import SwiftUICoordinator
 
 final class AppCoordinator: RootCoordinator {
-    
+
     func start(with coordinator: any Routing) {
         self.add(child: coordinator)
         try? coordinator.start()
@@ -21,5 +21,5 @@ final class AppCoordinator: RootCoordinator {
 }
 
 extension AppCoordinator: CoordinatorDeepLinkHandling {
-    func handle(_ deepLink: SwiftUICoordinator.DeepLink, with params: [String : String]) {}
+    func handle(_ deepLink: SwiftUICoordinator.DeepLink, with params: [String: String]) {}
 }

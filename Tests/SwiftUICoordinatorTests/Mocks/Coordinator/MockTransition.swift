@@ -9,7 +9,11 @@ import UIKit
 import SwiftUICoordinator
 
 class MockTransition: NSObject, Transitionable {
-    func isEligible(from fromRoute: NavigationRoute, to toRoute: NavigationRoute, operation: NavigationOperation) -> Bool {
+    func isEligible(
+        from fromRoute: NavigationRoute,
+        to toRoute: NavigationRoute,
+        operation: NavigationOperation
+    ) -> Bool {
         return (fromRoute as? MockRoute == .circle && toRoute as? MockRoute == .rectangle)
     }
     
@@ -30,8 +34,8 @@ class MockTransition: NSObject, Transitionable {
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             toView.alpha = 1.0
-        }) { _ in
+        }, completion: { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        }
+        })
     }
 }

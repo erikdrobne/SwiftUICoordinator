@@ -51,7 +51,8 @@ public extension DeepLinkHandling {
     ///     - keys: A set of strings representing the keys for the query parameters you want to extract.
     ///
     /// - Throws: An error of type ``DeepLinkError`` `invalidQueryString` in case of invalid query string.
-    /// - Returns: A `[String: String]` where the keys are the names of the query items and the values are their corresponding values.
+    /// - Returns: A `[String: String]` where the keys are the names of the query items and the values are their 
+    /// corresponding values.
     func params(for url: URL, and keys: Set<String>) throws -> [String: String] {
         guard keys.count > 0 else {
             return [:]

@@ -66,7 +66,12 @@ public extension Navigator where Self: RouterViewFactory {
         case .push(let animated):
             navigationController.pushViewController(viewController, animated: animated)
         case .present(let animated, let modalPresentationStyle, let completion):
-            present(viewController: viewController, animated: animated, modalPresentationStyle: modalPresentationStyle, completion: completion)
+            present(
+                viewController: viewController,
+                animated: animated,
+                modalPresentationStyle: modalPresentationStyle,
+                completion: completion
+            )
         case .none:
             throw NavigatorError.cannotShow(route)
         }
