@@ -23,6 +23,8 @@ public struct DeepLink {
     }
 }
 
+// MARK: - Extensions
+
 extension DeepLink: Hashable {
     public static func == (lhs: DeepLink, rhs: DeepLink) -> Bool {
         lhs.action == rhs.action
