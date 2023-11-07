@@ -18,6 +18,8 @@ public protocol DeepLinkHandling {
     func params(for url: URL, and keys: Set<String>) throws -> [String: String]
 }
 
+// MARK: - Extensions
+
 public extension DeepLinkHandling {
     
     /// Returns deep link or nil for a given URL.
