@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 protocol NavigationControllerCreatable {
-    func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy?
+    func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy
     func makeNavigationController(
         isNavigationBarHidden: Bool,
         delegate: NavigationControllerDelegateProxy?
@@ -20,7 +20,7 @@ public final class NavigationControllerFactory: NavigationControllerCreatable {
     
     public init() {}
     
-    public func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy? {
+    public func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy {
         let transitionProvider = TransitionProvider(transitions: transitions)
         let transitionHandler = NavigationControllerTransitionHandler(provider: transitionProvider)
         return NavigationControllerDelegateProxy(transitionHandler: transitionHandler)
