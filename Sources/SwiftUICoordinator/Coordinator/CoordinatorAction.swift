@@ -11,6 +11,8 @@ import Foundation
 public protocol CoordinatorAction {}
 
 public enum Action: CoordinatorAction {
+    /// Indicates a successful completion with an associated value.
     case done(Any)
+    /// Indicates cancellation with an associated value.
     case cancel(Any)
 }

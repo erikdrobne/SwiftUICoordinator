@@ -16,6 +16,7 @@ protocol NavigationControllerCreatable {
     ) -> NavigationController
 }
 
+/// A factory class for creating navigation controllers and their delegates.
 public final class NavigationControllerFactory: NavigationControllerCreatable {
     
     public init() {}
