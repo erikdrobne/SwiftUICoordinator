@@ -21,6 +21,7 @@
 		17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */; };
 		17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379702ACEDD7800CA4105 /* AppCoordinator.swift */; };
 		17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */; };
+		17DF24AF2AFD14C600578CD9 /* SlideTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */; };
 		17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183429CC63B1004755DB /* SimpleShapesView.swift */; };
 		17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183629CC63C0004755DB /* CustomShapesView.swift */; };
 		17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */; };
@@ -50,6 +51,7 @@
 		17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesAction.swift; sourceTree = "<group>"; };
 		17C379702ACEDD7800CA4105 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
+		17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTransition.swift; sourceTree = "<group>"; };
 		17E1C1FF2A1BD86D00542AB9 /* SwiftUICoordinator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftUICoordinator.xctestplan; sourceTree = "<group>"; };
 		17F1183429CC63B1004755DB /* SimpleShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesView.swift; sourceTree = "<group>"; };
 		17F1183629CC63C0004755DB /* CustomShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				17360A402A1275D600DB2296 /* FadeTransition.swift */,
+				17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */,
 			);
 			path = Transitions;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */,
 				17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
+				17DF24AF2AFD14C600578CD9 /* SlideTransition.swift in Sources */,
 				176F3CB529B8BF71009C4987 /* ShapeListView.swift in Sources */,
 				17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */,
 				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
