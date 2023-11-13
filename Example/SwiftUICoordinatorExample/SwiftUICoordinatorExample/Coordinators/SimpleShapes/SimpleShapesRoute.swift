@@ -34,6 +34,11 @@ enum SimpleShapesRoute: NavigationRoute {
     }
 
     var action: TransitionAction? {
-        return .push(animated: true)
+        switch self {
+        case .rect:
+            return .present(delegate: SlideTransitionDelegate())
+        default:
+            return .push(animated: true)
+        }
     }
 }

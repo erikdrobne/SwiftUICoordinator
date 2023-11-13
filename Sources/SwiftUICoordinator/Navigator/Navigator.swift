@@ -65,11 +65,12 @@ public extension Navigator where Self: RouterViewFactory {
         switch route.action {
         case .push(let animated):
             navigationController.pushViewController(viewController, animated: animated)
-        case .present(let animated, let modalPresentationStyle, let completion):
+        case .present(let animated, let modalPresentationStyle, let delegate, let completion):
             present(
                 viewController: viewController,
                 animated: animated,
                 modalPresentationStyle: modalPresentationStyle,
+                delegate: delegate,
                 completion: completion
             )
         case .none:
@@ -129,9 +130,16 @@ public extension Navigator where Self: RouterViewFactory {
         viewController: UIViewController,
         animated: Bool,
         modalPresentationStyle: UIModalPresentationStyle,
+        delegate: UIViewControllerTransitioningDelegate?,
         completion: (() -> Void)?
     ) {
-        viewController.modalPresentationStyle = modalPresentationStyle
+        if let delegate {
+            viewController.modalPresentationStyle = .custom
+            viewController.transitioningDelegate = delegate
+        } else {
+            viewController.modalPresentationStyle = modalPresentationStyle
+        }
+        
         navigationController.present(viewController, animated: animated, completion: completion)
     }
 }

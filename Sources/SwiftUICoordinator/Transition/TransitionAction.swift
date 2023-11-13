@@ -12,8 +12,9 @@ public enum TransitionAction {
     case push(animated: Bool)
     /// Represents a present action for presenting a view controller modally.
     case present(
-        animated: Bool,
+        animated: Bool = true,
         modalPresentationStyle: UIModalPresentationStyle = .automatic,
+        delegate: UIViewControllerTransitioningDelegate? = nil,
         completion: (() -> Void)? = nil
     )
 }
