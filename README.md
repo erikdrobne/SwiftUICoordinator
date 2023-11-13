@@ -365,6 +365,39 @@ lazy var delegate = factory.makeNavigationDelegate([FadeTransition()])
 lazy var navigationController = factory.makeNavigationController(delegate: delegate)
 ```
 
+#### Modal transitions
+
+Custom modal transitions can enhance the user experience by providing a unique way to `present` and `dismiss` view controllers.
+
+First, define a transition delegate object that conforms to the `UIViewControllerTransitioningDelegate` protocol.
+
+```Swift
+final class SlideTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SlideTransition(isPresenting: true)
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SlideTransition(isPresenting: false)
+    }
+}
+```
+
+In this example, `SlideTransition` is a custom class that conforms to the `UIViewControllerAnimatedTransitioning` protocol and handles the actual animation logic.
+
+Pass the `SlideTransitionDelegate` instance to the specific action where you wish to apply your modal transition.
+
+```Swift
+var action: TransitionAction? {
+    switch self {
+    case .rect:
+        return .present(delegate: SlideTransitionDelegate())
+    default:
+        return .push(animated: true)
+    }
+}
+```
+
 ### Handling deep links
 
 In your application, you can handle deep links by creating a `DeepLinkHandler` that conforms to the `DeepLinkHandling` protocol. This handler will specify the URL scheme and the supported deep links that your app can recognize.
