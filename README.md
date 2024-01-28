@@ -287,8 +287,6 @@ The coordinator is by default attached to the SwiftUI as an `@EnvironmentObject`
 To disable this feature, you need to set the `attachCoordinator` property of the `NavigationRoute` to `false`.
 
 ```Swift
-import SwiftUICoordinator
-
 struct ShapeListView<Coordinator: Routing>: View {
 
     @EnvironmentObject var coordinator: Coordinator
