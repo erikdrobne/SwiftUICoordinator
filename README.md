@@ -457,7 +457,7 @@ For feature requests, please open an issue on GitHub. Clearly describe the new f
 ### Submitting pull requests
 
 To submit a pull request:
-1. For the repository.
+1. Fork the repository.
 2. Create a new branch for your changes.
 3. Make your changes and test thoroughly.
 4. Open a pull request, clearly describing the changes you've made.
