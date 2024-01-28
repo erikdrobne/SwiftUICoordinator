@@ -436,9 +436,32 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 
 For better understanding, I recommend that you take a look at the example project located in the `SwiftUICoordinatorExample` folder.
 
-## 🤝 Contributions:
+## 🤝 Contributions
 
-Contributions are welcome! 
-If you find any issues, have suggestions for improvements, or want to add features, please open an issue or submit a pull request.
+Contributions are welcome to help improve and grow this project!
+
+### Reporting bugs
+
+If you come across a bug, kindly open an issue on GitHub, providing a detailed description of the problem. 
+Include the following information:
+
+- steps to reproduce the bug
+- expected behavior
+- actual behavior
+- environment details (Swift version, etc.)
+
+### Requesting features
+
+For feature requests, please open an issue on GitHub. Clearly describe the new functionality you'd like to see and provide any relevant details or use cases.
+
+### Submitting pull requests
+
+To submit a pull request:
+1. For the repository.
+2. Create a new branch for your changes.
+3. Make your changes and test thoroughly.
+4. Open a pull request, clearly describing the changes you've made.
+
+Thank you for contributing to SwiftUICoordinator! 🚀
 
 **If you appreciate this project, kindly give it a ⭐️ to help others discover the repository.**
