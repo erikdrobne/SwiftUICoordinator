@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  WeakCoordinator.swift
 //  
 //
 //  Created by Erik Drobne on 9. 10. 23.

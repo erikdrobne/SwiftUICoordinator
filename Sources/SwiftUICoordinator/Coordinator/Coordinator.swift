@@ -15,6 +15,8 @@ public protocol Coordinator: AnyObject {
     var parent: Coordinator? { get }
     /// An array that stores references to any child coordinators.
     var childCoordinators: [WeakCoordinator] { get set }
+    /// Coordinator type name
+    var name: String { get }
     /// Takes action parameter and handles the `CoordinatorAction`.
     func handle(_ action: CoordinatorAction)
     /// Adds child coordinator to the list.
@@ -27,11 +29,19 @@ public protocol Coordinator: AnyObject {
 
 public extension Coordinator {
     
+    // MARK: - Public properties
+    
+    var name: String {
+        return String(describing: type(of: self))
+    }
+    
     // MARK: - Public methods
 
     func add(child: Coordinator) {
         guard !childCoordinators.contains(where: { $0 === child }) else {
-            Logger.coordinator.warning("Attempted to add a coordinator that is already a child.")
+            Logger.coordinator.warning(
+                "Attempted to add a coordinator that is already a child: \(self.name)"
+            )
             return
         }
         
@@ -40,5 +50,6 @@ public extension Coordinator {
     
     func remove(coordinator: Coordinator) {
         childCoordinators.removeAll(where: { $0.coordinator === coordinator })
+        Logger.coordinator.notice("Removed coordinator: \(self.name)")
     }
 }
