@@ -57,9 +57,22 @@ extension SimpleShapesCoordinator: RouterViewFactory {
         case .simpleShapes:
             SimpleShapesView<SimpleShapesCoordinator>()
         case .rect:
-            Rectangle()
-                .fill(.yellow)
-                .frame(width: 200, height: 200)
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Rectangle()
+                        .fill(.yellow)
+                        .frame(width: 200, height: 200)
+                    Spacer()
+                }
+                Spacer()
+            }
+            .background(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onTapGesture { [weak self] in
+                self?.dismiss()
+            }
         case .roundedRect:
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                 .fill(.red)
