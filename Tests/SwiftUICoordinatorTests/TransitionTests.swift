@@ -9,9 +9,9 @@ import XCTest
 import Foundation
 @testable import SwiftUICoordinator
 
-@MainActor
 final class TransitionTests: XCTestCase {
-    
+        
+    @MainActor
     func test_registerTransitions() {
         let transition = MockTransition()
         let provider = TransitionProvider(transitions: [transition])

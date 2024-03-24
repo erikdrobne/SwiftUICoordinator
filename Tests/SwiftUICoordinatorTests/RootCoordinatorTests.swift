@@ -8,9 +8,9 @@
 import XCTest
 @testable import SwiftUICoordinator
 
-@MainActor
 final class RootCoordinatorTests: XCTestCase {
-
+    
+    @MainActor
     func test_rootViewControllerInitialization() {
         let navigationController = NavigationController()
         let window = UIWindow()

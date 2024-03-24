@@ -8,9 +8,9 @@
 import XCTest
 @testable import SwiftUICoordinator
 
-@MainActor
 final class DeepLinkHandlerTests: XCTestCase {
-
+    
+    @MainActor
     func test_linkForURLThrowsInvalidSchemeError() {
         let host = "circle"
         let url = URL(string: "://\(host)")
@@ -24,6 +24,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
+    @MainActor
     func test_linkForURLThrowsUnknownURLError() {
         let scheme = "myapp"
         let url = URL(string: "\(scheme)://")
@@ -37,6 +38,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
+    @MainActor
     func test_linkForURLReturnsNil() {
         let scheme = "myapp"
         let action = "square"
@@ -45,6 +47,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         XCTAssertNil(try MockDeepLinkHandler.shared.link(for: XCTUnwrap(url)))
     }
     
+    @MainActor
     func test_linkForURLSuccess() {
         let scheme = "myapp"
         let action = "circle"
@@ -58,6 +61,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }(), "Link for URL threw an error.")
     }
     
+    @MainActor
     func test_paramsThrowsMissingQueryStringError() {
         let scheme = "myapp"
         let action = "circle"
@@ -73,6 +77,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }
     }
     
+    @MainActor
     func test_paramsReturnsEmptyCollection() {
         let scheme = "myapp"
         let action = "circle"
@@ -85,6 +90,7 @@ final class DeepLinkHandlerTests: XCTestCase {
         }(), "Params for url threw an error.")
     }
     
+    @MainActor
     func test_paramsForURLSuccess() {
         let scheme = "myapp"
         let action = "rectangle"
