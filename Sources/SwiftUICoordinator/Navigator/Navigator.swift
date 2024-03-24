@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import OSLog
 
 public typealias Routing = Coordinator & Navigator
 
