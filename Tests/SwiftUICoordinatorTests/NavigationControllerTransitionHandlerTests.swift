@@ -8,9 +8,9 @@
 import XCTest
 @testable import SwiftUICoordinator
 
-@MainActor
 final class NavigationControllerTransitionHandlerTests: XCTestCase {
-    
+        
+    @MainActor
     func test_animationForEligibleRoutes() {
         let provider = TransitionProvider(transitions: [MockTransition(), MockTransition()])
         let handler = NavigationControllerTransitionHandler(provider: provider)
@@ -27,6 +27,7 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
         XCTAssertTrue(sut is MockTransition)
     }
     
+    @MainActor
     func test_animationForNoMatchingTransitions() {
         let provider = TransitionProvider(transitions: [])
         let handler = NavigationControllerTransitionHandler(provider: provider)

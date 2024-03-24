@@ -1,10 +1,9 @@
 import XCTest
 import Foundation
 @testable import SwiftUICoordinator
-
-@MainActor 
-final class CoordinatorTests: XCTestCase {
-    
+ 
+final class CoordinatorTests: XCTestCase {    
+    @MainActor 
     func test_coordinatorInitialState() {
         let navigationController = NavigationController()
         let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: navigationController)
@@ -12,6 +11,7 @@ final class CoordinatorTests: XCTestCase {
         XCTAssertTrue(sut.childCoordinators.isEmpty)
     }
     
+    @MainActor
     func test_addChildCoordinator() {
         let navigationController = NavigationController()
         let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
@@ -26,6 +26,7 @@ final class CoordinatorTests: XCTestCase {
         XCTAssert(sut.childCoordinators.first?.coordinator === coordinator)
     }
     
+    @MainActor
     func test_addMultipleChildrenToCoordinator() {
         let navigationController = NavigationController()
         let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
@@ -48,6 +49,7 @@ final class CoordinatorTests: XCTestCase {
         XCTAssert(sut.childCoordinators.first?.coordinator === coordinator)
     }
     
+    @MainActor
     func test_removeChildCoordinator() {
         let navigationController = NavigationController()
         let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
@@ -62,7 +64,8 @@ final class CoordinatorTests: XCTestCase {
         
         XCTAssertTrue(sut.childCoordinators.isEmpty)
     }
-    
+        
+    @MainActor
     func test_coordinatorDoesNotRetainChildCoordinators() {
         let navigationController = NavigationController()
         let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)

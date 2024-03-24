@@ -9,14 +9,15 @@ import Foundation
 import XCTest
 @testable import SwiftUICoordinator
 
-@MainActor
 final class NavigationControllerTests: XCTestCase {
-    
+        
+    @MainActor
     func test_navigationBarIsHiddenByDefault() {
         let sut = NavigationController()
         XCTAssertTrue(sut.isNavigationBarHidden)
     }
     
+    @MainActor
     func test_navigationBarIsNotHidden() {
         let sut = NavigationController(isNavigationBarHidden: false)
         XCTAssertFalse(sut.isNavigationBarHidden)

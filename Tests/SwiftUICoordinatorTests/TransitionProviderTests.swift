@@ -8,9 +8,9 @@
 import XCTest
 @testable import SwiftUICoordinator
 
-@MainActor
 class TransitionProviderTests: XCTestCase {
-    
+        
+    @MainActor
     func test_transitionProviderInitialization() {
         let transitions = [MockTransition(), MockTransition()]
         let sut = TransitionProvider(transitions: transitions)
@@ -19,6 +19,7 @@ class TransitionProviderTests: XCTestCase {
         XCTAssertNotNil(sut.transitions.first?.transition)
     }
     
+    @MainActor
     func test_weakTransitionDoesNotRetain() {
         var transition: Transitionable? = MockTransition()
         let weakTransition: WeakTransition? = WeakTransition(transition!)
