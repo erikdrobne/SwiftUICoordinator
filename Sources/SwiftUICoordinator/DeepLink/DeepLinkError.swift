@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  DeepLinkError.swift
 //  
 //
 //  Created by Erik Drobne on 13/09/2023.
