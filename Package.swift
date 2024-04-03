@@ -24,10 +24,14 @@ let package = Package(
         .target(
             name: "SwiftUICoordinator",
             dependencies: [],
-            path: "Sources"
+            path: "Sources",
+            resources: [
+                .process("PrivacyInfo.xcprivacy")
+            ]
         ),
         .testTarget(
             name: "SwiftUICoordinatorTests",
             dependencies: ["SwiftUICoordinator"])
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
