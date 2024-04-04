@@ -67,6 +67,9 @@ extension SimpleShapesCoordinator: RouterViewFactory {
                     Spacer()
                 }
                 Spacer()
+                    .frame(height: 16)
+                Text("Tap to dismiss.")
+                Spacer()
             }
             .background(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
