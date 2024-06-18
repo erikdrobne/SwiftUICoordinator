@@ -30,6 +30,11 @@ struct ShapeListView<Coordinator: Routing>: View {
             } label: {
                 Text("Featured")
             }
+            Button {
+                viewModel.didTapTabs()
+            } label: {
+                Text("Tabs")
+            }
         }
         .onAppear {
             viewModel.coordinator = coordinator
@@ -61,6 +66,10 @@ extension ShapeListView {
             }
 
             coordinator?.handle(ShapesAction.featuredShape(route))
+        }
+        
+        func didTapTabs() {
+            coordinator?.handle(ShapesAction.tabs)
         }
     }
 }

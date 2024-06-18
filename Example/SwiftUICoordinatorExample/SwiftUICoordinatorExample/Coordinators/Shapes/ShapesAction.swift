@@ -12,4 +12,5 @@ enum ShapesAction: CoordinatorAction {
     case simpleShapes
     case customShapes
     case featuredShape(NavigationRoute)
+    case tabs
 }

@@ -11,6 +11,7 @@
 		1732CA0029A6607800C2BC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732C9FF29A6607800C2BC1F /* Assets.xcassets */; };
 		1732CA0329A6607800C2BC1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */; };
 		17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17360A402A1275D600DB2296 /* FadeTransition.swift */; };
+		173FA01F2C18EFDB004EDF24 /* TabsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173FA01E2C18EFDB004EDF24 /* TabsCoordinator.swift */; };
 		1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */; };
 		176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176969902AB4AFD200CD6696 /* DependencyContainer.swift */; };
 		176F3CB529B8BF71009C4987 /* ShapeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F3CB429B8BF71009C4987 /* ShapeListView.swift */; };
@@ -19,6 +20,7 @@
 		17AABAED2A6D5CF400AFE8A7 /* SimpleShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAEC2A6D5CF400AFE8A7 /* SimpleShapesAction.swift */; };
 		17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAEE2A6D5E1500AFE8A7 /* CustomShapesAction.swift */; };
 		17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */; };
+		17B9E71C2C1CE30D00518BAB /* TabsCoordinatorRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9E71B2C1CE30D00518BAB /* TabsCoordinatorRoute.swift */; };
 		17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379702ACEDD7800CA4105 /* AppCoordinator.swift */; };
 		17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */; };
 		17DF24AF2AFD14C600578CD9 /* SlideTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */; };
@@ -40,6 +42,7 @@
 		1732C9FF29A6607800C2BC1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1732CA0229A6607800C2BC1F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17360A402A1275D600DB2296 /* FadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
+		173FA01E2C18EFDB004EDF24 /* TabsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsCoordinator.swift; sourceTree = "<group>"; };
 		1769698D2AB49FCF00CD6696 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		1769698F2AB4A25600CD6696 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		176969902AB4AFD200CD6696 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		17AABAEC2A6D5CF400AFE8A7 /* SimpleShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesAction.swift; sourceTree = "<group>"; };
 		17AABAEE2A6D5E1500AFE8A7 /* CustomShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesAction.swift; sourceTree = "<group>"; };
 		17AABAF02A6D5F2100AFE8A7 /* ShapesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesAction.swift; sourceTree = "<group>"; };
+		17B9E71B2C1CE30D00518BAB /* TabsCoordinatorRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsCoordinatorRoute.swift; sourceTree = "<group>"; };
 		17C379702ACEDD7800CA4105 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTransition.swift; sourceTree = "<group>"; };
@@ -129,6 +133,15 @@
 			path = Transitions;
 			sourceTree = "<group>";
 		};
+		173FA01D2C18EFBC004EDF24 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				173FA01E2C18EFDB004EDF24 /* TabsCoordinator.swift */,
+				17B9E71B2C1CE30D00518BAB /* TabsCoordinatorRoute.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
 		1769698C2AB49FB700CD6696 /* DeepLink */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +170,7 @@
 				176F3CB929B8C143009C4987 /* Shapes */,
 				17F1183929CC6648004755DB /* CustomShapes */,
 				17F1183829CC662B004755DB /* SimpleShapes */,
+				173FA01D2C18EFBC004EDF24 /* Tabs */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -288,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				173FA01F2C18EFDB004EDF24 /* TabsCoordinator.swift in Sources */,
 				1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */,
 				17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */,
 				176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */,
@@ -305,6 +320,7 @@
 				17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */,
 				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
 				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
+				17B9E71C2C1CE30D00518BAB /* TabsCoordinatorRoute.swift in Sources */,
 				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
 				176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */,
 				17AABAED2A6D5CF400AFE8A7 /* SimpleShapesAction.swift in Sources */,
