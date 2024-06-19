@@ -18,7 +18,7 @@ public protocol Navigator: ObservableObject {
     /// The starting route of the navigator.
     var startRoute: Route { get }
     
-    /// This method should be called to start the flow  and to show the view for the `startRoute`.
+    /// This method should be called to start the flow and to show the view for the `startRoute`.
     func start() throws
     /// It creates a view for the route and adds it to the navigation stack.
     func show(route: Route) throws
@@ -106,25 +106,6 @@ public extension Navigator where Self: RouterViewFactory {
     }
 
     // MARK: - Private methods
-    
-    private func hostingController(for route: Route) -> UIHostingController<some View> {
-        let view: some View = self.view(for: route)
-            .ifLet(route.title) { view, value in
-                view.navigationTitle(value)
-            }
-            .if(route.attachCoordinator) { view in
-                view.environmentObject(self)
-            }
-        
-        return RouteHostingController(
-            rootView: view,
-            route: route
-        )
-    }
-
-    private func views(for routes: [Route]) -> [UIHostingController<some View>] {
-        return routes.map { self.hostingController(for: $0) }
-    }
 
     private func present(
         viewController: UIViewController,
@@ -141,43 +122,5 @@ public extension Navigator where Self: RouterViewFactory {
         }
         
         navigationController.present(viewController, animated: animated, completion: completion)
-    }
-}
-
-public typealias TabBarRouting = Coordinator & TabBarCoordinatable
-
-@MainActor
-public protocol TabBarCoordinatable: ObservableObject {
-    associatedtype Route: TabBarNavigationRoute
-    
-    var navigationController: NavigationController { get }
-    var tabBarController: UITabBarController { get }
-    var tabs: [Route] { get }
-    func start()
-}
-
-public extension TabBarCoordinatable where Self: RouterViewFactory {
-    func start() {
-        tabBarController.viewControllers = views(for: tabs)
-        navigationController.pushViewController(tabBarController, animated: true)
-    }
-    
-    private func views(for routes: [Route]) -> [UIHostingController<some View>] {
-        return routes.map { self.hostingController(for: $0) }
-    }
-    
-    private func hostingController(for route: Route) -> UIHostingController<some View> {
-        let view: some View = self.view(for: route)
-            .ifLet(route.title) { view, value in
-                view.navigationTitle(value)
-            }
-            .if(route.attachCoordinator) { view in
-                view.environmentObject(self)
-            }
-        
-        return RouteHostingController(
-            rootView: view,
-            route: route
-        )
     }
 }

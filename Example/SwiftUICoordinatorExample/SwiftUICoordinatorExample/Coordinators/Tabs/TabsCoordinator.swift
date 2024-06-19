@@ -41,11 +41,23 @@ extension TabsCoordinator: RouterViewFactory {
     public func view(for route: TabsCoordinatorRoute) -> some View {
         switch route {
         case .red:
-            Text("Red")
+            VStack {
+                Circle()
+                    .foregroundStyle(.red)
+            }
+            .padding(16)
         case .green:
-            Text("Green")
+            VStack {
+                Circle()
+                    .foregroundStyle(.green)
+            }
+            .padding(16)
         case .blue:
-            Text("Blue")
+            VStack {
+                Circle()
+                    .foregroundStyle(.blue)
+            }
+            .padding(16)
         }
     }
 }
