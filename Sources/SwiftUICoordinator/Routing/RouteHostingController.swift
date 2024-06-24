@@ -21,7 +21,7 @@ public class RouteHostingController<Content: View>: UIHostingController<Content>
         self.route = route
         super.init(rootView: rootView)
         
-        if let tabBarRoute = route as? (any TabBarNavigationRoute) {
+        if let tabBarRoute = route as? any TabBarNavigationRoute {
             self.tabBarItem = tabBarRoute.tabBarItem
         }
     }

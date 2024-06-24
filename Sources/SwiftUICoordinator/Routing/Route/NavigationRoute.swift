@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 @MainActor
 public protocol NavigationRoute {
@@ -33,9 +32,8 @@ public extension NavigationRoute {
     var attachCoordinator: Bool {
         return true
     }
-}
-
-@MainActor
-public protocol TabBarNavigationRoute: NavigationRoute, Hashable {
-    var tabBarItem: UITabBarItem { get }
+    
+    var action: TransitionAction? {
+        return nil
+    }
 }

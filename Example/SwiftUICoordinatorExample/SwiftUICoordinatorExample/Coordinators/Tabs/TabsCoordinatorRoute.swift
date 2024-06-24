@@ -35,8 +35,4 @@ enum TabsCoordinatorRoute: TabBarNavigationRoute {
             )
         }
     }
-    
-    var action: TransitionAction? {
-        return nil
-    }
 }

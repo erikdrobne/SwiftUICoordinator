@@ -8,9 +8,13 @@ public protocol TabBarCoordinator: ObservableObject {
     associatedtype Route: TabBarNavigationRoute
     
     var navigationController: NavigationController { get }
+    /// The tab bar controller that manages the tab bar interface.
     var tabBarController: UITabBarController { get }
+    /// The tabs available in the tab bar interface, represented by `Route` types.
     var tabs: [Route] { get }
-    /// This method should be called to show the `tabBarController`
+    /// This method should be called to show the `tabBarController`.
+    ///
+    /// - Parameter action:The type of transition can be customized by providing a `TransitionAction`.
     func start(with action: TransitionAction)
 }
 
