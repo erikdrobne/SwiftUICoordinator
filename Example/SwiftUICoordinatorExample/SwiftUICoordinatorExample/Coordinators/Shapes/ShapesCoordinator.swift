@@ -51,6 +51,9 @@ class ShapesCoordinator: Routing {
             default:
                 return
             }
+        case ShapesAction.tabs:
+            let coordinator = factory.makeTabsCoordinator(parent: self)
+            coordinator.start()
         case Action.done(_):
             popToRoot()
             childCoordinators.removeAll()

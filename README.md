@@ -96,7 +96,7 @@ public protocol Navigator: ObservableObject {
     /// The starting route of the navigator.
     var startRoute: Route { get }
     
-    /// This method should be called to start the flow  and to show the view for the `startRoute`.
+    /// This method should be called to start the flow and to show the view for the `startRoute`.
     func start() throws
     /// It creates a view for the route and adds it to the navigation stack.
     func show(route: Route) throws
@@ -110,6 +110,30 @@ public protocol Navigator: ObservableObject {
     func popToRoot(animated: Bool)
     /// Dismisses the view.
     func dismiss(animated: Bool)
+}
+```
+
+### TabBarCoordinator
+
+The `TabBarCoordinator` protocol provides a way to manage a tab bar interface in your application.
+It defines the necessary properties and methods for handling tab bar navigation.
+
+**Protocol declaration**
+
+```Swift
+@MainActor
+public protocol TabBarCoordinator: ObservableObject {
+    associatedtype Route: TabBarNavigationRoute
+    
+    var navigationController: NavigationController { get }
+    /// The tab bar controller that manages the tab bar interface.
+    var tabBarController: UITabBarController { get }
+    /// The tabs available in the tab bar interface, represented by `Route` types.
+    var tabs: [Route] { get }
+    /// This method should be called to show the `tabBarController`.
+    ///
+    /// - Parameter action:The type of transition can be customized by providing a `TransitionAction`.
+    func start(with action: TransitionAction)
 }
 ```
 
@@ -428,7 +452,6 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     dependencyContainer.appCoordinator?.handle(deepLink, with: params)
 }
 ```
-
 
 ## 📒 Example project
 

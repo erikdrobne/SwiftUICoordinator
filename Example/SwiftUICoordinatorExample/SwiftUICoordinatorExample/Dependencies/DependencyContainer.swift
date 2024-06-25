@@ -57,6 +57,13 @@ extension DependencyContainer: CoordinatorFactory {
             navigationController: self.navigationController
         )
     }
+    
+    func makeTabsCoordinator(parent: Coordinator) -> TabsCoordinator {
+        return TabsCoordinator(
+            parent: parent,
+            navigationController: self.navigationController
+        )
+    }
 }
 
 extension DependencyContainer {

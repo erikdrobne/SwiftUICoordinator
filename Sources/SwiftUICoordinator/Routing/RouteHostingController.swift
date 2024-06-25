@@ -20,6 +20,10 @@ public class RouteHostingController<Content: View>: UIHostingController<Content>
     init(rootView: Content, route: NavigationRoute) {
         self.route = route
         super.init(rootView: rootView)
+        
+        if let tabBarRoute = route as? any TabBarNavigationRoute {
+            self.tabBarItem = tabBarRoute.tabBarItem
+        }
     }
 
     @objc required dynamic init?(coder aDecoder: NSCoder) {

@@ -21,3 +21,24 @@ public protocol RouterViewFactory {
     @ViewBuilder
     func view(for route: Route) -> V
 }
+
+extension RouterViewFactory where Self: ObservableObject {
+    func hostingController(for route: Route) -> UIHostingController<some View> {
+        let view: some View = self.view(for: route)
+            .ifLet(route.title) { view, value in
+                view.navigationTitle(value)
+            }
+            .if(route.attachCoordinator) { view in
+                view.environmentObject(self)
+            }
+        
+        return RouteHostingController(
+            rootView: view,
+            route: route
+        )
+    }
+
+    func views(for routes: [Route]) -> [UIHostingController<some View>] {
+        return routes.map { self.hostingController(for: $0) }
+    }
+}

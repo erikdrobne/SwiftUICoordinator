@@ -32,4 +32,8 @@ public extension NavigationRoute {
     var attachCoordinator: Bool {
         return true
     }
+    
+    var action: TransitionAction? {
+        return nil
+    }
 }
