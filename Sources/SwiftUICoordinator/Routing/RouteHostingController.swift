@@ -36,5 +36,9 @@ public class RouteHostingController<Content: View>: UIHostingController<Content>
         if let appearance = route.appearance {
             self.view.backgroundColor = appearance.background
         }
+
+        if let hidesBackButton = route.hidesBackButton {
+            self.navigationItem.setHidesBackButton(hidesBackButton, animated: false)
+        }
     }
 }

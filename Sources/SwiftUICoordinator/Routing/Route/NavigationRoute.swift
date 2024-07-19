@@ -18,6 +18,10 @@ public protocol NavigationRoute {
     var action: TransitionAction? { get }
     /// A property that indicates whether the Coordinator should be attached to the View as an EnvironmentObject.
     var attachCoordinator: Bool { get }
+    /// A property that hides the back button during navigation
+    var hidesBackButton: Bool? { get }
+    /// A property that hides the navigation bar
+    var hidesNavigationBar: Bool? { get }
 }
 
 public extension NavigationRoute {
@@ -34,6 +38,14 @@ public extension NavigationRoute {
     }
     
     var action: TransitionAction? {
+        return nil
+    }
+
+    var hidesBackButton: Bool? {
+        return nil
+    }
+
+    var hidesNavigationBar: Bool? {
         return nil
     }
 }
