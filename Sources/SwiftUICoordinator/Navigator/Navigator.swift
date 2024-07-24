@@ -80,13 +80,15 @@ public extension Navigator where Self: RouterViewFactory {
 
     func set(routes: [Route], animated: Bool = true) {
         let views = views(for: routes)
-        navigationController.isNavigationBarHidden = routes.last?.title == nil && routes.last?.hidesNavigationBar ?? true
+        let hidesNavigationBar = routes.last?.hidesNavigationBar ?? true
+        navigationController.isNavigationBarHidden = routes.last?.title == nil && hidesNavigationBar
         navigationController.setViewControllers(views, animated: animated)
     }
 
     func append(routes: [Route], animated: Bool = true) {
         let views = views(for: routes)
-        navigationController.isNavigationBarHidden = routes.last?.title == nil && routes.last?.hidesNavigationBar ?? true
+        let hidesNavigationBar = routes.last?.hidesNavigationBar ?? true
+        navigationController.isNavigationBarHidden = routes.last?.title == nil && hidesNavigationBar
         navigationController.setViewControllers(self.viewControllers + views, animated: animated)
     }
 
