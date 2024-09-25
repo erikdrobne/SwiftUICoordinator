@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol NavigationControllerCreatable {
     func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy
     func makeNavigationController(
@@ -16,7 +17,7 @@ protocol NavigationControllerCreatable {
 }
 
 /// A factory class for creating navigation controllers and their delegates.
-public final class NavigationControllerFactory: NavigationControllerCreatable, Sendable {
+public final class NavigationControllerFactory: NavigationControllerCreatable {
     
     public init() {}
     
