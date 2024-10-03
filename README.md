@@ -128,10 +128,11 @@ It defines the necessary properties and methods for handling tab bar navigation.
 @MainActor
 public protocol TabBarCoordinator: ObservableObject {
     associatedtype Route: TabBarNavigationRoute
+    associatedtype TabBarController: UITabBarController
     
     var navigationController: NavigationController { get }
     /// The tab bar controller that manages the tab bar interface.
-    var tabBarController: UITabBarController { get }
+    var tabBarController: TabBarController { get }
     /// The tabs available in the tab bar interface, represented by `Route` types.
     var tabs: [Route] { get }
     /// This method should be called to show the `tabBarController`.
