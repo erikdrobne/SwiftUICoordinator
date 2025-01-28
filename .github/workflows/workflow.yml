@@ -10,8 +10,10 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
+    strategy:
+      matrix:
+        platform: [iOS]
     env:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
