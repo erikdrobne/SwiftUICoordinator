@@ -2,7 +2,6 @@ opt_in_rules:
   - closure_spacing
   - function_default_parameter_at_end
   - fatal_error_message
-  - unused_private_declaration
   - convenience_type
 
 trailing_whitespace:
@@ -40,13 +39,5 @@ type_body_length:
 function_body_length:
   warning: 40
   error: 80
-
-custom_rules:
-  force_unwrapping_warning:
-    included: "*.swift"
-    name: "Force Unwrapping Detected"
-    regex: "![^=]"
-    message: "Avoid using force unwrapping (!) unless absolutely necessary."
-    severity: warning
 
 reporter: "xcode"
