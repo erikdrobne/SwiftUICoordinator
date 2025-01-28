@@ -78,8 +78,8 @@ struct ShapesView_Previews: PreviewProvider {
     static let coordinator = ShapesCoordinator(
         parent: nil,
         navigationController: NavigationControllerFactory().makeNavigationController(),
-        startRoute: ShapesRoute.shapes,
-        factory: DependencyContainer.mock
+        factory: DependencyContainer.mock,
+        startRoute: ShapesRoute.shapes
     )
 
     static var previews: some View {
