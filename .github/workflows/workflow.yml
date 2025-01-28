@@ -11,9 +11,6 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        platform: [iOS]
     env:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
@@ -22,17 +19,26 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
     - name: Select Xcode
       run: sudo xcode-select --switch $DEVELOPER_DIR
+
     - name: Clear Derived Data
       run: |
         rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
     - name: Install SwiftLint
       run: |
         brew install swiftlint
+
     - name: Run SwiftLint
       run: swiftlint
+
+    - name: Boot Simulator
+      run: |
+        xcrun simctl boot "iPhone 14"
+
     - name: Build and test
       run: |
         swift package update
-        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION"
+        xcodebuild clean test -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
