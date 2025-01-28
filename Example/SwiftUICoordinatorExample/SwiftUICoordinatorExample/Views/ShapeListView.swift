@@ -67,7 +67,7 @@ extension ShapeListView {
 
             coordinator?.handle(ShapesAction.featuredShape(route))
         }
-        
+
         func didTapTabs() {
             coordinator?.handle(ShapesAction.tabs)
         }

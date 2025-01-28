@@ -11,7 +11,7 @@ import SwiftUI
 public struct RouteAppearance {
     /// The background color associated with the route.
     let background: UIColor
-    
+
     public init(background: UIColor) {
         self.background = background
     }

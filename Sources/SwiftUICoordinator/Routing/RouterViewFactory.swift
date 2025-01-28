@@ -13,7 +13,7 @@ public protocol RouterViewFactory {
     associatedtype V: View
     /// The type of navigation route for which views will be created.
     associatedtype Route: NavigationRoute
-    
+
     /// Creates a SwiftUI view for the specified navigation route.
     ///
     /// - Parameter `route`: The navigation route for which the view should be created.
@@ -31,7 +31,7 @@ extension RouterViewFactory where Self: ObservableObject {
             .if(route.attachCoordinator) { view in
                 view.environmentObject(self)
             }
-        
+
         return RouteHostingController(
             rootView: view,
             route: route

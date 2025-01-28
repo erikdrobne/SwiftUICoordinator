@@ -13,7 +13,7 @@ import Foundation
 public final class WeakTransition {
     /// The weak reference to the transition.
     public private(set) weak var transition: Transitionable?
-    
+
     /// Initializes a `WeakTransition` with the provided transition.
     ///
     /// - Parameter transition: The transition to wrap with a weak reference.

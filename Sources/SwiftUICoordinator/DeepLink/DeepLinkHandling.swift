@@ -14,8 +14,8 @@ public protocol DeepLinkHandling {
     /// The set of supported deep links.
     var links: Set<DeepLink> { get }
     
-    func link(for url: URL) throws -> DeepLink?
-    func params(for url: URL, and keys: Set<String>) throws -> [String: String]
+    func link(for url: URL) throws(DeepLinkError) -> DeepLink?
+    func params(for url: URL, and keys: Set<String>) throws(DeepLinkParamsError) -> [String: String]
 }
 
 // MARK: - Extensions
@@ -34,7 +34,7 @@ public extension DeepLinkHandling {
     ///     action (host) that corresponds to any registered deep link.
     ///
     /// - Returns: ``DeepLink`` or `nil`.
-    func link(for url: URL) throws -> DeepLink? {
+    func link(for url: URL) throws(DeepLinkError) -> DeepLink? {
         guard url.scheme == scheme else {
             throw DeepLinkError.invalidScheme
         }
@@ -52,16 +52,16 @@ public extension DeepLinkHandling {
     ///     - url: A URL from which you want to extract query parameters.
     ///     - keys: A set of strings representing the keys for the query parameters you want to extract.
     ///
-    /// - Throws: An error of type ``DeepLinkError`` `invalidQueryString` in case of invalid query string.
-    /// - Returns: A `[String: String]` where the keys are the names of the query items and the values are their 
+    /// - Throws: An error of type ``DeepLinkParamsError`` `missingQueryString` in case of invalid query string.
+    /// - Returns: A `[String: String]` where the keys are the names of the query items and the values are their
     /// corresponding values.
-    func params(for url: URL, and keys: Set<String>) throws -> [String: String] {
+    func params(for url: URL, and keys: Set<String>) throws(DeepLinkParamsError) -> [String: String] {
         guard keys.count > 0 else {
             return [:]
         }
-        
+
         guard let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems else {
-            throw DeepLinkError.missingQueryString
+            throw DeepLinkParamsError.missingQueryString
         }
         
         return queryItems

@@ -11,7 +11,7 @@ import SwiftUICoordinator
 class ShapesCoordinator: Routing {
 
     // MARK: - Internal properties
-    
+
     weak var parent: Coordinator?
     var childCoordinators = [WeakCoordinator]()
     let navigationController: NavigationController
@@ -23,15 +23,15 @@ class ShapesCoordinator: Routing {
     init(
         parent: Coordinator?,
         navigationController: NavigationController,
-        startRoute: ShapesRoute = .shapes,
-        factory: CoordinatorFactory
+        factory: CoordinatorFactory,
+        startRoute: ShapesRoute = .shapes
     ) {
         self.parent = parent
         self.navigationController = navigationController
-        self.startRoute = startRoute
         self.factory = factory
+        self.startRoute = startRoute
     }
-    
+
     func handle(_ action: CoordinatorAction) {
         switch action {
         case ShapesAction.simpleShapes:
@@ -61,7 +61,7 @@ class ShapesCoordinator: Routing {
             parent?.handle(action)
         }
     }
-    
+
     func handle(_ deepLink: DeepLink, with params: [String: String]) {
         switch deepLink.route {
         case ShapesRoute.customShapes:
@@ -76,7 +76,7 @@ class ShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension ShapesCoordinator: RouterViewFactory {
-    
+
     @ViewBuilder
     public func view(for route: ShapesRoute) -> some View {
         switch route {

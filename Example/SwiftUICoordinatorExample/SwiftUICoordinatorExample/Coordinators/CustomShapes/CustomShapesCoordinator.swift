@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICoordinator
 
 class CustomShapesCoordinator: Routing {
-    
+
     // MARK: - Internal properties
 
     weak var parent: Coordinator?
@@ -28,7 +28,7 @@ class CustomShapesCoordinator: Routing {
         self.navigationController = navigationController
         self.startRoute = startRoute
     }
-    
+
     func handle(_ action: CoordinatorAction) {
         switch action {
         case CustomShapesAction.triangle:
@@ -46,7 +46,7 @@ class CustomShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension CustomShapesCoordinator: RouterViewFactory {
-    
+
     @ViewBuilder
     public func view(for route: CustomShapesRoute) -> some View {
         switch route {

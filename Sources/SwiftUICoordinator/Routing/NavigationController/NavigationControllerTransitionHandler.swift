@@ -9,14 +9,14 @@ import SwiftUI
 
 @MainActor
 public class NavigationControllerTransitionHandler {
-    
+
     /// The provider responsible for supplying transitions.
     public let provider: TransitionProvidable
-    
+
     public init(provider: TransitionProvidable) {
         self.provider = provider
     }
-    
+
     /// Asks the transition handler for an animator object to use when transitioning a view controller on or off the navigation stack.
     ///
     /// - Parameters:
@@ -39,14 +39,14 @@ public class NavigationControllerTransitionHandler {
         else {
             return nil
         }
-        
+
         // Find the eligible transition from the provider based on the given route and operation.
         if let transition = provider.transitions
             .compactMap({ $0.transition })
             .first(where: { $0.isEligible(from: from, to: to, operation: operation) }) {
             return transition
         }
-        
+
         return nil
     }
 }

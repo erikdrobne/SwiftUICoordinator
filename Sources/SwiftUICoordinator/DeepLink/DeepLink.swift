@@ -15,7 +15,7 @@ public struct DeepLink {
     public let route: NavigationRoute
     /// A set of parameters associated with the deep link.
     public let params: Set<String>
-    
+
     public init(action: String, route: NavigationRoute, params: Set<String> = []) {
         self.action = action
         self.route = route
@@ -29,7 +29,7 @@ extension DeepLink: Hashable {
     public static func == (lhs: DeepLink, rhs: DeepLink) -> Bool {
         lhs.action == rhs.action
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(action)
     }

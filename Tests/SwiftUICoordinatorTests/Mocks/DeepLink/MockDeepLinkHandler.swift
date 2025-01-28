@@ -10,7 +10,7 @@ import SwiftUICoordinator
 
 class MockDeepLinkHandler: DeepLinkHandling {
     static let shared = MockDeepLinkHandler()
-    
+
     let scheme = "myapp"
     let links: Set<DeepLink> = [
         DeepLink(action: "circle", route: MockRoute.circle),
@@ -20,6 +20,6 @@ class MockDeepLinkHandler: DeepLinkHandling {
             params: ["color", "width", "height"]
         )
     ]
-    
+
     private init() {}
 }

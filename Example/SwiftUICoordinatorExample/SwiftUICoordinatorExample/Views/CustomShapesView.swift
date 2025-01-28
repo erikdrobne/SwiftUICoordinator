@@ -60,7 +60,7 @@ struct CustomShapesView_Previews: PreviewProvider {
         parent: nil,
         navigationController: NavigationControllerFactory().makeNavigationController()
     )
-    
+
     static var previews: some View {
         CustomShapesView<CustomShapesCoordinator>()
             .environmentObject(coordinator)

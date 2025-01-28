@@ -18,17 +18,17 @@ protocol NavigationControllerCreatable {
 
 /// A factory class for creating navigation controllers and their delegates.
 public final class NavigationControllerFactory: NavigationControllerCreatable {
-    
+
     public init() {}
-    
+
     @MainActor
     public func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy {
         let transitionProvider = TransitionProvider(transitions: transitions)
         let transitionHandler = NavigationControllerTransitionHandler(provider: transitionProvider)
         return NavigationControllerDelegateProxy(transitionHandler: transitionHandler)
     }
-    
-    @MainActor 
+
+    @MainActor
     public func makeNavigationController(
         isNavigationBarHidden: Bool = true,
         delegate: NavigationControllerDelegateProxy? = nil

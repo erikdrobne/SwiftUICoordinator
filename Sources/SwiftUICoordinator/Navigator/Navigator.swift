@@ -19,9 +19,9 @@ public protocol Navigator: ObservableObject {
     var startRoute: Route { get }
     
     /// This method should be called to start the flow and to show the view for the `startRoute`.
-    func start() throws
+    func start() throws(NavigatorError)
     /// It creates a view for the route and adds it to the navigation stack.
-    func show(route: Route) throws
+    func show(route: Route) throws(NavigatorError)
     /// Creates views for routes, and replaces the navigation stack with the specified views.
     func set(routes: [Route], animated: Bool)
     /// Creates views for routes, and appends them on the navigation stack.
@@ -54,11 +54,11 @@ public extension Navigator where Self: RouterViewFactory {
     
     // MARK: - Public methods
 
-    func start() throws {
+    func start() throws(NavigatorError) {
         try show(route: startRoute)
     }
 
-    func show(route: Route) throws {
+    func show(route: Route) throws(NavigatorError) {
         let viewController = self.hostingController(for: route)
         navigationController.isNavigationBarHidden = route.title == nil && route.hidesNavigationBar ?? true
 

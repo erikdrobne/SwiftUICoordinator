@@ -10,20 +10,20 @@ import SwiftUICoordinator
 
 @MainActor
 final class DependencyContainer {
-    
+
     let factory = NavigationControllerFactory()
     lazy var delegate = factory.makeNavigationDelegate([FadeTransition()])
-    lazy var navigationController = factory.makeNavigationController(delegate: delegate)
-    
+    lazy var navigationController = factory.makeNavigationController(delegate: nil)
+
     let deepLinkHandler = DeepLinkHandler.shared
-    
+
     private(set) var appCoordinator: AppCoordinator?
-    
+
     func set(_ coordinator: AppCoordinator) {
         guard appCoordinator == nil else {
             return
         }
-        
+
         self.appCoordinator = coordinator
     }
 }
@@ -35,7 +35,7 @@ extension DependencyContainer: CoordinatorFactory {
             navigationController: self.navigationController
         )
     }
-    
+
     func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator {
         return ShapesCoordinator(
             parent: parent,
@@ -43,7 +43,7 @@ extension DependencyContainer: CoordinatorFactory {
             factory: self
         )
     }
-    
+
     func makeSimpleShapesCoordinator(parent: Coordinator) -> SimpleShapesCoordinator {
         return SimpleShapesCoordinator(
             parent: parent,
@@ -57,7 +57,7 @@ extension DependencyContainer: CoordinatorFactory {
             navigationController: self.navigationController
         )
     }
-    
+
     func makeTabsCoordinator(parent: Coordinator) -> TabsCoordinator {
         return TabsCoordinator(
             parent: parent,

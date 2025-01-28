@@ -12,7 +12,7 @@ enum MockRoute: NavigationRoute {
     case circle
     case rectangle
     case square
-    
+
     var title: String? {
         switch self {
         case .circle:
