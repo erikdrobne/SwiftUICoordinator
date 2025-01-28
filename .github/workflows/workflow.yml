@@ -15,7 +15,7 @@ jobs:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
       SCHEME: SwiftUICoordinator
-      DESTINATION: platform=iOS Simulator,name=iPhone 15
+      DESTINATION: platform=iOS Simulator,name=iPhone 16 Pro
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
     - name: List Available Simulators
       run: xcrun simctl list devices
 
-    # - name: Build and test
-    #   run: |
-    #     swift package update
-    #     xcodebuild clean test -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
+    - name: Build and test
+      run: |
+        swift package update
+        xcodebuild clean test -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
