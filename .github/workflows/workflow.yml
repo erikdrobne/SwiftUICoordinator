@@ -38,7 +38,7 @@ jobs:
     #   run: xcrun simctl list devices
 
     - name: Run tests
-      run: xcodebuild clean test -project "Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj" -scheme "SwiftUICoordinator" -destination "platform=iOS Simulator,name=iPhone 16 Pro,OS=latest"
+      run: xcodebuild clean build test -scheme "SwiftUICoordinator" -destination "platform=iOS Simulator,name=iPhone 16 Pro,OS=latest"
 
     # - name: Build and test
     #   run: |
