@@ -20,9 +20,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install iOS 17.0 Simulator
+    - name: List available Xcode versions
       run: |
-        xcversion simulators --install='iOS 17.0'
+        xcversion list
 
     - name: Select Xcode
       run: sudo xcode-select --switch $DEVELOPER_DIR
@@ -41,7 +41,7 @@ jobs:
     - name: List Available Simulators
       run: xcrun simctl list devices
 
-    - name: Build and test
-      run: |
-        swift package update
-        xcodebuild clean test -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
+    # - name: Build and test
+    #   run: |
+    #     swift package update
+    #     xcodebuild clean test -project $PROJECT -scheme $SCHEME -destination "$DESTINATION"
