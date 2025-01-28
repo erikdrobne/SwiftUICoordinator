@@ -78,7 +78,7 @@ struct SimpleShapesView_Previews: PreviewProvider {
         parent: nil,
         navigationController: NavigationControllerFactory().makeNavigationController()
     )
-    
+
     static var previews: some View {
         SimpleShapesView<SimpleShapesCoordinator>()
             .environmentObject(coordinator)

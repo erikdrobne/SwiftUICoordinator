@@ -28,15 +28,15 @@ public extension NavigationRoute {
     var title: String? {
         return nil
     }
-    
+
     var appearance: RouteAppearance? {
         return nil
     }
-    
+
     var attachCoordinator: Bool {
         return true
     }
-    
+
     var action: TransitionAction? {
         return nil
     }

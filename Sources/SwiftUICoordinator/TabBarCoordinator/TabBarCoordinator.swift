@@ -7,7 +7,7 @@ public typealias TabBarRouting = Coordinator & TabBarCoordinator
 public protocol TabBarCoordinator: ObservableObject {
     associatedtype Route: TabBarNavigationRoute
     associatedtype TabBarController: UITabBarController
-    
+
     var navigationController: NavigationController { get }
     /// The tab bar controller that manages the tab bar interface.
     var tabBarController: TabBarController { get }
@@ -22,7 +22,7 @@ public protocol TabBarCoordinator: ObservableObject {
 public extension TabBarCoordinator where Self: RouterViewFactory {
     func start(with action: TransitionAction = .push(animated: true)) {
         tabBarController.viewControllers = views(for: tabs)
-        
+
         switch action {
         case .push(let animated):
             navigationController.pushViewController(tabBarController, animated: animated)
@@ -36,9 +36,9 @@ public extension TabBarCoordinator where Self: RouterViewFactory {
             )
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func present(
         viewController: UITabBarController,
         animated: Bool,
@@ -52,7 +52,7 @@ public extension TabBarCoordinator where Self: RouterViewFactory {
         } else {
             viewController.modalPresentationStyle = modalPresentationStyle
         }
-        
+
         navigationController.present(viewController, animated: animated, completion: completion)
     }
 }

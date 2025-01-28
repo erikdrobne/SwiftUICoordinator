@@ -16,13 +16,13 @@ import SwiftUI
 ///   `NavigationControllerTransitionHandler` instance.
 @MainActor
 public class NavigationControllerDelegateProxy: NSObject, UINavigationControllerDelegate {
-    
+
     public let transitionHandler: NavigationControllerTransitionHandler
-    
+
     public init(transitionHandler: NavigationControllerTransitionHandler) {
         self.transitionHandler = transitionHandler
     }
-    
+
     public func navigationController(
         _ navigationController: UINavigationController,
         animationControllerFor operation: UINavigationController.Operation,

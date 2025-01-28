@@ -28,7 +28,7 @@ class SimpleShapesCoordinator: Routing {
         self.navigationController = navigationController
         self.startRoute = startRoute
     }
-    
+
     func handle(_ action: CoordinatorAction) {
         switch action {
         case SimpleShapesAction.rect:
@@ -50,32 +50,14 @@ class SimpleShapesCoordinator: Routing {
 // MARK: - RouterViewFactory
 
 extension SimpleShapesCoordinator: RouterViewFactory {
-    
+
     @ViewBuilder
     public func view(for route: SimpleShapesRoute) -> some View {
         switch route {
         case .simpleShapes:
             SimpleShapesView<SimpleShapesCoordinator>()
         case .rect:
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Rectangle()
-                        .fill(.yellow)
-                        .frame(width: 200, height: 200)
-                    Spacer()
-                }
-                Spacer()
-                    .frame(height: 16)
-                Text("Tap to dismiss.")
-                Spacer()
-            }
-            .background(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onTapGesture { [weak self] in
-                self?.dismiss()
-            }
+            makeRect()
         case .roundedRect:
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                 .fill(.red)
@@ -103,6 +85,29 @@ extension SimpleShapesCoordinator: RouterViewFactory {
                 .buttonStyle(.borderedProminent)
             }
 
+        }
+    }
+    
+    @ViewBuilder
+    private func makeRect() -> some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Rectangle()
+                    .fill(.yellow)
+                    .frame(width: 200, height: 200)
+                Spacer()
+            }
+            Spacer()
+                .frame(height: 16)
+            Text("Tap to dismiss.")
+            Spacer()
+        }
+        .background(.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onTapGesture { [weak self] in
+            self?.dismiss()
         }
     }
 }

@@ -27,7 +27,7 @@ class TabsCoordinator: TabBarRouting {
         self.navigationController = navigationController
         self.tabs = [.red, .green, .blue]
     }
-    
+
     func handle(_ action: CoordinatorAction) {
         parent?.handle(action)
     }
@@ -36,7 +36,7 @@ class TabsCoordinator: TabBarRouting {
 // MARK: - RouterViewFactory
 
 extension TabsCoordinator: RouterViewFactory {
-    
+
     @ViewBuilder
     public func view(for route: TabsCoordinatorRoute) -> some View {
         switch route {

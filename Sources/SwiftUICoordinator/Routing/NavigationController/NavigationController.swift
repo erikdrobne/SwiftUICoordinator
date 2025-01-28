@@ -9,7 +9,7 @@ import SwiftUI
 
 @MainActor
 public class NavigationController: UINavigationController {
-    
+
     /// Initializes an instance of the class with optional customization for the navigation bar's visibility.
     ///
     /// - Parameters:
@@ -22,15 +22,15 @@ public class NavigationController: UINavigationController {
     ///
     convenience init(isNavigationBarHidden: Bool = true, delegate: NavigationControllerDelegateProxy? = nil) {
         self.init(nibName: nil, bundle: nil)
-        
+
         self.isNavigationBarHidden = isNavigationBarHidden
         self.delegate = delegate
     }
-    
+
     private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

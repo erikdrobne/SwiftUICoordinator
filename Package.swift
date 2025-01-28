@@ -32,6 +32,5 @@ let package = Package(
         .testTarget(
             name: "SwiftUICoordinatorTests",
             dependencies: ["SwiftUICoordinator"])
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )

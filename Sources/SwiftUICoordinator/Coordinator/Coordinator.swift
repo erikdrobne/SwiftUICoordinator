@@ -28,13 +28,13 @@ public protocol Coordinator: AnyObject {
 // MARK: - Extensions
 
 public extension Coordinator {
-    
+
     // MARK: - Public properties
-    
+
     var name: String {
         return String(describing: type(of: self))
     }
-    
+
     // MARK: - Public methods
 
     func add(child: Coordinator) {
@@ -44,10 +44,10 @@ public extension Coordinator {
             )
             return
         }
-        
+
         childCoordinators.append(WeakCoordinator(child))
     }
-    
+
     func remove(coordinator: Coordinator) {
         childCoordinators.removeAll(where: { $0.coordinator === coordinator })
         Logger.coordinator.notice("Removed coordinator: \(self.name)")

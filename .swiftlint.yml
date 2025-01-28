@@ -1,5 +1,13 @@
-disabled_rules:
-  - trailing_whitespace
+opt_in_rules:
+  - closure_spacing
+  - function_default_parameter_at_end
+  - fatal_error_message
+  - convenience_type
+
+trailing_whitespace:
+  ignores_empty_lines: true
+  ignores_comments: true
+
 identifier_name:
   min_length:
     warning: 0
@@ -7,6 +15,7 @@ identifier_name:
   max_length:
     warning: 45
     error: 60
+
 type_name:
   min_length:
     warning: 0
@@ -14,9 +23,21 @@ type_name:
   max_length:
     warning: 45
     error: 60
+
 line_length:
   warning: 120
+  error: 200
   ignores_function_declarations: true
   ignores_comments: true
   ignores_interpolated_strings: true
   ignores_urls: true
+
+type_body_length:
+  warning: 200
+  error: 400
+
+function_body_length:
+  warning: 40
+  error: 80
+
+reporter: "xcode"

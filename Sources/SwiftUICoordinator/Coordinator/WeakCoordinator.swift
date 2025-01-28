@@ -13,7 +13,7 @@ import Foundation
 public final class WeakCoordinator {
     /// The weak reference to the coordinator.
     public private(set) weak var coordinator: Coordinator?
-    
+
     /// Initializes a `WeakCoordinator` with the provided coordinator.
     ///
     /// - Parameter coordinator: The coordinator to wrap with a weak reference.

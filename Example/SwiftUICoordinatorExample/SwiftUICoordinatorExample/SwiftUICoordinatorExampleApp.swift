@@ -21,7 +21,7 @@ struct SwiftUICoordinatorExampleApp: App {
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
     var dependencyContainer = DependencyContainer()
-    
+
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
@@ -30,14 +30,14 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         guard let window = (scene as? UIWindowScene)?.windows.first else {
             return
         }
-        
+
         let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
         dependencyContainer.set(appCoordinator)
-        
+
         let coordinator = dependencyContainer.makeShapesCoordinator(parent: appCoordinator)
         appCoordinator.start(with: coordinator)
     }
-    
+
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard
             let url = URLContexts.first?.url,
@@ -46,7 +46,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         else {
             return
         }
-        
+
         dependencyContainer.appCoordinator?.handle(deepLink, with: params)
     }
 }

@@ -12,7 +12,7 @@ enum TabsCoordinatorRoute: TabBarNavigationRoute {
     case red
     case green
     case blue
-    
+
     var tabBarItem: UITabBarItem {
         switch self {
         case .red:

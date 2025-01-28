@@ -10,27 +10,30 @@ on:
 
 jobs:
   build:
-
-    runs-on: macos-latest
+    runs-on: macos-15
     env:
-      PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
-      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+      XCODE_DIR: /Applications/Xcode_16.2.app/Contents/Developer
       SCHEME: SwiftUICoordinator
-      DESTINATION: platform=iOS Simulator,name=iPhone 14
+      DESTINATION: platform=iOS Simulator,name=iPhone 16 Pro
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
     - name: Select Xcode
-      run: sudo xcode-select --switch $DEVELOPER_DIR
+      run: sudo xcode-select --switch $XCODE_DIR
+
     - name: Clear Derived Data
       run: |
         rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
     - name: Install SwiftLint
       run: |
         brew install swiftlint
+
     - name: Run SwiftLint
       run: swiftlint
-    - name: Build and test
+
+    - name: Test
       run: |
         swift package update
         xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION"
