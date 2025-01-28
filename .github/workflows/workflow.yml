@@ -20,10 +20,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install xcode-install
-      run: |
-        brew install xcode-install
-    - name: Install iOS 16.2 Simulator
+    - name: Install iOS 17.0 Simulator
       run: |
         xcversion simulators --install='iOS 17.0'
 
