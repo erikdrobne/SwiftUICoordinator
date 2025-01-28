@@ -34,10 +34,6 @@ jobs:
     - name: Run SwiftLint
       run: swiftlint
 
-    - name: Boot Simulator
-      run: |
-        xcrun simctl boot "iPhone 14"
-
     - name: Build and test
       run: |
         swift package update
