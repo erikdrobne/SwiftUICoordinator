@@ -34,6 +34,10 @@ jobs:
     - name: Run SwiftLint
       run: swiftlint
 
+    - name: List Available Simulators
+      run: xcrun simctl list devices
+    
+
     - name: Build and test
       run: |
         swift package update
