@@ -15,10 +15,17 @@ jobs:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
       SCHEME: SwiftUICoordinator
-      DESTINATION: platform=iOS Simulator,name=iPhone 15,OS=17.0
+      DESTINATION: platform=iOS Simulator,name=iPhone 15
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Install xcode-install
+      run: |
+        brew install xcode-install
+    - name: Install iOS 16.2 Simulator
+      run: |
+        xcversion simulators --install='iOS 17.0'
 
     - name: Select Xcode
       run: sudo xcode-select --switch $DEVELOPER_DIR
@@ -36,7 +43,6 @@ jobs:
 
     - name: List Available Simulators
       run: xcrun simctl list devices
-    
 
     - name: Build and test
       run: |
