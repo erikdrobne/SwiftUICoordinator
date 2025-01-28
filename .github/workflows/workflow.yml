@@ -15,7 +15,7 @@ jobs:
       PROJECT: Example/SwiftUICoordinatorExample/SwiftUICoordinatorExample.xcodeproj
       DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
       SCHEME: SwiftUICoordinator
-      DESTINATION: platform=iOS Simulator,name=iPhone 15,OS=17.0.1
+      DESTINATION: platform=iOS Simulator,name=iPhone 15,OS=17.0
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
