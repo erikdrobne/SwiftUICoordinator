@@ -13,8 +13,7 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
     @MainActor
     func test_animationForEligibleRoutes() {
         let transitions = [MockTransition(), MockTransition()]
-        let provider = TransitionProvider(transitions: transitions)
-        let handler = NavigationControllerTransitionHandler(provider: provider)
+        let handler = NavigationControllerTransitionHandler(transitions: transitions)
 
         let mockFromVC = RouteHostingController(rootView: CircleView(), route: MockRoute.circle)
         let mockToVC = RouteHostingController(rootView: RectangleView(), route: MockRoute.rectangle)
@@ -30,8 +29,7 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
 
     @MainActor
     func test_animationForNoMatchingTransitions() {
-        let provider = TransitionProvider(transitions: [])
-        let handler = NavigationControllerTransitionHandler(provider: provider)
+        let handler = NavigationControllerTransitionHandler(transitions: [])
 
         let mockFromVC = RouteHostingController(rootView: CircleView(), route: MockRoute.circle)
         let mockToVC = RouteHostingController(rootView: RectangleView(), route: MockRoute.rectangle)

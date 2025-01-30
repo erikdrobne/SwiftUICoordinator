@@ -23,8 +23,7 @@ public struct NavigationControllerFactory: NavigationControllerCreatable {
     public init() {}
     
     public func makeTransitionDelegate(_ transitions: [Transitionable]) -> NavigationControllerTransitionDelegate {
-        let transitionProvider = TransitionProvider(transitions: transitions)
-        let transitionHandler = NavigationControllerTransitionHandler(provider: transitionProvider)
+        let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
         return NavigationControllerTransitionDelegate(transitionHandler: transitionHandler)
     }
 

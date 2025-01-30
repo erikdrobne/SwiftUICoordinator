@@ -19,7 +19,7 @@ public typealias NavigationOperation = UINavigationController.Operation
 ///
 /// - Returns: `true` if the transition is eligible; otherwise, `false`.
 @MainActor
-public protocol Transitionable: UIViewControllerAnimatedTransitioning {
+public protocol Transitionable: AnyObject, UIViewControllerAnimatedTransitioning {
     func isEligible(
         from fromRoute: NavigationRoute,
         to toRoute: NavigationRoute,

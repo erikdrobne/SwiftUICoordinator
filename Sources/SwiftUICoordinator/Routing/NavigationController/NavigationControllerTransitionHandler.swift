@@ -11,7 +11,7 @@ import UIKit
 struct NavigationControllerTransitionHandler {
 
     /// The provider responsible for supplying transitions.
-    let provider: TransitionProvidable
+    let transitions: [Transitionable]
 
     /// Asks the transition handler for an animator object to use when transitioning a view controller on or off the navigation stack.
     ///
@@ -37,7 +37,7 @@ struct NavigationControllerTransitionHandler {
         }
 
         // Find the eligible transition from the provider based on the given route and operation.
-        if let transition = provider.transitions.first(where: {
+        if let transition = self.transitions.first(where: {
             $0.isEligible(from: from, to: to, operation: operation)
         }) {
             return transition
