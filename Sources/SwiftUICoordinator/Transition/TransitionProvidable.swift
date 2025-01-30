@@ -9,6 +9,5 @@ import Foundation
 
 @MainActor
 public protocol TransitionProvidable {
-    /// An array of transitions wrapped in weak references.
-    var transitions: [WeakTransition] { get }
+    var transitions: [Transitionable] { get }
 }

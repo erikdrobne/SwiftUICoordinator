@@ -41,9 +41,9 @@ public class NavigationControllerTransitionHandler {
         }
 
         // Find the eligible transition from the provider based on the given route and operation.
-        if let transition = provider.transitions
-            .compactMap({ $0.transition })
-            .first(where: { $0.isEligible(from: from, to: to, operation: operation) }) {
+        if let transition = provider.transitions.first(where: {
+            $0.isEligible(from: from, to: to, operation: operation)
+        }) {
             return transition
         }
 
