@@ -1,5 +1,5 @@
 //
-//  Transition.swift
+//  Transitionable.swift
 //  
 //
 //  Created by Erik Drobne on 15/05/2023.
