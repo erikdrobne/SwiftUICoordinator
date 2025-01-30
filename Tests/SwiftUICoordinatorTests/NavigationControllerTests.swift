@@ -13,13 +13,17 @@ final class NavigationControllerTests: XCTestCase {
 
     @MainActor
     func testNavigationBarIsHiddenByDefault() {
+        // Act
         let navigationController = NavigationController()
+        // Assert
         XCTAssertTrue(navigationController.isNavigationBarHidden)
     }
 
     @MainActor
     func testNavigationBarIsNotHidden() {
+        // Act
         let navigationController = NavigationController(isNavigationBarHidden: false)
+        // Assert
         XCTAssertFalse(navigationController.isNavigationBarHidden)
     }
     
