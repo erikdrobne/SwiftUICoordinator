@@ -5,17 +5,13 @@
 //  Created by Erik Drobne on 19. 10. 23.
 //
 
-import SwiftUI
+import UIKit
 
 @MainActor
-public class NavigationControllerTransitionHandler {
+struct NavigationControllerTransitionHandler {
 
     /// The provider responsible for supplying transitions.
-    public let provider: TransitionProvidable
-
-    public init(provider: TransitionProvidable) {
-        self.provider = provider
-    }
+    let provider: TransitionProvidable
 
     /// Asks the transition handler for an animator object to use when transitioning a view controller on or off the navigation stack.
     ///

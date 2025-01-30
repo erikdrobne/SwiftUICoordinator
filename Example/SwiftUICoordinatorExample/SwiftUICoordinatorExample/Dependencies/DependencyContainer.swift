@@ -13,7 +13,7 @@ final class DependencyContainer {
 
     let factory = NavigationControllerFactory()
     let transitions = [FadeTransition()]
-    lazy var delegate = factory.makeNavigationDelegate(transitions)
+    lazy var delegate = factory.makeTransitionDelegate(transitions)
     lazy var navigationController = factory.makeNavigationController(delegate: self.delegate)
 
     let deepLinkHandler = DeepLinkHandler.shared

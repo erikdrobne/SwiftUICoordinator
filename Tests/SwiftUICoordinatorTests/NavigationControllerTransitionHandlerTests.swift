@@ -12,7 +12,8 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
 
     @MainActor
     func test_animationForEligibleRoutes() {
-        let provider = TransitionProvider(transitions: [MockTransition(), MockTransition()])
+        let transitions = [MockTransition(), MockTransition()]
+        let provider = TransitionProvider(transitions: transitions)
         let handler = NavigationControllerTransitionHandler(provider: provider)
 
         let mockFromVC = RouteHostingController(rootView: CircleView(), route: MockRoute.circle)

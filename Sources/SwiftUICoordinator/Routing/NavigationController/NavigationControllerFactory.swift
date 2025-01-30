@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  NavigationControllerFactory.swift
+//
 //
 //  Created by Erik Drobne on 19. 10. 23.
 //
@@ -9,29 +9,28 @@ import Foundation
 
 @MainActor
 protocol NavigationControllerCreatable {
-    func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy
+    func makeTransitionDelegate(_ transitions: [Transitionable]) -> NavigationControllerTransitionDelegate
     func makeNavigationController(
         isNavigationBarHidden: Bool,
-        delegate: NavigationControllerDelegateProxy?
+        delegate: NavigationControllerTransitionDelegate?
     ) -> NavigationController
 }
 
 /// A factory class for creating navigation controllers and their delegates.
-public final class NavigationControllerFactory: NavigationControllerCreatable {
-
+@MainActor
+public struct NavigationControllerFactory: NavigationControllerCreatable {
+    
     public init() {}
-
-    @MainActor
-    public func makeNavigationDelegate(_ transitions: [Transitionable]) -> NavigationControllerDelegateProxy {
+    
+    public func makeTransitionDelegate(_ transitions: [Transitionable]) -> NavigationControllerTransitionDelegate {
         let transitionProvider = TransitionProvider(transitions: transitions)
         let transitionHandler = NavigationControllerTransitionHandler(provider: transitionProvider)
-        return NavigationControllerDelegateProxy(transitionHandler: transitionHandler)
+        return NavigationControllerTransitionDelegate(transitionHandler: transitionHandler)
     }
 
-    @MainActor
     public func makeNavigationController(
         isNavigationBarHidden: Bool = true,
-        delegate: NavigationControllerDelegateProxy? = nil
+        delegate: NavigationControllerTransitionDelegate? = nil
     ) -> NavigationController {
         return NavigationController(isNavigationBarHidden: isNavigationBarHidden, delegate: delegate)
     }

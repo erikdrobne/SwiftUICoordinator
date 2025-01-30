@@ -16,9 +16,9 @@ final class TransitionTests: XCTestCase {
         let transition = MockTransition()
         let provider = TransitionProvider(transitions: [transition])
         let transitionHandler = NavigationControllerTransitionHandler(provider: provider)
-        let delegateProxy = NavigationControllerDelegateProxy(transitionHandler: transitionHandler)
+        let delegateProxy = NavigationControllerTransitionDelegate(transitionHandler: transitionHandler)
 
-        guard let sut = delegateProxy.transitionHandler.provider.transitions[0].transition as? MockTransition else {
+        guard let sut = delegateProxy.transitionHandler.provider.transitions[0] as? MockTransition else {
             XCTFail("Cannot cast to MockTransition.")
             return
         }

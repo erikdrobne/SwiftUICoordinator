@@ -16,16 +16,18 @@ class TransitionProviderTests: XCTestCase {
         let sut = TransitionProvider(transitions: transitions)
 
         XCTAssertEqual(sut.transitions.count, transitions.count)
-        XCTAssertNotNil(sut.transitions.first?.transition)
+        XCTAssertNotNil(sut.transitions.first)
     }
 
     @MainActor
-    func test_weakTransitionDoesNotRetain() {
-        var transition: Transitionable? = MockTransition()
-        let weakTransition: WeakTransition? = WeakTransition(transition!)
+    func test_transitionDoesNotRetain() {
+        let optionalTransition: MockTransition? = MockTransition()
+        let transitions = [optionalTransition!]
+        let sut = TransitionProvider(transitions: transitions)
 
-        XCTAssertNotNil(weakTransition?.transition)
-        transition = nil
-        XCTAssertNil(weakTransition?.transition)
+        XCTAssertEqual(sut.transitions.count, transitions.count)
+        DispatchQueue.main.async {
+            XCTAssertTrue(sut.transitions.isEmpty)
+        }
     }
 }

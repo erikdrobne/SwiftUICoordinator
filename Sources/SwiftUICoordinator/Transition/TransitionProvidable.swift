@@ -8,6 +8,6 @@
 import Foundation
 
 @MainActor
-public protocol TransitionProvidable {
+protocol TransitionProvidable {
     var transitions: [Transitionable] { get }
 }
