@@ -5,17 +5,13 @@
 //  Created by Erik Drobne on 19. 10. 23.
 //
 
-import SwiftUI
+import UIKit
 
 @MainActor
-public class NavigationControllerTransitionHandler {
+struct NavigationControllerTransitionHandler {
 
     /// The provider responsible for supplying transitions.
-    public let provider: TransitionProvidable
-
-    public init(provider: TransitionProvidable) {
-        self.provider = provider
-    }
+    let transitions: [Transitionable]
 
     /// Asks the transition handler for an animator object to use when transitioning a view controller on or off the navigation stack.
     ///
@@ -41,9 +37,9 @@ public class NavigationControllerTransitionHandler {
         }
 
         // Find the eligible transition from the provider based on the given route and operation.
-        if let transition = provider.transitions
-            .compactMap({ $0.transition })
-            .first(where: { $0.isEligible(from: from, to: to, operation: operation) }) {
+        if let transition = self.transitions.first(where: {
+            $0.isEligible(from: from, to: to, operation: operation)
+        }) {
             return transition
         }
 

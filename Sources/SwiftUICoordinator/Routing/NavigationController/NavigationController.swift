@@ -5,10 +5,10 @@
 //  Created by Erik Drobne on 12/05/2023.
 //
 
-import SwiftUI
+import UIKit
 
 @MainActor
-public class NavigationController: UINavigationController {
+public final class NavigationController: UINavigationController {
 
     /// Initializes an instance of the class with optional customization for the navigation bar's visibility.
     ///
@@ -16,11 +16,11 @@ public class NavigationController: UINavigationController {
     ///   - isNavigationBarHidden: A Boolean value indicating whether the navigation bar should be
     ///     hidden on the created instance. If set to `true`, the navigation bar will be hidden.
     ///     If set to `false`, the navigation bar will be displayed.
-    ///   - delegate: An optional `NavigationControllerDelegateProxy` object to set as the delegate.
+    ///   - delegate: An optional `NavigationControllerTransitionDelegate` object to set as the delegate.
     ///
     /// - Note: By default, `isNavigationBarHidden` is set to `true`.
     ///
-    convenience init(isNavigationBarHidden: Bool = true, delegate: NavigationControllerDelegateProxy? = nil) {
+    convenience init(isNavigationBarHidden: Bool = true, delegate: NavigationControllerTransitionDelegate? = nil) {
         self.init(nibName: nil, bundle: nil)
 
         self.isNavigationBarHidden = isNavigationBarHidden

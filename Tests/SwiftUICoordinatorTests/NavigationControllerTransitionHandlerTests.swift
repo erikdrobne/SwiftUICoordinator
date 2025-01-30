@@ -11,36 +11,72 @@ import XCTest
 final class NavigationControllerTransitionHandlerTests: XCTestCase {
 
     @MainActor
-    func test_animationForEligibleRoutes() {
-        let provider = TransitionProvider(transitions: [MockTransition(), MockTransition()])
-        let handler = NavigationControllerTransitionHandler(provider: provider)
-
-        let mockFromVC = RouteHostingController(rootView: CircleView(), route: MockRoute.circle)
-        let mockToVC = RouteHostingController(rootView: RectangleView(), route: MockRoute.rectangle)
-        let sut = handler.navigationController(
-            NavigationController(),
+    func testWhenTransitionIsEligible() {
+        // Arrange
+        let transitions = [MockTransition(), MockTransition()]
+        let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
+        let mockFromVC = MockViewController(route: MockRoute.circle)
+        let mockToVC = MockViewController(route: MockRoute.rectangle)
+        let navigationController = NavigationController()
+        
+        // Act
+        let animationController = transitionHandler.navigationController(
+            navigationController,
             animationControllerFor: .push,
             from: mockFromVC,
             to: mockToVC
         )
-
-        XCTAssertTrue(sut is MockTransition)
+        
+        // Assert
+        XCTAssertNotNil(animationController, "Animation controller should be returned for eligible transition.")
+        XCTAssertTrue(animationController is MockTransition, "Returned animation controller should be of type MockTransition.")
     }
 
     @MainActor
-    func test_animationForNoMatchingTransitions() {
-        let provider = TransitionProvider(transitions: [])
-        let handler = NavigationControllerTransitionHandler(provider: provider)
-
-        let mockFromVC = RouteHostingController(rootView: CircleView(), route: MockRoute.circle)
-        let mockToVC = RouteHostingController(rootView: RectangleView(), route: MockRoute.rectangle)
-        let sut = handler.navigationController(
-            NavigationController(),
+    func testWhenNoTransitionIsEligible() {
+        // Arrange
+        let transitions = [MockTransition(), MockTransition()]
+        let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
+        let mockFromVC = MockViewController(route: MockRoute.square)
+        let mockToVC = MockViewController(route: MockRoute.rectangle)
+        let navigationController = NavigationController()
+        
+        // Act
+        let animationController = transitionHandler.navigationController(
+            navigationController,
             animationControllerFor: .push,
             from: mockFromVC,
             to: mockToVC
         )
-
-        XCTAssertNil(sut)
+        
+        // Assert
+        XCTAssertNil(
+            animationController,
+            "No animation controller should be returned for ineligible transition."
+        )
+    }
+    
+    @MainActor
+    func testNoTransitionForNonRouteProviderViewController() {
+        // Arrange
+        let transitions = [MockTransition(), MockTransition()]
+        let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
+        let mockFromVC = UIViewController()
+        let mockToVC = MockViewController(route: MockRoute.rectangle)
+        let navigationController = NavigationController()
+        
+        // Act
+        let animationController = transitionHandler.navigationController(
+            navigationController,
+            animationControllerFor: .push,
+            from: mockFromVC,
+            to: mockToVC
+        )
+        
+        // Assert
+        XCTAssertNil(
+            animationController,
+            "No animation controller should be returned when fromVC doesn't conform to RouteProvider."
+        )
     }
 }
