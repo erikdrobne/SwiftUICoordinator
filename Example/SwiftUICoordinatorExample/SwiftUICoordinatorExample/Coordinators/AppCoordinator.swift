@@ -15,7 +15,7 @@ final class AppCoordinator: RootCoordinator {
         try? coordinator.start()
     }
 
-    override func handle(_ action: CoordinatorAction) {
+    func handle(_ action: CoordinatorAction) {
         fatalError("Unhadled coordinator action.")
     }
 }

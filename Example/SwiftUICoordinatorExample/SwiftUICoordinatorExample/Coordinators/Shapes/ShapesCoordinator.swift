@@ -13,7 +13,7 @@ class ShapesCoordinator: Routing {
     // MARK: - Internal properties
 
     weak var parent: Coordinator?
-    var childCoordinators = [WeakCoordinator]()
+    var childCoordinators = [Coordinator]()
     let navigationController: NavigationController
     let startRoute: ShapesRoute
     let factory: CoordinatorFactory

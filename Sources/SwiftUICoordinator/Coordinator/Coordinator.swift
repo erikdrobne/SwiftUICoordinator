@@ -11,17 +11,22 @@ import OSLog
 @MainActor
 public protocol Coordinator: AnyObject {
     /// A property that stores a reference to the parent coordinator, if any.
-    /// Should be used as a weak reference.
+    /// - Important: Implementations **must** declare this property as `weak var parent: Coordinator?`
     var parent: Coordinator? { get }
-    /// An array that stores references to any child coordinators.
-    var childCoordinators: [WeakCoordinator] { get set }
-    /// Coordinator type name
+
+    /// A list of child coordinators.
+    var childCoordinators: [Coordinator] { get set }
+
+    /// The name of the coordinator.
     var name: String { get }
-    /// Takes action parameter and handles the `CoordinatorAction`.
+    
+    /// Handles a given `CoordinatorAction`.
     func handle(_ action: CoordinatorAction)
-    /// Adds child coordinator to the list.
+    
+    /// Adds a child coordinator.
     func add(child: Coordinator)
-    /// Removes the coordinator from the list of children.
+    
+    /// Removes a child coordinator.
     func remove(coordinator: Coordinator)
 }
 
@@ -39,17 +44,20 @@ public extension Coordinator {
 
     func add(child: Coordinator) {
         guard !childCoordinators.contains(where: { $0 === child }) else {
-            Logger.coordinator.warning(
-                "Attempted to add a coordinator that is already a child: \(self.name)"
-            )
+            Logger.coordinator.warning("Attempted to add \(child.name), but it is already a child of \(self.name).")
             return
         }
-
-        childCoordinators.append(WeakCoordinator(child))
+        
+        childCoordinators.append(child)
+        Logger.coordinator.notice("Added \(child.name) as a child to \(self.name).")
     }
 
     func remove(coordinator: Coordinator) {
-        childCoordinators.removeAll(where: { $0.coordinator === coordinator })
-        Logger.coordinator.notice("Removed coordinator: \(self.name)")
+        childCoordinators.removeAll(where: { $0 === coordinator })
+        Logger.coordinator.notice("Removed \(coordinator.name) from \(self.name).")
+    }
+    
+    func handle(_ action: CoordinatorAction) {
+        Logger.coordinator.warning("Unhandled action: \(action.name) by \(self.name).")
     }
 }

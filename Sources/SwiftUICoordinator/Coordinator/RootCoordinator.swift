@@ -17,7 +17,7 @@ open class RootCoordinator: Coordinator {
 
     /// RootCoordinator doesn't have a parent
     public let parent: Coordinator? = nil
-    public var childCoordinators = [WeakCoordinator]()
+    public var childCoordinators = [Coordinator]()
 
     public private(set) var window: UIWindow
     public private(set) var navigationController: NavigationController
@@ -29,6 +29,4 @@ open class RootCoordinator: Coordinator {
         window.rootViewController = self.navigationController
         window.makeKeyAndVisible()
     }
-
-    open func handle(_ action: CoordinatorAction) {}
 }

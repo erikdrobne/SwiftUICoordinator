@@ -12,11 +12,11 @@ import SwiftUICoordinator
 class MockCoordinator: Routing {
 
     weak var parent: Coordinator?
-    var childCoordinators = [WeakCoordinator]()
+    var childCoordinators = [Coordinator]()
     var navigationController: NavigationController
     let startRoute: MockRoute
 
-    init(parent: Coordinator?, startRoute: MockRoute, navigationController: NavigationController) {
+    init(startRoute: MockRoute, navigationController: NavigationController, parent: Coordinator? = nil) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
