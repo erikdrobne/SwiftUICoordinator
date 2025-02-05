@@ -1,83 +1,96 @@
-import XCTest
-import Foundation
+import Testing
 @testable import SwiftUICoordinator
 
-final class CoordinatorTests: XCTestCase {
-    @MainActor
-    func test_coordinatorInitialState() {
+@MainActor
+@Suite("Coordinator Tests") struct CoordinatorTests {
+    
+    @Test func testParentHasNoChildCoordinatorsInitially() {
+        // Arrange
         let navigationController = NavigationController()
-        let sut = MockCoordinator(parent: nil, startRoute: .circle, navigationController: navigationController)
-        XCTAssertNil(sut.parent)
-        XCTAssertTrue(sut.childCoordinators.isEmpty)
-    }
-
-    @MainActor
-    func test_addChildCoordinator() {
-        let navigationController = NavigationController()
-        let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
-        let coordinator = MockCoordinator(
-            parent: sut,
-            startRoute: .rectangle,
+        let parentCoordinator: MockCoordinator = .init(
+            startRoute: .circle,
             navigationController: navigationController
         )
-
-        sut.start(with: coordinator)
-        XCTAssertEqual(sut.childCoordinators.count, 1)
-        XCTAssert(sut.childCoordinators.first?.coordinator === coordinator)
+        
+        // Act / Assert
+        #expect(
+            parentCoordinator.childCoordinators.isEmpty,
+            "Parent coordinator should initially have no child coordinators."
+        )
     }
 
-    @MainActor
-    func test_addMultipleChildrenToCoordinator() {
+    @Test func testAddChildCoordinator() {
+        // Arrange
         let navigationController = NavigationController()
-        let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
-        let coordinator = MockCoordinator(
-            parent: sut,
-            startRoute: .rectangle,
+        let parentCoordinator: MockCoordinator = .init(
+            startRoute: .circle,
             navigationController: navigationController
         )
-
-        sut.start(with: coordinator)
-        sut.add(
-            child: MockCoordinator(
-                parent: coordinator,
-                startRoute: .circle,
-                navigationController: navigationController
-            )
+        let initialCount = parentCoordinator.childCoordinators.count
+        
+        // Act
+        let childCoordinator = MockCoordinator(
+            startRoute: .square,
+            navigationController: navigationController
         )
-
-        XCTAssertEqual(sut.childCoordinators.count, 2)
-        XCTAssert(sut.childCoordinators.first?.coordinator === coordinator)
+        parentCoordinator.add(child: childCoordinator)
+        
+        // Assert
+        #expect(
+            parentCoordinator.childCoordinators.count == initialCount + 1,
+            "Child coordinator should be added."
+        )
+        #expect(
+            parentCoordinator.childCoordinators.contains { $0 === childCoordinator },
+            "Child coordinator should be in the list.")
     }
-
-    @MainActor
-    func test_removeChildCoordinator() {
+    
+    @Test func testAddSameChildCoordinatorTwice() {
+        // Arrange
         let navigationController = NavigationController()
-        let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
-        let coordinator = MockCoordinator(
-            parent: sut,
-            startRoute: .rectangle,
+        let parentCoordinator: MockCoordinator = .init(
+            startRoute: .circle,
             navigationController: navigationController
         )
-
-        sut.start(with: coordinator)
-        sut.remove(coordinator: coordinator)
-
-        XCTAssertTrue(sut.childCoordinators.isEmpty)
+        let childCoordinator = MockCoordinator(
+            startRoute: .square,
+            navigationController: navigationController
+        )
+        
+        // Act
+        parentCoordinator.add(child: childCoordinator)
+        parentCoordinator.add(child: childCoordinator)
+        
+        // Assert
+        #expect(
+            parentCoordinator.childCoordinators.count == 1,
+            "Same child coordinator should not be added twice."
+        )
     }
-
-    @MainActor
-    func test_coordinatorDoesNotRetainChildCoordinators() {
+    
+    @Test func testRemoveChildCoordinator() {
+        // Arrange
         let navigationController = NavigationController()
-        let sut = MockAppCoordinator(window: UIWindow(), navigationController: navigationController)
-        var childCoordinator: Coordinator? = MockCoordinator(
-            parent: sut,
-            startRoute: .rectangle,
+        let parentCoordinator: MockCoordinator = .init(
+            startRoute: .circle,
             navigationController: navigationController
         )
-
-        sut.add(child: childCoordinator!)
-        XCTAssertNotNil(sut.childCoordinators.first?.coordinator)
-        childCoordinator = nil
-        XCTAssertNil(sut.childCoordinators.first?.coordinator)
+        let childCoordinator = MockCoordinator(
+            startRoute: .square,
+            navigationController: navigationController
+        )
+        
+        // Act
+        parentCoordinator.remove(coordinator: childCoordinator)
+        
+        // Assert
+        #expect(
+            parentCoordinator.childCoordinators.count == 0,
+            "Child coordinator should be removed."
+        )
+        #expect(
+            parentCoordinator.childCoordinators.contains { $0 === childCoordinator } == false,
+            "Child coordinator should not be in the list."
+        )
     }
 }

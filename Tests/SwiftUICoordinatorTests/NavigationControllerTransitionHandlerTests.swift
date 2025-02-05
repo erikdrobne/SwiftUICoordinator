@@ -5,13 +5,14 @@
 //  Created by Erik Drobne on 23. 10. 23.
 //
 
-import XCTest
+import Testing
+import UIKit
 @testable import SwiftUICoordinator
 
-final class NavigationControllerTransitionHandlerTests: XCTestCase {
-
-    @MainActor
-    func testWhenTransitionIsEligible() {
+@MainActor
+@Suite("NavigationControllerTransitionHandler Tests") struct NavigationControllerTransitionHandlerTests {
+    
+    @Test func testWhenTransitionIsEligible() {
         // Arrange
         let transitions = [MockTransition(), MockTransition()]
         let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
@@ -28,12 +29,11 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
         )
         
         // Assert
-        XCTAssertNotNil(animationController, "Animation controller should be returned for eligible transition.")
-        XCTAssertTrue(animationController is MockTransition, "Returned animation controller should be of type MockTransition.")
+        #expect(animationController != nil, "Animation controller should be returned for eligible transition.")
+        #expect(animationController === transitions.first)
     }
 
-    @MainActor
-    func testWhenNoTransitionIsEligible() {
+    @Test func testWhenNoTransitionIsEligible() {
         // Arrange
         let transitions = [MockTransition(), MockTransition()]
         let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
@@ -50,14 +50,13 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
         )
         
         // Assert
-        XCTAssertNil(
-            animationController,
+        #expect(
+            animationController == nil,
             "No animation controller should be returned for ineligible transition."
         )
     }
     
-    @MainActor
-    func testNoTransitionForNonRouteProviderViewController() {
+    @Test func testNoTransitionForNonRouteProviderViewController() {
         // Arrange
         let transitions = [MockTransition(), MockTransition()]
         let transitionHandler = NavigationControllerTransitionHandler(transitions: transitions)
@@ -74,8 +73,8 @@ final class NavigationControllerTransitionHandlerTests: XCTestCase {
         )
         
         // Assert
-        XCTAssertNil(
-            animationController,
+        #expect(
+            animationController == nil,
             "No animation controller should be returned when fromVC doesn't conform to RouteProvider."
         )
     }

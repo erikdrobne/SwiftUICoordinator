@@ -18,7 +18,7 @@ class TabsCoordinator: TabBarRouting {
     // MARK: - Internal properties
 
     weak var parent: Coordinator?
-    var childCoordinators = [WeakCoordinator]()
+    var childCoordinators = [Coordinator]()
 
     // MARK: - Initialization
 
