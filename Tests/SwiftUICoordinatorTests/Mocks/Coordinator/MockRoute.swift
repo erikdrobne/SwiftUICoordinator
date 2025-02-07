@@ -28,6 +28,8 @@ enum MockRoute: NavigationRoute {
         switch self {
         case .square:
             return nil
+        case .rectangle:
+            return .present(animated: true)
         default:
             return .push(animated: true)
         }

@@ -14,7 +14,7 @@ public typealias Routing = Coordinator & Navigator
 public protocol Navigator: ObservableObject {
     associatedtype Route: NavigationRoute
 
-    var navigationController: NavigationController { get }
+    var navigationController: UINavigationController { get }
     /// The starting route of the navigator.
     var startRoute: Route { get }
     
