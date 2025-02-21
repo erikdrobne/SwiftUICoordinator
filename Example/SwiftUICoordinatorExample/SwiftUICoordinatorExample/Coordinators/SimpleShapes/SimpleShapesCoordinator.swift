@@ -14,7 +14,7 @@ class SimpleShapesCoordinator: Routing {
 
     weak var parent: Coordinator?
     var childCoordinators = [Coordinator]()
-    var navigationController: NavigationController
+    var navigationController: UINavigationController
     let startRoute: SimpleShapesRoute
 
     // MARK: - Initialization

@@ -14,7 +14,7 @@ class ShapesCoordinator: Routing {
 
     weak var parent: Coordinator?
     var childCoordinators = [Coordinator]()
-    let navigationController: NavigationController
+    let navigationController: UINavigationController
     let startRoute: ShapesRoute
     let factory: CoordinatorFactory
 

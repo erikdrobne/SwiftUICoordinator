@@ -13,7 +13,7 @@ class MockCoordinator: Routing {
 
     weak var parent: Coordinator?
     var childCoordinators = [Coordinator]()
-    var navigationController: NavigationController
+    let navigationController: UINavigationController
     let startRoute: MockRoute
 
     init(startRoute: MockRoute, navigationController: NavigationController, parent: Coordinator? = nil) {
