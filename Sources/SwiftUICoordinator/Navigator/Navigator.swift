@@ -80,15 +80,13 @@ public extension Navigator where Self: RouterViewFactory {
 
     func set(routes: [Route], animated: Bool = true) {
         let views = views(for: routes)
-        let hidesNavigationBar = routes.last?.hidesNavigationBar ?? true
-        navigationController.isNavigationBarHidden = routes.last?.title == nil && hidesNavigationBar
+        updateNavigationBarVisibility(for: routes)
         navigationController.setViewControllers(views, animated: animated)
     }
 
     func append(routes: [Route], animated: Bool = true) {
         let views = views(for: routes)
-        let hidesNavigationBar = routes.last?.hidesNavigationBar ?? true
-        navigationController.isNavigationBarHidden = routes.last?.title == nil && hidesNavigationBar
+        updateNavigationBarVisibility(for: routes)
         navigationController.setViewControllers(self.viewControllers + views, animated: animated)
     }
 
@@ -124,5 +122,10 @@ public extension Navigator where Self: RouterViewFactory {
         }
         
         navigationController.present(viewController, animated: animated, completion: completion)
+    }
+    
+    private func updateNavigationBarVisibility(for routes: [Route]) {
+        let hidesNavigationBar = routes.last?.hidesNavigationBar ?? true
+        navigationController.isNavigationBarHidden = routes.last?.title == nil && hidesNavigationBar
     }
 }
