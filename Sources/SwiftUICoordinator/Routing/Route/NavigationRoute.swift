@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-public protocol NavigationRoute: Sendable {
+public protocol NavigationRoute {
     /// Use this title to set the navigation bar title when the route is displayed.
     var title: String? { get }
     /// A property that provides the info about the appearance and styling of a route in the navigation system.
