@@ -5,40 +5,42 @@
 //  Created by Erik Drobne on 23/09/2023.
 //
 
-import Foundation
-import XCTest
+import Testing
 @testable import SwiftUICoordinator
 
-final class NavigationControllerTests: XCTestCase {
+@MainActor
+@Suite("Navigation Controller Tests") struct NavigationControllerTests {
 
-    @MainActor
-    func testNavigationBarIsHiddenByDefault() {
+    @Test func testNavigationBarIsHiddenByDefault() {
         // Act
         let navigationController = NavigationController()
+        
         // Assert
-        XCTAssertTrue(navigationController.isNavigationBarHidden)
+        #expect(navigationController.isNavigationBarHidden)
     }
 
-    @MainActor
-    func testNavigationBarIsNotHidden() {
+    @Test func testNavigationBarIsNotHidden() {
         // Act
         let navigationController = NavigationController(isNavigationBarHidden: false)
+        
         // Assert
-        XCTAssertFalse(navigationController.isNavigationBarHidden)
+        #expect(!navigationController.isNavigationBarHidden)
     }
     
-    @MainActor
-    func testNavigationControllerDelegate() {
+    @Test func testNavigationControllerDelegate() {
         // Arrange
         let transitionDelegate = NavigationControllerFactory().makeTransitionDelegate([])
-        let navigationController = NavigationController(isNavigationBarHidden: false, delegate: transitionDelegate)
+        let navigationController = NavigationController(
+            isNavigationBarHidden: false,
+            delegate: transitionDelegate
+        )
         
         // Act
         let currentDelegate = navigationController.delegate
         
         // Assert
-        XCTAssertNotNil(currentDelegate, "Delegate should not be nil")
-        XCTAssertTrue(
+        #expect(currentDelegate != nil, "Delegate should not be nil")
+        #expect(
             currentDelegate === transitionDelegate,
             "Delegate should be of type NavigationControllerTransitionDelegate"
         )
