@@ -1,33 +1,37 @@
 //
-//  File.swift
+//  DeepLinkTests.swift
 //  
 //
 //  Created by Erik Drobne on 17/09/2023.
 //
-
+import Testing
 import Foundation
-import XCTest
 @testable import SwiftUICoordinator
 
-final class DeepLinkTests: XCTestCase {
+@MainActor
+@Suite("Deep Link Tests") struct DeepLinkTests {
 
-    func test_deepLinksWithoutParametersAreEqual() {
+    @Test func testDeepLinksWithoutParametersAreEqual() {
+        // Arrange
         let linkA = DeepLink(action: "square", route: MockRoute.square)
         let linkB = DeepLink(action: "square", route: MockRoute.square)
         let linkC = DeepLink(action: "rectangle", route: MockRoute.rectangle)
 
-        XCTAssertEqual(linkA, linkB)
-        XCTAssertNotEqual(linkA, linkC)
-        XCTAssertNotEqual(linkB, linkC)
+        // Assert
+        #expect(linkA == linkB)
+        #expect(linkA != linkC)
+        #expect(linkB != linkC)
     }
 
-    func test_deepLinksWithParametersAreEqual() {
+    @Test func testDeepLinksWithParametersAreEqual() {
+        // Arrange
         let linkA = DeepLink(action: "square", route: MockRoute.square, params: [])
         let linkB = DeepLink(action: "square", route: MockRoute.square, params: ["color"])
         let linkC = DeepLink(action: "square", route: MockRoute.rectangle, params: ["width"])
 
-        XCTAssertEqual(linkA, linkB)
-        XCTAssertEqual(linkA, linkC)
-        XCTAssertEqual(linkB, linkC)
+        // Assert
+        #expect(linkA == linkB)
+        #expect(linkA == linkC)
+        #expect(linkB == linkC)
     }
 }
