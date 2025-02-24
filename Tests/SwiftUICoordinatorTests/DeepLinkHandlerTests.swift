@@ -5,8 +5,8 @@
 //  Created by Erik Drobne on 17/09/2023.
 //
 
-import Testing
 import Foundation
+import Testing
 @testable import SwiftUICoordinator
 
 @MainActor

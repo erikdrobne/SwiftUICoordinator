@@ -5,8 +5,8 @@
 //  Created by Erik Drobne on 23. 10. 23.
 //
 
-import Testing
 import UIKit
+import Testing
 @testable import SwiftUICoordinator
 
 @MainActor
