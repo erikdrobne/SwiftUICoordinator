@@ -5,21 +5,26 @@
 //  Created by Erik Drobne on 10. 10. 23.
 //
 
-import XCTest
+import Testing
+import UIKit
 @testable import SwiftUICoordinator
 
-final class RootCoordinatorTests: XCTestCase {
+@MainActor
+@Suite("Root Coordinator Tests") struct RootCoordinatorTests {
 
-    @MainActor
-    func test_rootViewControllerInitialization() {
+    @Test func testRootViewControllerInitialization() {
+        // Arrange
         let navigationController = NavigationController()
         let window = UIWindow()
-        let sut = MockAppCoordinator(window: window, navigationController: navigationController)
-
-        XCTAssertEqual(sut.window, window)
-        XCTAssertTrue(sut.window.isKeyWindow)
-        XCTAssertFalse(sut.window.isHidden)
-        XCTAssertEqual(sut.window.rootViewController, navigationController)
-        XCTAssertTrue(sut.childCoordinators.isEmpty)
+        
+        // Act
+        let coordinator = MockAppCoordinator(window: window, navigationController: navigationController)
+        
+        // Assert
+        #expect(coordinator.window == window)
+        #expect(coordinator.window.isKeyWindow)
+        #expect(!coordinator.window.isHidden)
+        #expect(coordinator.window.rootViewController == navigationController)
+        #expect(coordinator.childCoordinators.isEmpty)
     }
 }
