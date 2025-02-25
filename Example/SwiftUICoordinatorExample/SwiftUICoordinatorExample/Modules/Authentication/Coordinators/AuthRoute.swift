@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUICoordinator
 
-enum AuthRoute: NavigationRoute {
+enum AuthRoute: StackNavigationRoute {
     case login
     case signup
     case resetPassword
     
-    var action: TransitionAction? {
+    var action: TransitionAction {
         return .push(animated: true)
     }
 }

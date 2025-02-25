@@ -13,7 +13,7 @@ class DeepLinkHandler: DeepLinkHandling {
 
     let scheme = "coordinatorexample"
     let links: Set<DeepLink> = [
-        DeepLink(action: "custom", route: ShapesRoute.customShapes)
+        // DeepLink(action: "custom", route: ShapesRoute.customShapes)
     ]
 
     private init() {}

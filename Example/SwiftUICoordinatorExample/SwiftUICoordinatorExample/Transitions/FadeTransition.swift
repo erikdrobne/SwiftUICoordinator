@@ -14,7 +14,8 @@ class FadeTransition: NSObject, Transitionable {
         to toRoute: NavigationRoute,
         operation: NavigationOperation
     ) -> Bool {
-        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
+        return false
+        // return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

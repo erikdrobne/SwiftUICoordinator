@@ -37,28 +37,6 @@ extension DependencyContainer: CoordinatorFactory {
         )
     }
 
-    func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator {
-        return ShapesCoordinator(
-            parent: parent,
-            navigationController: self.navigationController,
-            factory: self
-        )
-    }
-
-    func makeSimpleShapesCoordinator(parent: Coordinator) -> SimpleShapesCoordinator {
-        return SimpleShapesCoordinator(
-            parent: parent,
-            navigationController: self.navigationController
-        )
-    }
-
-    func makeCustomShapesCoordinator(parent: Coordinator) -> CustomShapesCoordinator {
-        return CustomShapesCoordinator(
-            parent: parent,
-            navigationController: self.navigationController
-        )
-    }
-
     func makeTabsCoordinator(parent: Coordinator) -> TabsCoordinator {
         return TabsCoordinator(
             parent: parent,

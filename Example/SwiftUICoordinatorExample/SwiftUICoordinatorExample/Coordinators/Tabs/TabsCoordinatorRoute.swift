@@ -9,6 +9,7 @@ import UIKit
 import SwiftUICoordinator
 
 enum TabsCoordinatorRoute: TabBarNavigationRoute {
+    
     case red
     case green
     case blue

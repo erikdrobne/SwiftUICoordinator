@@ -11,12 +11,12 @@ import Testing
 @MainActor
 @Suite("Navigator Tests") struct NavigatorTests {
     
-    @Test func testStartShouldShowStartRoute() throws {
+    @Test func testStartShouldShowStartRoute() {
         // Arrange
         let navigator = MockNavigator(startRoute: .circle)
         
         // Act
-        try navigator.start()
+        navigator.start()
         
         guard let mockNavController = navigator.navigationController as? MockNavigationController else {
             Issue.record("Expected MockNavigationController but got a different type")
@@ -27,12 +27,12 @@ import Testing
         #expect(mockNavController.pushedVC != nil)
     }
     
-    @Test func testShowPresentsViewController() throws {
+    @Test func testShowPresentsViewController() {
         // Arrange
         let navigator = MockNavigator(startRoute: .rectangle)
         
         // Act
-        try navigator.start()
+        navigator.start()
         
         guard let mockNavController = navigator.navigationController as? MockNavigationController else {
             Issue.record("Expected MockNavigationController but got a different type")
@@ -44,26 +44,20 @@ import Testing
         #expect(mockNavController.pushedVC == nil)
     }
     
-    @Test func testShowRouteThrowsError() {
+    @Test func testShowRoute() {
         // Arrange
         let navigator = MockNavigator(startRoute: .circle)
         
-        // Act / Assert
-        #expect {
-            try navigator.show(route: .square)
-        } throws: { error in
-            return error is NavigatorError
-        }
-    }
-    
-    @Test func testShowRouteNoThrow() {
-        // Arrange
-        let navigator = MockNavigator(startRoute: .circle)
+        // Act
+        navigator.show(route: .square)
         
-        // Act / Assert
-        #expect(throws: Never.self) {
-            try navigator.start()
+        guard let mockNavController = navigator.navigationController as? MockNavigationController else {
+            Issue.record("Expected MockNavigationController but got a different type")
+            return
         }
+        
+        // Assert
+        #expect(mockNavController.pushedVC != nil)
     }
     
     @Test func testSetUpdatesNavigationStack() {
@@ -71,7 +65,7 @@ import Testing
         let navigator = MockNavigator(startRoute: .circle)
         
         // Act
-        navigator.set(routes: [.rectangle, .rectangle])
+        navigator.set(routes: [.rectangle, .rectangle], animated: false)
         
         guard let mockNavController = navigator.navigationController as? MockNavigationController else {
             Issue.record("Expected MockNavigationController but got a different type")
@@ -88,7 +82,7 @@ import Testing
         let navigator = MockNavigator(startRoute: .circle)
         
         // Act
-        navigator.append(routes: [.rectangle, .circle])
+        navigator.append(routes: [.rectangle, .circle], animated: false)
         
         // Assert
         #expect(navigator.viewControllers.count == 2)
@@ -97,7 +91,7 @@ import Testing
     @Test func testPopToRootRemovesAllButRoot() {
         // Arrange
         let navigator = MockNavigator(startRoute: .circle)
-        navigator.append(routes: [.rectangle, .circle])
+        navigator.append(routes: [.rectangle, .circle], animated: false)
         
         // Act / Assert
         #expect(navigator.viewControllers.count == 2)
