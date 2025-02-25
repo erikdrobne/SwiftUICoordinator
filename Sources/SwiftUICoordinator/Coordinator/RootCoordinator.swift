@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 ///  A coordinator responsible for managing the root navigation flow of the application.
 ///
@@ -28,5 +29,9 @@ open class RootCoordinator: Coordinator {
 
         window.rootViewController = self.navigationController
         window.makeKeyAndVisible()
+    }
+    
+    open func handle(_ action: CoordinatorAction) {
+        Logger.coordinator.warning("Unhandled action: \(action.name) by \(self.name).")
     }
 }

@@ -20,7 +20,7 @@ struct SwiftUICoordinatorExampleApp: App {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
-    var dependencyContainer = DependencyContainer()
+    let dependencyContainer = DependencyContainer()
 
     func scene(
         _ scene: UIScene,
@@ -33,9 +33,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
         let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
         dependencyContainer.set(appCoordinator)
-
-        let coordinator = dependencyContainer.makeAuthCoordinator(parent: appCoordinator)
-        appCoordinator.start(with: coordinator)
+        appCoordinator.start()
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

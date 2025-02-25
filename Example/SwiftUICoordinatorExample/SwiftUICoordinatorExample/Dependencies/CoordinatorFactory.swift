@@ -12,4 +12,5 @@ import SwiftUICoordinator
 protocol CoordinatorFactory {
     func makeTabsCoordinator(parent: Coordinator) -> TabsCoordinator
     func makeAuthCoordinator(parent: Coordinator) -> AuthCoordinator
+    func makeCatalogCoordinator(parent: Coordinator) -> CatalogCoordinator
 }

@@ -27,16 +27,14 @@ final class AuthCoordinator: Routing {
     
     func handle(_ action: CoordinatorAction) {
         switch action {
-        case AuthAction.didLogin:
-            try? show(route: .login)
-        case AuthAction.didSignup:
-            print("did signup")
+        case AuthAction.didLogin, AuthAction.didSignup:
+            parent?.handle(Action.done(self))
         case AuthAction.showSignup:
-            try? show(route: .signup)
+            show(route: .signup)
         case AuthAction.showLogin:
             pop()
         case AuthAction.showResetPassword:
-            try? show(route: .resetPassword)
+            show(route: .resetPassword)
         default:
             parent?.handle(action)
         }

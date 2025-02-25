@@ -16,7 +16,7 @@ final class LoginViewModel: ObservableObject {
     @Published var isLoading = false
     
     var isValid: Bool {
-        !email.isEmpty && !password.isEmpty
+        !email.isEmpty && email.contains("@") && !password.isEmpty
     }
     
     private let coordinator: AuthCoordinator
@@ -29,11 +29,6 @@ final class LoginViewModel: ObservableObject {
         guard !isLoading else {
             return
         }
-        
-        isLoading = true
-        try? await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
-        isLoading = false
-        
         coordinator.handle(AuthAction.didLogin)
     }
     

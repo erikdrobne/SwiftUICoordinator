@@ -37,11 +37,6 @@ final class SignupViewModel: ObservableObject {
         guard !isLoading else {
             return
         }
-        
-        isLoading = true
-        try? await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
-        isLoading = false
-        
         coordinator.handle(AuthAction.didSignup)
     }
     

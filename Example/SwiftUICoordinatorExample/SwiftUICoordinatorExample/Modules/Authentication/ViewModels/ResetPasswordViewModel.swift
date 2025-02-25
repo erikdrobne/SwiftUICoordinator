@@ -25,10 +25,6 @@ final class ResetPasswordViewModel: ObservableObject {
     }
     
     func onResetPasswordTap() async {
-        isLoading = true
-        try? await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
-        isLoading = false
-
         coordinator.handle(AuthAction.showLogin)
     }
     

@@ -27,6 +27,12 @@
 		17EDF6B32D6DC4FC00DC7BEE /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6B22D6DC4F600DC7BEE /* SignupViewModel.swift */; };
 		17EDF6D52D6DF81E00DC7BEE /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6D42D6DF81800DC7BEE /* ResetPasswordView.swift */; };
 		17EDF6D72D6DF83100DC7BEE /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6D62D6DF82A00DC7BEE /* ResetPasswordViewModel.swift */; };
+		17EDF6DB2D6E12E300DC7BEE /* CatalogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6DA2D6E12D800DC7BEE /* CatalogCoordinator.swift */; };
+		17EDF6E02D6E140C00DC7BEE /* CatalogRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6DF2D6E140600DC7BEE /* CatalogRoute.swift */; };
+		17EDF6E22D6E144000DC7BEE /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6E12D6E143900DC7BEE /* ProductListView.swift */; };
+		17EDF6E42D6E147800DC7BEE /* CatalogAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6E32D6E146500DC7BEE /* CatalogAction.swift */; };
+		17EDF6E62D6E442200DC7BEE /* ProductItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6E52D6E441C00DC7BEE /* ProductItem.swift */; };
+		17EDF6E82D6E446500DC7BEE /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6E72D6E445C00DC7BEE /* ProductListViewModel.swift */; };
 		182274C729C09C94001F9B50 /* SwiftUICoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 182274C629C09C94001F9B50 /* SwiftUICoordinator */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +60,12 @@
 		17EDF6B22D6DC4F600DC7BEE /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		17EDF6D42D6DF81800DC7BEE /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		17EDF6D62D6DF82A00DC7BEE /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		17EDF6DA2D6E12D800DC7BEE /* CatalogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCoordinator.swift; sourceTree = "<group>"; };
+		17EDF6DF2D6E140600DC7BEE /* CatalogRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogRoute.swift; sourceTree = "<group>"; };
+		17EDF6E12D6E143900DC7BEE /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
+		17EDF6E32D6E146500DC7BEE /* CatalogAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogAction.swift; sourceTree = "<group>"; };
+		17EDF6E52D6E441C00DC7BEE /* ProductItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductItem.swift; sourceTree = "<group>"; };
+		17EDF6E72D6E445C00DC7BEE /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		182274C529C09C79001F9B50 /* SwiftUICoordinator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUICoordinator; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +178,8 @@
 		17EDF6812D6CC92B00DC7BEE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				17EDF6E92D6E4C2900DC7BEE /* Cart */,
+				17EDF6D82D6E129F00DC7BEE /* Catalog */,
 				17EDF6822D6CC94200DC7BEE /* Authentication */,
 			);
 			path = Modules;
@@ -176,19 +190,19 @@
 			children = (
 				17EDF6892D6CD45F00DC7BEE /* ViewModels */,
 				17EDF6862D6CD40700DC7BEE /* Views */,
-				17EDF6832D6CC95700DC7BEE /* Coordinators */,
+				17EDF6832D6CC95700DC7BEE /* Coordinator */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		17EDF6832D6CC95700DC7BEE /* Coordinators */ = {
+		17EDF6832D6CC95700DC7BEE /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				17EDF68C2D6CE62500DC7BEE /* AuthAction.swift */,
 				17EDF6842D6CC96D00DC7BEE /* AuthRoute.swift */,
 				17EDF67C2D6CC5BA00DC7BEE /* AuthCoordinator.swift */,
 			);
-			path = Coordinators;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		17EDF6862D6CD40700DC7BEE /* Views */ = {
@@ -209,6 +223,58 @@
 				17EDF68A2D6CD48D00DC7BEE /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		17EDF6D82D6E129F00DC7BEE /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6D92D6E12C400DC7BEE /* Catalog */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		17EDF6D92D6E12C400DC7BEE /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6DE2D6E130A00DC7BEE /* ViewModels */,
+				17EDF6DD2D6E130500DC7BEE /* Views */,
+				17EDF6DC2D6E12F900DC7BEE /* Coordinator */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		17EDF6DC2D6E12F900DC7BEE /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6E32D6E146500DC7BEE /* CatalogAction.swift */,
+				17EDF6DF2D6E140600DC7BEE /* CatalogRoute.swift */,
+				17EDF6DA2D6E12D800DC7BEE /* CatalogCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		17EDF6DD2D6E130500DC7BEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6E12D6E143900DC7BEE /* ProductListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		17EDF6DE2D6E130A00DC7BEE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6E72D6E445C00DC7BEE /* ProductListViewModel.swift */,
+				17EDF6E52D6E441C00DC7BEE /* ProductItem.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		17EDF6E92D6E4C2900DC7BEE /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		182274C429C09C79001F9B50 /* Packages */ = {
@@ -294,14 +360,20 @@
 			files = (
 				173FA01F2C18EFDB004EDF24 /* TabsCoordinator.swift in Sources */,
 				1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */,
+				17EDF6E62D6E442200DC7BEE /* ProductItem.swift in Sources */,
 				17EDF6D52D6DF81E00DC7BEE /* ResetPasswordView.swift in Sources */,
+				17EDF6E02D6E140C00DC7BEE /* CatalogRoute.swift in Sources */,
 				176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */,
 				17EDF6D72D6DF83100DC7BEE /* ResetPasswordViewModel.swift in Sources */,
 				17EDF67D2D6CC5C400DC7BEE /* AuthCoordinator.swift in Sources */,
 				1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */,
+				17EDF6DB2D6E12E300DC7BEE /* CatalogCoordinator.swift in Sources */,
+				17EDF6E22D6E144000DC7BEE /* ProductListView.swift in Sources */,
 				17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */,
 				17EDF6B32D6DC4FC00DC7BEE /* SignupViewModel.swift in Sources */,
 				17DF24AF2AFD14C600578CD9 /* SlideTransition.swift in Sources */,
+				17EDF6E82D6E446500DC7BEE /* ProductListViewModel.swift in Sources */,
+				17EDF6E42D6E147800DC7BEE /* CatalogAction.swift in Sources */,
 				17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */,
 				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
 				17EDF6852D6CC97200DC7BEE /* AuthRoute.swift in Sources */,

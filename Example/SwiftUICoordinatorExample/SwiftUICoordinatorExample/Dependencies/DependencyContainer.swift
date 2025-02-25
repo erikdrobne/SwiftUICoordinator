@@ -33,7 +33,8 @@ extension DependencyContainer: CoordinatorFactory {
     func makeAppCoordinator(window: UIWindow) -> AppCoordinator {
         return AppCoordinator(
             window: window,
-            navigationController: self.navigationController
+            navigationController: self.navigationController,
+            factory: self
         )
     }
 
@@ -46,6 +47,13 @@ extension DependencyContainer: CoordinatorFactory {
     
     func makeAuthCoordinator(parent: Coordinator) -> AuthCoordinator {
         return AuthCoordinator(
+            parent: parent,
+            navigationController: navigationController
+        )
+    }
+    
+    func makeCatalogCoordinator(parent: any Coordinator) -> CatalogCoordinator {
+        return CatalogCoordinator(
             parent: parent,
             navigationController: navigationController
         )
