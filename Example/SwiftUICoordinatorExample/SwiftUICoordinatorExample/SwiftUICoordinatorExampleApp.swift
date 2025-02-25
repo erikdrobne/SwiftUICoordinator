@@ -13,7 +13,7 @@ struct SwiftUICoordinatorExampleApp: App {
 
     var body: some Scene {
         WindowGroup {
-
+            
         }
     }
 }
@@ -34,7 +34,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
         dependencyContainer.set(appCoordinator)
 
-        let coordinator = dependencyContainer.makeShapesCoordinator(parent: appCoordinator)
+        let coordinator = dependencyContainer.makeAuthCoordinator(parent: appCoordinator)
         appCoordinator.start(with: coordinator)
     }
 

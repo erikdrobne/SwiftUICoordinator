@@ -24,6 +24,15 @@
 		17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379702ACEDD7800CA4105 /* AppCoordinator.swift */; };
 		17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */; };
 		17DF24AF2AFD14C600578CD9 /* SlideTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */; };
+		17EDF67D2D6CC5C400DC7BEE /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF67C2D6CC5BA00DC7BEE /* AuthCoordinator.swift */; };
+		17EDF6852D6CC97200DC7BEE /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6842D6CC96D00DC7BEE /* AuthRoute.swift */; };
+		17EDF6882D6CD41000DC7BEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6872D6CD40D00DC7BEE /* LoginView.swift */; };
+		17EDF68B2D6CD49100DC7BEE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF68A2D6CD48D00DC7BEE /* LoginViewModel.swift */; };
+		17EDF68D2D6CE62A00DC7BEE /* AuthAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF68C2D6CE62500DC7BEE /* AuthAction.swift */; };
+		17EDF6B12D6DC47D00DC7BEE /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6B02D6DC47500DC7BEE /* SignupView.swift */; };
+		17EDF6B32D6DC4FC00DC7BEE /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6B22D6DC4F600DC7BEE /* SignupViewModel.swift */; };
+		17EDF6D52D6DF81E00DC7BEE /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6D42D6DF81800DC7BEE /* ResetPasswordView.swift */; };
+		17EDF6D72D6DF83100DC7BEE /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDF6D62D6DF82A00DC7BEE /* ResetPasswordViewModel.swift */; };
 		17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183429CC63B1004755DB /* SimpleShapesView.swift */; };
 		17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183629CC63C0004755DB /* CustomShapesView.swift */; };
 		17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */; };
@@ -57,6 +66,15 @@
 		17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTransition.swift; sourceTree = "<group>"; };
 		17E1C1FF2A1BD86D00542AB9 /* SwiftUICoordinator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftUICoordinator.xctestplan; sourceTree = "<group>"; };
+		17EDF67C2D6CC5BA00DC7BEE /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		17EDF6842D6CC96D00DC7BEE /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
+		17EDF6872D6CD40D00DC7BEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		17EDF68A2D6CD48D00DC7BEE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		17EDF68C2D6CE62500DC7BEE /* AuthAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAction.swift; sourceTree = "<group>"; };
+		17EDF6B02D6DC47500DC7BEE /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		17EDF6B22D6DC4F600DC7BEE /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		17EDF6D42D6DF81800DC7BEE /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		17EDF6D62D6DF82A00DC7BEE /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		17F1183429CC63B1004755DB /* SimpleShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesView.swift; sourceTree = "<group>"; };
 		17F1183629CC63C0004755DB /* CustomShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapesView.swift; sourceTree = "<group>"; };
 		17F1183A29CC6678004755DB /* SimpleShapesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleShapesCoordinator.swift; sourceTree = "<group>"; };
@@ -108,6 +126,7 @@
 				17C379722ACEDFBD00CA4105 /* Dependencies */,
 				176F3CB629B8C01E009C4987 /* Coordinators */,
 				1769698C2AB49FB700CD6696 /* DeepLink */,
+				17EDF6812D6CC92B00DC7BEE /* Modules */,
 				176F3CB329B8BD92009C4987 /* Views */,
 				17360A3F2A1275C000DB2296 /* Transitions */,
 				1732C9FF29A6607800C2BC1F /* Assets.xcassets */,
@@ -199,6 +218,54 @@
 				17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */,
 			);
 			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		17EDF6812D6CC92B00DC7BEE /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6822D6CC94200DC7BEE /* Authentication */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		17EDF6822D6CC94200DC7BEE /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6892D6CD45F00DC7BEE /* ViewModels */,
+				17EDF6862D6CD40700DC7BEE /* Views */,
+				17EDF6832D6CC95700DC7BEE /* Coordinators */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		17EDF6832D6CC95700DC7BEE /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF68C2D6CE62500DC7BEE /* AuthAction.swift */,
+				17EDF6842D6CC96D00DC7BEE /* AuthRoute.swift */,
+				17EDF67C2D6CC5BA00DC7BEE /* AuthCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		17EDF6862D6CD40700DC7BEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6D42D6DF81800DC7BEE /* ResetPasswordView.swift */,
+				17EDF6B02D6DC47500DC7BEE /* SignupView.swift */,
+				17EDF6872D6CD40D00DC7BEE /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		17EDF6892D6CD45F00DC7BEE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				17EDF6D62D6DF82A00DC7BEE /* ResetPasswordViewModel.swift */,
+				17EDF6B22D6DC4F600DC7BEE /* SignupViewModel.swift */,
+				17EDF68A2D6CD48D00DC7BEE /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		17F1183829CC662B004755DB /* SimpleShapes */ = {
@@ -305,14 +372,18 @@
 				173FA01F2C18EFDB004EDF24 /* TabsCoordinator.swift in Sources */,
 				1769698E2AB49FCF00CD6696 /* DeepLinkHandler.swift in Sources */,
 				17AABAEF2A6D5E1500AFE8A7 /* CustomShapesAction.swift in Sources */,
+				17EDF6D52D6DF81E00DC7BEE /* ResetPasswordView.swift in Sources */,
 				176969912AB4AFD200CD6696 /* DependencyContainer.swift in Sources */,
+				17EDF6D72D6DF83100DC7BEE /* ResetPasswordViewModel.swift in Sources */,
 				17F1183729CC63C0004755DB /* CustomShapesView.swift in Sources */,
+				17EDF67D2D6CC5C400DC7BEE /* AuthCoordinator.swift in Sources */,
 				17F1183B29CC6678004755DB /* SimpleShapesCoordinator.swift in Sources */,
 				17F1184729CC8F1A004755DB /* Tower.swift in Sources */,
 				17F1184329CC8BA6004755DB /* Triangle.swift in Sources */,
 				1732C9FC29A6607500C2BC1F /* SwiftUICoordinatorExampleApp.swift in Sources */,
 				17F1184529CC8CF6004755DB /* Star.swift in Sources */,
 				17C379742ACEE1EA00CA4105 /* CoordinatorFactory.swift in Sources */,
+				17EDF6B32D6DC4FC00DC7BEE /* SignupViewModel.swift in Sources */,
 				17AABAF12A6D5F2100AFE8A7 /* ShapesAction.swift in Sources */,
 				176F3CB829B8C05B009C4987 /* ShapesCoordinator.swift in Sources */,
 				17DF24AF2AFD14C600578CD9 /* SlideTransition.swift in Sources */,
@@ -320,11 +391,16 @@
 				17C379712ACEDD7800CA4105 /* AppCoordinator.swift in Sources */,
 				17360A412A1275D600DB2296 /* FadeTransition.swift in Sources */,
 				17F1183D29CC668F004755DB /* SimpleShapesRoute.swift in Sources */,
+				17EDF6852D6CC97200DC7BEE /* AuthRoute.swift in Sources */,
+				17EDF68B2D6CD49100DC7BEE /* LoginViewModel.swift in Sources */,
 				17B9E71C2C1CE30D00518BAB /* TabsCoordinatorRoute.swift in Sources */,
+				17EDF6882D6CD41000DC7BEE /* LoginView.swift in Sources */,
 				17F1183529CC63B1004755DB /* SimpleShapesView.swift in Sources */,
+				17EDF6B12D6DC47D00DC7BEE /* SignupView.swift in Sources */,
 				176F3CBB29B8C162009C4987 /* ShapesRoute.swift in Sources */,
 				17AABAED2A6D5CF400AFE8A7 /* SimpleShapesAction.swift in Sources */,
 				17F1183F29CC8A57004755DB /* CustomShapesCoordinator.swift in Sources */,
+				17EDF68D2D6CE62A00DC7BEE /* AuthAction.swift in Sources */,
 				17F1184129CC8A84004755DB /* CustomShapesRoute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

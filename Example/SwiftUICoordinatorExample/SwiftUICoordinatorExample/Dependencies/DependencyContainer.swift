@@ -65,6 +65,13 @@ extension DependencyContainer: CoordinatorFactory {
             navigationController: self.navigationController
         )
     }
+    
+    func makeAuthCoordinator(parent: Coordinator) -> AuthCoordinator {
+        return AuthCoordinator(
+            parent: parent,
+            navigationController: navigationController
+        )
+    }
 }
 
 extension DependencyContainer {
