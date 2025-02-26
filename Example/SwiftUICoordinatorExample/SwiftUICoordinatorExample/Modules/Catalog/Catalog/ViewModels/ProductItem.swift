@@ -8,11 +8,15 @@
 import Foundation
 import SwiftUI
 
-struct ProductItem: Identifiable {
+struct ProductItem: Identifiable, Equatable {
     let id: String
     let name: String
     let description: String
     let image: Image
+    
+    static func == (lhs: ProductItem, rhs: ProductItem) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 // swiftlint:disable line_length

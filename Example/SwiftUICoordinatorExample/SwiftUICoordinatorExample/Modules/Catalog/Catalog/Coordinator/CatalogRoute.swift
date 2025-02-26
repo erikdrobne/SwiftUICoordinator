@@ -15,4 +15,15 @@ enum CatalogRoute: StackNavigationRoute {
     var action: TransitionAction {
         return .push(animated: true)
     }
+    
+    nonisolated static func == (lhs: CatalogRoute, rhs: CatalogRoute) -> Bool {
+        switch (lhs, rhs) {
+        case (.productList, .productList):
+            return true
+        case let (.productDetails(lhsItem), .productDetails(rhsItem)):
+            return lhsItem == rhsItem
+        default:
+            return false
+        }
+    }
 }
