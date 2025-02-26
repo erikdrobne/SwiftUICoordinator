@@ -11,4 +11,5 @@ import SwiftUICoordinator
 enum CatalogAction: CoordinatorAction {
     case showCart
     case showProduct(ProductItem)
+    case dismissProductDetails
 }

@@ -22,7 +22,7 @@ extension ProductItem {
         ProductItem(id: "2", name: "Orange", description: "Juicy citrus fruit", image: Image(systemName: "circle.fill")),
         ProductItem(id: "3", name: "Milk", description: "Fresh dairy milk", image: Image(systemName: "cup.and.saucer.fill")),
         ProductItem(id: "4", name: "Bread", description: "Freshly baked bread", image: Image(systemName: "square.fill")),
-        ProductItem(id: "5", name: "Coca Cola", description: "Carbonated soft drink", image: Image(systemName: "drop.fill")),
+        ProductItem(id: "5", name: "Water", description: "Pure natural spring water", image: Image(systemName: "drop.fill")),
         ProductItem(id: "6", name: "Bananas", description: "Yellow ripe bananas", image: Image(systemName: "moon.fill")),
         ProductItem(id: "7", name: "Eggs", description: "Farm fresh eggs", image: Image(systemName: "circle.fill")),
         ProductItem(id: "8", name: "Cheese", description: "Aged cheddar cheese", image: Image(systemName: "square.fill")),

@@ -30,7 +30,9 @@ final class CatalogCoordinator: Routing {
         case CatalogAction.showCart:
             print("show cart")
         case CatalogAction.showProduct(let product):
-            print("show product")
+            show(route: .productDetails(product))
+        case CatalogAction.dismissProductDetails:
+            pop()
         default:
             parent?.handle(action)
         }
@@ -43,6 +45,8 @@ extension CatalogCoordinator: RouterViewFactory {
         switch route {
         case .productList:
             ProductListView(viewModel: ProductListViewModel(coordinator: self))
+        case .productDetails(let product):
+            ProductDetailsView(viewModel: ProductDetailsViewModel(item: product, coordinator: self))
         }
     }
 }

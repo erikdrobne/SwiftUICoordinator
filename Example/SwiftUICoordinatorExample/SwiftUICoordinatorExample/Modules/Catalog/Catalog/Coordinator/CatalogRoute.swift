@@ -10,6 +10,7 @@ import SwiftUICoordinator
 
 enum CatalogRoute: StackNavigationRoute {
     case productList
+    case productDetails(ProductItem)
     
     var action: TransitionAction {
         return .push(animated: true)

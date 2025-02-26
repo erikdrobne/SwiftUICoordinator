@@ -9,7 +9,7 @@ import Foundation
 import SwiftUICoordinator
 
 @MainActor
-class ProductListViewModel: ObservableObject {
+final class ProductListViewModel: ObservableObject {
     
     @Published var products: [ProductItem]
     
