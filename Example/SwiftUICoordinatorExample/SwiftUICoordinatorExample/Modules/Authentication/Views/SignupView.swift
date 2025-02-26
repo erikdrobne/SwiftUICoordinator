@@ -12,11 +12,11 @@ struct SignupView: View {
     
     @StateObject private var viewModel: SignupViewModel
     
+    @FocusState private var currentFocus: FocusObject?
+    enum FocusObject: Hashable { case name, email, pass, passConfirm }
+    
     init(viewModel: @autoclosure @escaping () -> SignupViewModel) {
-        print("SignupView init called")
-        let vm = viewModel()
-        print("ViewModel created: \(ObjectIdentifier(vm))")
-        _viewModel = StateObject(wrappedValue: vm)
+        _viewModel = StateObject(wrappedValue: viewModel())
     }
     
     var body: some View {
@@ -32,20 +32,44 @@ struct SignupView: View {
                 Spacer()
                     .frame(height: 32)
                 TextField("Full Name", text: $viewModel.fullName)
+                    .focused($currentFocus, equals: .name)
+                    .onAppear { currentFocus = .name }
+                    .onSubmit { currentFocus = .email }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
                     .autocapitalization(.words)
-                    .padding(.horizontal)
+                    .autocorrectionDisabled(true)
+                    .keyboardType(.namePhonePad)
+                    .textContentType(.name)
+                    .submitLabel(.continue)
                 TextField("Email", text: $viewModel.email)
+                    .focused($currentFocus, equals: .email)
+                    .onSubmit { currentFocus = .pass }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
                     .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
                     .keyboardType(.emailAddress)
-                    .padding(.horizontal)
+                    .textContentType(.emailAddress)
+                    .submitLabel(.continue)
                 SecureField("Password", text: $viewModel.password)
+                    .focused($currentFocus, equals: .pass)
+                    .onSubmit { currentFocus = .passConfirm }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
+                    .textContentType(.password)
+                    .submitLabel(.continue)
                 SecureField("Confirm Password", text: $viewModel.confirmPassword)
+                    .focused($currentFocus, equals: .passConfirm)
+                    .onSubmit { currentFocus = nil }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
+                    .textContentType(.password)
+                    .submitLabel(.done)
                 Toggle(isOn: $viewModel.acceptedTerms) {
                     Text("I accept the Terms and Conditions")
                         .font(.footnote)
@@ -76,6 +100,8 @@ struct SignupView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top)
+                
+                Spacer()
             }
             if viewModel.isLoading {
                 ProgressView("Loading")

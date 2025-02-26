@@ -12,6 +12,9 @@ struct LoginView: View {
     
     @StateObject private var viewModel: LoginViewModel
     
+    @FocusState private var currentFocus: FocusObject?
+    enum FocusObject: Hashable { case email, pass }
+    
     init(viewModel: @autoclosure @escaping () -> LoginViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel())
     }
@@ -29,13 +32,26 @@ struct LoginView: View {
                 Spacer()
                     .frame(height: 32)
                 TextField("Email", text: $viewModel.email)
+                    .focused($currentFocus, equals: .email)
+                    .onAppear { currentFocus = .email }
+                    .onSubmit { currentFocus = .pass }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
                     .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
                     .keyboardType(.emailAddress)
-                    .padding(.horizontal)
+                    .textContentType(.emailAddress)
+                    .submitLabel(.continue)
+                
                 SecureField("Password", text: $viewModel.password)
+                    .focused($currentFocus, equals: .pass)
+                    .onSubmit { currentFocus = .pass }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
+                    .textContentType(.password)
+                    .submitLabel(.done)
                 Spacer()
                     .frame(height: 48)
                 Button {
@@ -68,6 +84,8 @@ struct LoginView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top)
+                
+                Spacer()
             }
             if viewModel.isLoading {
                 ProgressView("Loading")

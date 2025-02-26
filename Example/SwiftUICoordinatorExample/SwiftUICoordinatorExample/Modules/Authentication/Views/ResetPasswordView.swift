@@ -37,9 +37,12 @@ struct ResetPasswordView: View {
                 
                 TextField("Email", text: $viewModel.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .keyboardType(.emailAddress)
                     .padding(.horizontal)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
+                    .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
+                    .submitLabel(.done)
                 
                 Spacer()
                     .frame(height: 48)
@@ -66,6 +69,8 @@ struct ResetPasswordView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top)
+                
+                Spacer()
             }
             
             if viewModel.isLoading {
