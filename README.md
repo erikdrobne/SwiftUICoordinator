@@ -47,6 +47,7 @@ The foundation of navigation flow management:
 protocol Coordinator: AnyObject {
     var parent: Coordinator? { get }
     var childCoordinators: [Coordinator] { get set }
+    var name: String { get }
     func handle(_ action: CoordinatorAction)
     func add(child: Coordinator)
     func remove(coordinator: Coordinator)
@@ -98,15 +99,7 @@ enum AuthRoute: StackNavigationRoute {
     case login
     case signup
     case resetPassword
-    
-    var title: String? {
-        switch self {
-        case .login: return "Login"
-        case .signup: return "Sign Up"
-        case .resetPassword: return "Reset Password"
-        }
-    }
-    
+
     var action: TransitionAction {
         return .push(animated: true)
     }
@@ -270,11 +263,7 @@ final class FadeTransition: NSObject, Transitionable {
         )
     }
 }
-```
 
-Transitions will be registered by creating the `NavigationControllerDelegateProxy` and passing them as parameters.
-
-```Swift
 // Register transitions
 let factory = NavigationControllerFactory()
 let transitions = [FadeTransition()]
@@ -283,8 +272,6 @@ lazy var navigationController = factory.makeNavigationController(delegate: self.
 ```
 
 #### Modal transitions
-
-Custom modal transitions can enhance the user experience by providing a unique way to `present` and `dismiss` view controllers.
 
 First, define a transition delegate object that conforms to the `UIViewControllerTransitioningDelegate` protocol.
 
@@ -325,7 +312,7 @@ class DeepLinkHandler: DeepLinkHandling {
     
     let scheme = "coordinatorexample"
     let links: Set<DeepLink> = [
-        DeepLink(action: "product", route: CatalogRoute.productList)
+        DeepLink(action: "cart", route: CatalogRoute.cart)
     ]
     
     private init() {}
@@ -348,9 +335,9 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 }
 ```
 
-## 📒 Example project
+## Example project
 
-For better understanding, I recommend that you take a look at the example project located in the `SwiftUICoordinatorExample` folder.
+For better understanding, I recommend that you check the example project located in the `SwiftUICoordinatorExample` directory.
 
 ## 🤝 Contributions
 
