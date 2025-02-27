@@ -13,7 +13,7 @@ jobs:
     runs-on: macos-15
     env:
       XCODE_DIR: /Applications/Xcode_16.2.app/Contents/Developer
-      SCHEME: SwiftUICoordinator
+      SCHEME: SwiftUICoordinatorTests
       DESTINATION: platform=iOS Simulator,name=iPhone 16 Pro
     steps:
     - name: Checkout code
@@ -36,4 +36,4 @@ jobs:
     - name: Test
       run: |
         swift package update
-        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION" -skipTestPlan
+        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION"
