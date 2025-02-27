@@ -36,4 +36,4 @@ jobs:
     - name: Test
       run: |
         swift package update
-        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION"
+        xcodebuild clean test -scheme $SCHEME -destination "$DESTINATION" -skipTestPlan
