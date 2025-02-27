@@ -28,9 +28,6 @@ extension RouterViewFactory where Self: ObservableObject {
             .ifLet(route.title) { view, value in
                 view.navigationTitle(value)
             }
-            .if(route.attachCoordinator) { view in
-                view.environmentObject(self)
-            }
 
         return RouteHostingController(
             rootView: view,

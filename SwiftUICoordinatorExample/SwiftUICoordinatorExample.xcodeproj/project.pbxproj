@@ -63,7 +63,6 @@
 		17C379702ACEDD7800CA4105 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		17C379732ACEE1EA00CA4105 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		17DF24AE2AFD14C600578CD9 /* SlideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTransition.swift; sourceTree = "<group>"; };
-		17E1C1FF2A1BD86D00542AB9 /* SwiftUICoordinator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftUICoordinator.xctestplan; sourceTree = "<group>"; };
 		17EDF67C2D6CC5BA00DC7BEE /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		17EDF6842D6CC96D00DC7BEE /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
 		17EDF6872D6CD40D00DC7BEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -105,7 +104,6 @@
 		1732C9EF29A6607500C2BC1F = {
 			isa = PBXGroup;
 			children = (
-				17E1C1FF2A1BD86D00542AB9 /* SwiftUICoordinator.xctestplan */,
 				1732C9FA29A6607500C2BC1F /* SwiftUICoordinatorExample */,
 				1732C9F929A6607500C2BC1F /* Products */,
 				176F3CBE29B8CF75009C4987 /* Frameworks */,
