@@ -34,11 +34,7 @@ dependencies: [
 
 <img width="912" alt="workflow" src="https://github.com/erikdrobne/SwiftUICoordinator/assets/15943419/9c9d279c-e87d-43c2-85df-7f197bed01d3">
 
-### Coordinator
-
-The foundation of navigation flow management:
-
-### 1. Coordinator Protocol
+### Coordinator Protocol
 
 The foundation of navigation flow management:
 
@@ -53,7 +49,7 @@ protocol Coordinator: AnyObject {
     func remove(coordinator: Coordinator)
 }
 ```
-### 2. Navigator Protocol
+### Navigator Protocol
 
 Manages the navigation stack and view presentation:
 
@@ -78,7 +74,7 @@ public protocol Navigator: ObservableObject {
 public typealias Routing = Coordinator & Navigator
 ```
 
-### 3. Navigation Routes
+### Navigation Routes
 
 Define your navigation paths:
 
@@ -125,7 +121,7 @@ enum AuthAction: CoordinatorAction {
 }
 ```
 
-### 5. RouterViewFactory
+### RouterViewFactory
 
 Connect routes to views:
 
@@ -351,7 +347,7 @@ Include the following information:
 - steps to reproduce the bug
 - expected behavior
 - actual behavior
-- environment details (Swift version, etc.)
+- environment details
 
 ### Requesting features
 
