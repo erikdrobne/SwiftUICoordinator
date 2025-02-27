@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUICoordinator
 
-class DeepLinkHandler: DeepLinkHandling {
+struct DeepLinkHandler: DeepLinkHandling {
     static let shared = DeepLinkHandler()
 
     let scheme = "coordinatorexample"
     let links: Set<DeepLink> = [
-        DeepLink(action: "custom", route: ShapesRoute.customShapes)
+        DeepLink(action: "cart", route: CartRoute.cart)
     ]
 
     private init() {}

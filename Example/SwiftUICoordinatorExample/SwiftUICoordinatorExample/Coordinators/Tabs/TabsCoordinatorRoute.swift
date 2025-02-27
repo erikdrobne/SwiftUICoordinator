@@ -9,28 +9,29 @@ import UIKit
 import SwiftUICoordinator
 
 enum TabsCoordinatorRoute: TabBarNavigationRoute {
-    case red
-    case green
-    case blue
+    
+    case home
+    case search
+    case profile
 
     var tabBarItem: UITabBarItem {
         switch self {
-        case .red:
+        case .home:
             UITabBarItem(
-                title: "Red",
-                image: UIImage(systemName: "pencil.tip"),
+                title: "Home",
+                image: UIImage(systemName: "house"),
                 tag: 0
             )
-        case .green:
+        case .search:
             UITabBarItem(
-                title: "Green",
-                image: UIImage(systemName: "pencil"),
+                title: "Search",
+                image: UIImage(systemName: "magnifyingglass"),
                 tag: 1
             )
-        case .blue:
+        case .profile:
             UITabBarItem(
-                title: "Blue",
-                image: UIImage(systemName: "pencil.and.scribble"),
+                title: "Profile",
+                image: UIImage(systemName: "person"),
                 tag: 2
             )
         }
