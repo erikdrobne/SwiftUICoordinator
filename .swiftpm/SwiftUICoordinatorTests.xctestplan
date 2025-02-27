@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "51D14964-835F-4EF4-8EA4-3CADD3C68FCD",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SwiftUICoordinatorTests",
+        "name" : "SwiftUICoordinatorTests"
+      }
+    }
+  ],
+  "version" : 1
+}

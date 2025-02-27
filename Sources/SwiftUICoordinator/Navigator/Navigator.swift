@@ -12,16 +12,16 @@ public typealias Routing = Coordinator & Navigator
 /// A protocol for navigating and managing view controllers within a navigation stack.
 @MainActor
 public protocol Navigator: ObservableObject {
-    associatedtype Route: NavigationRoute
+    associatedtype Route: StackNavigationRoute
 
     var navigationController: UINavigationController { get }
     /// The starting route of the navigator.
     var startRoute: Route { get }
     
     /// This method should be called to start the flow and to show the view for the `startRoute`.
-    func start() throws(NavigatorError)
+    func start()
     /// It creates a view for the route and adds it to the navigation stack.
-    func show(route: Route) throws(NavigatorError)
+    func show(route: Route)
     /// Creates views for routes, and replaces the navigation stack with the specified views.
     func set(routes: [Route], animated: Bool)
     /// Creates views for routes, and appends them on the navigation stack.
@@ -54,11 +54,11 @@ public extension Navigator where Self: RouterViewFactory {
     
     // MARK: - Public methods
 
-    func start() throws(NavigatorError) {
-        try show(route: startRoute)
+    func start() {
+        show(route: startRoute)
     }
 
-    func show(route: Route) throws(NavigatorError) {
+    func show(route: Route) {
         let viewController = self.hostingController(for: route)
         navigationController.isNavigationBarHidden = route.title == nil && route.hidesNavigationBar ?? true
 
@@ -73,8 +73,6 @@ public extension Navigator where Self: RouterViewFactory {
                 delegate: delegate,
                 completion: completion
             )
-        case .none:
-            throw NavigatorError.cannotShow(route)
         }
     }
 
