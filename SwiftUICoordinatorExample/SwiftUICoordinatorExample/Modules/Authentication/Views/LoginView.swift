@@ -45,7 +45,7 @@ struct LoginView: View {
                 
                 SecureField("Password", text: $viewModel.password)
                     .focused($currentFocus, equals: .pass)
-                    .onSubmit { currentFocus = .pass }
+                    .onSubmit { currentFocus = nil }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
                     .autocapitalization(.none)
