@@ -14,13 +14,13 @@ SwiftUICoordinator is a powerful implementation of the Coordinator pattern speci
 - 🔄 **Flexible Navigation**: Support for stack-based, modal, and tab bar navigation
 - 🔗 **Deep Linking**: Built-in support for handling deep links
 - 🎨 **Custom Transitions**: Extensible transition system
-- 📱 **iOS 15+ Support**: Modern iOS features and SwiftUI integration
+- 📱 **iOS 15+ Support**
 
 ## Installation
 
 ### Requirements
 
-`iOS 15.0`+
+`iOS 15.0+`
 
 ### Swift Package Manager
 
