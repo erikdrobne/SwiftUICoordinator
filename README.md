@@ -6,147 +6,21 @@
 
 ## Introduction
 
-The Coordinator pattern is a widely used design pattern in Swift/iOS applications that facilitates the management of navigation and view flow within an app. The main idea behind this pattern is to decouple the navigation logic from the views, thereby making it easier to maintain and extend the application over time. By offering a central point of contact for navigation purposes, the Coordinator pattern encapsulates the navigation logic and enables views to remain lightweight and focused on their own responsibilities.
+SwiftUICoordinator is a powerful implementation of the Coordinator pattern specifically designed for SwiftUI applications. It provides a robust solution for managing navigation flows while maintaining clean architecture principles and separation of concerns.
 
-This package provides a seamless integration of the Coordinator pattern into the SwiftUI framework, making it easy to implement and manage navigation in your SwiftUI applications. With the Coordinator pattern, you can easily manage the flow of views within your app, while maintaining a clear separation of concerns between views and navigation logic. This results in a more maintainable and extensible app, with clean and easy-to-understand code.
+## Features
 
-## 💡 Problem
+- 🏗️ **Modular Architecture**: Clear separation between navigation logic and view presentation
+- 🔄 **Flexible Navigation**: Support for stack-based, modal, and tab bar navigation
+- 🔗 **Deep Linking**: Built-in support for handling deep links
+- 🎨 **Custom Transitions**: Extensible transition system
+- 📱 **iOS 15+ Support**: Modern iOS features and SwiftUI integration
 
-Despite the benefits of using SwiftUI, navigating between views and managing their flow can become a complex and cumbersome task. With `NavigationStack`, there are limitations where dismissing or replacing views in the middle of the stack becomes challenging. This can occur when you have multiple views that are presented in sequence, and you need to dismiss or replace one of the intermediate views.
-
-The second challenge is related to popping to the root view when you have several views presented in a hierarchical manner, and you want to return to the root view.
-
-## 🏃 Implementation
-
-<img width="912" alt="workflow" src="https://github.com/erikdrobne/SwiftUICoordinator/assets/15943419/9c9d279c-e87d-43c2-85df-7f197bed01d3">
-
-### Coordinator
-
-Coordinator protocol is the core component of the pattern representing each distinct flow of views in your app.
-
-**Protocol declaration**
-
-```Swift
-@MainActor
-public protocol Coordinator: AnyObject {
-    /// A property that stores a reference to the parent coordinator, if any.
-    /// Should be used as a weak reference.
-    var parent: Coordinator? { get }
-    /// An array that stores references to any child coordinators.
-    var childCoordinators: [WeakCoordinator] { get set }
-    /// Takes action parameter and handles the `CoordinatorAction`.
-    func handle(_ action: CoordinatorAction)
-    /// Adds child coordinator to the list.
-    func add(child: Coordinator)
-    /// Removes the coordinator from the list of children.
-    func remove(coordinator: Coordinator)
-}
-```
-
-### CoordinatorAction
-
-This protocol defines the available actions for the coordinator. Views should exclusively interact with the coordinator through actions, ensuring a unidirectional flow of communication.
-
-**Protocol declaration**
-
-```Swift
-public protocol CoordinatorAction {}
-
-public enum Action: CoordinatorAction {
-    /// Indicates a successful completion with an associated value.
-    case done(Any)
-    /// Indicates cancellation with an associated value.
-    case cancel(Any)
-}
-```
-
-### NavigationRoute
-
-This protocol defines the available routes for navigation within a coordinator flow.
-
-**Protocol declaration**
-
-```Swift
-@MainActor
-public protocol NavigationRoute {
-    /// Use this title to set the navigation bar title when the route is displayed.
-    var title: String? { get }
-    /// A property that provides the info about the appearance and styling of a route in the navigation system.
-    var appearance: RouteAppearance? { get }
-    /// Transition action to be used when the route is shown.
-    /// This can be a push action, a modal presentation, or `nil` (for child coordinators).
-    var action: TransitionAction? { get }
-    /// A property that indicates whether the Coordinator should be attached to the View as an EnvironmentObject.
-    var attachCoordinator: Bool { get }
-    /// A property that hides the back button during navigation
-    var hidesBackButton: Bool? { get }
-    /// A property that hides the navigation bar
-    var hidesNavigationBar: Bool? { get }
-}
-```
-
-### Navigator
-
-The Navigator protocol encapsulates all the necessary logic for navigating hierarchical content, including the management of the `NavigationController` and its child views.
-
-**Protocol declaration**
-
-```Swift
-@MainActor
-public protocol Navigator: ObservableObject {
-    associatedtype Route: NavigationRoute
-
-    var navigationController: NavigationController { get }
-    /// The starting route of the navigator.
-    var startRoute: Route { get }
-    
-    /// This method should be called to start the flow and to show the view for the `startRoute`.
-    func start() throws(NavigatorError)
-    /// It creates a view for the route and adds it to the navigation stack.
-    func show(route: Route) throws(NavigatorError)
-    /// Creates views for routes, and replaces the navigation stack with the specified views.
-    func set(routes: [Route], animated: Bool)
-    /// Creates views for routes, and appends them on the navigation stack.
-    func append(routes: [Route], animated: Bool)
-    /// Pops the top view from the navigation stack.
-    func pop(animated: Bool)
-    /// Pops all the views on the stack except the root view.
-    func popToRoot(animated: Bool)
-    /// Dismisses the view.
-    func dismiss(animated: Bool)
-}
-```
-
-### TabBarCoordinator
-
-The `TabBarCoordinator` protocol provides a way to manage a tab bar interface in your application.
-It defines the necessary properties and methods for handling tab bar navigation.
-
-**Protocol declaration**
-
-```Swift
-@MainActor
-public protocol TabBarCoordinator: ObservableObject {
-    associatedtype Route: TabBarNavigationRoute
-    associatedtype TabBarController: UITabBarController
-    
-    var navigationController: NavigationController { get }
-    /// The tab bar controller that manages the tab bar interface.
-    var tabBarController: TabBarController { get }
-    /// The tabs available in the tab bar interface, represented by `Route` types.
-    var tabs: [Route] { get }
-    /// This method should be called to show the `tabBarController`.
-    ///
-    /// - Parameter action:The type of transition can be customized by providing a `TransitionAction`.
-    func start(with action: TransitionAction)
-}
-```
-
-## 💿 Installation
+## Installation
 
 ### Requirements
 
-`iOS 15.0` or higher
+`iOS 15.0`+
 
 ### Swift Package Manager
 
@@ -154,6 +28,116 @@ public protocol TabBarCoordinator: ObservableObject {
 dependencies: [
     .package(url: "https://github.com/erikdrobne/SwiftUICoordinator")
 ]
+```
+
+## 🏃 Core Components
+
+<img width="912" alt="workflow" src="https://github.com/erikdrobne/SwiftUICoordinator/assets/15943419/9c9d279c-e87d-43c2-85df-7f197bed01d3">
+
+### Coordinator
+
+The foundation of navigation flow management:
+
+### 1. Coordinator Protocol
+
+The foundation of navigation flow management:
+
+```swift
+@MainActor
+protocol Coordinator: AnyObject {
+    var parent: Coordinator? { get }
+    var childCoordinators: [Coordinator] { get set }
+    var name: String { get }
+    func handle(_ action: CoordinatorAction)
+    func add(child: Coordinator)
+    func remove(coordinator: Coordinator)
+}
+```
+### 2. Navigator Protocol
+
+Manages the navigation stack and view presentation:
+
+```swift
+@MainActor
+public protocol Navigator: ObservableObject {
+    associatedtype Route: StackNavigationRoute
+
+    var navigationController: UINavigationController { get }
+    var startRoute: Route { get }
+    
+    func start()
+    func show(route: Route)
+    func set(routes: [Route], animated: Bool)
+    func append(routes: [Route], animated: Bool)
+    func pop(animated: Bool)
+    func popToRoot(animated: Bool)
+    func dismiss(animated: Bool)
+}
+
+// Combine Navigator and Coordinator
+public typealias Routing = Coordinator & Navigator
+```
+
+### 3. Navigation Routes
+
+Define your navigation paths:
+
+```swift
+protocol NavigationRoute {
+    var title: String? { get }
+    var appearance: RouteAppearance? { get }
+    var hidesNavigationBar: Bool? { get }
+}
+
+protocol StackNavigationRoute: NavigationRoute {
+    var action: TransitionAction { get }
+    var hidesBackButton: Bool? { get }
+}
+
+// Example Implementation
+enum AuthRoute: StackNavigationRoute {
+    case login
+    case signup
+    case resetPassword
+
+    var action: TransitionAction {
+        return .push(animated: true)
+    }
+}
+```
+
+### CoordinatorAction
+
+Defines the available actions for the coordinator. Views should exclusively interact with the coordinator through actions, ensuring a unidirectional flow of communication.
+
+```swift
+protocol CoordinatorAction {
+    var name: String { get }
+}
+
+// Example Implementation
+enum AuthAction: CoordinatorAction {
+    case didLogin
+    case didSignup
+    case showSignup
+    case showLogin
+    case showResetPassword
+}
+```
+
+### 5. RouterViewFactory
+
+Connect routes to views:
+
+```swift
+@MainActor
+protocol RouterViewFactory {
+    associatedtype V: View
+    associatedtype Route: NavigationRoute
+
+    @ViewBuilder
+    func view(for route: Route) -> V
+}
 ```
 
 ## 🔧 Usage
@@ -167,180 +151,76 @@ import SwiftUICoordinator
 Start by creating an enum with all the available routes for a particular coordinator flow.
 
 ```Swift
-enum ShapesRoute: NavigationRoute {
-    case shapes
-    case simpleShapes
-    case customShapes
-    case featuredShape
-
-    var title: String? {
-        switch self {
-        case .shapes:
-            return "SwiftUI Shapes"
-        default:
-            return nil
-        }
-    }
-
-    var action: TransitionAction? {
-        switch self {
-        case .simpleShapes:
-            // We have to pass nil for the route presenting a child coordinator.
-            return nil
-        default:
-            return .push(animated: true)
-        }
+enum AuthRoute: StackNavigationRoute {
+    case login
+    case signup
+    case resetPassword
+    
+    var action: TransitionAction {
+        return .push(animated: true)
     }
 }
 ```
 
 ### Create Action
 
-Specify custom actions that can be sent from coordinated objects to their parent coordinators.
+Specify custom actions that can be sent from coordinated objects to their coordinators.
 
 ```Swift
-enum ShapesAction: CoordinatorAction {
-    case simpleShapes
-    case customShapes
-    case featuredShape(NavigationRoute)
+enum AuthAction: CoordinatorAction {
+    case didLogin
+    case didSignup
+    case showLogin
+    case showSignup
+    case showResetPassword
 }
 ```
 
 ### Create Coordinator
 
-The coordinator has to conform to the `Routing` protocol and implement the `handle(_ action: CoordinatorAction)` method which executes flow-specific logic when the action is received.
+The coordinator has to conform to the `Routing` protocol.
 ```Swift
-class ShapesCoordinator: Routing {
-
-    // MARK: - Internal properties
-
+final class AuthCoordinator: Routing {
     weak var parent: Coordinator?
-    var childCoordinators = [WeakCoordinator]()
-    let navigationController: NavigationController
-    let startRoute: ShapesRoute
-    let factory: CoordinatorFactory
-
-    // MARK: - Initialization
-
+    var childCoordinators = [Coordinator]()
+    let navigationController: UINavigationController
+    let startRoute: AuthRoute
+    
     init(
         parent: Coordinator?,
         navigationController: NavigationController,
-        startRoute: ShapesRoute = .shapes,
-        factory: CoordinatorFactory
+        startRoute: AuthRoute = .login
     ) {
         self.parent = parent
         self.navigationController = navigationController
         self.startRoute = startRoute
-        self.factory = factory
     }
     
     func handle(_ action: CoordinatorAction) {
         switch action {
-        case ShapesAction.simpleShapes:
-            let coordinator = factory.makeSimpleShapesCoordinator(parent: self)
-            try? coordinator.start()
-        case ShapesAction.customShapes:
-            let coordinator = factory.makeCustomShapesCoordinator(parent: self)
-            try? coordinator.start()
-        case let ShapesAction.featuredShape(route):
-            switch route {
-            ...
-            default:
-                return
-            }
-        case Action.done(_):
-            popToRoot()
-            childCoordinators.removeAll()
+        case AuthAction.didLogin:
+            parent?.handle(Action.done(self))
+        case AuthAction.showSignup:
+            show(route: .signup)
+        case AuthAction.showLogin:
+            pop()
         default:
             parent?.handle(action)
         }
     }
 }
-```
 
-### Conform to RouterViewFactory
-
-By conforming to the `RouterViewFactory` protocol, we are defining which view should be displayed for each route. 
-**Important: When we want to display a child coordinator, we should return an EmptyView.**
-
-```Swift
-extension ShapesCoordinator: RouterViewFactory {
+// Connect views to routes
+extension AuthCoordinator: RouterViewFactory {
     @ViewBuilder
-    public func view(for route: ShapesRoute) -> some View {
+    func view(for route: AuthRoute) -> some View {
         switch route {
-        case .shapes:
-            ShapeListView<ShapesCoordinator>()
-        case .simpleShapes:
-            EmptyView()
-        case .customShapes:
-            CustomShapesView<CustomShapesCoordinator>()
-        case .featuredShape:
-            EmptyView()
-        }
-    }
-}
-```
-
-### Adding RootCoordinator to the app
-
-We will instantiate `AppCoordinator` (a subclass of `RootCoordinator`), pass `ShapesCoordinator` as its child, and then initiate the flow. 
-Our starting route will be `ShapesRoute.shapes`.
-
-```Swift
-
-final class SceneDelegate: NSObject, UIWindowSceneDelegate {
-
-    var dependencyContainer = DependencyContainer()
-    
-    func scene(
-        _ scene: UIScene,
-        willConnectTo session: UISceneSession,
-        options connectionOptions: UIScene.ConnectionOptions
-    ) {
-        guard let window = (scene as? UIWindowScene)?.windows.first else {
-            return
-        }
-        
-        let appCoordinator = dependencyContainer.makeAppCoordinator(window: window)
-        dependencyContainer.set(appCoordinator)
-        
-        let coordinator = dependencyContainer.makeShapesCoordinator(parent: appCoordinator)
-        appCoordinator.start(with: coordinator)
-    }
-}
-```
-
-### Access coordinator in SwiftUI view
-
-The coordinator is by default attached to the SwiftUI as an `@EnvironmentObject`.
-To disable this feature, you need to set the `attachCoordinator` property of the `NavigationRoute` to `false`.
-
-```Swift
-struct ShapeListView<Coordinator: Routing>: View {
-
-    @EnvironmentObject var coordinator: Coordinator
-    @StateObject var viewModel = ViewModel<Coordinator>()
-
-    var body: some View {
-        List {
-            Button {
-                viewModel.didTapBuiltIn()
-            } label: {
-                Text("Simple")
-            }
-            Button {
-                viewModel.didTapCustom()
-            } label: {
-                Text("Custom")
-            }
-            Button {
-                viewModel.didTapFeatured()
-            } label: {
-                Text("Featured")
-            }
-        }
-        .onAppear {
-            viewModel.coordinator = coordinator
+        case .login:
+            LoginView(viewModel: LoginViewModel(coordinator: self))
+        case .signup:
+            SignupView(viewModel: SignupViewModel(coordinator: self))
+        case .resetPassword:
+            ResetPasswordView(viewModel: ResetPasswordViewModel(coordinator: self))
         }
     }
 }
@@ -351,50 +231,47 @@ struct ShapeListView<Coordinator: Routing>: View {
 SwiftUICoordinator also supports creating custom transitions.
 
 ```Swift
-class FadeTransition: NSObject, Transitionable {
+final class FadeTransition: NSObject, Transitionable {
     func isEligible(
         from fromRoute: NavigationRoute,
         to toRoute: NavigationRoute,
         operation: NavigationOperation
     ) -> Bool {
-        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
+        // Define when this transition should be used
+        return true
     }
     
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3
-    }
-    
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toView = transitionContext.view(forKey: .to) else {
-            transitionContext.completeTransition(false)
+    func animateTransition(using context: UIViewControllerContextTransitioning) {
+        guard let toView = context.view(forKey: .to) else {
+            context.completeTransition(false)
             return
         }
         
-        let containerView = transitionContext.containerView
+        let containerView = context.containerView
         toView.alpha = 0.0
         
         containerView.addSubview(toView)
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-            toView.alpha = 1.0
-        }, completion: { _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
+        UIView.animate(
+            withDuration: transitionDuration(using: context),
+            animations: {
+                toView.alpha = 1.0
+            },
+            completion: { _ in
+                context.completeTransition(!context.transitionWasCancelled)
+            }
+        )
     }
 }
-```
 
-Transitions will be registered by creating the `NavigationControllerDelegateProxy` and passing them as parameters.
-
-```Swift
+// Register transitions
 let factory = NavigationControllerFactory()
-lazy var delegate = factory.makeNavigationDelegate([FadeTransition()])
-lazy var navigationController = factory.makeNavigationController(delegate: delegate)
+let transitions = [FadeTransition()]
+lazy var delegate = factory.makeTransitionDelegate(transitions)
+lazy var navigationController = factory.makeNavigationController(delegate: self.delegate)
 ```
 
 #### Modal transitions
-
-Custom modal transitions can enhance the user experience by providing a unique way to `present` and `dismiss` view controllers.
 
 First, define a transition delegate object that conforms to the `UIViewControllerTransitioningDelegate` protocol.
 
@@ -435,7 +312,7 @@ class DeepLinkHandler: DeepLinkHandling {
     
     let scheme = "coordinatorexample"
     let links: Set<DeepLink> = [
-        DeepLink(action: "custom", route: ShapesRoute.customShapes)
+        DeepLink(action: "cart", route: CatalogRoute.cart)
     ]
     
     private init() {}
@@ -458,9 +335,9 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 }
 ```
 
-## 📒 Example project
+## Example project
 
-For better understanding, I recommend that you take a look at the example project located in the `SwiftUICoordinatorExample` folder.
+For better understanding, I recommend that you check the example project located in the `SwiftUICoordinatorExample` directory.
 
 ## 🤝 Contributions
 

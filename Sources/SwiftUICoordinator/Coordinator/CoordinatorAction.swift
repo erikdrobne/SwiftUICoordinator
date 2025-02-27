@@ -8,7 +8,15 @@
 import Foundation
 
 /// A protocol that defines coordinator actions.
-public protocol CoordinatorAction {}
+public protocol CoordinatorAction {
+    var name: String { get }
+}
+
+extension CoordinatorAction {
+    public var name: String {
+        return String(describing: type(of: self))
+    }
+}
 
 public enum Action: CoordinatorAction {
     /// Indicates a successful completion with an associated value.

@@ -10,8 +10,8 @@ import SwiftUICoordinator
 
 @MainActor
 protocol CoordinatorFactory {
-    func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator
-    func makeSimpleShapesCoordinator(parent: Coordinator) -> SimpleShapesCoordinator
-    func makeCustomShapesCoordinator(parent: Coordinator) -> CustomShapesCoordinator
     func makeTabsCoordinator(parent: Coordinator) -> TabsCoordinator
+    func makeAuthCoordinator(parent: Coordinator) -> AuthCoordinator
+    func makeCatalogCoordinator(parent: Coordinator) -> CatalogCoordinator
+    func makeCartCoordinator(parent: Coordinator) -> CartCoordinator
 }

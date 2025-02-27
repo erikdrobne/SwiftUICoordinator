@@ -8,13 +8,19 @@
 import UIKit
 import SwiftUICoordinator
 
-class FadeTransition: NSObject, Transitionable {
+final class FadeTransition: NSObject, Transitionable {
     func isEligible(
         from fromRoute: NavigationRoute,
         to toRoute: NavigationRoute,
         operation: NavigationOperation
     ) -> Bool {
-        return (fromRoute as? CustomShapesRoute == .customShapes && toRoute as? CustomShapesRoute == .star)
+        guard let from = fromRoute as? CatalogRoute, let to = toRoute as? CatalogRoute else {
+            return false
+        }
+        
+        let firstProduct = ProductItem.mock[0]
+        return from == .productList && to == .productDetails(firstProduct) ||
+            to == .productList && from == .productDetails(firstProduct)
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

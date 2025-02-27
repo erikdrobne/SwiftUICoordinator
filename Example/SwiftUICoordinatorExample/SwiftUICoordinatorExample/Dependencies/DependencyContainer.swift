@@ -12,8 +12,9 @@ import SwiftUICoordinator
 final class DependencyContainer {
 
     let factory = NavigationControllerFactory()
-    lazy var delegate = factory.makeNavigationDelegate([FadeTransition()])
-    lazy var navigationController = factory.makeNavigationController(delegate: nil)
+    let transitions = [FadeTransition()]
+    lazy var delegate = factory.makeTransitionDelegate(transitions)
+    lazy var navigationController = factory.makeNavigationController(delegate: self.delegate)
 
     let deepLinkHandler = DeepLinkHandler.shared
 
@@ -32,29 +33,8 @@ extension DependencyContainer: CoordinatorFactory {
     func makeAppCoordinator(window: UIWindow) -> AppCoordinator {
         return AppCoordinator(
             window: window,
-            navigationController: self.navigationController
-        )
-    }
-
-    func makeShapesCoordinator(parent: Coordinator) -> ShapesCoordinator {
-        return ShapesCoordinator(
-            parent: parent,
             navigationController: self.navigationController,
             factory: self
-        )
-    }
-
-    func makeSimpleShapesCoordinator(parent: Coordinator) -> SimpleShapesCoordinator {
-        return SimpleShapesCoordinator(
-            parent: parent,
-            navigationController: self.navigationController
-        )
-    }
-
-    func makeCustomShapesCoordinator(parent: Coordinator) -> CustomShapesCoordinator {
-        return CustomShapesCoordinator(
-            parent: parent,
-            navigationController: self.navigationController
         )
     }
 
@@ -62,6 +42,28 @@ extension DependencyContainer: CoordinatorFactory {
         return TabsCoordinator(
             parent: parent,
             navigationController: self.navigationController
+        )
+    }
+    
+    func makeAuthCoordinator(parent: Coordinator) -> AuthCoordinator {
+        return AuthCoordinator(
+            parent: parent,
+            navigationController: navigationController
+        )
+    }
+    
+    func makeCatalogCoordinator(parent: any Coordinator) -> CatalogCoordinator {
+        return CatalogCoordinator(
+            parent: parent,
+            navigationController: navigationController,
+            factory: self
+        )
+    }
+    
+    func makeCartCoordinator(parent: any Coordinator) -> CartCoordinator {
+        return CartCoordinator(
+            parent: parent,
+            navigationController: navigationController
         )
     }
 }

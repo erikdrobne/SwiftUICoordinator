@@ -12,7 +12,7 @@ final class MockAppCoordinator: RootCoordinator {
 
     func start(with coordinator: any Routing) {
         self.add(child: coordinator)
-        try? coordinator.start()
+        coordinator.start()
     }
 
     override func handle(_ action: CoordinatorAction) {
