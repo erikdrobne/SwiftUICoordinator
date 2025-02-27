@@ -39,6 +39,39 @@
                ReferencedContainer = "container:../..">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17A695A32D70783A000068ED"
+               BuildableName = "SwiftUICoordinatorExampleTests.xctest"
+               BlueprintName = "SwiftUICoordinatorExampleTests"
+               ReferencedContainer = "container:SwiftUICoordinatorExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17A695B02D70791C000068ED"
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
+               ReferencedContainer = "container:SwiftUICoordinatorExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17A695BD2D707971000068ED"
+               BuildableName = "SwiftUICoordinatorTests.xctest"
+               BlueprintName = "SwiftUICoordinatorTests"
+               ReferencedContainer = "container:SwiftUICoordinatorExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
