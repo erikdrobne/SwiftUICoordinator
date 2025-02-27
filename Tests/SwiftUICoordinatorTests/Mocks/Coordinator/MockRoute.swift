@@ -15,7 +15,6 @@ enum MockRoute: StackNavigationRoute {
     
     var title: String? { nil }
     var appearance: RouteAppearance? { nil }
-    var attachCoordinator: Bool { true }
     var hidesNavigationBar: Bool? { nil }
     var hidesBackButton: Bool? { nil }
     

@@ -85,7 +85,6 @@ Define your navigation paths:
 protocol NavigationRoute {
     var title: String? { get }
     var appearance: RouteAppearance? { get }
-    var attachCoordinator: Bool { get }
     var hidesNavigationBar: Bool? { get }
 }
 
